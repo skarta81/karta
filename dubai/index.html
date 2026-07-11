@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>🌴 דובאי 2026 — משפחת קרתא</title>
+<title>🌴 דובאי 2026 — משפחות קרתא · בוטא · קחלון</title>
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;700;900&display=swap');
 * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -217,14 +217,6 @@ body {
 }
 .btn-small:hover { background: rgba(126,184,255,0.1); border-color: #7eb8ff; }
 
-/* Footer */
-.footer {
-  text-align: center;
-  padding: 30px;
-  color: #666688;
-  font-size: 0.85em;
-}
-
 /* Gallery */
 .gallery-grid {
   display: grid;
@@ -244,6 +236,16 @@ body {
   .gallery-grid { grid-template-columns: 1fr 1fr; gap: 8px; }
   .gallery-grid img { height: 130px; }
 }
+
+/* Footer */
+.footer {
+  text-align: center;
+  padding: 30px;
+  color: #666688;
+  font-size: 0.85em;
+}
+
+/* Responsive */
 @media (max-width: 600px) {
   .hero h1 { font-size: 2.2em; }
   .countdown { gap: 10px; }
@@ -278,12 +280,12 @@ body {
 <div class="card">
   <h2>📸 דובאי בתמונות</h2>
   <div class="gallery-grid">
-    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/86/Burj_Khalifa_005.JPG/640px-Burj_Khalifa_005.JPG" alt="בורג׳ ח׳ליפה">
-    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a0/Dubai_Marina_Skyline_at_night_%2836489706755%29.jpg/640px-Dubai_Marina_Skyline_at_night_%2836489706755%29.jpg" alt="מרינת דובאי בלילה">
-    <img src="https://www.hyatt.com/hyatt/images/hotels/dxbgh/dxbgh-exterior-aerial-pool.jpg" alt="Grand Hyatt Dubai">
-    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/9b/The_Dubai_Fountain.jpg/640px-The_Dubai_Fountain.jpg" alt="מזרקת דובאי">
-    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e6/Dubai_Mall_%2836013153604%29.jpg/640px-Dubai_Mall_%2836013153604%29.jpg" alt="דובאי מול">
-    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5c/Atlantis_Hotel_Dubai.jpg/640px-Atlantis_Hotel_Dubai.jpg" alt="חוף דובאי">
+    <img src="https://images.unsplash.com/photo-1582672060674-bc2bd808a8b5?w=640&q=80" alt="בורג׳ ח׳ליפה">
+    <img src="https://images.unsplash.com/photo-1512453979798-5ea266f8880c?w=640&q=80" alt="מרינת דובאי">
+    <img src="https://images.unsplash.com/photo-1592210454359-9043f067919b?w=640&q=80" alt="מדבר דובאי">
+    <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=640&q=80" alt="חוף דובאי">
+    <img src="https://images.unsplash.com/photo-1533105079780-92b9be482077?w=640&q=80" alt="נוף אווירי">
+    <img src="https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?w=640&q=80" alt="הרים ומדבר">
   </div>
 </div>
 
@@ -311,7 +313,7 @@ body {
 <div class="card">
   <h2>🏨 מלון</h2>
   <div style="border-radius: 12px; overflow: hidden; margin-bottom: 15px;">
-    <img src="https://www.hyatt.com/hyatt/images/hotels/dxbgh/dxbgh-exterior-aerial-pool.jpg" alt="Grand Hyatt Dubai" style="width:100%; display:block; border-radius: 12px;">
+    <img src="https://images.unsplash.com/photo-1568084680786-a84f91d1153c?w=800&q=80" alt="מלון יוקרה" style="width:100%; display:block; border-radius: 12px;">
   </div>
   <p><strong>Grand Hyatt Dubai</strong> — Oud Metha, Bur Dubai</p>
   <p>בריכות, מועדון ילדים, 12 מסעדות, ספא</p>
@@ -462,16 +464,10 @@ function checkPassword() {
     alert('❌ סיסמה שגויה. נסה שוב.');
   }
 }
-</script>
-
-</div>
-
-<script>
 function updateCountdown() {
   const target = new Date('2026-08-04T10:50:00+03:00');
   const now = new Date();
   const diff = target - now;
-
   if (diff <= 0) {
     document.getElementById('days').textContent = '00';
     document.getElementById('hours').textContent = '00';
@@ -480,12 +476,10 @@ function updateCountdown() {
     document.querySelector('.countdown-note').textContent = '🎉 כולנו בדובאי!';
     return;
   }
-
   const days = Math.floor(diff / (1000 * 60 * 60 * 24));
   const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
   const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
   const seconds = Math.floor((diff % (1000 * 60)) / 1000);
-
   document.getElementById('days').textContent = String(days).padStart(2, '0');
   document.getElementById('hours').textContent = String(hours).padStart(2, '0');
   document.getElementById('minutes').textContent = String(minutes).padStart(2, '0');

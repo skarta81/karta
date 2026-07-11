@@ -225,7 +225,25 @@ body {
   font-size: 0.85em;
 }
 
-/* Responsive */
+/* Gallery */
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+  margin: 15px 0;
+}
+.gallery-grid img {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+  border-radius: 10px;
+  transition: transform 0.3s;
+}
+.gallery-grid img:hover { transform: scale(1.03); }
+@media (max-width: 600px) {
+  .gallery-grid { grid-template-columns: 1fr 1fr; gap: 8px; }
+  .gallery-grid img { height: 130px; }
+}
 @media (max-width: 600px) {
   .hero h1 { font-size: 2.2em; }
   .countdown { gap: 10px; }
@@ -254,6 +272,19 @@ body {
     <div class="countdown-item"><span class="num" id="seconds">00</span><span class="label">שניות</span></div>
   </div>
   <div class="countdown-note">🎉 מגיעים!</div>
+</div>
+
+<!-- Gallery -->
+<div class="card">
+  <h2>📸 דובאי בתמונות</h2>
+  <div class="gallery-grid">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/86/Burj_Khalifa_005.JPG/640px-Burj_Khalifa_005.JPG" alt="בורג׳ ח׳ליפה">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a0/Dubai_Marina_Skyline_at_night_%2836489706755%29.jpg/640px-Dubai_Marina_Skyline_at_night_%2836489706755%29.jpg" alt="מרינת דובאי בלילה">
+    <img src="https://www.hyatt.com/hyatt/images/hotels/dxbgh/dxbgh-exterior-aerial-pool.jpg" alt="Grand Hyatt Dubai">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/9b/The_Dubai_Fountain.jpg/640px-The_Dubai_Fountain.jpg" alt="מזרקת דובאי">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e6/Dubai_Mall_%2836013153604%29.jpg/640px-Dubai_Mall_%2836013153604%29.jpg" alt="דובאי מול">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5c/Atlantis_Hotel_Dubai.jpg/640px-Atlantis_Hotel_Dubai.jpg" alt="חוף דובאי">
+  </div>
 </div>
 
 <!-- Who -->

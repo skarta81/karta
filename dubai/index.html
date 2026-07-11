@@ -357,9 +357,76 @@ body {
   </div>
 </div>
 
+<!-- Password Protected Details Button -->
+<div style="text-align: center; margin: 20px 0;">
+  <button id="details-btn" class="btn" onclick="checkPassword()" style="background: linear-gradient(135deg, #555588, #3d3d66); cursor: pointer; border: none;">
+    🔐 פרטים נוספים
+  </button>
+</div>
+
 <div class="footer">
   נוצר ב־💙 ע"י רמבו · מבוסס על Tripadvisor, TimeOut Dubai, Visit Dubai 2026
 </div>
+
+<!-- Hidden Details -->
+<div class="card" id="details-card" style="display:none;">
+  <h2>🔐 פרטים מלאים</h2>
+
+  <h3>🛏️ הרכב החדרים</h3>
+  <table style="width:100%; border-collapse: collapse; margin: 10px 0; color: #c8c8e0;">
+    <tr style="background: rgba(212,175,55,0.15);">
+      <th style="padding: 8px; border-bottom: 1px solid rgba(255,255,255,0.1);">#</th>
+      <th style="padding: 8px; border-bottom: 1px solid rgba(255,255,255,0.1);">חדר</th>
+      <th style="padding: 8px; border-bottom: 1px solid rgba(255,255,255,0.1);">דיירים</th>
+      <th style="padding: 8px; border-bottom: 1px solid rgba(255,255,255,0.1);">עלות</th>
+    </tr>
+    <tr><td style="padding: 8px;">1</td><td style="padding: 8px;">Superior Double</td><td style="padding: 8px;">דורון + לימור קחלון</td><td style="padding: 8px;">$3,173</td></tr>
+    <tr><td style="padding: 8px;">2</td><td style="padding: 8px;">Twin</td><td style="padding: 8px;">שקד + שרית + ניבו</td><td style="padding: 8px;">$4,091</td></tr>
+    <tr><td style="padding: 8px;">3</td><td style="padding: 8px;">Superior Family</td><td style="padding: 8px;">רזיייי + נויצ'י פויצ'י + ירין</td><td style="padding: 8px;">$4,648</td></tr>
+    <tr><td style="padding: 8px;">4</td><td style="padding: 8px;">Superior Family</td><td style="padding: 8px;">אופיר + דניאל + ציונה</td><td style="padding: 8px;">$4,818</td></tr>
+    <tr><td style="padding: 8px;">5</td><td style="padding: 8px;">Skyline View</td><td style="padding: 8px;">אורן + יעל בוטא</td><td style="padding: 8px;">$3,210</td></tr>
+    <tr style="font-weight: 700; color: #d4af37;">
+      <td colspan="3" style="padding: 8px; text-align: left;">סה״כ</td>
+      <td style="padding: 8px;">$19,940</td>
+    </tr>
+  </table>
+
+  <h3>📋 קודי הזמנה</h3>
+  <table style="width:100%; border-collapse: collapse; margin: 10px 0; color: #c8c8e0;">
+    <tr style="background: rgba(212,175,55,0.15);">
+      <th style="padding: 8px; border-bottom: 1px solid rgba(255,255,255,0.1);">הזמנה</th>
+      <th style="padding: 8px; border-bottom: 1px solid rgba(255,255,255,0.1);">מלון</th>
+      <th style="padding: 8px; border-bottom: 1px solid rgba(255,255,255,0.1);">טיסה</th>
+    </tr>
+    <tr><td style="padding: 8px;">426-05-268959</td><td style="padding: 8px;">52606266</td><td style="padding: 8px;">51014993</td></tr>
+    <tr><td style="padding: 8px;">426-05-268961</td><td style="padding: 8px;">802779339</td><td style="padding: 8px;">51015005</td></tr>
+    <tr><td style="padding: 8px;">426-05-268965</td><td style="padding: 8px;">Z2255V</td><td style="padding: 8px;">51015007</td></tr>
+    <tr><td style="padding: 8px;">426-05-269144</td><td style="padding: 8px;">XSPN7Y</td><td style="padding: 8px;">51016139</td></tr>
+  </table>
+
+  <h3>✈️ טיסות</h3>
+  <p>FZ1550 ת"א → דובאי · 10:50–15:20</p>
+  <p>FZ1625 דובאי → ת"א · 20:10–22:40</p>
+
+  <h3>🏨 מלון</h3>
+  <p>Grand Hyatt Dubai, Oud Metha · צ׳ק-אין 14:00 · צ׳ק-אאוט 12:00</p>
+  <p>חצי פנסיון · ביטול חינם עד 28.7</p>
+
+  <h3>💰 עלות כוללת</h3>
+  <p style="font-size: 1.3em; color: #d4af37; font-weight: 700;">$19,940</p>
+</div>
+
+<script>
+function checkPassword() {
+  const pwd = prompt('🔐 הזן סיסמה לפרטים נוספים:', '');
+  if (pwd === 'טוטו') {
+    document.getElementById('details-card').style.display = 'block';
+    document.getElementById('details-btn').style.display = 'none';
+  } else if (pwd !== null) {
+    alert('❌ סיסמה שגויה. נסה שוב.');
+  }
+}
+</script>
 
 </div>
 

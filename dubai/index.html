@@ -6,423 +6,107 @@
 <title>🌴 דובאי 2026 — משפחות קרתא · בוטא · קחלון</title>
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;700;900&display=swap');
+:root{--gold:#d4af37;--gl:#f5e78a;--bg:#0a0a1a;--cb:rgba(255,255,255,0.04);--ce:rgba(255,255,255,0.06);--t1:#f0eee8;--t2:#9898b0;--tm:#666680;--rs:8px;--rm:16px;--rl:24px}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Heebo',sans-serif;background:var(--bg);background-image:radial-gradient(ellipse 80% 60% at 50% -20%,rgba(212,175,55,0.06) 0%,transparent 70%),radial-gradient(ellipse 40% 40% at 80% 80%,rgba(120,80,200,0.04) 0%,transparent 60%);color:var(--t1);min-height:100dvh;line-height:1.7}
+.container{max-width:900px;margin:0 auto;padding:60px 24px 40px}
 
-:root {
-  --gold: #d4af37;
-  --gold-light: #f5e78a;
-  --deep-bg: #0a0a1a;
-  --card-bg: rgba(255,255,255,0.04);
-  --card-border: rgba(255,255,255,0.06);
-  --text-primary: #f0eee8;
-  --text-secondary: #9898b0;
-  --text-muted: #666680;
-  --radius-sm: 8px;
-  --radius-md: 16px;
-  --radius-lg: 24px;
-}
+/* Hero */
+.hero{text-align:center;padding:80px 20px 60px;position:relative}
+.hero::after{content:'';position:absolute;bottom:0;left:50%;transform:translateX(-50%);width:120px;height:1px;background:linear-gradient(90deg,transparent,var(--gold),transparent)}
+.hero h1{font-size:clamp(2.5rem,6vw,4rem);font-weight:900;letter-spacing:-0.02em;background:linear-gradient(135deg,var(--gl),var(--gold));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:8px}
+.hero .subtitle{font-size:1.15rem;color:var(--t2);font-weight:400;letter-spacing:.3px}
+.hero .dates{font-size:1rem;color:var(--gold);margin-top:12px;font-weight:500;letter-spacing:.5px}
 
-* { margin: 0; padding: 0; box-sizing: border-box; }
+/* Countdown */
+.countdown-section{background:var(--cb);border:1px solid var(--ce);border-radius:var(--rl);padding:36px;margin:40px 0;text-align:center}
+.countdown-section h2{font-size:1.1rem;color:var(--gold);font-weight:500;letter-spacing:.5px;margin-bottom:24px}
+.countdown{display:flex;justify-content:center;gap:24px;flex-wrap:wrap}
+.countdown-item{background:rgba(255,255,255,0.05);border-radius:var(--rs);padding:16px 24px;min-width:88px}
+.countdown-item .num{font-size:2.2rem;font-weight:700;color:var(--gl);display:block;line-height:1;font-variant-numeric:tabular-nums}
+.countdown-item .label{font-size:.7rem;color:var(--tm);text-transform:uppercase;letter-spacing:2px;margin-top:6px;display:block}
+.countdown-note{margin-top:20px;font-size:.85rem;color:var(--tm)}
 
-body {
-  font-family: 'Heebo', sans-serif;
-  background: var(--deep-bg);
-  background-image:
-    radial-gradient(ellipse 80% 60% at 50% -20%, rgba(212,175,55,0.06) 0%, transparent 70%),
-    radial-gradient(ellipse 40% 40% at 80% 80%, rgba(120,80,200,0.04) 0%, transparent 60%);
-  color: var(--text-primary);
-  min-height: 100dvh;
-  line-height: 1.7;
-}
+/* Gallery + Lightbox */
+.gallery-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:20px 0 0}
+.gallery-grid img{width:100%;height:160px;object-fit:cover;border-radius:var(--rs);cursor:pointer;transition:transform .4s ease}
+.gallery-grid img:hover{transform:scale(1.04)}
+@media(max-width:640px){.gallery-grid{grid-template-columns:repeat(2,1fr);gap:8px}.gallery-grid img{height:120px}}
+.lightbox{display:none;position:fixed;z-index:999;left:0;top:0;width:100%;height:100%;background:rgba(0,0,0,.92);cursor:pointer;align-items:center;justify-content:center}
+.lightbox img{max-width:90vw;max-height:90vh;border-radius:var(--rs);object-fit:contain}
+.lightbox.show{display:flex}
 
-.container {
-  max-width: 900px;
-  margin: 0 auto;
-  padding: 60px 24px 40px;
-}
+/* Cards */
+.card{background:var(--cb);border:1px solid var(--ce);border-radius:var(--rm);padding:36px;margin:24px 0}
+.card h2{font-size:1.3rem;color:var(--gold);font-weight:600;margin-bottom:16px;letter-spacing:.3px}
+.card h3{font-size:1.05rem;color:var(--gl);font-weight:500;margin:20px 0 8px}
+.card p{color:var(--t2);margin-bottom:8px}
+.card ul,.card ol{padding-right:20px;margin:12px 0}
+.card li{margin-bottom:6px;color:var(--t2)}
+.hotel-image{border-radius:var(--rs);overflow:hidden;margin-bottom:20px}
+.hotel-image img{width:100%;display:block}
 
-/* ── Hero ── */
-.hero {
-  text-align: center;
-  padding: 80px 20px 60px;
-  position: relative;
-}
+/* People Tags */
+.people-list{display:flex;flex-wrap:wrap;gap:8px;margin:16px 0 0}
+.people-list span{background:rgba(212,175,55,0.1);border:1px solid rgba(212,175,55,0.2);border-radius:100px;padding:6px 18px;font-size:.9rem;color:#e8dcc8;transition:background .2s}
+.people-list span:hover{background:rgba(212,175,55,0.18)}
 
-.hero::after {
-  content: '';
-  position: absolute;
-  bottom: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 120px;
-  height: 1px;
-  background: linear-gradient(90deg, transparent, var(--gold), transparent);
-}
+/* Timeline */
+.timeline-item{border-right:1.5px solid rgba(212,175,55,0.3);padding-right:20px;padding-bottom:8px;margin:20px 0;position:relative}
+.timeline-item::before{content:'';width:9px;height:9px;background:var(--gold);border-radius:50%;position:absolute;right:-5px;top:5px}
+.timeline-item:last-child{border-right-color:transparent}
+.timeline-item .day{font-weight:600;color:var(--gl);font-size:1rem}
+.timeline-item .activity{color:var(--t2);margin-top:4px;font-size:.95rem}
 
-.hero h1 {
-  font-size: clamp(2.5rem, 6vw, 4rem);
-  font-weight: 900;
-  letter-spacing: -0.02em;
-  background: linear-gradient(135deg, var(--gold-light), var(--gold));
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  margin-bottom: 8px;
-}
+/* Links */
+.map-link{display:inline-block;color:#7eb8ff;text-decoration:none;font-size:.85rem;margin:2px 4px;padding:2px 8px;border:1px solid rgba(126,184,255,0.2);border-radius:6px;transition:all .2s}
+.map-link:hover{background:rgba(126,184,255,0.08);border-color:rgba(126,184,255,0.4)}
+.ext-link{display:inline-flex;align-items:center;gap:4px;color:#7eb8ff;text-decoration:none;font-size:.85rem;margin:3px 0;padding:4px 10px;border:1px solid rgba(126,184,255,0.15);border-radius:6px;transition:all .2s}
+.ext-link:hover{background:rgba(126,184,255,0.08);border-color:#7eb8ff}
 
-.hero .subtitle {
-  font-size: 1.15rem;
-  color: var(--text-secondary);
-  font-weight: 400;
-  letter-spacing: 0.3px;
-}
+/* Buttons */
+.btn{display:inline-flex;align-items:center;gap:8px;background:linear-gradient(135deg,var(--gold),#b8962e);color:#0a0a1a;text-decoration:none;padding:12px 28px;border-radius:var(--rs);font-weight:700;font-size:.95rem;transition:transform .2s,box-shadow .2s;border:none;cursor:pointer}
+.btn:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(212,175,55,0.25)}
+.btn-outline{background:transparent;color:var(--t2);border:1px solid rgba(255,255,255,0.15)}
+.btn-outline:hover{border-color:var(--gold);color:var(--t1);box-shadow:none}
+.btn-sm{display:inline-flex;gap:4px;padding:6px 14px;font-size:.8rem;border-radius:6px}
 
-.hero .dates {
-  font-size: 1rem;
-  color: var(--gold);
-  margin-top: 12px;
-  font-weight: 500;
-  letter-spacing: 0.5px;
-}
+/* Tips Grid */
+.tips-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:10px;margin:16px 0 0}
+.tip-item{background:rgba(255,255,255,0.04);border-radius:var(--rs);padding:12px 16px;display:flex;align-items:center;gap:10px;color:var(--t2);font-size:.9rem;border:1px solid rgba(255,255,255,0.04)}
+.tip-item .icon{font-size:1.2rem}
 
-/* ── Countdown ── */
-.countdown-section {
-  background: var(--card-bg);
-  border: 1px solid var(--card-border);
-  border-radius: var(--radius-lg);
-  padding: 36px;
-  margin: 40px 0;
-  text-align: center;
-}
+/* Attraction cards */
+.att-card{background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.06);border-radius:var(--rm);padding:24px;margin:16px 0}
+.att-card h3{color:var(--gl);font-size:1.1rem;margin-bottom:8px}
+.att-price{display:inline-block;background:rgba(212,175,55,0.12);color:var(--gold);padding:4px 14px;border-radius:100px;font-size:.85rem;font-weight:600;margin:8px 0}
+.att-links{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}
 
-.countdown-section h2 {
-  font-size: 1.1rem;
-  color: var(--gold);
-  font-weight: 500;
-  letter-spacing: 0.5px;
-  margin-bottom: 24px;
-}
-
-.countdown {
-  display: flex;
-  justify-content: center;
-  gap: 24px;
-  flex-wrap: wrap;
-}
-
-.countdown-item {
-  background: rgba(255,255,255,0.05);
-  border-radius: var(--radius-sm);
-  padding: 16px 24px;
-  min-width: 88px;
-}
-
-.countdown-item .num {
-  font-size: 2.2rem;
-  font-weight: 700;
-  color: var(--gold-light);
-  display: block;
-  line-height: 1;
-  font-variant-numeric: tabular-nums;
-}
-
-.countdown-item .label {
-  font-size: 0.7rem;
-  color: var(--text-muted);
-  text-transform: uppercase;
-  letter-spacing: 2px;
-  margin-top: 6px;
-  display: block;
-}
-
-.countdown-note {
-  margin-top: 20px;
-  font-size: 0.85rem;
-  color: var(--text-muted);
-}
-
-/* ── Gallery ── */
-.gallery-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 12px;
-  margin: 20px 0 0;
-}
-
-.gallery-grid img {
-  width: 100%;
-  height: 160px;
-  object-fit: cover;
-  border-radius: var(--radius-sm);
-  transition: transform 0.4s ease;
-}
-
-.gallery-grid img:hover {
-  transform: scale(1.04);
-}
-
-@media (max-width: 640px) {
-  .gallery-grid {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 8px;
-  }
-  .gallery-grid img { height: 120px; }
-}
-
-/* ── Cards ── */
-.card {
-  background: var(--card-bg);
-  border: 1px solid var(--card-border);
-  border-radius: var(--radius-md);
-  padding: 36px;
-  margin: 24px 0;
-}
-
-.card h2 {
-  font-size: 1.3rem;
-  color: var(--gold);
-  font-weight: 600;
-  margin-bottom: 16px;
-  letter-spacing: 0.3px;
-}
-
-.card h3 {
-  font-size: 1.05rem;
-  color: var(--gold-light);
-  font-weight: 500;
-  margin: 20px 0 8px;
-}
-
-.card p { color: var(--text-secondary); margin-bottom: 8px; }
-.card ul, .card ol { padding-right: 20px; margin: 12px 0; }
-.card li { margin-bottom: 6px; color: var(--text-secondary); }
-
-/* ── Hotel Image ── */
-.hotel-image {
-  border-radius: var(--radius-sm);
-  overflow: hidden;
-  margin-bottom: 20px;
-}
-
-.hotel-image img {
-  width: 100%;
-  display: block;
-}
-
-/* ── People Tags ── */
-.people-list {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-  margin: 16px 0 0;
-}
-
-.people-list span {
-  background: rgba(212,175,55,0.1);
-  border: 1px solid rgba(212,175,55,0.2);
-  border-radius: 100px;
-  padding: 6px 18px;
-  font-size: 0.9rem;
-  color: #e8dcc8;
-  transition: background 0.2s;
-}
-
-.people-list span:hover {
-  background: rgba(212,175,55,0.18);
-}
-
-/* ── Timeline ── */
-.timeline-item {
-  border-right: 1.5px solid rgba(212,175,55,0.3);
-  padding-right: 20px;
-  padding-bottom: 8px;
-  margin: 20px 0;
-  position: relative;
-}
-
-.timeline-item::before {
-  content: '';
-  width: 9px;
-  height: 9px;
-  background: var(--gold);
-  border-radius: 50%;
-  position: absolute;
-  right: -5px;
-  top: 5px;
-}
-
-.timeline-item:last-child {
-  border-right-color: transparent;
-}
-
-.timeline-item .day {
-  font-weight: 600;
-  color: var(--gold-light);
-  font-size: 1rem;
-}
-
-.timeline-item .activity {
-  color: var(--text-secondary);
-  margin-top: 4px;
-  font-size: 0.95rem;
-}
-
-/* ── Links ── */
-.map-link {
-  display: inline-block;
-  color: #7eb8ff;
-  text-decoration: none;
-  font-size: 0.85rem;
-  margin: 2px 4px;
-  padding: 2px 8px;
-  border: 1px solid rgba(126,184,255,0.2);
-  border-radius: 6px;
-  transition: all 0.2s;
-}
-
-.map-link:hover {
-  background: rgba(126,184,255,0.08);
-  border-color: rgba(126,184,255,0.4);
-}
-
-/* ── Buttons ── */
-.btn {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  background: linear-gradient(135deg, var(--gold), #b8962e);
-  color: #0a0a1a;
-  text-decoration: none;
-  padding: 12px 28px;
-  border-radius: var(--radius-sm);
-  font-weight: 700;
-  font-size: 0.95rem;
-  transition: transform 0.2s, box-shadow 0.2s;
-  border: none;
-  cursor: pointer;
-}
-
-.btn:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 8px 24px rgba(212,175,55,0.25);
-}
-
-.btn-outline {
-  background: transparent;
-  color: var(--text-secondary);
-  border: 1px solid rgba(255,255,255,0.15);
-}
-
-.btn-outline:hover {
-  border-color: var(--gold);
-  color: var(--text-primary);
-  box-shadow: none;
-}
-
-/* ── Tips Grid ── */
-.tips-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-  gap: 10px;
-  margin: 16px 0 0;
-}
-
-.tip-item {
-  background: rgba(255,255,255,0.04);
-  border-radius: var(--radius-sm);
-  padding: 12px 16px;
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  color: var(--text-secondary);
-  font-size: 0.9rem;
-  border: 1px solid rgba(255,255,255,0.04);
-}
-
-.tip-item .icon { font-size: 1.2rem; }
-
-/* ── Protected details ── */
-.details-table {
-  width: 100%;
-  border-collapse: collapse;
-  margin: 12px 0;
-  color: var(--text-secondary);
-  font-size: 0.9rem;
-}
-
-.details-table th {
-  background: rgba(212,175,55,0.1);
-  padding: 10px 12px;
-  border-bottom: 1px solid rgba(255,255,255,0.08);
-  text-align: right;
-  font-weight: 600;
-  color: var(--gold-light);
-}
-
-.details-table td {
-  padding: 10px 12px;
-  border-bottom: 1px solid rgba(255,255,255,0.04);
-}
-
-.details-table tr:last-child td {
-  border-bottom: none;
-}
-
-.details-table .total td {
-  font-weight: 700;
-  color: var(--gold);
-}
-
-/* ── Footer ── */
-.footer {
-  text-align: center;
-  padding: 40px 20px;
-  color: var(--text-muted);
-  font-size: 0.8rem;
-}
-
-/* ── Track info ── */
-.flight-row {
-  display: flex;
-  align-items: center;
-  gap: 16px;
-  padding: 12px 0;
-  border-bottom: 1px solid rgba(255,255,255,0.04);
-}
-
-.flight-row:last-child { border-bottom: none; }
-
-.flight-icon { font-size: 1.5rem; }
-
-.flight-info { flex: 1; }
-
-.flight-info .flight-code {
-  font-weight: 600;
-  color: var(--gold-light);
-  font-size: 0.95rem;
-}
-
-.flight-info .flight-route {
-  color: var(--text-secondary);
-  font-size: 0.9rem;
-}
-
-.flight-info .flight-time {
-  color: var(--text-muted);
-  font-size: 0.85rem;
-}
+/* Details table */
+.details-table{width:100%;border-collapse:collapse;margin:12px 0;color:var(--t2);font-size:.9rem}
+.details-table th{background:rgba(212,175,55,0.1);padding:10px 12px;border-bottom:1px solid rgba(255,255,255,0.08);text-align:right;font-weight:600;color:var(--gl)}
+.details-table td{padding:10px 12px;border-bottom:1px solid rgba(255,255,255,0.04)}
+.details-table tr:last-child td{border-bottom:none}
+.details-table .total td{font-weight:700;color:var(--gold)}
+.flight-row{display:flex;align-items:center;gap:16px;padding:12px 0;border-bottom:1px solid rgba(255,255,255,0.04)}
+.flight-row:last-child{border-bottom:none}
+.flight-icon{font-size:1.5rem}
+.flight-info{flex:1}
+.flight-info .flight-code{font-weight:600;color:var(--gl);font-size:.95rem}
+.flight-info .flight-route{color:var(--t2);font-size:.9rem}
+.flight-info .flight-time{color:var(--tm);font-size:.85rem}
+.footer{text-align:center;padding:40px 20px;color:var(--tm);font-size:.8rem}
 </style>
 </head>
 <body>
 <div class="container">
 
-<!-- Hero -->
 <div class="hero">
   <h1>🌴 דובאי 2026</h1>
   <div class="subtitle">משפחות קרתא · בוטא · קחלון</div>
   <div class="dates">✈ 4 – 11 באוגוסט · 7 לילות</div>
 </div>
 
-<!-- Countdown -->
 <div class="countdown-section" id="countdown">
   <h2>⏳ ספירה לאחור</h2>
   <div class="countdown">
@@ -434,112 +118,128 @@ body {
   <div class="countdown-note">🎉 מגיעים!</div>
 </div>
 
-<!-- Gallery -->
+<!-- Gallery + Lightbox -->
 <div class="card">
   <h2>תמונות</h2>
-  <div class="gallery-grid">
-    <img src="https://images.unsplash.com/photo-1582672060674-bc2bd808a8b5?w=500&q=80" alt="">
-    <img src="https://images.unsplash.com/photo-1512453979798-5ea266f8880c?w=500&q=80" alt="">
-    <img src="https://images.unsplash.com/photo-1592210454359-9043f067919b?w=500&q=80" alt="">
-    <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=500&q=80" alt="">
-    <img src="https://images.unsplash.com/photo-1533105079780-92b9be482077?w=500&q=80" alt="">
-    <img src="https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?w=500&q=80" alt="">
+  <div class="gallery-grid" id="gallery">
+    <img src="https://images.unsplash.com/photo-1582672060674-bc2bd808a8b5?w=500&q=80" alt="בורג׳ ח׳ליפה" onclick="openLightbox(this.src)">
+    <img src="https://images.unsplash.com/photo-1512453979798-5ea266f8880c?w=500&q=80" alt="מרינת דובאי" onclick="openLightbox(this.src)">
+    <img src="https://images.unsplash.com/photo-1592210454359-9043f067919b?w=500&q=80" alt="מדבר" onclick="openLightbox(this.src)">
+    <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=500&q=80" alt="חוף" onclick="openLightbox(this.src)">
+    <img src="https://images.unsplash.com/photo-1533105079780-92b9be482077?w=500&q=80" alt="נוף אווירי" onclick="openLightbox(this.src)">
+    <img src="https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?w=500&q=80" alt="מדבר הרים" onclick="openLightbox(this.src)">
   </div>
 </div>
+<div class="lightbox" id="lightbox" onclick="closeLightbox()"><img id="lightbox-img" src="" alt=""></div>
 
 <!-- Who -->
 <div class="card">
   <h2>נוסעים</h2>
   <div class="people-list">
-    <span>שקד</span><span>שרית</span><span>רזיייי</span>
-    <span>נויצ'י פויצ'י</span><span>ניבו</span><span>דורון</span>
-    <span>לימור</span><span>ירין</span><span>אופיר</span>
-    <span>דניאל</span><span>ציונה</span><span>אורן</span><span>יעל</span>
+    <span>שקד</span><span>שרית</span><span>רזיייי</span><span>נויצ'י פויצ'י</span>
+    <span>ניבו</span><span>דורון</span><span>לימור</span><span>ירין</span>
+    <span>אופיר</span><span>דניאל</span><span>ציונה</span><span>אורן</span><span>יעל</span>
   </div>
 </div>
 
 <!-- Hotel -->
 <div class="card">
   <h2>מלון · Grand Hyatt Dubai</h2>
-  <div class="hotel-image">
-    <img src="https://images.unsplash.com/photo-1568084680786-a84f91d1153c?w=800&q=80" alt="">
-  </div>
+  <div class="hotel-image"><img src="https://images.unsplash.com/photo-1568084680786-a84f91d1153c?w=800&q=80" alt=""></div>
   <p>Oud Metha, Bur Dubai · בריכות, מועדון ילדים, 12 מסעדות, ספא</p>
   <p>צ׳ק-אין 14:00 · צ׳ק-אאוט 12:00</p>
-  <div style="margin-top:12px;">
-    <a class="map-link" href="https://maps.google.com/?q=Grand+Hyatt+Dubai" target="_blank">📍 מפה</a>
-  </div>
+  <div style="margin-top:12px"><a class="map-link" href="https://maps.google.com/?q=Grand+Hyatt+Dubai" target="_blank">📍 מפה</a></div>
 </div>
 
 <!-- Flights -->
 <div class="card">
   <h2>טיסות · Flydubai</h2>
-  <div class="flight-row">
-    <div class="flight-icon">🛫</div>
-    <div class="flight-info">
-      <div class="flight-code">FZ1550 · הלוך</div>
-      <div class="flight-route">ת״א (TLV) → דובאי (DXB)</div>
-      <div class="flight-time">10:50 – 15:20</div>
-    </div>
-  </div>
-  <div class="flight-row">
-    <div class="flight-icon">🛬</div>
-    <div class="flight-info">
-      <div class="flight-code">FZ1625 · חזור</div>
-      <div class="flight-route">דובאי (DXB) → ת״א (TLV)</div>
-      <div class="flight-time">20:10 – 22:40</div>
-    </div>
-  </div>
+  <div class="flight-row"><div class="flight-icon">🛫</div><div class="flight-info"><div class="flight-code">FZ1550 · הלוך</div><div class="flight-route">ת״א (TLV) → דובאי (DXB)</div><div class="flight-time">10:50 – 15:20</div></div></div>
+  <div class="flight-row"><div class="flight-icon">🛬</div><div class="flight-info"><div class="flight-code">FZ1625 · חזור</div><div class="flight-route">דובאי (DXB) → ת״א (TLV)</div><div class="flight-time">20:10 – 22:40</div></div></div>
 </div>
 
 <!-- Itinerary -->
 <div class="card">
   <h2>מסלול · 3 יציאות</h2>
+  <div class="timeline-item"><div class="day">יום 1 · ג 4.8 — הגעה</div><div class="activity">21:00 → Dubai Mall + מזרקות + בורג׳ ח׳ליפה</div><a class="map-link" href="https://maps.google.com/?q=Burj+Khalifa" target="_blank">📍 Burj Khalifa</a></div>
+  <div class="timeline-item"><div class="day">יום 2 · ה 5.8 — מנוחה</div><div class="activity">בריכה, Kidz Club, ספא</div></div>
+  <div class="timeline-item"><div class="day">יום 3 · ו 6.8 — פארקים</div><div class="activity"><strong>IMG Worlds of Adventure</strong> — מקורה וממוזג</div><a class="map-link" href="https://maps.google.com/?q=IMG+Worlds+of+Adventure" target="_blank">📍 IMG Worlds</a></div>
+  <div class="timeline-item"><div class="day">יום 4 · שבת 7.8 — מנוחה</div><div class="activity">בריכה, חדר כושר</div></div>
+  <div class="timeline-item"><div class="day">יום 5 · א 8.8 — קניות</div><div class="activity"><strong>AYA Universe</strong> (Wafi City) + Dubai Aquarium + VR Park</div><a class="map-link" href="https://maps.google.com/?q=AYA+Universe+Dubai" target="_blank">📍 AYA Universe</a></div>
+  <div class="timeline-item"><div class="day">יום 6 · ב 9.8 — חוף</div><div class="activity"><strong>JBR Beach</strong> + The View at The Palm</div><a class="map-link" href="https://maps.google.com/?q=JBR+Beach+Dubai" target="_blank">📍 JBR Beach</a><a class="map-link" href="https://maps.google.com/?q=The+View+at+The+Palm" target="_blank">📍 Palm View</a></div>
+  <div class="timeline-item"><div class="day">יום 7 · ג 10.8 — חזרה</div><div class="activity">צ׳ק-אאוט 16:00 → טיסה 20:10</div></div>
+  <div style="margin-top:24px"><a class="btn" href="https://www.google.com/maps/dir/Grand+Hyatt+Dubai/Burj+Khalifa/IMG+Worlds+of+Adventure+Dubai/AYA+Universe+Dubai/JBR+Beach+Dubai/The+View+at+The+Palm+Dubai/Grand+Hyatt+Dubai" target="_blank">🗺 כל המסלול</a></div>
+</div>
 
-  <div class="timeline-item">
-    <div class="day">יום 1 · ג 4.8 — הגעה</div>
-    <div class="activity">21:00 → Dubai Mall + מזרקות + בורג׳ ח׳ליפה</div>
-    <a class="map-link" href="https://maps.google.com/?q=Burj+Khalifa" target="_blank">📍 Burj Khalifa</a>
+<!-- Attractions -->
+<div class="card">
+  <h2>אטרקציות · מידע ומחירים</h2>
+  <p style="font-size:.9rem;color:var(--tm);margin-bottom:16px">מחירים משוערים לשנת 2026 · מומלץ להזמין מראש</p>
+
+  <div class="att-card">
+    <h3>🏗️ בורג׳ ח׳ליפה — Burj Khalifa</h3>
+    <div class="att-price">מ-149 AED (~150 ש"ח)</div>
+    <p>תצפית קומות 124-125. בשקיעה יקר יותר (מ-219 AED). כרטיס SKY קומה 148 מ-500 AED.</p>
+    <div class="att-links">
+      <a class="ext-link" href="https://www.burjkhalifa.ae/" target="_blank">🌐 אתר רשמי</a>
+      <a class="ext-link" href="https://www.metailimbaolam.com/%D7%90%D7%98%D7%A8%D7%A7%D7%A6%D7%99%D7%95%D7%AA-%D7%91%D7%93%D7%95%D7%91%D7%90%D7%99/" target="_blank">📰 מטיילים בעולם</a>
+      <a class="ext-link" href="https://dubai.co.il/" target="_blank">📰 Dubai.co.il</a>
+      <a class="ext-link" href="https://dubai.platinumlist.net/event-tickets/at-the-top" target="_blank">🎫 Platinumlist</a>
+    </div>
   </div>
 
-  <div class="timeline-item">
-    <div class="day">יום 2 · ה 5.8 — מנוחה</div>
-    <div class="activity">בריכה, Kidz Club, ספא</div>
+  <div class="att-card">
+    <h3>🎢 IMG Worlds of Adventure</h3>
+    <div class="att-price">מ-255 AED (~260 ש"ח)</div>
+    <p>פארק מקורה ענק (ממוזג!). Marvel, Cartoon Network. מתאים לכל הגילאים. חסכו עם כרטיס משפחתי.</p>
+    <div class="att-links">
+      <a class="ext-link" href="https://www.imgworlds.com/" target="_blank">🌐 אתר רשמי</a>
+      <a class="ext-link" href="https://takebreaktravel.com/articles/dubai-attractions-top-2026" target="_blank">📰 Take A Break</a>
+      <a class="ext-link" href="https://www.metailimbaolam.com/%D7%90%D7%98%D7%A8%D7%A7%D7%A6%D7%99%D7%95%D7%AA-%D7%91%D7%93%D7%95%D7%91%D7%90%D7%99/" target="_blank">📰 מטיילים בעולם</a>
+      <a class="ext-link" href="https://dubai.platinumlist.net/event-tickets/img-worlds-of-adventure/" target="_blank">🎫 Platinumlist</a>
+    </div>
   </div>
 
-  <div class="timeline-item">
-    <div class="day">יום 3 · ו 6.8 — פארקים</div>
-    <div class="activity"><strong>IMG Worlds of Adventure</strong> — מקורה וממוזג</div>
-    <a class="map-link" href="https://maps.google.com/?q=IMG+Worlds+of+Adventure" target="_blank">📍 IMG Worlds</a>
+  <div class="att-card">
+    <h3>🌌 AYA Universe</h3>
+    <div class="att-price">מ-100 AED (~100 ש"ח)</div>
+    <p>חוויה אימרסיבית ב-Wafi City, 5 דקות מהמלון. 12 אזורי אור וסאונד. מושלם לכל המשפחה.</p>
+    <div class="att-links">
+      <a class="ext-link" href="https://www.aya-universe.com/" target="_blank">🌐 אתר רשמי</a>
+      <a class="ext-link" href="https://fullsuitcase.com/dubai-family-activities/" target="_blank">📰 Full Suitcase</a>
+      <a class="ext-link" href="https://dubai.platinumlist.net/event-tickets/aya-a-trip-to-a-beautiful-universe/" target="_blank">🎫 Platinumlist</a>
+    </div>
   </div>
 
-  <div class="timeline-item">
-    <div class="day">יום 4 · שבת 7.8 — מנוחה</div>
-    <div class="activity">בריכה, חדר כושר</div>
+  <div class="att-card">
+    <h3>🌊 Aquaventure Waterpark (Atlantis)</h3>
+    <div class="att-price">מ-259 AED (~265 ש"ח)</div>
+    <p>פארק המים הגדול בעולם! 105+ מגלשות. אופציה: Super Pass מוסיף את Lost Chambers Aquarium.</p>
+    <div class="att-links">
+      <a class="ext-link" href="https://www.atlantis.com/dubai/aquaventure" target="_blank">🌐 אתר רשמי</a>
+      <a class="ext-link" href="https://takebreaktravel.com/articles/dubai-attractions-top-2026" target="_blank">📰 Take A Break</a>
+      <a class="ext-link" href="https://dubai.co.il/" target="_blank">📰 Dubai.co.il</a>
+    </div>
   </div>
 
-  <div class="timeline-item">
-    <div class="day">יום 5 · א 8.8 — קניות</div>
-    <div class="activity"><strong>AYA Universe</strong> (Wafi City, 5 דקות) + Dubai Aquarium + VR Park</div>
-    <a class="map-link" href="https://maps.google.com/?q=AYA+Universe+Dubai" target="_blank">📍 AYA Universe</a>
+  <div class="att-card">
+    <h3>🪟 The View at The Palm</h3>
+    <div class="att-price">מ-60 AED (~60 ש"ח)</div>
+    <p>תצפית מקומה 52 במגדל The Palm Tower. נוף 360 לאי הפאלם והמרינה.</p>
+    <div class="att-links">
+      <a class="ext-link" href="https://www.theviewatthepalm.com/" target="_blank">🌐 אתר רשמי</a>
+      <a class="ext-link" href="https://dubai.platinumlist.net/event-tickets/the-view-at-the-palm" target="_blank">🎫 Platinumlist</a>
+    </div>
   </div>
 
-  <div class="timeline-item">
-    <div class="day">יום 6 · ב 9.8 — חוף</div>
-    <div class="activity"><strong>JBR Beach</strong> + The View at The Palm</div>
-    <a class="map-link" href="https://maps.google.com/?q=JBR+Beach+Dubai" target="_blank">📍 JBR Beach</a>
-    <a class="map-link" href="https://maps.google.com/?q=The+View+at+The+Palm" target="_blank">📍 Palm View</a>
-  </div>
-
-  <div class="timeline-item">
-    <div class="day">יום 7 · ג 10.8 — חזרה</div>
-    <div class="activity">צ׳ק-אאוט 16:00 → טיסה 20:10</div>
-  </div>
-
-  <div style="margin-top:24px;">
-    <a class="btn" href="https://www.google.com/maps/dir/Grand+Hyatt+Dubai/Burj+Khalifa/IMG+Worlds+of+Adventure+Dubai/AYA+Universe+Dubai/JBR+Beach+Dubai/The+View+at+The+Palm+Dubai/Grand+Hyatt+Dubai" target="_blank">
-      🗺 כל המסלול
-    </a>
+  <div class="att-card">
+    <h3>🛍️ Dubai Mall</h3>
+    <div class="att-price">כניסה חופשית</div>
+    <p>אקווריום (מ-120 AED), מזרקות (חינם!), VR Park, Ice Rink. כניסה חופשית לקניון.</p>
+    <div class="att-links">
+      <a class="ext-link" href="https://www.thedubaimall.com/" target="_blank">🌐 אתר רשמי</a>
+      <a class="ext-link" href="https://www.visitdubai.com/en/places-to-visit/the-dubai-fountain" target="_blank">🌐 מזרקות</a>
+    </div>
   </div>
 </div>
 
@@ -559,16 +259,12 @@ body {
 </div>
 
 <!-- Protected -->
-<div style="text-align:center; margin:24px 0;">
-  <button class="btn btn-outline" onclick="checkPassword()" id="details-btn">🔐 פרטים נוספים</button>
-</div>
-
+<div style="text-align:center;margin:24px 0"><button class="btn btn-outline" onclick="checkPassword()" id="details-btn">🔐 פרטים נוספים</button></div>
 <div class="footer">נוצר ב־💙 עי רמבו · Tripadvisor · TimeOut Dubai · Visit Dubai 2026</div>
 
 <!-- Hidden Details -->
-<div class="card" id="details-card" style="display:none;">
+<div class="card" id="details-card" style="display:none">
   <h2>פרטים מלאים</h2>
-
   <h3>הרכב החדרים</h3>
   <table class="details-table">
     <tr><th>#</th><th>חדר</th><th>דיירים</th><th>עלות</th></tr>
@@ -579,7 +275,6 @@ body {
     <tr><td>5</td><td>Skyline View</td><td>אורן + יעל בוטא</td><td>$3,210</td></tr>
     <tr class="total"><td colspan="3">סה״כ</td><td>$19,940</td></tr>
   </table>
-
   <h3>קודי הזמנה</h3>
   <table class="details-table">
     <tr><th>הזמנה</th><th>מלון</th><th>טיסה</th></tr>
@@ -588,49 +283,25 @@ body {
     <tr><td>426-05-268965</td><td>Z2255V</td><td>51015007</td></tr>
     <tr><td>426-05-269144</td><td>XSPN7Y</td><td>51016139</td></tr>
   </table>
-
   <h3>טיסות</h3>
   <p>הלוך: <strong>FZ1550</strong> ת״א→דובאי · 10:50–15:20</p>
   <p>חזור: <strong>FZ1625</strong> דובאי→ת״א · 20:10–22:40</p>
-
   <h3>מלון</h3>
   <p>Grand Hyatt Dubai · חצי פנסיון · ביטול חינם עד 28.7</p>
-
   <h3>עלות כוללת</h3>
-  <p style="font-size:1.4rem; color:var(--gold); font-weight:700;">$19,940</p>
+  <p style="font-size:1.4rem;color:var(--gold);font-weight:700">$19,940</p>
 </div>
 
 </div>
 
 <script>
-function checkPassword() {
-  const pwd = prompt('🔐 הזן סיסמה לפרטים נוספים:', '');
-  if (pwd === 'טוטו') {
-    document.getElementById('details-card').style.display = 'block';
-    document.getElementById('details-btn').style.display = 'none';
-  } else if (pwd !== null) {
-    alert('❌ סיסמה שגויה.');
-  }
-}
-
-function updateCountdown() {
-  const t = new Date('2026-08-04T10:50:00+03:00');
-  const d = t - new Date();
-  if (d <= 0) {
-    document.getElementById('days').textContent = '00';
-    document.getElementById('hours').textContent = '00';
-    document.getElementById('minutes').textContent = '00';
-    document.getElementById('seconds').textContent = '00';
-    document.querySelector('.countdown-note').textContent = '🎉 כולנו בדובאי!';
-    return;
-  }
-  document.getElementById('days').textContent = String(Math.floor(d/864e5)).padStart(2,'0');
-  document.getElementById('hours').textContent = String(Math.floor(d/36e5%24)).padStart(2,'0');
-  document.getElementById('minutes').textContent = String(Math.floor(d/6e4%60)).padStart(2,'0');
-  document.getElementById('seconds').textContent = String(Math.floor(d/1e3%60)).padStart(2,'0');
-}
-updateCountdown();
-setInterval(updateCountdown, 1000);
+function openLightbox(src){document.getElementById('lightbox-img').src=src;document.getElementById('lightbox').classList.add('show')}
+function closeLightbox(){document.getElementById('lightbox').classList.remove('show')}
+document.addEventListener('keydown',function(e){if(e.key==='Escape')closeLightbox()});
+function checkPassword(){const pwd=prompt('🔐 הזן סיסמה לפרטים נוספים:','');if(pwd==='טוטו'){document.getElementById('details-card').style.display='block';document.getElementById('details-btn').style.display='none'}else if(pwd!==null){alert('❌ סיסמה שגויה.')}}
+function updateCountdown(){const t=new Date('2026-08-04T10:50:00+03:00');const d=t-new Date();if(d<=0){document.getElementById('days').textContent='00';document.getElementById('hours').textContent='00';document.getElementById('minutes').textContent='00';document.getElementById('seconds').textContent='00';document.querySelector('.countdown-note').textContent='🎉 כולנו בדובאי!';return}
+document.getElementById('days').textContent=String(Math.floor(d/864e5)).padStart(2,'0');document.getElementById('hours').textContent=String(Math.floor(d/36e5%24)).padStart(2,'0');document.getElementById('minutes').textContent=String(Math.floor(d/6e4%60)).padStart(2,'0');document.getElementById('seconds').textContent=String(Math.floor(d/1e3%60)).padStart(2,'0')}
+updateCountdown();setInterval(updateCountdown,1000);
 </script>
 </body>
 </html>

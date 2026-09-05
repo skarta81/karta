@@ -3,277 +3,88 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>🍃 צפון 2026 — הגושרים</title>
+<title>🍃 הגושרים — צפון 2026</title>
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;600;700;800;900&display=swap');
+:root{--gold:#d4af37;--gl:#f5e78a;--bg:#0f1a12;--cb:rgba(255,255,255,0.04);--ce:rgba(255,255,255,0.06);--t1:#f0eee8;--t2:#a8b8a8;--t3:#6f7f6f;--ac:#7cb57e;--ac2:#d4af37;--ease:cubic-bezier(0.23,1,0.32,1)}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Heebo',sans-serif;background:var(--bg);background-image:radial-gradient(ellipse 70% 50% at 50% -10%,rgba(124,181,126,0.08) 0%,transparent 60%);color:var(--t1);min-height:100dvh;line-height:1.7;-webkit-font-smoothing:antialiased}
+.container{max-width:900px;margin:0 auto;padding:48px 24px 40px}
 
-/* ── Emil Kowalski design tokens ── */
-:root {
-  --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
-  --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
-  --bg: #0f1a12;
-  --bg-2: #142217;
-  --surface: rgba(255, 255, 255, 0.04);
-  --surface-hover: rgba(255, 255, 255, 0.07);
-  --border: rgba(255, 255, 255, 0.07);
-  --text: #eef2ec;
-  --text-2: #a8b8a8;
-  --text-3: #6f7f6f;
-  --accent: #7cb57e;
-  --accent-2: #d4af37;
-  --shadow: 0 20px 60px rgba(0, 0, 0, 0.35);
-  --shadow-soft: 0 8px 30px rgba(0, 0, 0, 0.25);
-}
+/* Hero */
+.hero{text-align:center;padding:70px 20px 40px;opacity:0;transform:translateY(16px);animation:in 700ms var(--ease) forwards}
+@keyframes in{to{opacity:1;transform:none}}
+.hero .eyebrow{font-size:.8rem;font-weight:600;letter-spacing:2.5px;color:var(--ac);margin-bottom:14px}
+.hero h1{font-size:clamp(2.4rem,6vw,3.6rem);font-weight:900;letter-spacing:-.03em;background:linear-gradient(135deg,#e8f5e9,#a5d6a7 50%,var(--ac2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.hero .subtitle{color:var(--t2);font-size:1.1rem;margin-top:8px}
+.hero .dates{color:var(--ac2);font-weight:600;margin-top:10px}
+.hero::after{content:'';display:block;width:120px;height:1px;background:linear-gradient(90deg,transparent,var(--ac),transparent);margin:28px auto 0}
 
-* { margin: 0; padding: 0; box-sizing: border-box; }
+/* Cards */
+.card{background:var(--cb);border:1px solid var(--ce);border-radius:20px;padding:28px;margin:18px 0;box-shadow:0 8px 30px rgba(0,0,0,.25);transition:transform 300ms var(--ease)}
+.card:hover{transform:translateY(-2px)}
+.card h2{font-size:1.2rem;color:var(--ac);font-weight:700;margin-bottom:14px}
+.card p{color:var(--t2);font-size:.95rem;margin-bottom:6px}
+.card strong{color:#d8e8d8}
 
-body {
-  font-family: 'Heebo', sans-serif;
-  background: var(--bg);
-  background-image:
-    radial-gradient(ellipse 70% 50% at 50% -10%, rgba(124, 181, 126, 0.08) 0%, transparent 60%),
-    radial-gradient(ellipse 40% 40% at 90% 90%, rgba(212, 175, 55, 0.04) 0%, transparent 60%);
-  color: var(--text);
-  min-height: 100dvh;
-  line-height: 1.7;
-  -webkit-font-smoothing: antialiased;
-}
+/* Countdown */
+.countdown{display:flex;justify-content:center;gap:24px;flex-wrap:wrap;text-align:center}
+.cd-item{min-width:80px}
+.cd-item .num{font-size:2.3rem;font-weight:800;color:var(--ac);display:block;line-height:1;font-variant-numeric:tabular-nums}
+.cd-item .label{font-size:.68rem;color:var(--t3);letter-spacing:2px;text-transform:uppercase}
+.cd-note{margin-top:12px;font-size:.85rem;color:var(--t3);text-align:center}
 
-.container { max-width: 900px; margin: 0 auto; padding: 48px 24px 40px; }
+/* People */
+.people{display:flex;flex-wrap:wrap;gap:8px}
+.people span{background:rgba(124,181,126,.1);border:1px solid rgba(124,181,126,.2);border-radius:100px;padding:5px 16px;font-size:.9rem;color:#cfe8cf;transition:transform 200ms var(--ease)}
+.people span:hover{transform:scale(1.05)}
 
-/* ── Hero ── */
-.hero {
-  text-align: center;
-  padding: 70px 20px 50px;
-  position: relative;
-  opacity: 0;
-  transform: translateY(16px);
-  animation: hero-in 700ms var(--ease-out) forwards;
-}
-@keyframes hero-in {
-  to { opacity: 1; transform: translateY(0); }
-}
-.hero .eyebrow {
-  display: inline-block;
-  font-size: 0.8rem;
-  font-weight: 600;
-  letter-spacing: 2.5px;
-  text-transform: uppercase;
-  color: var(--accent);
-  margin-bottom: 16px;
-}
-.hero h1 {
-  font-size: clamp(2.4rem, 6vw, 3.6rem);
-  font-weight: 900;
-  letter-spacing: -0.03em;
-  line-height: 1.15;
-  background: linear-gradient(135deg, #e8f5e9, #a5d6a7 50%, #d4af37);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  margin-bottom: 12px;
-}
-.hero .subtitle {
-  font-size: 1.15rem;
-  color: var(--text-2);
-  font-weight: 400;
-}
-.hero .dates {
-  font-size: 1rem;
-  color: var(--accent-2);
-  margin-top: 10px;
-  font-weight: 600;
-  letter-spacing: 0.3px;
-}
-.hero::after {
-  content: '';
-  display: block;
-  width: 120px;
-  height: 1px;
-  background: linear-gradient(90deg, transparent, var(--accent), transparent);
-  margin: 30px auto 0;
-}
+/* Timeline */
+.tl{border-right:1.5px solid rgba(124,181,126,.3);padding-right:18px;padding-bottom:4px;margin:14px 0;position:relative;opacity:0;transform:translateX(10px);animation:in 500ms var(--ease) forwards}
+.tl::before{content:'';width:9px;height:9px;background:var(--ac);border-radius:50%;position:absolute;right:-5px;top:5px;box-shadow:0 0 0 3px rgba(124,181,126,.15)}
+.tl .day{font-weight:700;color:#d8e8d8}
+.tl .tm{font-size:.72rem;color:var(--ac2);font-weight:600;margin-right:8px}
+.tl .act{color:var(--t2);font-size:.92rem}
 
-/* ── Countdown ── */
-.countdown-section {
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: 20px;
-  padding: 32px;
-  margin: 36px 0;
-  text-align: center;
-  box-shadow: var(--shadow-soft);
-  transition: transform 300ms var(--ease-out), box-shadow 300ms var(--ease-out);
-}
-.countdown-section:hover {
-  transform: translateY(-2px);
-  box-shadow: var(--shadow);
-}
-.countdown-section h2 {
-  font-size: 1rem;
-  color: var(--text-2);
-  font-weight: 500;
-  letter-spacing: 1px;
-  margin-bottom: 20px;
-}
-.countdown { display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; }
-.countdown-item { min-width: 84px; }
-.countdown-item .num {
-  font-size: 2.4rem;
-  font-weight: 800;
-  color: var(--accent);
-  display: block;
-  line-height: 1;
-  font-variant-numeric: tabular-nums;
-  letter-spacing: -0.02em;
-}
-.countdown-item .label {
-  font-size: 0.7rem;
-  color: var(--text-3);
-  text-transform: uppercase;
-  letter-spacing: 2px;
-  margin-top: 8px;
-  display: block;
-}
-.countdown-note { margin-top: 18px; font-size: 0.85rem; color: var(--text-3); }
+/* Chart grid */
+.charts{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+@media(max-width:700px){.charts{grid-template-columns:1fr}}
+.chart-card{background:rgba(255,255,255,.02);border:1px solid var(--ce);border-radius:16px;padding:20px;text-align:center}
+.chart-card h3{color:#d8e8d8;font-size:.95rem;margin-bottom:10px}
+.chart-legend{display:flex;flex-direction:column;gap:5px;margin-top:10px;text-align:right;font-size:.8rem;color:var(--t2)}
+.chart-legend .row{display:flex;align-items:center;gap:8px}
+.dot{width:10px;height:10px;border-radius:3px;flex-shrink:0}
+.chart-legend .pct{margin-right:auto;color:var(--t3)}
 
-/* ── Cards ── */
-.card {
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: 20px;
-  padding: 32px;
-  margin: 20px 0;
-  box-shadow: var(--shadow-soft);
-  transition: transform 300ms var(--ease-out), border-color 300ms var(--ease-out);
-}
-.card:hover { transform: translateY(-2px); border-color: rgba(124, 181, 126, 0.25); }
-.card h2 {
-  font-size: 1.25rem;
-  font-weight: 700;
-  color: var(--accent);
-  margin-bottom: 16px;
-  letter-spacing: 0.2px;
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-.card h3 { font-size: 1rem; color: #d8e8d8; font-weight: 600; margin: 16px 0 6px; }
-.card p { color: var(--text-2); margin-bottom: 6px; font-size: 0.95rem; }
+/* Bars */
+.bars{display:flex;flex-direction:column;gap:10px;margin-top:8px}
+.bar-row .bar-label{font-size:.8rem;color:var(--t2);display:flex;justify-content:space-between;margin-bottom:3px}
+.bar-row .bar-label b{color:#d8e8d8}
+.bar-track{background:rgba(255,255,255,.05);border-radius:6px;height:14px;overflow:hidden}
+.bar-fill{height:100%;border-radius:6px;width:0;transition:width 1.2s var(--ease);animation:grow 1.2s var(--ease) forwards}
 
-/* ── People tags ── */
-.people-list { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; }
-.people-list span {
-  background: rgba(124, 181, 126, 0.1);
-  border: 1px solid rgba(124, 181, 126, 0.2);
-  border-radius: 100px;
-  padding: 6px 18px;
-  font-size: 0.9rem;
-  color: #cfe8cf;
-  transition: background 200ms var(--ease-out), transform 200ms var(--ease-out);
-}
-.people-list span:hover { background: rgba(124, 181, 126, 0.2); transform: scale(1.04); }
+/* Day strip */
+.daystrip{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:10px}
+@media(max-width:600px){.daystrip{grid-template-columns:1fr}}
+.daychip{background:rgba(255,255,255,.03);border:1px solid var(--ce);border-radius:14px;padding:14px;text-align:center;transition:transform 250ms var(--ease),border-color 250ms var(--ease)}
+.daychip:hover{transform:translateY(-3px);border-color:rgba(124,181,126,.4)}
+.daychip .d{font-size:.7rem;color:var(--ac2);font-weight:600;letter-spacing:1px}
+.daychip .t{font-weight:700;color:#d8e8d8;font-size:1rem;margin:4px 0}
+.daychip .n{font-size:.78rem;color:var(--t2)}
 
-/* ── Timeline / itinerary ── */
-.timeline-item {
-  border-right: 1.5px solid rgba(124, 181, 126, 0.3);
-  padding-right: 20px;
-  padding-bottom: 6px;
-  margin: 18px 0;
-  position: relative;
-  opacity: 0;
-  transform: translateX(12px);
-  animation: item-in 500ms var(--ease-out) forwards;
-}
-@keyframes item-in { to { opacity: 1; transform: translateX(0); } }
-.timeline-item::before {
-  content: '';
-  width: 9px; height: 9px;
-  background: var(--accent);
-  border-radius: 50%;
-  position: absolute;
-  right: -5px; top: 6px;
-  box-shadow: 0 0 0 3px rgba(124, 181, 126, 0.15);
-}
-.timeline-item:last-child { border-right-color: transparent; }
-.timeline-item .day { font-weight: 700; color: #d8e8d8; font-size: 1rem; }
-.timeline-item .time { font-size: 0.75rem; color: var(--accent-2); font-weight: 600; letter-spacing: 0.5px; margin-right: 8px; }
-.timeline-item .activity { color: var(--text-2); margin-top: 3px; font-size: 0.92rem; }
-
-/* ── Attraction cards ── */
-.att-card {
-  background: rgba(255, 255, 255, 0.02);
-  border: 1px solid var(--border);
-  border-radius: 16px;
-  padding: 22px;
-  margin: 12px 0;
-  transition: transform 250ms var(--ease-out), border-color 250ms var(--ease-out), background 250ms var(--ease-out);
-}
-.att-card:hover { transform: translateY(-3px); border-color: rgba(124, 181, 126, 0.3); background: rgba(124, 181, 126, 0.03); }
-.att-card h3 { color: #d8e8d8; font-size: 1.02rem; margin-bottom: 4px; display: flex; align-items: center; gap: 8px; }
-.att-card .meta { font-size: 0.8rem; color: var(--text-3); margin-bottom: 8px; }
-.att-card p { font-size: 0.9rem; color: var(--text-2); }
-
-/* ── Restaurant cards ── */
-.rest-card {
-  display: flex;
-  gap: 16px;
-  align-items: flex-start;
-  background: rgba(255, 255, 255, 0.02);
-  border: 1px solid var(--border);
-  border-radius: 16px;
-  padding: 22px;
-  margin: 12px 0;
-  transition: transform 250ms var(--ease-out), border-color 250ms var(--ease-out);
-}
-.rest-card:hover { transform: translateY(-3px); border-color: rgba(212, 175, 55, 0.35); }
-.rest-card .rest-icon { font-size: 1.8rem; flex-shrink: 0; }
-.rest-card h3 { color: #e8e0c8; font-size: 1.02rem; margin-bottom: 4px; }
-.rest-card .cuisine { font-size: 0.8rem; color: var(--accent-2); font-weight: 600; margin-bottom: 6px; }
-.rest-card p { font-size: 0.88rem; color: var(--text-2); }
-
-/* ── Links / buttons ── */
-.btn {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  background: var(--accent);
-  color: #0f1a12;
-  text-decoration: none;
-  padding: 12px 26px;
-  border-radius: 12px;
-  font-weight: 700;
-  font-size: 0.92rem;
-  transition: transform 160ms var(--ease-out), box-shadow 250ms var(--ease-out), background 250ms var(--ease-out);
-  box-shadow: 0 4px 16px rgba(124, 181, 126, 0.25);
-}
-.btn:hover { transform: translateY(-2px); box-shadow: 0 10px 30px rgba(124, 181, 126, 0.35); }
-.btn:active { transform: scale(0.97); }
-.btn-ghost {
-  background: transparent;
-  color: var(--text-2);
-  border: 1px solid var(--border);
-  box-shadow: none;
-}
-.btn-ghost:hover { border-color: var(--accent); color: var(--text); }
-
-/* ── Footer ── */
-.footer { text-align: center; padding: 40px 20px; color: var(--text-3); font-size: 0.8rem; }
-
-/* ── Responsive ── */
-@media (max-width: 600px) {
-  .container { padding: 32px 16px; }
-  .countdown { gap: 12px; }
-  .countdown-item { min-width: 65px; }
-  .countdown-item .num { font-size: 1.8rem; }
-  .rest-card { flex-direction: column; gap: 8px; }
-}
+/* Others */
+.links a{display:inline-block;color:#7eb8ff;font-size:.85rem;margin:2px 4px;padding:3px 10px;border:1px solid rgba(126,184,255,.2);border-radius:6px;text-decoration:none;transition:all 200ms var(--ease)}
+.links a:hover{background:rgba(126,184,255,.08)}
+.btn{display:inline-flex;align-items:center;gap:8px;background:var(--ac);color:#0f1a12;text-decoration:none;padding:11px 24px;border-radius:12px;font-weight:700;font-size:.9rem;transition:transform 160ms var(--ease),box-shadow 250ms var(--ease);box-shadow:0 4px 16px rgba(124,181,126,.25)}
+.btn:hover{transform:translateY(-2px)}
+.btn:active{transform:scale(.97)}
+.btn-ghost{background:transparent;color:var(--t2);border:1px solid var(--ce)}
+.footer{text-align:center;padding:30px;color:var(--t3);font-size:.8rem}
 </style>
 </head>
 <body>
 <div class="container">
 
-<!-- Hero -->
 <div class="hero">
   <div class="eyebrow">חופשה משפחתית · צפון</div>
   <h1>🍃 הגושרים</h1>
@@ -281,191 +92,170 @@ body {
   <div class="dates">🗓 17 – 19 בספטמבר 2026 · 2 לילות</div>
 </div>
 
-<!-- Countdown -->
-<div class="countdown-section">
+<div class="card">
   <h2>⏳ ספירה לחופשה</h2>
   <div class="countdown">
-    <div class="countdown-item"><span class="num" id="days">00</span><span class="label">ימים</span></div>
-    <div class="countdown-item"><span class="num" id="hours">00</span><span class="label">שעות</span></div>
-    <div class="countdown-item"><span class="num" id="minutes">00</span><span class="label">דקות</span></div>
-    <div class="countdown-item"><span class="num" id="seconds">00</span><span class="label">שניות</span></div>
+    <div class="cd-item"><span class="num" id="days">00</span><span class="label">ימים</span></div>
+    <div class="cd-item"><span class="num" id="hours">00</span><span class="label">שעות</span></div>
+    <div class="cd-item"><span class="num" id="minutes">00</span><span class="label">דקות</span></div>
+    <div class="cd-item"><span class="num" id="seconds">00</span><span class="label">שניות</span></div>
   </div>
-  <div class="countdown-note" id="countdown-note">🌲 הגליל מחכה</div>
+  <div class="cd-note" id="cdnote">🌲 הגליל מחכה</div>
 </div>
 
-<!-- Who -->
 <div class="card">
   <h2>👨‍👩‍👧‍👦 הנוסעים</h2>
-  <div class="people-list">
+  <div class="people">
     <span>שקד</span><span>שרית</span><span>רזיייי</span><span>נויצ'י פויצ'י</span><span>ניבו</span>
   </div>
 </div>
 
-<!-- Hotel -->
+<!-- Budget diagrams -->
+<div class="card">
+  <h2>💰 תקציב משוער</h2>
+  <div class="charts">
+    <div class="chart-card">
+      <h3>חלוקת ההוצאות</h3>
+      <svg viewBox="0 0 220 220" width="190" height="190">
+        <circle cx="110" cy="110" r="80" fill="none" stroke="rgba(255,255,255,.06)" stroke-width="26"/>
+        <circle id="seg1" cx="110" cy="110" r="80" fill="none" stroke="#7cb57e" stroke-width="26" stroke-dasharray="0 502" stroke-linecap="butt" transform="rotate(-90 110 110)"/>
+        <circle id="seg2" cx="110" cy="110" r="80" fill="none" stroke="#d4af37" stroke-width="26" stroke-dasharray="0 502" stroke-linecap="butt" transform="rotate(-90 110 110)"/>
+        <circle id="seg3" cx="110" cy="110" r="80" fill="none" stroke="#7eb8ff" stroke-width="26" stroke-dasharray="0 502" stroke-linecap="butt" transform="rotate(-90 110 110)"/>
+        <circle id="seg4" cx="110" cy="110" r="80" fill="none" stroke="#c98bb8" stroke-width="26" stroke-dasharray="0 502" stroke-linecap="butt" transform="rotate(-90 110 110)"/>
+        <text x="110" y="104" text-anchor="middle" fill="#f0eee8" font-size="26" font-weight="800">~10.5k</text>
+        <text x="110" y="128" text-anchor="middle" fill="#6f7f6f" font-size="11">₪ משוער</text>
+      </svg>
+      <div class="chart-legend" id="legend"></div>
+    </div>
+    <div class="chart-card">
+      <h3>עלויות אטרקציות (למשפחה)</h3>
+      <div class="bars" id="bars"></div>
+    </div>
+  </div>
+</div>
+
+<div class="card">
+  <h2>📊 שלושת הימים במבט אחד</h2>
+  <div class="daystrip" id="daystrip"></div>
+</div>
+
 <div class="card">
   <h2>🏨 מלון הגושרים</h2>
-  <p>מלון בטבע, קיבוץ הגושרים · גליל עליון</p>
-  <p>🛎 צ׳ק-אין 17.9 15:00 · צ׳ק-אאוט 19.9 11:00</p>
-  <p>🍳 פנסיון: ארוחת בוקר · 🏊 בריכות, ספא, מרכז ספורט</p>
-  <p style="font-size:0.85rem; color:var(--text-3); margin-top:8px;">2 הזמנות · סה״כ 7,440 ₪ · ביטול חינם עד 10.9</p>
-  <div style="margin-top:14px;">
-    <a class="btn btn-ghost" href="https://maps.google.com/?q=Hagoshrim+Hotel" target="_blank">📍 ניווט למלון</a>
-  </div>
+  <p><strong>מלון בטבע</strong> · קיבוץ הגושרים · גליל עליון</p>
+  <p>🛎 צ׳ק-אין 17.9 15:00 · צ׳ק-אאוט 19.9 11:00 · 🍳 בוקר בלבד</p>
+  <p>🏊 בריכות · ספא · מרכז ספורט · 💰 7,440₪ (2 הזמנות) · ביטול חינם עד 10.9</p>
+  <div class="links" style="margin-top:10px"><a href="https://maps.google.com/?q=Hagoshrim+Hotel" target="_blank">📍 ניווט</a></div>
 </div>
 
-<!-- Route -->
 <div class="card">
   <h2>🚗 הדרך</h2>
-  <p><strong>צור יצחק → הגושרים</strong> · ~2 שעות · כביש 6 → כביש 90</p>
-  <p>🕛 יציאה משוערת: <strong>12:00</strong> · הגעה ~14:00 (לפני צ׳ק-אין 15:00)</p>
+  <p><strong>צור יצחק → הגושרים</strong> · ~2 שעות · יציאה 12:00 · הגעה ~14:00</p>
 </div>
 
-<!-- Itinerary -->
 <div class="card">
   <h2>🗺 תכנון יומי</h2>
-
-  <div class="timeline-item">
-    <div class="day">📅 יום 1 · חמישי 17.9 — הגעה ומים</div>
-    <div class="activity"><span class="time">12:00</span> יציאה מצור יצחק 🚗</div>
-    <div class="activity"><span class="time">14:00</span> הגעה לאזור · עצירת קפה קצרה</div>
-    <div class="activity"><span class="time">15:00</span> צ׳ק-אין · התיישבות בחדרים</div>
-    <div class="activity"><span class="time">16:00</span> 🛶 <strong>קייקי מעיין הגושרים</strong> — שייט בנחל שניר (5 דק׳ מהמלון)</div>
-    <div class="activity"><span class="time">20:00</span> 🍽 ארוחת ערב: <strong>דג על הדן</strong></div>
-  </div>
-
-  <div class="timeline-item">
-    <div class="day">📅 יום 2 · שישי 18.9 — טבע וטיול</div>
-    <div class="activity"><span class="time">09:00</span> 🍳 ארוחת בוקר במלון</div>
-    <div class="activity"><span class="time">10:30</span> 💦 <strong>שמורת תל דן</strong> — מסלול מים קליל (נגיש, מוצל)</div>
-    <div class="activity"><span class="time">13:30</span> 🥪 ארוחת צהריים קלה באזור</div>
-    <div class="activity"><span class="time">15:00</span> 🦁 <strong>גן גורו</strong> — פינת חי וחיות (או בריכת המלון)</div>
-    <div class="activity"><span class="time">19:00</span> 🌅 ערב חופשי · בריכה / ספא</div>
-    <div class="activity"><span class="time">20:30</span> 🍽 ארוחת ערב: <strong>מסעדת מלון הגושרים</strong></div>
-  </div>
-
-  <div class="timeline-item">
-    <div class="day">📅 יום 3 · שבת 19.9 — סיום</div>
-    <div class="activity"><span class="time">09:00</span> 🍳 ארוחת בוקר אחרונה</div>
-    <div class="activity"><span class="time">10:30</span> ⛰ <strong>עין קנייה</strong> — מפל ופיקניק קצר (או שמורת דן)</div>
-    <div class="activity"><span class="time">11:00</span> צ׳ק-אאוט</div>
-    <div class="activity"><span class="time">13:00</span> 🚗 נסיעה חזרה הביתה</div>
-  </div>
+  <div class="tl"><div class="day">📅 יום 1 · חמישי 17.9 — הגעה ומים</div>
+    <div class="act"><span class="tm">12:00</span> יציאה מצור יצחק 🚗</div>
+    <div class="act"><span class="tm">15:00</span> צ׳ק-אין + התיישבות</div>
+    <div class="act"><span class="tm">16:00</span> 🛶 קייקי מעיין הגושרים (נחל שניר)</div>
+    <div class="act"><span class="tm">20:00</span> 🍽 דג על הדן</div></div>
+  <div class="tl"><div class="day">📅 יום 2 · שישי 18.9 — טבע</div>
+    <div class="act"><span class="tm">09:00</span> 🍳 ארוחת בוקר</div>
+    <div class="act"><span class="tm">10:30</span> 💦 שמורת תל דן (מסלול מים)</div>
+    <div class="act"><span class="tm">15:00</span> 🦁 גן גורו / בריכה</div>
+    <div class="act"><span class="tm">20:30</span> 🍽 מסעדת מלון הגושרים</div></div>
+  <div class="tl"><div class="day">📅 יום 3 · שבת 19.9 — סיום</div>
+    <div class="act"><span class="tm">09:00</span> 🍳 בוקר אחרון</div>
+    <div class="act"><span class="tm">10:30</span> ⛰ עין קנייה / פיקניק</div>
+    <div class="act"><span class="tm">11:00</span> צ׳ק-אאוט → 🚗 חזרה</div></div>
 </div>
 
-<!-- Attractions -->
 <div class="card">
   <h2>🎯 אטרקציות בסביבה</h2>
-
-  <div class="att-card">
-    <h3>🛶 קייקי מעיין הגושרים</h3>
-    <div class="meta">5 דק׳ מהמלון · כ-40 ₪/אדם</div>
-    <p>שייט קיאקים משפחתי בנחל שניר (החצבאני) — מים צלולים, מוצל, מתאים לילדים. הפעילות הכי קרובה למלון.</p>
-  </div>
-
-  <div class="att-card">
-    <h3>💦 שמורת תל דן</h3>
-    <div class="meta">10 דק׳ · כניסה ~29 ₪</div>
-    <p>מסלול מים קצר ונגיש עם עצים עתיקים, מעיינות ובית כנסת עתיק. מושלם למשפחה — גם באוגוסט קריר.</p>
-  </div>
-
-  <div class="att-card">
-    <h3>🌊 נחל חרמון (בניאס)</h3>
-    <div class="meta">15 דק׳ · כניסה ~29 ₪</div>
-    <p>מפל הבניאס המרשים, מסלול מוצל על מים זורמים, גשר תלוי ונוף לחרמון.</p>
-  </div>
-
-  <div class="att-card">
-    <h3>🦁 גן גורו</h3>
-    <div class="meta">20 דק׳ · ~59 ₪</div>
-    <p>פינת חי וחיות בלב הגליל — חיות אקזוטיות, מופעים והאכלות. להיט אצל ילדים.</p>
-  </div>
-
-  <div class="att-card">
-    <h3>⛰ עין קנייה</h3>
-    <div class="meta">15 דק׳ · חינם</div>
-    <p>מפל מים יפה ליד מטולה עם בריכת שכשוך ומדשאות פיקניק. נקודת עצירה מצוינת בדרך חזרה.</p>
-  </div>
-
-  <div class="att-card">
-    <h3>🛟 רפטינג נהר הירדן</h3>
-    <div class="meta">25 דק׳ (כפר בלום) · ~90 ₪</div>
-    <p>שיט רפסודות משפחתי על הירדן — אדרנלין כיפי. אופציה ליום השני אם מתחשק עוצמה.</p>
-  </div>
-
-  <div style="margin-top:18px;">
-    <a class="btn" href="https://www.google.com/maps/dir/Hagoshrim+Hotel/Kayaks+Hagoshrim/Tel+Dan+Nature+Reserve/Banias/HaGoshrim+Junction+Restaurant/Beit+Ussishkin+Museum/Hagoshrim+Hotel" target="_blank">🗺 כל המסלול במפה</a>
-  </div>
+  <p>🛶 <strong>קייקי הגושרים</strong> — 5 דק׳, ~200₪ למשפחה · מים צלולים</p>
+  <p>💦 <strong>שמורת תל דן</strong> — 10 דק׳, ~145₪ · מוצל ונגיש</p>
+  <p>🌊 <strong>נחל חרמון (בניאס)</strong> — 15 דק׳, ~145₪ · מפל מרשים</p>
+  <p>🦁 <strong>גן גורו</strong> — 20 דק׳, ~295₪ · פינת חי</p>
+  <p>⛰ <strong>עין קנייה</strong> — 15 דק׳, חינם · מפל ופיקניק</p>
+  <p>🛟 <strong>רפטינג ירדן</strong> — 25 דק׳, ~450₪ · אדרנלין</p>
 </div>
 
-<!-- Restaurants -->
 <div class="card">
   <h2>🍽 מסעדות מומלצות — ערב</h2>
-
-  <div class="rest-card">
-    <div class="rest-icon">🐟</div>
-    <div>
-      <h3>דג על הדן</h3>
-      <div class="cuisine">דגים · הגושרים (צומת) · ₪₪₪₪</div>
-      <p>מסעדת הדגים האגדית בצומת הגושרים — הנחל זורם מתחת לרגליים, דגים טריים ואווירה קסומה. ביקורות מצוינות, הזמנה מראש חובה.</p>
-    </div>
-  </div>
-
-  <div class="rest-card">
-    <div class="rest-icon">🔥</div>
-    <div>
-      <h3>מסעדת מלון הגושרים</h3>
-      <div class="cuisine">בשרים מעושנים · גריל · דגים · סלטים לבנוניים</div>
-      <p>המסעדה של המלון — בשרים מעושנים, מטעמי גריל וערבי שירה וזמר. פתוחה עד חצות. נוח בערב של יום שישי.</p>
-    </div>
-  </div>
-
-  <div class="rest-card">
-    <div class="rest-icon">🍷</div>
-    <div>
-      <h3>בראסרי MTA — מטולה</h3>
-      <div class="cuisine">מסעדת שף · מטולה · 15 דק׳</div>
-      <p>מסעדה יוקרתית עם תפריט עונתי ונוף להרי החרמון. אופציה לארוחת ערב רומנטית-משפחתית מיוחדת.</p>
-    </div>
-  </div>
-
-  <div class="rest-card">
-    <div class="rest-icon">🥛</div>
-    <div>
-      <h3>חוות דובדבנים</h3>
-      <div class="cuisine">חלבי-כשר · גליל עליון · 20 דק׳</div>
-      <p>מעדנייה ומסעדה חלבית באווירת חווה — גבינות, מאפים וקינוחים תוצרת בית. מצוין גם לעצירת צהריים.</p>
-    </div>
-  </div>
+  <p>🐟 <strong>דג על הדן</strong> — דגים · צומת הגושרים · הנחל מתחת לרגליים</p>
+  <p>🔥 <strong>מסעדת מלון הגושרים</strong> — בשרים מעושנים · גריל · ערבי שירה</p>
+  <p>🥛 <strong>חוות דובדבנים</strong> — חלבי · גבינות ומאפים</p>
 </div>
 
-<div class="footer">נוצר ב־💚 ע״י רמבו · עיצוב בהשראת Emil Kowalski · 25.8.2026</div>
+<div class="card" style="text-align:center">
+  <a class="btn" href="https://www.google.com/maps/dir/Hagoshrim+Hotel/Tel+Dan+Nature+Reserve/Ein+Kinya+Hagoshrim" target="_blank">🗺 כל המסלול במפה</a>
+</div>
+
+<div class="footer">נוצר ב־💚 ע״י רמבו · עיצוב Emil Kowalski + דיאגרמות Lieflat · 3.9.2026</div>
 
 </div>
 
 <script>
-/* Emil-style: calm, precise */
-function updateCountdown() {
-  const target = new Date('2026-09-17T12:00:00+03:00');
-  const now = new Date();
-  const diff = target - now;
-  const el = (id) => document.getElementById(id);
-  if (diff <= 0) {
-    ['days','hours','minutes','seconds'].forEach(i => el(i).textContent = '00');
-    el('countdown-note').textContent = '🎉 בחופשה!';
-    return;
-  }
-  el('days').textContent = String(Math.floor(diff / 864e5)).padStart(2, '0');
-  el('hours').textContent = String(Math.floor(diff / 36e5 % 24)).padStart(2, '0');
-  el('minutes').textContent = String(Math.floor(diff / 6e4 % 60)).padStart(2, '0');
-  el('seconds').textContent = String(Math.floor(diff / 1e3 % 60)).padStart(2, '0');
-}
-updateCountdown();
-setInterval(updateCountdown, 1000);
+/* Countdown */
+function cd(){const t=new Date('2026-09-17T12:00:00+03:00'),d=t-new Date();if(d<=0){['days','hours','minutes','seconds'].forEach(i=>document.getElementById(i).textContent='00');document.getElementById('cdnote').textContent='🎉 בחופשה!';return}
+document.getElementById('days').textContent=String(Math.floor(d/864e5)).padStart(2,'0');document.getElementById('hours').textContent=String(Math.floor(d/36e5%24)).padStart(2,'0');document.getElementById('minutes').textContent=String(Math.floor(d/6e4%60)).padStart(2,'0');document.getElementById('seconds').textContent=String(Math.floor(d/1e3%60)).padStart(2,'0')}
+cd();setInterval(cd,1000);
 
-/* Stagger timeline items */
-document.querySelectorAll('.timeline-item').forEach((el, i) => {
-  el.style.animationDelay = (200 + i * 120) + 'ms';
+/* Donut — budget */
+const budget=[
+ {label:'מלון (2 הזמנות)',v:7440,c:'#7cb57e'},
+ {label:'מסעדות (3 ערבים)',v:1800,c:'#d4af37'},
+ {label:'אטרקציות',v:1000,c:'#7eb8ff'},
+ {label:'דלק ודרכים',v:260,c:'#c98bb8'}];
+const total=budget.reduce((a,b)=>a+b.v,0);
+const C=2*Math.PI*80; // circumference
+let acc=0;
+budget.forEach((s,i)=>{
+  const frac=s.v/total, seg=document.getElementById('seg'+(i+1));
+  const start=acc/C*C;
+  seg.setAttribute('stroke-dasharray',`${frac*C-3} ${C}`);
+  seg.setAttribute('stroke-dashoffset',`${-acc}`);
+  acc+=frac*C;
+  // animate in
+  seg.style.transition='stroke-dasharray 1.4s cubic-bezier(0.23,1,0.32,1)';
 });
+setTimeout(()=>{
+  let a=0;
+  budget.forEach((s,i)=>{
+    const frac=s.v/total;
+    document.getElementById('seg'+(i+1)).setAttribute('stroke-dasharray',`${frac*C-3} ${C-(frac*C-3)}`);
+    document.getElementById('seg'+(i+1)).setAttribute('stroke-dashoffset',`${-a}`);
+    a+=frac*C;
+  });
+},100);
+const lg=document.getElementById('legend');
+budget.forEach(s=>{const p=Math.round(s.v/total*100);const r=document.createElement('div');r.className='row';r.innerHTML=`<span class="dot" style="background:${s.c}"></span>${s.label}<span class="pct">${p}%</span>`;lg.appendChild(r)});
+
+/* Bars — attractions (family of 5) */
+const att=[
+ {n:'קייקי הגושרים',v:200,c:'#7cb57e'},
+ {n:'שמורת תל דן',v:145,c:'#7cb57e'},
+ {n:'נחל חרמון',v:145,c:'#7cb57e'},
+ {n:'גן גורו',v:295,c:'#d4af37'},
+ {n:'רפטינג ירדן',v:450,c:'#d4af37'},
+ {n:'עין קנייה',v:0,c:'#7eb8ff'}];
+const maxA=Math.max(...att.map(a=>a.v),1);
+const bars=document.getElementById('bars');
+att.forEach(a=>{const row=document.createElement('div');row.className='bar-row';
+ row.innerHTML=`<div class="bar-label"><b>${a.n}</b><span>${a.v?('~'+a.v+'₪'):'חינם'}</span></div><div class="bar-track"><div class="bar-fill" style="background:${a.c}" data-w="${a.v/maxA*100}%"></div></div>`;
+ bars.appendChild(row)});
+setTimeout(()=>document.querySelectorAll('.bar-fill').forEach(b=>b.style.width=b.dataset.w),200);
+
+/* Day strip */
+const days=[
+ {d:'יום 1 · חמישי',t:'💧 מים',n:'קייקים + הגעה'},
+ {d:'יום 2 · שישי',t:'🌿 טבע',n:'תל דן + גן גורו'},
+ {d:'יום 3 · שבת',t:'⛰ סיום',n:'עין קנייה + חזרה'}];
+const ds=document.getElementById('daystrip');
+days.forEach(x=>{const c=document.createElement('div');c.className='daychip';c.innerHTML=`<div class="d">${x.d}</div><div class="t">${x.t}</div><div class="n">${x.n}</div>`;ds.appendChild(c)});
+
+/* stagger timeline */
+document.querySelectorAll('.tl').forEach((el,i)=>el.style.animationDelay=(150+i*120)+'ms');
 </script>
 </body>
 </html>

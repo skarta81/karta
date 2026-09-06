@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>לוח הלימודים — משפחת קרתא</title>
+<meta name="description" content="מערכת שעות חיה של הילדים — מה לומדים עכשיו ומה השיעור הבא.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🏫</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<div class="page">
+
+  <header class="hero">
+    <a class="back-home" href="/karta/">← הבית</a>
+    <div class="hero-badge">משפחת קרתא</div>
+    <h1>לוח הלימודים</h1>
+    <p class="subtitle">מה לומדים עכשיו — ומה השיעור הבא</p>
+    <div class="clock" id="clock" aria-live="off">
+      <span id="clock-time">--:--</span>
+      <span id="clock-date" class="clock-date"></span>
+    </div>
+  </header>
+
+  <main id="kids"></main>
+
+  <footer class="site-footer">
+    <span>רמבו · משפחת קרתא</span>
+    <span class="footer-dot">·</span>
+    <span id="footer-note">מעודכן אוטומטית לשעון ישראל</span>
+  </footer>
+
+</div>
+
+<script src="data.js"></script>
+<script src="app.js"></script>
+</body>
+</html>

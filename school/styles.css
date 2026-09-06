@@ -1,0 +1,213 @@
+/* ── לוח הלימודים המשפחתי · עיצוב ──────────────────────────────
+   שפת עיצוב: Emil Kowalski — easing מותאם, אנימציות עדינות,
+   soft shadows, בלי AI-slop. */
+
+:root {
+  --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+  --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
+
+  --bg: #f6f5f1;
+  --card: #ffffff;
+  --ink: #17191f;
+  --ink-soft: #4b5160;
+  --muted: #8a8f9c;
+  --line: rgba(23, 25, 31, 0.08);
+  --line-strong: rgba(23, 25, 31, 0.14);
+  --hero-1: #274a9e;
+  --hero-2: #0d9488;
+
+  --ok: #16a34a;
+  --break: #d97706;
+  --radius: 18px;
+  --shadow-card: 0 1px 2px rgba(23, 25, 31, 0.04), 0 12px 32px rgba(23, 25, 31, 0.06);
+  --shadow-pop: 0 2px 4px rgba(23, 25, 31, 0.05), 0 24px 60px rgba(23, 25, 31, 0.12);
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+html { -webkit-text-size-adjust: 100%; }
+
+body {
+  font-family: 'Heebo', -apple-system, 'Segoe UI', sans-serif;
+  background: var(--bg);
+  background-image:
+    radial-gradient(ellipse 70% 40% at 85% -5%, rgba(39, 74, 158, 0.07), transparent 60%),
+    radial-gradient(ellipse 60% 35% at 10% 0%, rgba(13, 148, 136, 0.06), transparent 55%);
+  color: var(--ink);
+  min-height: 100dvh;
+  line-height: 1.5;
+}
+
+.page { max-width: 1080px; margin: 0 auto; padding: 28px 20px 60px; }
+
+/* ── Hero ── */
+.hero { text-align: center; padding: 26px 0 34px; animation: rise 700ms var(--ease-out) both; }
+
+.back-home {
+  position: absolute; inset-inline-start: 20px; top: 28px;
+  font-size: 0.85rem; color: var(--muted); text-decoration: none;
+  padding: 6px 12px; border-radius: 999px;
+  border: 1px solid var(--line);
+  transition: transform 160ms var(--ease-out), color 200ms, border-color 200ms;
+}
+.back-home:hover { color: var(--ink); border-color: var(--line-strong); transform: translateY(-1px); }
+.back-home:active { transform: scale(0.96); }
+
+.hero-badge {
+  display: inline-block; font-size: 0.78rem; font-weight: 600;
+  color: var(--hero-2); letter-spacing: 0.02em;
+  background: rgba(13, 148, 136, 0.08);
+  border: 1px solid rgba(13, 148, 136, 0.2);
+  padding: 4px 14px; border-radius: 999px; margin-bottom: 14px;
+}
+
+h1 {
+  font-size: clamp(2.2rem, 6vw, 3.2rem);
+  font-weight: 900; letter-spacing: -0.035em; line-height: 1.15;
+  background: linear-gradient(120deg, var(--hero-1), var(--hero-2) 80%);
+  -webkit-background-clip: text; background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.subtitle { color: var(--ink-soft); font-size: 1.05rem; font-weight: 300; margin-top: 6px; }
+
+.clock {
+  margin: 22px auto 0; display: inline-flex; align-items: baseline; gap: 10px;
+  background: var(--card); border: 1px solid var(--line);
+  border-radius: 999px; padding: 8px 22px;
+  box-shadow: var(--shadow-card);
+}
+#clock-time {
+  font-size: 1.5rem; font-weight: 700; font-variant-numeric: tabular-nums;
+  letter-spacing: -0.01em; direction: ltr;
+}
+.clock-date { color: var(--muted); font-size: 0.9rem; }
+
+/* ── כרטיס ילד ── */
+.kid { margin-bottom: 34px; animation: rise 700ms var(--ease-out) both; }
+.kid:nth-of-type(1) { animation-delay: 120ms; }
+.kid:nth-of-type(2) { animation-delay: 240ms; }
+.kid:nth-of-type(3) { animation-delay: 360ms; }
+
+.kid-card {
+  background: var(--card); border: 1px solid var(--line);
+  border-radius: calc(var(--radius) + 6px);
+  box-shadow: var(--shadow-card);
+  overflow: hidden;
+  transition: box-shadow 300ms var(--ease-out);
+}
+.kid-card:hover { box-shadow: var(--shadow-pop); }
+
+.kid-head {
+  display: flex; align-items: center; gap: 14px; flex-wrap: wrap;
+  padding: 20px 24px 16px;
+}
+.kid-avatar {
+  width: 52px; height: 52px; border-radius: 16px;
+  display: grid; place-items: center; font-size: 1.6rem;
+  background: var(--kid-bg, #e8edfb);
+  flex-shrink: 0;
+  box-shadow: inset 0 0 0 1px rgba(23,25,31,0.04);
+}
+.kid-title { flex: 1; min-width: 160px; }
+.kid-title h2 { font-size: 1.35rem; font-weight: 800; letter-spacing: -0.02em; display: flex; align-items: center; gap: 10px; }
+.kid-grade { color: var(--muted); font-size: 0.85rem; font-weight: 400; }
+.kid-note { color: var(--muted); font-size: 0.78rem; }
+
+/* פס סטטוס חי */
+.now {
+  margin: 0 24px 18px;
+  border-radius: 14px; padding: 12px 18px;
+  display: flex; align-items: center; gap: 14px; flex-wrap: wrap;
+  background: var(--kid-now-bg, #f2f6ff);
+  border: 1px solid var(--kid-now-line, rgba(39,74,158,0.18));
+  min-height: 52px;
+  transition: background 300ms var(--ease-out);
+}
+.now-icon { font-size: 1.3rem; flex-shrink: 0; animation: pop 400ms var(--ease-out) both; }
+.now-main { font-size: 1.06rem; font-weight: 600; flex: 1; min-width: 200px; }
+.now-main .now-subject { color: var(--kid-accent, var(--hero-1)); }
+.now-meta { font-size: 0.85rem; color: var(--ink-soft); }
+.dot {
+  width: 9px; height: 9px; border-radius: 50%;
+  background: var(--ok); display: inline-block; margin-inline-end: 6px;
+}
+.dot.pulse { animation: pulse 1.6s var(--ease-in-out) infinite; }
+
+/* ── טבלה ── */
+.table-wrap { overflow-x: auto; padding: 0 8px 8px; }
+table { border-collapse: separate; border-spacing: 4px; width: 100%; min-width: 640px; }
+th, td { text-align: center; vertical-align: middle; }
+
+.period-th {
+  font-size: 0.72rem; color: var(--muted); font-weight: 500;
+  padding: 6px 4px; white-space: nowrap; min-width: 96px;
+}
+.period-th b { display: block; color: var(--ink-soft); font-size: 0.82rem; font-weight: 700; }
+
+.day-head {
+  font-weight: 700; font-size: 0.95rem; padding: 8px 6px 4px;
+  color: var(--ink-soft); border-radius: 10px 10px 0 0;
+}
+.day-head .dsub { display: block; font-size: 0.7rem; font-weight: 400; color: var(--muted); }
+.day-head.today { background: var(--kid-now-bg, #f2f6ff); color: var(--kid-accent, var(--hero-1)); }
+
+td.cell, td.cell-empty {
+  border-radius: 10px; font-size: 0.88rem; padding: 6px 8px;
+  border: 1px solid var(--line);
+}
+td.cell {
+  background: var(--c-bg, #fff); cursor: default;
+  transition: transform 180ms var(--ease-out), box-shadow 200ms;
+}
+td.cell:hover { transform: translateY(-1px); box-shadow: 0 6px 16px rgba(23,25,31,0.08); }
+td.cell .cls { font-weight: 600; color: var(--c, #17191f); font-size: 0.9rem; }
+td.cell .csub { font-size: 0.68rem; color: var(--muted); margin-top: 1px; }
+td.cell .ctime { display: block; font-size: 0.66rem; color: var(--muted); direction: ltr; margin-top: 2px; opacity: 0.85; }
+td.cell-empty { background: rgba(23, 25, 31, 0.02); }
+
+td.cell.now-cell {
+  border-color: var(--kid-accent, var(--hero-1));
+  box-shadow: 0 0 0 2px var(--kid-accent, var(--hero-1));
+  background: #fff; position: relative; z-index: 1;
+}
+td.cell.now-cell .cls { color: var(--kid-accent, var(--hero-1)); }
+td.cell.now-cell::before {
+  content: "עכשיו"; position: absolute; top: -9px; inset-inline-start: 8px;
+  font-size: 0.62rem; font-weight: 700; color: #fff;
+  background: var(--kid-accent, var(--hero-1));
+  padding: 1px 8px; border-radius: 999px;
+}
+
+/* שורת יציאה */
+tr.exit-row td {
+  border: none; padding: 2px 4px 6px; font-size: 0.78rem; color: var(--muted);
+  border-radius: 0;
+}
+tr.exit-row td .exit-tag {
+  display: inline-block; background: rgba(23,25,31,0.045);
+  border-radius: 999px; padding: 2px 12px;
+  font-size: 0.75rem;
+}
+tr.exit-row td .exit-tag b { color: var(--ink-soft); font-weight: 600; }
+tr.exit-row td.done-today .exit-tag { background: rgba(22,163,74,0.1); }
+tr.exit-row td.done-today .exit-tag b { color: var(--ok); }
+
+/* ── Footer ── */
+.site-footer {
+  margin-top: 40px; text-align: center; color: var(--muted);
+  font-size: 0.82rem; display: flex; justify-content: center; gap: 8px; flex-wrap: wrap;
+}
+
+/* ── אנימציות ── */
+@keyframes rise { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
+@keyframes pulse { 0%, 100% { opacity: 1; transform: scale(1); } 50% { opacity: 0.45; transform: scale(0.82); } }
+@keyframes pop { from { opacity: 0; transform: scale(0.6); } to { opacity: 1; transform: scale(1); } }
+
+@media (max-width: 640px) {
+  .page { padding: 18px 12px 40px; }
+  .kid-head { padding: 16px 16px 12px; }
+  .now { margin: 0 12px 14px; }
+  .back-home { position: static; display: inline-block; margin-bottom: 18px; }
+  .clock { margin-top: 18px; }
+}

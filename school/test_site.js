@@ -31,13 +31,20 @@ for (const kid of KIDS) {
   });
 }
 // Niv exit times vs documented pickup times
-const niv = KIDS[0];
+const niv = KIDS.find(k => k.id === 'niv');
+const raz = KIDS.find(k => k.id === 'raz');
+const noy = KIDS.find(k => k.id === 'noy');
+expect(niv && raz && noy, 'all three kids present');
 const exp = ['12:45','12:45','13:30','13:30','12:45','11:45'];
 niv.days.forEach((b,d)=>{ const last=b[b.length-1]; expect(last && last.e===exp[d], 'niv exit d'+d+' = '+exp[d]+' got '+(last&&last.e)); });
+// Noy exit times (derived from the photo's bell pattern)
+const expNoy = ['13:45','14:45','13:45','13:45','14:45', null];
+noy.days.forEach((b,d)=>{ const last=b[b.length-1];
+  if (expNoy[d] === null) expect(!last, 'noy day '+d+' has no school');
+  else expect(last && last.e===expNoy[d], 'noy exit d'+d+' = '+expNoy[d]+' got '+(last&&last.e)); });
 
 const mk = (dateStr, jsDow, hm) => { const [h,m]=hm.split(':').map(Number); return {dateStr, jsDow, minutes:h*60+m, seconds:0}; };
 const S = (kid, now) => kidStatus(kid, now);
-const raz = KIDS[1];
 
 const mon = mk('2026-09-07', 1, '10:30');
 expect(S(niv, mon).type==='lesson' && S(niv, mon).block.label==='תורה', 'niv Mon 10:30 = תורה got '+(S(niv,mon).block||{}).label);
@@ -67,6 +74,25 @@ expect(S(raz, mk('2026-09-04',5,'10:00')).type==='free', 'raz Fri free');
 // tomorrow hint for niv when done Monday
 const hint = tomorrowHint(niv, mk('2026-09-07',1,'20:00'));
 expect(typeof hint === 'string' && hint.includes('שלישי'), 'niv hint mentions Tuesday got: '+hint);
+
+// Noy checks (grade 8, Bereshit Nesher)
+expect(S(noy, mk('2026-09-07',1,'08:45')).block.label==='של״ח', 'noy Mon 08:45 של״ח (lesson 1 only)');
+expect(S(noy, mk('2026-09-07',1,'09:30')).block.label==='תנ״ך', 'noy Mon 09:30 תנ״ך (lesson 2)');
+expect(S(noy, mk('2026-09-07',1,'11:00')).block.label==='מתמטיקה', 'noy Mon 11:00 math');
+expect(S(noy, mk('2026-09-07',1,'10:15')).type==='before' && S(noy, mk('2026-09-07',1,'10:15')).started===true, 'noy Mon 10:15 = big break 10:00-10:30');
+expect(S(noy, mk('2026-09-07',1,'13:20')).block.label==='אנגלית', 'noy Mon 13:20 english (13:00-14:45)');
+expect(S(noy, mk('2026-09-07',1,'14:15')).block.label==='אנגלית', 'noy Mon 14:15 english 7th lesson');
+expect(S(noy, mk('2026-09-07',1,'20:00')).type==='done' && S(noy, mk('2026-09-07',1,'20:00')).end==='14:45', 'noy Mon done 14:45');
+expect(S(noy, mk('2026-09-06',0,'13:20')).block.label==='להיות', 'noy Sun 13:20 להיות (6th lesson)');
+expect(S(noy, mk('2026-09-06',0,'14:30')).type==='done' && S(noy, mk('2026-09-06',0,'14:30')).end==='13:45', 'noy Sun done 13:45');
+expect(S(noy, mk('2026-09-08',2,'09:00')).block.label==='מדעים', 'noy Tue(ג׳) 09:00 science');
+expect(S(noy, mk('2026-09-09',3,'12:30')).block.label==='שפה', 'noy Wed(ד׳) 12:30 שפה');
+expect(S(noy, mk('2026-09-10',4,'08:45')).block.label==='בראשית', 'noy Thu(ה׳) 08:45 בראשית');
+expect(S(noy, mk('2026-09-10',4,'14:15')).block.label==='תנ״ך', 'noy Thu(ה׳) 14:15 תנ״ך');
+expect(S(noy, mk('2026-09-10',4,'15:00')).type==='done', 'noy Thu done 14:45');
+expect(S(noy, mk('2026-09-11',5,'10:00')).type==='holiday', 'noy Fri 11.9 RH holiday');
+expect(S(noy, mk('2026-09-04',5,'10:00')).type==='free', 'noy regular Fri free (no school)');
+expect(S(noy, mk('2026-09-13',0,'09:30')).type==='holiday', 'noy Sun 13.9 RH holiday');
 
 // grid: every period row/day maps correctly; maxP sensible
 for (const kid of KIDS) {

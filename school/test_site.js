@@ -42,6 +42,11 @@ const expNoy = ['13:45','14:45','13:45','13:45','14:45', null];
 noy.days.forEach((b,d)=>{ const last=b[b.length-1];
   if (expNoy[d] === null) expect(!last, 'noy day '+d+' has no school');
   else expect(last && last.e===expNoy[d], 'noy exit d'+d+' = '+expNoy[d]+' got '+(last&&last.e)); });
+// Raz exit times after dropping הנדסת תוכנה (2026-09-07): Sun 14:30, Thu 13:40
+const expRaz = ['14:30','14:30','14:30','13:00','13:40', null];
+raz.days.forEach((b,d)=>{ const last=b[b.length-1];
+  if (expRaz[d] === null) expect(!last, 'raz day '+d+' has no school');
+  else expect(last && last.e===expRaz[d], 'raz exit d'+d+' = '+expRaz[d]+' got '+(last&&last.e)); });
 
 const mk = (dateStr, jsDow, hm) => { const [h,m]=hm.split(':').map(Number); return {dateStr, jsDow, minutes:h*60+m, seconds:0}; };
 const S = (kid, now) => kidStatus(kid, now);
@@ -61,7 +66,10 @@ expect(S(niv, mk('2026-09-19',6,'12:00')).type==='free', 'niv Sat 19.9 free');
 expect(S(niv, mk('2026-09-13',0,'09:30')).type==='holiday', 'niv Sun 13.9 RH holiday (3 days)');
 expect(S(niv, mk('2026-09-10',4,'10:30')).block.label==='ספורט', 'niv Thu 10:30 sport (3rd lesson)');
 expect(S(niv, mk('2026-09-10',4,'11:00')).block.label==='שבילי מורשת', 'niv Thu 11:00 heritage');
-expect(S(raz, mk('2026-09-10',4,'15:00')).type==='lesson', 'raz Thu(ה׳) 15:00 lesson (long day to 16:00)');
+expect(S(raz, mk('2026-09-10',4,'15:00')).type==='done' && S(raz, mk('2026-09-10',4,'15:00')).end==='13:40', 'raz Thu(ה׳) 15:00 done 13:40 (after dropping SE)');
+expect(S(raz, mk('2026-09-06',0,'15:00')).type==='done' && S(raz, mk('2026-09-06',0,'15:00')).end==='14:30', 'raz Sun 15:00 done 14:30 (after dropping SE)');
+expect(S(raz, mk('2026-09-06',0,'14:10')).block.label==='תנ״ך', 'raz Sun 14:10 תנ״ך (13:50-14:30) still there');
+expect(S(raz, mk('2026-09-07',1,'13:30')).block.label==='מדעי המחשב', 'raz Mon(ב׳) 13:30 מדעי המחשב (12:20-14:30)');
 expect(S(raz, mk('2026-09-09',3,'15:00')).type==='done' && S(raz, mk('2026-09-09',3,'15:00')).end==='13:00', 'raz Wed(ד׳) 15:00 done 13:00 short day');
 expect(S(raz, mk('2026-09-10',4,'12:05')).type==='before', 'raz Thu 12:05 break before 12:20');
 expect(S(raz, mk('2026-09-08',2,'09:00')).block.label.includes('חדו'), 'raz Tue(ג׳) 09:00 calculus');

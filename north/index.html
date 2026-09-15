@@ -213,7 +213,7 @@ body{font-family:'Heebo',sans-serif;background:var(--bg);background-image:radial
     <div class="act gone"><span class="tm">10:30</span> 💦 שמורת תל דן — סגורה עקב שריפה (13.9)</div>
     <div class="act"><span class="tm">10:30</span> 💦 שמורת נחל חרמון (בניאס) — שביל תלוי ומפל</div>
     <div class="act"><span class="tm">15:00</span> 🦁 גן גורו / בריכה</div>
-    <div class="act"><span class="tm">20:30</span> 🍽 מסעדת מלון הגושרים</div></div>
+    <div class="act pin"><span class="tm">19:30</span> 🍖 ערב בשרים בחוץ — כביש 90 (להזמין מקום מראש!) / טיב׳יס</div></div>
   <div class="tl"><div class="day">📅 יום 3 · שבת 19.9 — סיום</div>
     <div class="act"><span class="tm">09:00</span> 🍳 בוקר אחרון</div>
     <div class="act"><span class="tm">10:30</span> ⛰ עין קנייה / אגמון החולה</div>
@@ -233,10 +233,23 @@ body{font-family:'Heebo',sans-serif;background:var(--bg);background-image:radial
 </div>
 
 <div class="card">
-  <h2>🍽 מסעדות מומלצות — ערב</h2>
-  <p>🐟 <strong>דג על הדן</strong> — דגים · צומת הגושרים · הנחל מתחת לרגליים</p>
-  <p>🔥 <strong>מסעדת מלון הגושרים</strong> — בשרים מעושנים · גריל · ערבי שירה</p>
-  <p>🥛 <strong>חוות דובדבנים</strong> — חלבי · גבינות ומאפים</p>
+  <h2>🍖 ערב שישי — בשרים (במקום מסעדת המלון)</h2>
+  <p class="meta">שישי 18.9 הוא ערב שבת (הדלקת נרות בצפון ~18:25) — כל המסעדות הכשרות באזור סגורות בערב שישי. אלה שפתוחות ומגישות בשר:</p>
+
+  <p>🍔 <strong>כביש 90 — המבורגר ובירה</strong> <span class="tag gold">הכי קרוב ופשוט</span></p>
+  <p class="sub">~15–20 דק׳ מהמלון · סניפים באזור (קריית שמונה · צומת מחניים) · המבורגר בקר פרימיום, צ׳יפס ובירות מהחבית · מהמבורגריות המפורסמות בצפון (4.6★, 13.8K ביקורות) · לא כשר ⇒ פתוח בערב שישי (12:00–23:30).</p>
+  <p class="sub">⚠️ בשישי חובה להזמין מקום מראש:</p>
+  <div class="links"><a href="https://tbit.be/dUmMtH" target="_blank">הזמנת מקום לשישי</a><a href="https://maps.google.com/?q=Kvish+90+Burger+Kiryat+Shmona" target="_blank">📍 ניווט</a></div>
+  <p class="sub">☎️ 04-681-7190 (קריית שמונה) · 04-6160190 (מחניים)</p>
+
+  <p style="margin-top:16px">🥩 <strong>טיבי׳ס — חוות ורד הגליל</strong> <span class="tag ok">מסעדת שף</span></p>
+  <p class="sub">~35–40 דק׳ (ליד צומת כורזים, מעל הכנרת) · מסעדת הבשרים של השף חיים טיבי: נתחים בקיצוב אישי, מנות ראשונות ויינות האזור, עם נוף לכנרת · פתוח בשישי 12:30–23:00 · ☎️ 04-6330885.</p>
+  <div class="links"><a href="https://ontopo.com/he/il/page/91060047" target="_blank">הזמנת שולחן</a><a href="https://maps.google.com/?q=Tibi%27s+Vered+HaGalil" target="_blank">📍 ניווט</a></div>
+
+  <p style="margin-top:16px">🐎 <strong>חוות בת יער — יער ביריה (מצפה עמוקה)</strong></p>
+  <p class="sub">~45 דק׳ · מסעדת בשרים בסגנון אמריקאי: סטייקים מיושנים, צלעות ובשרים מעושנים, בתוך חוות סוסים עם מרחבים לילדים · פתוח בשישי עד ~22:00 · מומלץ להזמין מראש · ☎️ 04-692-1788.</p>
+
+  <p class="meta">רוצים להישאר ממש ליד המלון? 🐟 <strong>דג על הדן</strong> (צומת הגושרים, 5 דק׳) פתוח בשישי עד 21:00 — אבל זה דגים, לא בשרים. 🥛 <strong>חוות דובדבנים</strong> — חלבי, גבינות ומאפים (יום).</p>
 </div>
 
 <div class="card" style="text-align:center">
@@ -299,7 +312,7 @@ setTimeout(()=>document.querySelectorAll('.bar-fill').forEach(b=>b.style.width=b
 /* Day strip */
 const days=[
  {d:'יום 1 · חמישי',t:'🍳 + 💧',n:'13:45 מקלות וניל + קייקים'},
- {d:'יום 2 · שישי',t:'🌿 טבע',n:'בניאס + גן גורו'},
+ {d:'יום 2 · שישי',t:'🌿 + 🍖',n:'בניאס + ערב בשרים'},
  {d:'יום 3 · שבת',t:'⛰ סיום',n:'עין קנייה / אגמון החולה'}];
 const ds=document.getElementById('daystrip');
 days.forEach(x=>{const c=document.createElement('div');c.className='daychip';c.innerHTML=`<div class="d">${x.d}</div><div class="t">${x.t}</div><div class="n">${x.n}</div>`;ds.appendChild(c)});

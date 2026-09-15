@@ -26,6 +26,14 @@ body{font-family:'Heebo',sans-serif;background:var(--bg);background-image:radial
 .card h2{font-size:1.2rem;color:var(--ac);font-weight:700;margin-bottom:14px}
 .card p{color:var(--t2);font-size:.95rem;margin-bottom:6px}
 .card strong{color:#d8e8d8}
+.card.alert{border-color:rgba(255,138,128,.35);background:rgba(255,138,128,.05)}
+.card.alert h2{color:#ff8a80}
+.sub{margin-right:14px;font-size:.88rem;color:var(--t2)}
+.sub.line{border-right:2px solid rgba(124,181,126,.25);padding-right:12px;margin-top:2px;margin-bottom:12px}
+.tag{display:inline-block;font-size:.68rem;font-weight:700;letter-spacing:.5px;padding:2px 8px;border-radius:100px;margin-left:6px;vertical-align:middle}
+.tag.ok{background:rgba(124,181,126,.16);color:#a5d6a7}
+.tag.no{background:rgba(255,138,128,.16);color:#ff8a80}
+.meta{font-size:.8rem;color:var(--t3);margin-top:8px}
 
 /* Countdown */
 .countdown{display:flex;justify-content:center;gap:24px;flex-wrap:wrap;text-align:center}
@@ -45,6 +53,7 @@ body{font-family:'Heebo',sans-serif;background:var(--bg);background-image:radial
 .tl .day{font-weight:700;color:#d8e8d8}
 .tl .tm{font-size:.72rem;color:var(--ac2);font-weight:600;margin-right:8px}
 .tl .act{color:var(--t2);font-size:.92rem}
+.tl .act.gone{color:#8a9a8a;text-decoration:line-through}
 
 /* Chart grid */
 .charts{display:grid;grid-template-columns:1fr 1fr;gap:16px}
@@ -100,7 +109,13 @@ body{font-family:'Heebo',sans-serif;background:var(--bg);background-image:radial
     <div class="cd-item"><span class="num" id="minutes">00</span><span class="label">דקות</span></div>
     <div class="cd-item"><span class="num" id="seconds">00</span><span class="label">שניות</span></div>
   </div>
-  <div class="cd-note" id="cdnote">🌲 הגליל מחכה</div>
+  <div class="cd-note" id="cdnote">🚗 יציאה מצור יצחק — חמישי 17.9 ב־12:30</div>
+</div>
+
+<div class="card alert">
+  <h2>⚠️ עדכון מצב אתרים · 14.9.2026</h2>
+  <p><span class="tag no">סגור</span><strong>שמורת תל דן (נחל דן)</strong> — סגורה למבקרים מאז 13.9.2026 <strong>עקב שריפה</strong> (הודעת רשות הטבע והגנים). אין תאריך פתיחה מחודשת — נבדוק שוב לפני הנסיעה.</p>
+  <p><span class="tag ok">פתוח</span><strong>שמורת נחל חרמון (בניאס)</strong> · <strong>אגמון החולה</strong> · <strong>עין קנייה</strong> · <strong>קייקי הגושרים</strong> · <strong>גן גורו</strong> — כולם פתוחים. התוכנית עודכנה בהתאם (יום שישי ⇒ בניאס במקום תל דן).</p>
 </div>
 
 <div class="card">
@@ -149,35 +164,63 @@ body{font-family:'Heebo',sans-serif;background:var(--bg);background-image:radial
 
 <div class="card">
   <h2>🚗 הדרך</h2>
-  <p><strong>צור יצחק → הגושרים</strong> · ~2 שעות · יציאה 12:00 · הגעה ~14:00</p>
+  <p><strong>צור יצחק → הגושרים</strong> · ~160 ק״מ · ~2:10 נסיעה</p>
+  <p><strong>יציאה 12:30</strong> · עצירת בוקר־צהריים בדרך ~13:30 · <strong>הגעה ~15:15–15:30</strong></p>
+  <p class="meta">הציר: כביש 6 צפון → עמק יזרעאל (עפולה/מרחביה) → צפונה דרך עמק החולה → קריית שמונה → הגושרים. חניה במלון חופשית.</p>
+</div>
+
+<div class="card">
+  <h2>🍳 ארוחת בוקר בדרך — מיוחד, לא רשת</h2>
+  <p>ביצים, חביתות, שקשוקה וקפה טוב — שלוש אופציות לאורך הציר, מסודרות לפי זמן העצירה:</p>
+
+  <p>⭐ <strong>גולדה בחצר · קיבוץ מרחביה</strong> <span class="tag ok">הכי מתאים</span></p>
+  <p class="sub">~55 דק׳ מהבית (עצירה ~13:30). בית קפה בחצר של בית ילדים קיבוצי לשעבר, אווירה כפרית רגועה: מגש ארוחת בוקר עם חביתה, חצ׳פורי עם ביצת עין, כמה סוגי שקשוקה, קישים, קובנה, מאפי בוקר וקפה.</p>
+  <p class="sub">🕐 פתוח חמישי 08:00–23:00 · ☎️ 04-659-8933 · הזמנת שולחן באונטופו</p>
+  <div class="links"><a href="https://ontopo.com/he/il/page/16080479" target="_blank">הזמנת שולחן</a><a href="https://maps.google.com/?q=Golda+BaChatzer+Merhavia" target="_blank">📍 ניווט</a></div>
+
+  <p style="margin-top:16px">🧑‍🍳 <strong>המטבח של דורון · מושב היוגב</strong></p>
+  <p class="sub">~1:05 מהבית. ארוחת בוקר/בראנץ׳ של שף יליד העמק, מבוססת תוצרת מקומית: שקשוקה מעגבניות שרופות וביצי משק, מאפה פילאס במילוי תרד ופטה, צלחת דגים מעושנים, סלט עלים בקיסר.</p>
+  <p class="sub">⚠️ חובה לתאם מראש · ☎️ 04-9893247</p>
+  <div class="links"><a href="https://maps.google.com/?q=HaYogev" target="_blank">📍 ניווט</a></div>
+
+  <p style="margin-top:16px">🥐 <strong>מקלות וניל · עפולה</strong> <span class="tag ok">נוח ומהיר</span></p>
+  <p class="sub">~1:00 מהבית, ממש על הציר. קונדיטוריה־אימפריה עם בית קפה חלבי: ארוחות בוקר, קישים, כריכים, פסטות, סלטים וקפה — פתרון טוב אם רוצים עצירה קצרה.</p>
+  <p class="sub">☎️ 04-6420222 · כשר · מומלץ לוודא שעות טלפונית</p>
+  <div class="links"><a href="https://maps.google.com/?q=Maklot+Vanil+Afula" target="_blank">📍 ניווט</a></div>
+
+  <p class="meta">⏱ תזמון: עצירה של ~45 דק׳ במרחביה ⇒ הגעה למלון ~15:30 (צ׳ק־אין מ־15:00). רוצים להגיע ב־15:00 בדיוק? קצרו את העצירה או דלגו עליה — המלון נותן ארוחת בוקר בכל מקרה.</p>
 </div>
 
 <div class="card">
   <h2>🗺 תכנון יומי</h2>
   <div class="tl"><div class="day">📅 יום 1 · חמישי 17.9 — הגעה ומים</div>
-    <div class="act"><span class="tm">12:00</span> יציאה מצור יצחק 🚗</div>
-    <div class="act"><span class="tm">15:00</span> צ׳ק-אין + התיישבות</div>
-    <div class="act"><span class="tm">16:00</span> 🛶 קייקי מעיין הגושרים (נחל שניר)</div>
+    <div class="act"><span class="tm">12:30</span> יציאה מצור יצחק 🚗 (כביש 6 צפונה)</div>
+    <div class="act"><span class="tm">13:30</span> 🍳 ארוחת בוקר־צהריים מיוחדת — גולדה בחצר, מרחביה</div>
+    <div class="act"><span class="tm">15:15</span> צ׳ק-אין + התיישבות</div>
+    <div class="act"><span class="tm">16:30</span> 🛶 קייקי מעיין הגושרים (נחל שניר)</div>
     <div class="act"><span class="tm">20:00</span> 🍽 דג על הדן</div></div>
   <div class="tl"><div class="day">📅 יום 2 · שישי 18.9 — טבע</div>
-    <div class="act"><span class="tm">09:00</span> 🍳 ארוחת בוקר</div>
-    <div class="act"><span class="tm">10:30</span> 💦 שמורת תל דן (מסלול מים)</div>
+    <div class="act"><span class="tm">09:00</span> 🍳 ארוחת בוקר במלון</div>
+    <div class="act gone"><span class="tm">10:30</span> 💦 שמורת תל דן — סגורה עקב שריפה (13.9)</div>
+    <div class="act"><span class="tm">10:30</span> 💦 שמורת נחל חרמון (בניאס) — שביל תלוי ומפל</div>
     <div class="act"><span class="tm">15:00</span> 🦁 גן גורו / בריכה</div>
     <div class="act"><span class="tm">20:30</span> 🍽 מסעדת מלון הגושרים</div></div>
   <div class="tl"><div class="day">📅 יום 3 · שבת 19.9 — סיום</div>
     <div class="act"><span class="tm">09:00</span> 🍳 בוקר אחרון</div>
-    <div class="act"><span class="tm">10:30</span> ⛰ עין קנייה / פיקניק</div>
+    <div class="act"><span class="tm">10:30</span> ⛰ עין קנייה / אגמון החולה</div>
     <div class="act"><span class="tm">11:00</span> צ׳ק-אאוט → 🚗 חזרה</div></div>
 </div>
 
 <div class="card">
-  <h2>🎯 אטרקציות בסביבה</h2>
-  <p>🛶 <strong>קייקי הגושרים</strong> — 5 דק׳, ~200₪ למשפחה · מים צלולים</p>
-  <p>💦 <strong>שמורת תל דן</strong> — 10 דק׳, ~145₪ · מוצל ונגיש</p>
-  <p>🌊 <strong>נחל חרמון (בניאס)</strong> — 15 דק׳, ~145₪ · מפל מרשים</p>
-  <p>🦁 <strong>גן גורו</strong> — 20 דק׳, ~295₪ · פינת חי</p>
-  <p>⛰ <strong>עין קנייה</strong> — 15 דק׳, חינם · מפל ופיקניק</p>
-  <p>🛟 <strong>רפטינג ירדן</strong> — 25 דק׳, ~450₪ · אדרנלין</p>
+  <h2>🎯 אטרקציות בסביבה · מעודכן 14.9.2026</h2>
+  <p><span class="tag no">סגור</span><strong>שמורת תל דן (נחל דן)</strong> — 10 דק׳. סגורה למבקרים עקב שריפה (רשות הטבע והגנים, 13.9.2026). אין תאריך פתיחה.</p>
+  <p><span class="tag ok">פתוח</span><strong>שמורת נחל חרמון (בניאס)</strong> — 15 דק׳ · ~28₪ מבוגר / 14₪ ילד · א׳–ה׳ ושבת 08:00–17:00, ו׳ 08:00–16:00 · שביל תלוי, מפל וטחנת קמח עתיקה. מומלץ לתאם ביקור מראש.</p>
+  <p><span class="tag ok">פתוח</span><strong>אגמון החולה</strong> — 25 דק׳ · פארק צפרות אקולוגי: שבילי מים, קלאב קארט ונדידת סתיו. פתוח גם בשבת.</p>
+  <p><span class="tag ok">פתוח</span><strong>קייקי הגושרים</strong> — 5 דק׳ · ~200₪ למשפחה · פתוח 7 ימים בשבוע כולל שבת · מים צלולים, מסלול למשפחות.</p>
+  <p><span class="tag ok">פתוח</span><strong>עין קנייה</strong> — 15 דק׳ · חינם · מפל, מים קרים ופיקניק.</p>
+  <p><span class="tag ok">פתוח</span><strong>גן גורו</strong> — 20 דק׳ · ~295₪ למשפחה · פינת חי וקנגורו, פתוח בשבת.</p>
+  <p><span class="tag ok">פתוח</span><strong>רפטינג ירדן</strong> — 25 דק׳ · ~450₪ · אדרנלין לנערים (לתאם מראש, 04-6950405).</p>
+  <p class="meta">נבדק מול רשות הטבע והגנים (parks.org.il) ומקורות המפעילים. סטטוסים יכולים להשתנות — שווה מבט קצר לפני כל יציאה.</p>
 </div>
 
 <div class="card">
@@ -188,16 +231,16 @@ body{font-family:'Heebo',sans-serif;background:var(--bg);background-image:radial
 </div>
 
 <div class="card" style="text-align:center">
-  <a class="btn" href="https://www.google.com/maps/dir/Hagoshrim+Hotel/Tel+Dan+Nature+Reserve/Ein+Kinya+Hagoshrim" target="_blank">🗺 כל המסלול במפה</a>
+  <a class="btn" href="https://www.google.com/maps/dir/Hagoshrim+Hotel/Banyas+Nature+Reserve/Agamon+Hula/Ein+Kinya" target="_blank">🗺 כל המסלול במפה</a>
 </div>
 
-<div class="footer">נוצר ב־💚 ע״י רמבו · עיצוב Emil Kowalski + דיאגרמות Lieflat · 3.9.2026</div>
+<div class="footer">נוצר ב־💚 ע״י רמבו · עיצוב Emil Kowalski + דיאגרמות Lieflat · עודכן 14.9.2026</div>
 
 </div>
 
 <script>
 /* Countdown */
-function cd(){const t=new Date('2026-09-17T12:00:00+03:00'),d=t-new Date();if(d<=0){['days','hours','minutes','seconds'].forEach(i=>document.getElementById(i).textContent='00');document.getElementById('cdnote').textContent='🎉 בחופשה!';return}
+function cd(){const t=new Date('2026-09-17T12:30:00+03:00'),d=t-new Date();if(d<=0){['days','hours','minutes','seconds'].forEach(i=>document.getElementById(i).textContent='00');document.getElementById('cdnote').textContent='🎉 בחופשה!';return}
 document.getElementById('days').textContent=String(Math.floor(d/864e5)).padStart(2,'0');document.getElementById('hours').textContent=String(Math.floor(d/36e5%24)).padStart(2,'0');document.getElementById('minutes').textContent=String(Math.floor(d/6e4%60)).padStart(2,'0');document.getElementById('seconds').textContent=String(Math.floor(d/1e3%60)).padStart(2,'0')}
 cd();setInterval(cd,1000);
 
@@ -212,11 +255,9 @@ const C=2*Math.PI*80; // circumference
 let acc=0;
 budget.forEach((s,i)=>{
   const frac=s.v/total, seg=document.getElementById('seg'+(i+1));
-  const start=acc/C*C;
   seg.setAttribute('stroke-dasharray',`${frac*C-3} ${C}`);
   seg.setAttribute('stroke-dashoffset',`${-acc}`);
   acc+=frac*C;
-  // animate in
   seg.style.transition='stroke-dasharray 1.4s cubic-bezier(0.23,1,0.32,1)';
 });
 setTimeout(()=>{
@@ -234,8 +275,8 @@ budget.forEach(s=>{const p=Math.round(s.v/total*100);const r=document.createElem
 /* Bars — attractions (family of 5) */
 const att=[
  {n:'קייקי הגושרים',v:200,c:'#7cb57e'},
- {n:'שמורת תל דן',v:145,c:'#7cb57e'},
- {n:'נחל חרמון',v:145,c:'#7cb57e'},
+ {n:'שמורת נחל חרמון (בניאס)',v:145,c:'#7cb57e'},
+ {n:'אגמון החולה',v:120,c:'#7cb57e'},
  {n:'גן גורו',v:295,c:'#d4af37'},
  {n:'רפטינג ירדן',v:450,c:'#d4af37'},
  {n:'עין קנייה',v:0,c:'#7eb8ff'}];
@@ -248,9 +289,9 @@ setTimeout(()=>document.querySelectorAll('.bar-fill').forEach(b=>b.style.width=b
 
 /* Day strip */
 const days=[
- {d:'יום 1 · חמישי',t:'💧 מים',n:'קייקים + הגעה'},
- {d:'יום 2 · שישי',t:'🌿 טבע',n:'תל דן + גן גורו'},
- {d:'יום 3 · שבת',t:'⛰ סיום',n:'עין קנייה + חזרה'}];
+ {d:'יום 1 · חמישי',t:'🍳 + 💧',n:'בוקר במרחביה + קייקים'},
+ {d:'יום 2 · שישי',t:'🌿 טבע',n:'בניאס + גן גורו'},
+ {d:'יום 3 · שבת',t:'⛰ סיום',n:'עין קנייה / אגמון החולה'}];
 const ds=document.getElementById('daystrip');
 days.forEach(x=>{const c=document.createElement('div');c.className='daychip';c.innerHTML=`<div class="d">${x.d}</div><div class="t">${x.t}</div><div class="n">${x.n}</div>`;ds.appendChild(c)});
 

@@ -28,11 +28,12 @@ body{font-family:'Heebo',sans-serif;background:var(--bg);background-image:radial
 .card strong{color:#d8e8d8}
 .card.alert{border-color:rgba(255,138,128,.35);background:rgba(255,138,128,.05)}
 .card.alert h2{color:#ff8a80}
+.card.booked{border-color:rgba(124,181,126,.4);background:rgba(124,181,126,.06)}
 .sub{margin-right:14px;font-size:.88rem;color:var(--t2)}
-.sub.line{border-right:2px solid rgba(124,181,126,.25);padding-right:12px;margin-top:2px;margin-bottom:12px}
 .tag{display:inline-block;font-size:.68rem;font-weight:700;letter-spacing:.5px;padding:2px 8px;border-radius:100px;margin-left:6px;vertical-align:middle}
 .tag.ok{background:rgba(124,181,126,.16);color:#a5d6a7}
 .tag.no{background:rgba(255,138,128,.16);color:#ff8a80}
+.tag.gold{background:rgba(212,175,55,.18);color:#f5e78a}
 .meta{font-size:.8rem;color:var(--t3);margin-top:8px}
 
 /* Countdown */
@@ -54,6 +55,7 @@ body{font-family:'Heebo',sans-serif;background:var(--bg);background-image:radial
 .tl .tm{font-size:.72rem;color:var(--ac2);font-weight:600;margin-right:8px}
 .tl .act{color:var(--t2);font-size:.92rem}
 .tl .act.gone{color:#8a9a8a;text-decoration:line-through}
+.tl .act.pin{color:#cfe8cf}
 
 /* Chart grid */
 .charts{display:grid;grid-template-columns:1fr 1fr;gap:16px}
@@ -112,6 +114,12 @@ body{font-family:'Heebo',sans-serif;background:var(--bg);background-image:radial
   <div class="cd-note" id="cdnote">🚗 יציאה מצור יצחק — חמישי 17.9 ב־12:30</div>
 </div>
 
+<div class="card booked">
+  <h2>✅ מה כבר סגור</h2>
+  <p>🏨 <strong>מלון הגושרים</strong> — 2 הזמנות (401905/1 · 401905/2) · 7,440₪ · צ׳ק־אין 17.9</p>
+  <p>🍳 <strong>מקלות וניל, עפולה</strong> — שולחן שמור ל־<strong>חמישי 17.9, 13:45</strong> · 5 סועדים · בפנים <span class="tag gold">הזמנה מאושרת</span></p>
+</div>
+
 <div class="card alert">
   <h2>⚠️ עדכון מצב אתרים · 15.9.2026</h2>
   <p><span class="tag no">סגור</span><strong>שמורת תל דן (נחל דן)</strong> — סגורה למבקרים מאז 13.9.2026 <strong>עקב שריפה</strong> (הודעת רשות הטבע והגנים). אין תאריך פתיחה מחודשת — נבדוק שוב לפני הנסיעה.</p>
@@ -137,7 +145,7 @@ body{font-family:'Heebo',sans-serif;background:var(--bg);background-image:radial
         <circle id="seg2" cx="110" cy="110" r="80" fill="none" stroke="#d4af37" stroke-width="26" stroke-dasharray="0 502" stroke-linecap="butt" transform="rotate(-90 110 110)"/>
         <circle id="seg3" cx="110" cy="110" r="80" fill="none" stroke="#7eb8ff" stroke-width="26" stroke-dasharray="0 502" stroke-linecap="butt" transform="rotate(-90 110 110)"/>
         <circle id="seg4" cx="110" cy="110" r="80" fill="none" stroke="#c98bb8" stroke-width="26" stroke-dasharray="0 502" stroke-linecap="butt" transform="rotate(-90 110 110)"/>
-        <text x="110" y="104" text-anchor="middle" fill="#f0eee8" font-size="26" font-weight="800">~10.5k</text>
+        <text x="110" y="104" text-anchor="middle" fill="#f0eee8" font-size="26" font-weight="800">~11k</text>
         <text x="110" y="128" text-anchor="middle" fill="#6f7f6f" font-size="11">₪ משוער</text>
       </svg>
       <div class="chart-legend" id="legend"></div>
@@ -164,40 +172,41 @@ body{font-family:'Heebo',sans-serif;background:var(--bg);background-image:radial
 
 <div class="card">
   <h2>🚗 הדרך</h2>
-  <p><strong>צור יצחק → הגושרים</strong> · ~160 ק״מ · ~2:10 נסיעה</p>
-  <p><strong>יציאה 12:30</strong> · עצירת בוקר־צהריים בדרך ~13:30 · <strong>הגעה ~15:15–15:30</strong></p>
-  <p class="meta">הציר: כביש 6 צפון → עמק יזרעאל (עפולה/מרחביה) → צפונה דרך עמק החולה → קריית שמונה → הגושרים. חניה במלון חופשית.</p>
+  <p><strong>צור יצחק → עפולה → הגושרים</strong> · ~160 ק״מ סה״כ</p>
+  <p><strong>יציאה 12:30</strong> → עצירה בעפולה ~13:30 (62 ק״מ, ~55 דק׳) → המשך ~14:40 (94 ק״מ, ~1:30) → <strong>הגעה למלון ~16:10</strong></p>
+  <p class="meta">הציר: כביש 6 צפון → עמק יזרעאל / עפולה (כביש 65) → צפונה דרך עמק החולה → קריית שמונה → הגושרים. חניה במלון חופשית. רוצים להגיע ב־15:30? קצרו את הארוחה ל־45 דק׳ וצאו ב־14:30.</p>
 </div>
 
 <div class="card">
-  <h2>🍳 ארוחת בוקר בדרך — מיוחד, לא רשת</h2>
-  <p>ביצים, חביתות, שקשוקה וקפה טוב — שלוש אופציות לאורך הציר, מסודרות לפי זמן העצירה:</p>
+  <h2>🍳 ארוחת בוקר בדרך — הוזמן</h2>
 
-  <p>⭐ <strong>גולדה בחצר · קיבוץ מרחביה</strong> <span class="tag ok">הכי מתאים</span></p>
-  <p class="sub">~55 דק׳ מהבית (עצירה ~13:30). בית קפה בחצר של בית ילדים קיבוצי לשעבר, אווירה כפרית רגועה: מגש ארוחת בוקר עם חביתה, חצ׳פורי עם ביצת עין, כמה סוגי שקשוקה, קישים, קובנה, מאפי בוקר וקפה.</p>
-  <p class="sub">🕐 פתוח חמישי 08:00–23:00 · ☎️ 04-659-8933 · הזמנת שולחן באונטופו</p>
+  <p>✅ <strong>מקלות וניל · עפולה (יהושע חנקין 9)</strong> <span class="tag ok">שולחן שמור</span></p>
+  <p class="sub">~55 דק׳ מהבית · שולחן ל־<strong>חמישי 17.9 בשעה 13:45</strong>, 5 סועדים, בפנים. קונדיטוריה ובית קפה של יגאל אפרתי (מ־2000): ארוחות בוקר עשירות על בסיס לחמים ומאפים תוצרת בית, כריכים וטוסטים, פסטה איטלקית מקמח דורום, קישים, סלטים, קפה — וגם קינוחים שנחטפים.</p>
+  <p class="sub">🕐 א׳–ה׳ 06:00–22:00 · ו׳ עד 14:00 · שבת סגור · ☎️ 04-6420222 · וואטסאפ 054-6688394</p>
+  <p class="sub">⏱ שמרו על הזמנים: השולחן נשמר 15 דק׳ ממועד ההזמנה — להיות שם ב־13:45.</p>
+  <div class="links"><a href="https://www.google.com/maps/search/?api=1&query=%D7%99%D7%94%D7%95%D7%A9%D7%A2+%D7%97%D7%A0%D7%A7%D7%99%D7%9F+9+%D7%A2%D7%A4%D7%95%D7%9C%D7%94" target="_blank">📍 ניווט</a></div>
+
+  <p style="margin-top:18px;color:#d8e8d8">— חלופות, אם משהו משתנה —</p>
+
+  <p>🥛 <strong>גולדה בחצר · קיבוץ מרחביה</strong> <span class="tag ok">חלופה</span></p>
+  <p class="sub">~55 דק׳ מהבית (ממש ליד עפולה). בית קפה בחצר של בית ילדים קיבוצי לשעבר: מגש ארוחת בוקר עם חביתה, חצ׳פורי עם ביצת עין, כמה סוגי שקשוקה, קישים, קובנה ומאפי בוקר.</p>
+  <p class="sub">🕐 חמישי 08:00–23:00 · ☎️ 04-659-8933 · אפשר להזמין באונטופו</p>
   <div class="links"><a href="https://ontopo.com/he/il/page/16080479" target="_blank">הזמנת שולחן</a><a href="https://maps.google.com/?q=Golda+BaChatzer+Merhavia" target="_blank">📍 ניווט</a></div>
 
   <p style="margin-top:16px">🧑‍🍳 <strong>המטבח של דורון · מושב היוגב</strong></p>
-  <p class="sub">~1:05 מהבית. ארוחת בוקר/בראנץ׳ של שף יליד העמק, מבוססת תוצרת מקומית: שקשוקה מעגבניות שרופות וביצי משק, מאפה פילאס במילוי תרד ופטה, צלחת דגים מעושנים, סלט עלים בקיסר.</p>
-  <p class="sub">⚠️ חובה לתאם מראש · ☎️ 04-9893247</p>
+  <p class="sub">~1:05 מהבית. בראנץ׳ של שף יליד העמק: שקשוקה מעגבניות שרופות וביצי משק, מאפה פילאס תרד ופטה, דגים מעושנים. ⚠️ חובה לתאם מראש · ☎️ 04-9893247</p>
   <div class="links"><a href="https://maps.google.com/?q=HaYogev" target="_blank">📍 ניווט</a></div>
-
-  <p style="margin-top:16px">🥐 <strong>מקלות וניל · עפולה</strong> <span class="tag ok">נוח ומהיר</span></p>
-  <p class="sub">~1:00 מהבית, ממש על הציר. קונדיטוריה־אימפריה עם בית קפה חלבי: ארוחות בוקר, קישים, כריכים, פסטות, סלטים וקפה — פתרון טוב אם רוצים עצירה קצרה.</p>
-  <p class="sub">☎️ 04-6420222 · כשר · מומלץ לוודא שעות טלפונית</p>
-  <div class="links"><a href="https://maps.google.com/?q=Maklot+Vanil+Afula" target="_blank">📍 ניווט</a></div>
-
-  <p class="meta">⏱ תזמון: עצירה של ~45 דק׳ במרחביה ⇒ הגעה למלון ~15:30 (צ׳ק־אין מ־15:00). רוצים להגיע ב־15:00 בדיוק? קצרו את העצירה או דלגו עליה — המלון נותן ארוחת בוקר בכל מקרה.</p>
 </div>
 
 <div class="card">
   <h2>🗺 תכנון יומי</h2>
-  <div class="tl"><div class="day">📅 יום 1 · חמישי 17.9 — הגעה ומים</div>
+  <div class="tl"><div class="day">📅 יום 1 · חמישי 17.9 — דרך, אוכל ומים</div>
     <div class="act"><span class="tm">12:30</span> יציאה מצור יצחק 🚗 (כביש 6 צפונה)</div>
-    <div class="act"><span class="tm">13:30</span> 🍳 ארוחת בוקר־צהריים מיוחדת — גולדה בחצר, מרחביה</div>
-    <div class="act"><span class="tm">15:15</span> צ׳ק-אין + התיישבות</div>
-    <div class="act"><span class="tm">16:30</span> 🛶 קייקי מעיין הגושרים (נחל שניר)</div>
+    <div class="act pin"><span class="tm">13:30</span> הגעה לעפולה · חניה ליד יהושע חנקין 9</div>
+    <div class="act pin"><span class="tm">13:45</span> 🍳 ארוחת בוקר־צהריים במקלות וניל (שולחן שמור, 5 סועדים)</div>
+    <div class="act"><span class="tm">14:40</span> המשך צפונה — 94 ק״מ עד המלון</div>
+    <div class="act"><span class="tm">16:10</span> צ׳ק־אין + התיישבות (מ־15:00)</div>
+    <div class="act"><span class="tm">17:00</span> 🛶 קייקי מעיין הגושרים — אם מספיקים (לבדוק שעה אחרונה)</div>
     <div class="act"><span class="tm">20:00</span> 🍽 דג על הדן</div></div>
   <div class="tl"><div class="day">📅 יום 2 · שישי 18.9 — טבע</div>
     <div class="act"><span class="tm">09:00</span> 🍳 ארוחת בוקר במלון</div>
@@ -231,7 +240,7 @@ body{font-family:'Heebo',sans-serif;background:var(--bg);background-image:radial
 </div>
 
 <div class="card" style="text-align:center">
-  <a class="btn" href="https://www.google.com/maps/dir/Hagoshrim+Hotel/Banyas+Nature+Reserve/Agamon+Hula/Ein+Kinya" target="_blank">🗺 כל המסלול במפה</a>
+  <a class="btn" href="https://www.google.com/maps/dir/Yehoshua+Hankin+9+Afula/Hagoshrim+Hotel/Banyas+Nature+Reserve/Agamon+Hula/Ein+Kinya" target="_blank">🗺 כל המסלול במפה</a>
 </div>
 
 <div class="footer">נוצר ב־💚 ע״י רמבו · עיצוב Emil Kowalski + דיאגרמות Lieflat · עודכן 15.9.2026</div>
@@ -247,9 +256,9 @@ cd();setInterval(cd,1000);
 /* Donut — budget */
 const budget=[
  {label:'מלון (2 הזמנות)',v:7440,c:'#7cb57e'},
- {label:'מסעדות (3 ערבים)',v:1800,c:'#d4af37'},
+ {label:'מסעדות (ארוחה + 3 ערבים)',v:2100,c:'#d4af37'},
  {label:'אטרקציות',v:1000,c:'#7eb8ff'},
- {label:'דלק ודרכים',v:260,c:'#c98bb8'}];
+ {label:'דלק ודרכים',v:400,c:'#c98bb8'}];
 const total=budget.reduce((a,b)=>a+b.v,0);
 const C=2*Math.PI*80; // circumference
 let acc=0;
@@ -289,7 +298,7 @@ setTimeout(()=>document.querySelectorAll('.bar-fill').forEach(b=>b.style.width=b
 
 /* Day strip */
 const days=[
- {d:'יום 1 · חמישי',t:'🍳 + 💧',n:'בוקר במרחביה + קייקים'},
+ {d:'יום 1 · חמישי',t:'🍳 + 💧',n:'13:45 מקלות וניל + קייקים'},
  {d:'יום 2 · שישי',t:'🌿 טבע',n:'בניאס + גן גורו'},
  {d:'יום 3 · שבת',t:'⛰ סיום',n:'עין קנייה / אגמון החולה'}];
 const ds=document.getElementById('daystrip');

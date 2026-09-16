@@ -208,7 +208,7 @@ body{font-family:'Heebo',sans-serif;background:var(--bg);background-image:radial
     <div class="act"><span class="tm">14:40</span> המשך צפונה — 94 ק״מ עד המלון</div>
     <div class="act"><span class="tm">16:10</span> צ׳ק־אין + התיישבות (מ־15:00)</div>
     <div class="act"><span class="tm">17:00</span> 🛶 קייקי מעיין הגושרים — אם מספיקים (לבדוק שעה אחרונה)</div>
-    <div class="act"><span class="tm">20:00</span> 🍽 דג על הדן</div></div>
+    <div class="act pin"><span class="tm">20:00</span> 🍕 ארוחת ערב בלה לונה — קיבוץ הגושרים (2 דק׳ מהמלון)</div></div>
   <div class="tl"><div class="day">📅 יום 2 · שישי 18.9 — טבע</div>
     <div class="act"><span class="tm">09:00</span> 🍳 ארוחת בוקר במלון</div>
     <div class="act gone"><span class="tm">10:30</span> 💦 שמורת תל דן — סגורה עקב שריפה (13.9)</div>
@@ -234,10 +234,13 @@ body{font-family:'Heebo',sans-serif;background:var(--bg);background-image:radial
 </div>
 
 <div class="card">
-  <h2>🍖 ערב שישי — בשרים (במקום מסעדת המלון)</h2>
-  <p class="meta">שישי 18.9 הוא ערב שבת (הדלקת נרות בצפון ~18:25) — כל המסעדות הכשרות באזור סגורות בערב שישי. אלה שפתוחות ומגישות בשר:</p>
+  <h2>🍽 ערבים — חמישי ושישי</h2>
+  <p>🍕 <strong>יום חמישי · לה לונה (La Luna) — קיבוץ הגושרים</strong> <span class="tag ok">2 דק׳ מהמלון</span></p>
+  <p class="sub">מסעדה איטלקית קטנה באווירה קיבוצית, בכניסה לקיבוץ: בצק בעבודת יד ותנור אבן, פיצות, פסטות, כריכים וסלטים · ראשון–חמישי 16:00–22:00, שבת 14:00–22:00 (שישי סגור) · ☎️ 07-33976304.</p>
+  <p class="sub">📞 מקום קטן — כדאי להזמין/לוודא מקום לחמישי בערב.</p>
 
-  <p>✅ <strong>קלומפוס · מתחם דפנה׳לה, קיבוץ דפנה</strong> <span class="tag ok">הוזמן — שישי 20:00</span></p>
+  <p style="margin-top:16px">🍔 <strong>יום שישי · קלומפוס — מתחם דפנה׳לה, קיבוץ דפנה</strong> <span class="tag ok">הוזמן — 20:00</span></p>
+  <p class="meta">שישי הוא ערב שבת (הדלקת נרות ~18:25) — כל המסעדות הכשרות באזור סגורות; קלומפוס פתוח ✓. חלופות בהמשך.</p>
   <p class="sub">~5 דק׳ מהמלון (3 ק״מ) · דיינר אמריקאי: המבורגרים מבקר וטלה, תוספות, בירות מהחבית וקוקטיילים · שני–שבת 12:00–22:00 (ראשון סגור) · ☎️ 072-2221243.</p>
   <p class="sub">⏱ השולחן נשמר 15 דק׳ מ־20:00 · סוגרים ב־22:00 · פיקדון 200₪ — ביטול בפחות מ־8 שעות מחייב.</p>
   <div class="links"><a href="https://www.google.com/maps/search/?api=1&query=%D7%A7%D7%9C%D7%95%D7%9E%D7%A4%D7%95%D7%A1+%D7%93%D7%A4%D7%A0%D7%94" target="_blank">📍 ניווט</a></div>
@@ -319,7 +322,7 @@ setTimeout(()=>document.querySelectorAll('.bar-fill').forEach(b=>b.style.width=b
 
 /* Day strip */
 const days=[
- {d:'יום 1 · חמישי',t:'🍳 + 💧',n:'13:45 מקלות וניל + קייקים'},
+ {d:'יום 1 · חמישי',t:'🍳 + 🍕',n:'מקלות וניל + לה לונה'},
  {d:'יום 2 · שישי',t:'🌿 + 🍔',n:'בניאס + קלומפוס'},
  {d:'יום 3 · שבת',t:'⛰ סיום',n:'עין קנייה / אגמון החולה'}];
 const ds=document.getElementById('daystrip');

@@ -118,6 +118,7 @@ body{font-family:'Heebo',sans-serif;background:var(--bg);background-image:radial
   <h2>✅ מה כבר סגור</h2>
   <p>🏨 <strong>מלון הגושרים</strong> — 2 הזמנות (401905/1 · 401905/2) · 7,440₪ · צ׳ק־אין 17.9</p>
   <p>🍳 <strong>מקלות וניל, עפולה</strong> — שולחן שמור ל־<strong>חמישי 17.9, 13:45</strong> · 5 סועדים · בפנים <span class="tag gold">הזמנה מאושרת</span></p>
+  <p>🍔 <strong>קלומפוס, מתחם דפנה׳לה</strong> — שולחן שמור ל־<strong>שישי 18.9, 20:00</strong> · 5 סועדים (עד 21:30) · פיקדון 200₪ <span class="tag gold">הזמנה מאושרת</span></p>
 </div>
 
 <div class="card alert">
@@ -213,7 +214,7 @@ body{font-family:'Heebo',sans-serif;background:var(--bg);background-image:radial
     <div class="act gone"><span class="tm">10:30</span> 💦 שמורת תל דן — סגורה עקב שריפה (13.9)</div>
     <div class="act"><span class="tm">10:30</span> 💦 שמורת נחל חרמון (בניאס) — שביל תלוי ומפל</div>
     <div class="act"><span class="tm">15:00</span> 🦁 גן גורו / בריכה</div>
-    <div class="act pin"><span class="tm">19:30</span> 🍖 ערב בשרים בחוץ — כביש 90 (להזמין מקום מראש!) / טיב׳יס</div></div>
+    <div class="act pin"><span class="tm">20:00</span> 🍔 ארוחת ערב בקלומפוס — דפנה׳לה, 5 דק׳ מהמלון (שולחן שמור ל־5)</div></div>
   <div class="tl"><div class="day">📅 יום 3 · שבת 19.9 — סיום</div>
     <div class="act"><span class="tm">09:00</span> 🍳 בוקר אחרון</div>
     <div class="act"><span class="tm">10:30</span> ⛰ עין קנייה / אגמון החולה</div>
@@ -236,7 +237,14 @@ body{font-family:'Heebo',sans-serif;background:var(--bg);background-image:radial
   <h2>🍖 ערב שישי — בשרים (במקום מסעדת המלון)</h2>
   <p class="meta">שישי 18.9 הוא ערב שבת (הדלקת נרות בצפון ~18:25) — כל המסעדות הכשרות באזור סגורות בערב שישי. אלה שפתוחות ומגישות בשר:</p>
 
-  <p>🍔 <strong>כביש 90 — המבורגר ובירה</strong> <span class="tag gold">הכי קרוב ופשוט</span></p>
+  <p>✅ <strong>קלומפוס · מתחם דפנה׳לה, קיבוץ דפנה</strong> <span class="tag ok">הוזמן — שישי 20:00</span></p>
+  <p class="sub">~5 דק׳ מהמלון (3 ק״מ) · דיינר אמריקאי: המבורגרים מבקר וטלה, תוספות, בירות מהחבית וקוקטיילים · שני–שבת 12:00–22:00 (ראשון סגור) · ☎️ 072-2221243.</p>
+  <p class="sub">⏱ השולחן נשמר 15 דק׳ מ־20:00 · סוגרים ב־22:00 · פיקדון 200₪ — ביטול בפחות מ־8 שעות מחייב.</p>
+  <div class="links"><a href="https://www.google.com/maps/search/?api=1&query=%D7%A7%D7%9C%D7%95%D7%9E%D7%A4%D7%95%D7%A1+%D7%93%D7%A4%D7%A0%D7%94" target="_blank">📍 ניווט</a></div>
+
+  <p style="margin-top:16px;color:#d8e8d8">— חלופות —</p>
+
+  <p>🍔 <strong>כביש 90 — המבורגר ובירה</strong></p>
   <p class="sub">~15–20 דק׳ מהמלון · סניפים באזור (קריית שמונה · צומת מחניים) · המבורגר בקר פרימיום, צ׳יפס ובירות מהחבית · מהמבורגריות המפורסמות בצפון (4.6★, 13.8K ביקורות) · לא כשר ⇒ פתוח בערב שישי (12:00–23:30).</p>
   <p class="sub">⚠️ בשישי חובה להזמין מקום מראש:</p>
   <div class="links"><a href="https://tbit.be/dUmMtH" target="_blank">הזמנת מקום לשישי</a><a href="https://maps.google.com/?q=Kvish+90+Burger+Kiryat+Shmona" target="_blank">📍 ניווט</a></div>
@@ -312,7 +320,7 @@ setTimeout(()=>document.querySelectorAll('.bar-fill').forEach(b=>b.style.width=b
 /* Day strip */
 const days=[
  {d:'יום 1 · חמישי',t:'🍳 + 💧',n:'13:45 מקלות וניל + קייקים'},
- {d:'יום 2 · שישי',t:'🌿 + 🍖',n:'בניאס + ערב בשרים'},
+ {d:'יום 2 · שישי',t:'🌿 + 🍔',n:'בניאס + קלומפוס'},
  {d:'יום 3 · שבת',t:'⛰ סיום',n:'עין קנייה / אגמון החולה'}];
 const ds=document.getElementById('daystrip');
 days.forEach(x=>{const c=document.createElement('div');c.className='daychip';c.innerHTML=`<div class="d">${x.d}</div><div class="t">${x.t}</div><div class="n">${x.n}</div>`;ds.appendChild(c)});

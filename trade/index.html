@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>📈 משחק המסחר — 10,000$ וירטואלי</title>
+<meta name="description" content="מעקב חי אחרי משחק המסחר הווירטואלי: פוזיציות, רווח והפסד, יומן פעולות יומי.">
+<style>
+:root{
+  --bg:#0b0e13; --bg2:#0f131a; --card:#121722; --line:#1e2634; --line2:#2a3446;
+  --tx:#e9eef6; --tx2:#9aa6b8; --tx3:#6b7688;
+  --up:#35d18a; --down:#ff6b6b; --acc:#7aa2f7; --gold:#e8c37a;
+  --r:16px;
+}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0}
+body{
+  background:radial-gradient(1100px 600px at 50% -10%,#141b27 0%,var(--bg) 60%) no-repeat,var(--bg);
+  color:var(--tx);
+  font:15px/1.65 "Assistant","Rubik",-apple-system,BlinkMacSystemFont,"Segoe UI",system-ui,sans-serif;
+  -webkit-font-smoothing:antialiased;
+}
+.num{font-variant-numeric:tabular-nums;font-feature-settings:"tnum" 1;direction:ltr;display:inline-block}
+.wrap{max-width:860px;margin:0 auto;padding:22px 16px 56px}
+a{color:var(--acc);text-decoration:none}
+a:hover{text-decoration:underline}
+
+/* ---------- hero ---------- */
+.hero{padding:10px 4px 20px}
+.brand{font-size:13px;letter-spacing:.14em;color:var(--tx3);text-transform:uppercase}
+h1{font-size:clamp(22px,5.4vw,30px);margin:8px 0 14px;font-weight:700;letter-spacing:-.01em}
+h1 .dim{color:var(--tx2);font-weight:500}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:14px}
+.chip{font-size:12.5px;padding:5px 11px;border:1px solid var(--line2);border-radius:999px;color:var(--tx2);background:#0e131c}
+.chip.live{color:var(--up);border-color:#1f4a38;background:#0d1b17}
+.chip.closed{color:var(--gold);border-color:#4a3f22;background:#1a1610}
+.tape{display:flex;gap:16px;flex-wrap:wrap;font-size:13px;color:var(--tx2)}
+.tape .t{display:flex;gap:7px;align-items:baseline}
+.tape .v{color:var(--tx);font-weight:600}
+
+/* ---------- kpis ---------- */
+.kpis{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-bottom:14px}
+@media(min-width:640px){.kpis{grid-template-columns:repeat(4,1fr)}}
+.kpi{background:linear-gradient(180deg,#131926,#10151f);border:1px solid var(--line);border-radius:var(--r);padding:13px 14px}
+.kpi .k{font-size:12.5px;color:var(--tx3);margin-bottom:6px}
+.kpi .v{font-size:clamp(19px,4.6vw,23px);font-weight:700}
+.kpi .s{font-size:12.5px;color:var(--tx2);margin-top:3px}
+.up{color:var(--up)} .down{color:var(--down)} .flat{color:var(--tx2)}
+
+/* ---------- cards ---------- */
+.card{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:16px;margin-bottom:14px}
+.card>h2{font-size:16px;margin:0 0 14px;font-weight:700;display:flex;align-items:center;gap:8px}
+.pill{font-size:12px;font-weight:500;color:var(--tx2);border:1px solid var(--line2);border-radius:999px;padding:3px 9px}
+.meta{font-size:12.5px;color:var(--tx3);margin:12px 0 0}
+
+/* ---------- chart ---------- */
+.chart{direction:ltr;width:100%}
+.chart svg{display:block;width:100%;height:auto;overflow:visible}
+.chart-foot{display:flex;gap:16px;flex-wrap:wrap;font-size:12.5px;color:var(--tx2);margin-top:10px}
+
+/* ---------- positions ---------- */
+.pos{border:1px solid var(--line);border-radius:14px;padding:14px;margin-bottom:10px;background:#101520}
+.pos:last-child{margin-bottom:0}
+.pos .row1{display:flex;justify-content:space-between;align-items:baseline;gap:10px;flex-wrap:wrap}
+.sym{font-weight:700;font-size:17px;letter-spacing:.02em;direction:ltr}
+.pos .sh{font-size:12.5px;color:var(--tx3)}
+.pos .pnl{font-weight:700;font-size:16px}
+.pos .prices{font-size:13px;color:var(--tx2);margin:6px 0 2px;display:flex;gap:8px;flex-wrap:wrap;align-items:baseline}
+.pos .thesis{font-size:13px;color:var(--tx2);margin-top:8px}
+.pos .exitrule{font-size:12.5px;color:var(--tx3);margin-top:4px}
+.bar{direction:ltr;margin-top:12px}
+.track{position:relative;height:6px;border-radius:6px;background:#1a2130;overflow:visible}
+.fill{position:absolute;inset:0 auto 0 0;height:6px;border-radius:6px;background:linear-gradient(90deg,#26405f,#3d6da8)}
+.fill.up{background:linear-gradient(90deg,#1f6b4c,#35d18a)}
+.fill.down{background:linear-gradient(90deg,#7a2f2f,#ff6b6b)}
+.mark{position:absolute;top:-4px;width:2px;height:14px;background:var(--tx3)}
+.mark.entry{background:var(--gold);height:16px;top:-5px}
+.dot{position:absolute;top:-4px;width:12px;height:14px;border-radius:4px;background:#fff;border:2px solid var(--bg2);transform:translateX(-5px)}
+.barlab{display:flex;justify-content:space-between;font-size:11.5px;color:var(--tx3);margin-top:6px}
+
+/* ---------- journal ---------- */
+details.day{border:1px solid var(--line);border-radius:14px;background:#101520;margin-bottom:10px;overflow:hidden}
+details.day[open]{background:#111827}
+details.day>summary{cursor:pointer;padding:13px 14px;display:flex;justify-content:space-between;align-items:center;gap:10px;list-style:none;font-weight:600}
+details.day>summary::-webkit-details-marker{display:none}
+details.day>summary .chev{transition:transform .22s cubic-bezier(.22,1,.36,1);color:var(--tx3)}
+details.day[open]>summary .chev{transform:rotate(-90deg)}
+.sum-d{font-size:12.5px;color:var(--tx3);font-weight:500}
+.day .body{padding:0 14px 14px;font-size:13.5px;color:var(--tx2)}
+.day .body h3{font-size:14px;color:var(--tx);margin:14px 0 6px}
+.day .body h4{font-size:13.5px;color:var(--tx);margin:12px 0 4px}
+.day .body ul{margin:6px 0;padding-inline-start:18px}
+.day .body li{margin:3px 0}
+.act{display:flex;gap:9px;align-items:baseline;flex-wrap:wrap;padding:8px 10px;border-radius:10px;background:#0d1320;border:1px solid var(--line);margin:8px 0}
+.act .side{font-size:11.5px;padding:2px 8px;border-radius:999px;border:1px solid #1f4a38;color:var(--up);background:#0d1b17}
+.act .side.sell{color:var(--down);border-color:#4a2222;background:#1b0f0f}
+pre.md{white-space:pre-wrap;font:inherit;margin:0}
+
+/* ---------- closed + stats ---------- */
+.closed{border:1px solid var(--line);border-radius:12px;padding:11px 13px;margin-bottom:8px;background:#101520}
+.closed .r{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;align-items:baseline}
+.stats{display:grid;grid-template-columns:repeat(2,1fr);gap:8px;margin-top:12px}
+@media(min-width:640px){.stats{grid-template-columns:repeat(4,1fr)}}
+.stat{border:1px solid var(--line);border-radius:12px;padding:10px 12px;background:#0f141e}
+.stat .k{font-size:12px;color:var(--tx3)}
+.stat .v{font-weight:700;font-size:16px;margin-top:2px}
+.empty{color:var(--tx3);font-size:13.5px;padding:10px 2px}
+.rules ul{margin:0;padding-inline-start:20px;color:var(--tx2);font-size:13.5px}
+.rules li{margin:4px 0}
+footer{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;align-items:center;color:var(--tx3);font-size:12.5px;padding:18px 4px 0;border-top:1px solid var(--line);margin-top:6px}
+.fade{animation:fi .5s cubic-bezier(.22,1,.36,1) both}
+@keyframes fi{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="hero">
+    <div class="brand">רמבו · מעקב מסחר</div>
+    <h1>📈 משחק המסחר <span class="dim">— 10,000$ וירטואלי</span></h1>
+    <div class="chips">
+      <span class="chip" id="daychip">—</span>
+      <span class="chip" id="mktchip">—</span>
+      <span class="chip" id="updchip">—</span>
+    </div>
+    <div class="tape" id="tape"></div>
+  </header>
+
+  <section class="kpis" id="kpis"></section>
+
+  <section class="card">
+    <h2>שווי התיק לאורך השבוע</h2>
+    <div class="chart" id="chart"></div>
+    <div class="chart-foot" id="chartfoot"></div>
+  </section>
+
+  <section class="card">
+    <h2>פוזיציות פתוחות <span class="pill" id="pospill">—</span></h2>
+    <div id="positions"></div>
+  </section>
+
+  <section class="card">
+    <h2>יומן יומי <span class="pill">החדש למעלה</span></h2>
+    <div id="journal"></div>
+  </section>
+
+  <section class="card">
+    <h2>עסקאות סגורות</h2>
+    <div id="closed"></div>
+    <div class="stats" id="stats"></div>
+  </section>
+
+  <section class="card rules">
+    <h2>כללי המשחק</h2>
+    <ul id="rules"></ul>
+    <p class="meta" id="srcnote"></p>
+  </section>
+
+  <footer>
+    <span>מחירים: CNBC / Nasdaq · האתר מתעדכן אוטומטית</span>
+    <span><a href="../">→ חזרה לאתרי המשפחה</a></span>
+  </footer>
+</div>
+
+<script>
+const shekel = n => (n < 0 ? '−' : '') + '$' + Math.abs(n).toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2});
+const pct = n => (n > 0 ? '+' : n < 0 ? '−' : '') + Math.abs(n).toFixed(2) + '%';
+const cls = n => n > 0 ? 'up' : n < 0 ? 'down' : 'flat';
+const n2 = n => Number(n).toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2});
+const esc = s => String(s).replace(/[&<>]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;'}[c]));
+
+function render(d){
+  const m = d.meta, k = d.kpis;
+  document.getElementById('daychip').textContent = `יום ${m.day_index}/${m.total_days} · שבוע ${m.week.replace(/-/g,'.')}`;
+  const mc = document.getElementById('mktchip');
+  const open = ['REG_MKT','PRE_MKT','POST_MKT'].includes(m.market_status);
+  mc.textContent = m.market_status === 'REG_MKT' ? '🟢 השוק פתוח'
+    : m.market_status === 'PRE_MKT' ? '🌅 טרום-מסחר'
+    : m.market_status === 'POST_MKT' ? '🌙 אחרי הסגירה' : '⏸ השוק סגור';
+  mc.className = 'chip ' + (m.market_status === 'REG_MKT' ? 'live' : 'closed');
+  document.getElementById('updchip').textContent = 'עודכן ' + m.updated_il;
+
+  const idx = m.indices || {};
+  document.getElementById('tape').innerHTML = [['S&P 500',idx['.SPX']],['נאסד״ק',idx['.IXIC']],['VIX',idx['.VIX']]]
+    .filter(([,v]) => v && v.last)
+    .map(([n,v]) => `<span class="t"><span>${n}</span><span class="v num">${v.last}</span><span class="${cls(parseFloat(String(v.chg)))} num">${v.chg||''}</span></span>`).join('');
+
+  document.getElementById('kpis').innerHTML = [
+    ['שווי התיק', shekel(k.equity), `מזומן ${shekel(k.cash)} · חשיפה ${shekel(k.exposure)}`, cls(k.total_pnl)],
+    ['שינוי היום', (k.day_pnl>0?'+':'') + shekel(k.day_pnl), pct(k.day_pct), cls(k.day_pnl)],
+    ['מצטבר מול 10,000$', (k.total_pnl>0?'+':'') + shekel(k.total_pnl), pct(k.total_pct), cls(k.total_pnl)],
+    ['עמלות ששולמו', shekel(k.fees), `${k.open_count}/${k.max_positions} פוזיציות פתוחות`, 'flat']
+  ].map(([t,v,s,cl]) => `<div class="kpi fade"><div class="k">${t}</div><div class="v ${cl}">${v}</div><div class="s">${s}</div></div>`).join('');
+
+  chart(d.curve, m.start_equity);
+
+  const pos = d.positions || [];
+  document.getElementById('pospill').textContent = `${pos.length}/${k.max_positions} · לא ממומש ${shekel(k.unrealized)} (ברוטו, לפני עמלות)`;
+  document.getElementById('positions').innerHTML = pos.length ? pos.map(p => `
+    <div class="pos fade">
+      <div class="row1">
+        <div><span class="sym">${esc(p.symbol)}</span> <span class="sh">${p.shares} מניות · כניסה ${n2(p.entry)}$ · ${esc(p.entry_il)}</span></div>
+        <div class="pnl ${cls(p.unreal)}">${(p.unreal>0?'+':'') + shekel(p.unreal)} <span class="num">(${pct(p.unreal_pct)})</span></div>
+      </div>
+      <div class="prices"><span>נוכחי <b class="num">${n2(p.last)}$</b></span><span>שווי <b class="num">${n2(p.market_value)}$</b></span><span class="sum-d">· ${esc(p.price_source)}</span></div>
+      <div class="bar">
+        <div class="track">
+          <div class="fill ${cls(p.unreal)}" style="width:${(p.progress*100).toFixed(1)}%"></div>
+          <div class="mark" style="left:0"></div>
+          <div class="mark entry" style="left:${(p.entry_progress*100).toFixed(1)}%"></div>
+          <div class="dot" style="left:${(p.progress*100).toFixed(1)}%"></div>
+        </div>
+        <div class="barlab"><span>סטופ ${n2(p.stop)}$ (${pct(p.stop_pct)})</span><span>יעד ${n2(p.target)}$ (+${Math.abs(p.target_pct).toFixed(2)}%)</span></div>
+      </div>
+      <div class="thesis">${esc(p.thesis)}</div>
+      <div class="exitrule">מבטל: ${esc(p.exit_rule)}</div>
+    </div>`).join('') : '<div class="empty">אין פוזיציות פתוחות כרגע — כל ההון במזומן.</div>';
+
+  const j = d.journal || [];
+  document.getElementById('journal').innerHTML = j.length ? j.map((e,i) => `
+    <details class="day"${i===0?' open':''}>
+      <summary>
+        <span>${esc(e.label)}</span>
+        <span class="sum-d">${e.day_pnl!==undefined ? `${e.day_pnl>0?'+':''}${shekel(e.day_pnl)} (${pct(e.day_pct||0)})` : ''} <span class="chev">▾</span></span>
+      </summary>
+      <div class="body">
+        ${(e.actions||[]).map(a => `<div class="act"><span class="side${a.side==='SELL'?' sell':''}">${a.side==='BUY'?'קנייה':'מכירה'}</span>
+          <b class="sym">${esc(a.symbol)}</b><span class="num">${a.shares} @ ${n2(a.price)}$ = ${n2(a.notional||a.shares*a.price)}$ + ${shekel(a.fee)} עמלה</span><span class="sum-d">${esc(a.time_il)}</span></div>`).join('')}
+        ${e.prep_html ? `<h3>תוכנית הבוקר</h3>${e.prep_html}` : ''}
+        ${e.summary_html ? `<h3>סיכום היום</h3>${e.summary_html}` : ''}
+      </div>
+    </details>`).join('') : '<div class="empty">היומן ייבנה בסיום יום המסחר הראשון.</div>';
+
+  const c = d.closed || [];
+  document.getElementById('closed').innerHTML = c.length ? c.map(t => `
+    <div class="closed fade">
+      <div class="r"><span><b class="sym">${esc(t.symbol)}</b> <span class="sh">${t.shares} מניות · ${esc(t.open_il)} → ${esc(t.close_il)}</span></span>
+      <span class="pnl ${cls(t.net)}">${t.net>0?'+':''}${shekel(t.net)}</span></div>
+      <div class="prices"><span class="num">${n2(t.entry)}$ → ${n2(t.exit)}$</span><span>ברוטו ${t.gross>0?'+':''}${shekel(t.gross)}</span><span>עמלות ${shekel(t.fees)}</span></div>
+      ${t.reason?`<div class="thesis">${esc(t.reason)}</div>`:''}
+    </div>`).join('') : '<div class="empty">עוד אין עסקאות סגורות.</div>';
+
+  const s = d.stats;
+  document.getElementById('stats').innerHTML = [
+    ['עסקאות', s.total_trades], ['אחוז הצלחה', s.win_rate===null?'—':s.win_rate+'%'],
+    ['רווח ממוצע', s.avg_win===null?'—':shekel(s.avg_win)], ['הפסד ממוצע', s.avg_loss===null?'—':shekel(s.avg_loss)],
+  ].map(([t,v]) => `<div class="stat"><div class="k">${t}</div><div class="v num">${v}</div></div>`).join('');
+
+  document.getElementById('rules').innerHTML = d.rules.map(r => `<li>${esc(r)}</li>`).join('');
+  document.getElementById('srcnote').textContent = d.source_note;
+}
+
+function chart(pts, start){
+  const host = document.getElementById('chart'), foot = document.getElementById('chartfoot');
+  if(!pts || pts.length < 1){ host.innerHTML = '<div class="empty">הגרף ייבנה אחרי יום המסחר הראשון.</div>'; foot.innerHTML=''; return; }
+  if(pts.length === 1){   /* first day: baseline + the single live point */
+    const p = pts[0], span = Math.max(Math.abs(p.equity - start) * 6, 40);
+    const W=720,H=230,PL=54,PR=16,PT=18,PB=30, y0=start-span, y1=start+span;
+    const Y = v => PT+(H-PT-PB)*(1-(v-y0)/(y1-y0));
+    const col = p.equity >= start ? 'var(--up)' : 'var(--down)';
+    host.innerHTML = `<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="גרף שווי התיק">
+      <line x1="${PL}" y1="${Y(start)}" x2="${W-PR}" y2="${Y(start)}" stroke="#2a3446" stroke-dasharray="5 5"/>
+      <text x="${PL-8}" y="${Y(start)+4}" fill="#6b7688" font-size="11" text-anchor="end">${(start/1000).toFixed(1)}k</text>
+      <line x1="${PL}" y1="${Y(p.equity)}" x2="${W-PR}" y2="${Y(p.equity)}" stroke="${col}" stroke-width="2.5" stroke-linecap="round" opacity=".55"/>
+      <circle cx="${(W+PL-PR)/2}" cy="${Y(p.equity)}" r="6" fill="${col}"/>
+      <text x="${(W+PL-PR)/2}" y="${Y(p.equity)-14}" fill="#e9eef6" font-size="13" font-weight="700" text-anchor="middle">${shekel(p.equity)}</text>
+      <text x="${(W+PL-PR)/2}" y="${H-8}" fill="#6b7688" font-size="11" text-anchor="middle">${esc(p.d)} — יום ראשון</text>
+    </svg>`;
+    foot.innerHTML = `<span>התחלה: <b class="num">${shekel(start)}</b></span><span>עדכון חי: <b class="num ${p.equity>=start?'up':'down'}">${shekel(p.equity)}</b></span>`;
+    return;
+  }
+  const W=720,H=230,PL=54,PR=16,PT=18,PB=30;
+  const vals = pts.map(p=>p.equity), lo=Math.min(...vals,start), hi=Math.max(...vals,start);
+  const pad=(hi-lo)*0.18||20, y0=lo-pad, y1=hi+pad;
+  const X=i=>PL+(W-PL-PR)*(i/(pts.length-1)), Y=v=>PT+(H-PT-PB)*(1-(v-y0)/(y1-y0));
+  const line = pts.map((p,i)=>`${i?'L':'M'}${X(i).toFixed(1)},${Y(p.equity).toFixed(1)}`).join(' ');
+  const area = `${line} L${X(pts.length-1).toFixed(1)},${H-PB} L${X(0).toFixed(1)},${H-PB} Z`;
+  const up = vals[vals.length-1] >= start;
+  const col = up ? 'var(--up)' : 'var(--down)';
+  const yBase = Y(start);
+  const last = pts[pts.length-1];
+  host.innerHTML = `
+  <svg viewBox="0 0 ${W} ${H}" preserveAspectRatio="xMidYMid meet" role="img" aria-label="גרף שווי התיק">
+    <defs><linearGradient id="g" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="${up?'#35d18a':'#ff6b6b'}" stop-opacity=".22"/>
+      <stop offset="100%" stop-color="${up?'#35d18a':'#ff6b6b'}" stop-opacity="0"/></linearGradient></defs>
+    <line x1="${PL}" y1="${yBase}" x2="${W-PR}" y2="${yBase}" stroke="#2a3446" stroke-dasharray="5 5"/>
+    <text x="${PL-8}" y="${yBase+4}" fill="#6b7688" font-size="11" text-anchor="end">${(start/1000).toFixed(1)}k</text>
+    <path d="${area}" fill="url(#g)"/>
+    <path d="${line}" fill="none" stroke="${col}" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+    ${pts.slice(0,-1).map((p,i)=>`<circle cx="${X(i)}" cy="${Y(p.equity)}" r="3.4" fill="#0f131a" stroke="${col}" stroke-width="2"/>`).join('')}
+    <circle cx="${X(pts.length-1)}" cy="${Y(last.equity)}" r="5.6" fill="${col}"/>
+    <text x="${X(pts.length-1)}" y="${Y(last.equity)-12}" fill="#e9eef6" font-size="12" font-weight="700" text-anchor="${pts.length>3?'middle':'end'}">${shekel(last.equity)}</text>
+    ${pts.map((p,i)=>`<text x="${X(i)}" y="${H-8}" fill="#6b7688" font-size="11" text-anchor="middle">${esc(p.d)}</text>`).join('')}
+  </svg>`;
+  const best = Math.max(...vals), worst = Math.min(...vals);
+  foot.innerHTML = `<span>התחלה: <b class="num">${shekel(start)}</b></span>
+    <span>שיא: <b class="num up">${shekel(best)}</b></span>
+    <span>שפל: <b class="num down">${shekel(worst)}</b></span>
+    <span>נקודות: <b class="num">${pts.length}</b></span>`;
+}
+
+async function load(){
+  try{
+    const r = await fetch('data.json', {cache:'no-store'});
+    if(!r.ok) throw new Error(r.status);
+    const d = await r.json();
+    render(d);
+    if(d.meta.market_open) setTimeout(load, 5*60*1000);
+  }catch(e){
+    document.getElementById('kpis').innerHTML = `<div class="kpi"><div class="k">אין נתונים</div><div class="s">data.json לא נטען (${esc(e.message)})</div></div>`;
+  }
+}
+load();
+</script>
+</body>
+</html>

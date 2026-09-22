@@ -11,10 +11,10 @@
   {
    "d": "22.09",
    "date": "2026-09-22",
-   "equity": 10003.85,
+   "equity": 10032.04,
    "live": true,
-   "pct": 0.04,
-   "pnl": 3.85
+   "pct": 0.32,
+   "pnl": 32.04
   }
  ],
  "journal": [
@@ -72,33 +72,33 @@
  ],
  "kpis": {
   "cash": 5255.06,
-  "day_pct": -0.05,
-  "day_pnl": -5.36,
-  "equity": 10003.85,
-  "exposure": 4748.79,
+  "day_pct": 0.23,
+  "day_pnl": 22.83,
+  "equity": 10032.04,
+  "exposure": 4776.98,
   "fees": 15.0,
   "max_positions": 5,
   "open_count": 3,
   "realized": 0.0,
-  "total_pct": 0.04,
-  "total_pnl": 3.85,
-  "unrealized": 18.85
+  "total_pct": 0.32,
+  "total_pnl": 32.04,
+  "unrealized": 47.04
  },
  "meta": {
   "day_index": 2,
   "feed_status": "REG_MKT",
   "indices": {
    ".IXIC": {
-    "chg": "+0.30%",
-    "last": "27,204.129"
+    "chg": "+0.42%",
+    "last": "27,234.786"
    },
    ".SPX": {
-    "chg": "+0.02%",
-    "last": "7,765.89"
+    "chg": "+0.06%",
+    "last": "7,769.29"
    },
    ".VIX": {
-    "chg": "-3.97%",
-    "last": "14.28"
+    "chg": "-4.03%",
+    "last": "14.27"
    }
   },
   "market_open": true,
@@ -106,7 +106,7 @@
   "start_equity": 10000,
   "title": "משחק המסחר — 10,000$ וירטואלי",
   "total_days": 5,
-  "updated_il": "22.09.2026 20:00",
+  "updated_il": "22.09.2026 21:00",
   "week": "2026-09-21 → 2026-09-25"
  },
  "positions": [
@@ -115,57 +115,57 @@
    "entry_il": "20:14",
    "entry_progress": 0.3581395348837204,
    "exit_rule": "סגירה מתחת ל-250.5 (מתחת לרצפת 18.9)",
-   "last": 254.29,
-   "market_value": 1780.03,
+   "last": 255.84,
+   "market_value": 1790.88,
    "price_source": "CNBC live",
-   "progress": 0.17627906976744148,
+   "progress": 0.24837209302325597,
    "shares": 7,
    "stop": 250.5,
-   "stop_pct": -1.49,
+   "stop_pct": -2.09,
    "symbol": "AMZN",
    "target": 272.0,
-   "target_pct": 6.96,
+   "target_pct": 6.32,
    "thesis": "פריצה לשיא שבועיים: חצה את שיא 18.9 (255.4) ואת שיא 11.9 (257.6) על נפח גבוה (52M בשישי) — עוגן מגה-קאפ עם סטופ צר",
-   "unreal": -27.37,
-   "unreal_pct": -1.51
+   "unreal": -16.52,
+   "unreal_pct": -0.91
   },
   {
    "entry": 81.53,
    "entry_il": "20:14",
    "entry_progress": 0.3439560439560437,
    "exit_rule": "סגירה מתחת ל-78.4 או זינוק מחודש בנפט מעל 100$",
-   "last": 83.02,
-   "market_value": 1494.36,
+   "last": 83.55,
+   "market_value": 1503.9,
    "price_source": "CNBC live",
-   "progress": 0.507692307692307,
+   "progress": 0.5659340659340654,
    "shares": 18,
    "stop": 78.4,
-   "stop_pct": -5.56,
+   "stop_pct": -6.16,
    "symbol": "DAL",
    "target": 87.5,
-   "target_pct": 5.4,
+   "target_pct": 4.73,
    "thesis": "מרוויח מהתרסקות הנפט (WTI ‎-5.3% ל-94.96$, היום הרביעי ברצף): דלק סילוני הוא ההוצאה הגדולה של חברות התעופה. דלתא פרצה מעל טווח 5 הימים (79.4-80.4) עם +2.4%",
-   "unreal": 26.82,
-   "unreal_pct": 1.83
+   "unreal": 36.36,
+   "unreal_pct": 2.48
   },
   {
    "entry": 72.75,
    "entry_il": "16:17",
    "entry_progress": 0.4473684210526316,
    "exit_rule": "סגירה מתחת ל-68.50 (כשל הפריצה) — או חזרה של WTI מעל 100$",
-   "last": 73.72,
-   "market_value": 1474.4,
+   "last": 74.11,
+   "market_value": 1482.2,
    "price_source": "CNBC live",
-   "progress": 0.5494736842105262,
+   "progress": 0.5905263157894737,
    "shares": 20,
    "stop": 68.5,
-   "stop_pct": -7.08,
+   "stop_pct": -7.57,
    "symbol": "THO",
    "target": 78.0,
-   "target_pct": 5.81,
+   "target_pct": 5.25,
    "thesis": "טריגר שפורסם בתוכנית היום נפגע (>72.50): דוחות חזקים אתמול (הכנסות מעל הצפי), +4% תוך החזקת הפתיחה, ונפט זול תומך בביקוש לקרוואנים. כניסה אחרי הפריצה, לא לפניה",
-   "unreal": 19.4,
-   "unreal_pct": 1.33
+   "unreal": 27.2,
+   "unreal_pct": 1.87
   }
  ],
  "rules": [

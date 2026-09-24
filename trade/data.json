@@ -38,10 +38,10 @@
   {
    "d": "24.09",
    "date": "2026-09-24",
-   "equity": 9850.23,
+   "equity": 9825.62,
    "live": true,
-   "pct": -1.5,
-   "pnl": -149.77
+   "pct": -1.74,
+   "pnl": -174.38
   }
  ],
  "journal": [
@@ -142,33 +142,33 @@
  ],
  "kpis": {
   "cash": 5544.56,
-  "day_pct": -0.49,
-  "day_pnl": -48.92,
-  "equity": 9850.23,
-  "exposure": 4305.67,
+  "day_pct": -0.74,
+  "day_pnl": -73.53,
+  "equity": 9825.62,
+  "exposure": 4281.06,
   "fees": 25.0,
   "max_positions": 5,
   "open_count": 3,
   "realized": -81.4,
-  "total_pct": -1.5,
-  "total_pnl": -149.77,
-  "unrealized": -53.37
+  "total_pct": -1.74,
+  "total_pnl": -174.38,
+  "unrealized": -77.98
  },
  "meta": {
   "day_index": 4,
   "feed_status": "REG_MKT",
   "indices": {
    ".IXIC": {
-    "chg": "-0.72%",
-    "last": "26,741.729"
+    "chg": "-0.73%",
+    "last": "26,740.748"
    },
    ".SPX": {
-    "chg": "-0.42%",
-    "last": "7,673.70"
+    "chg": "-0.49%",
+    "last": "7,668.57"
    },
    ".VIX": {
-    "chg": "+5.40%",
-    "last": "16.00"
+    "chg": "+6.13%",
+    "last": "16.11"
    }
   },
   "market_open": true,
@@ -176,7 +176,7 @@
   "start_equity": 10000,
   "title": "משחק המסחר — 10,000$ וירטואלי",
   "total_days": 5,
-  "updated_il": "24.09.2026 18:00",
+  "updated_il": "24.09.2026 19:00",
   "week": "2026-09-21 → 2026-09-25"
  },
  "positions": [
@@ -185,57 +185,57 @@
    "entry_il": "20:14",
    "entry_progress": 0.3439560439560437,
    "exit_rule": "סגירה מתחת ל-78.4 או זינוק מחודש בנפט מעל 100$ · מעודכן 24.9: יציאה גם בסגירה מתחת ל-80.40 (כשל הפריצה של 21.9)",
-   "last": 81.19,
-   "market_value": 1461.42,
+   "last": 80.92,
+   "market_value": 1456.56,
    "price_source": "CNBC live",
-   "progress": 0.3065934065934059,
+   "progress": 0.27692307692307666,
    "shares": 18,
    "stop": 78.4,
-   "stop_pct": -3.44,
+   "stop_pct": -3.11,
    "symbol": "DAL",
    "target": 87.5,
-   "target_pct": 7.77,
+   "target_pct": 8.13,
    "thesis": "מרוויח מהתרסקות הנפט (WTI ‎-5.3% ל-94.96$, היום הרביעי ברצף): דלק סילוני הוא ההוצאה הגדולה של חברות התעופה. דלתא פרצה מעל טווח 5 הימים (79.4-80.4) עם +2.4%",
-   "unreal": -6.12,
-   "unreal_pct": -0.42
+   "unreal": -10.98,
+   "unreal_pct": -0.75
   },
   {
    "entry": 72.75,
    "entry_il": "19:17",
    "entry_progress": 0.4473684210526316,
    "exit_rule": "סגירה מתחת ל-68.50 (כשל הפריצה) — או חזרה של WTI מעל 100$ · מעודכן 24.9: יציאה גם בסגירה מתחת ל-71.00",
-   "last": 71.46,
-   "market_value": 1429.2,
+   "last": 70.57,
+   "market_value": 1411.4,
    "price_source": "CNBC live",
-   "progress": 0.3115789473684204,
+   "progress": 0.21789473684210456,
    "shares": 20,
    "stop": 68.5,
-   "stop_pct": -4.14,
+   "stop_pct": -2.93,
    "symbol": "THO",
    "target": 78.0,
-   "target_pct": 9.15,
+   "target_pct": 10.53,
    "thesis": "טריגר שפורסם בתוכנית היום נפגע (>72.50): דוחות חזקים אתמול (הכנסות מעל הצפי), +4% תוך החזקת הפתיחה, ונפט זול תומך בביקוש לקרוואנים. כניסה אחרי הפריצה, לא לפניה",
-   "unreal": -25.8,
-   "unreal_pct": -1.77
+   "unreal": -43.6,
+   "unreal_pct": -3.0
   },
   {
    "entry": 110.5,
    "entry_il": "17:06",
    "entry_progress": 0.26666666666666666,
    "exit_rule": "סגירה מתחת ל-108 · מעודכן 24.9: סטופ הועלה מ-106.50 ל-108.50 (מגן על הרווח)",
-   "last": 108.85,
-   "market_value": 1415.05,
+   "last": 108.7,
+   "market_value": 1413.1,
    "price_source": "CNBC live",
-   "progress": 0.046666666666665906,
+   "progress": 0.026666666666667047,
    "shares": 13,
    "stop": 108.5,
-   "stop_pct": -0.32,
+   "stop_pct": -0.18,
    "symbol": "WMT",
    "target": 116.0,
-   "target_pct": 6.57,
+   "target_pct": 6.72,
    "thesis": "טריגר שפורסם בתוכנית היום (>110.25) נפגע: שיא בנפח גדול אתמול (+2.49%), סטאפלים כמגזר חסר בתיק, ומומנטום בזמן רוטציה החוצה משבבים",
-   "unreal": -21.45,
-   "unreal_pct": -1.49
+   "unreal": -23.4,
+   "unreal_pct": -1.63
   }
  ],
  "rules": [

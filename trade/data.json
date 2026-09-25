@@ -69,10 +69,10 @@
   {
    "d": "25.09",
    "date": "2026-09-25",
-   "equity": 9843.97,
+   "equity": 9863.77,
    "live": true,
-   "pct": -1.56,
-   "pnl": -156.03
+   "pct": -1.36,
+   "pnl": -136.23
   }
  ],
  "journal": [
@@ -205,33 +205,33 @@
  ],
  "kpis": {
   "cash": 8351.23,
-  "day_pct": 0.03,
-  "day_pnl": 3.24,
-  "equity": 9843.97,
-  "exposure": 1492.74,
+  "day_pct": 0.23,
+  "day_pnl": 23.04,
+  "equity": 9863.77,
+  "exposure": 1512.54,
   "fees": 35.0,
   "max_positions": 5,
   "open_count": 1,
   "realized": -176.23,
-  "total_pct": -1.56,
-  "total_pnl": -156.03,
-  "unrealized": 25.2
+  "total_pct": -1.36,
+  "total_pnl": -136.23,
+  "unrealized": 45.0
  },
  "meta": {
   "day_index": 5,
   "feed_status": "REG_MKT",
   "indices": {
    ".IXIC": {
-    "chg": "+0.20%",
-    "last": "26,993.505"
+    "chg": "+0.39%",
+    "last": "27,044.776"
    },
    ".SPX": {
-    "chg": "+0.18%",
-    "last": "7,717.64"
+    "chg": "+0.32%",
+    "last": "7,728.43"
    },
    ".VIX": {
-    "chg": "-1.60%",
-    "last": "15.42"
+    "chg": "-3.38%",
+    "last": "15.14"
    }
   },
   "market_open": true,
@@ -239,7 +239,7 @@
   "start_equity": 10000,
   "title": "משחק המסחר — 10,000$ וירטואלי",
   "total_days": 5,
-  "updated_il": "25.09.2026 18:00",
+  "updated_il": "25.09.2026 19:00",
   "week": "2026-09-21 → 2026-09-25"
  },
  "positions": [
@@ -248,19 +248,19 @@
    "entry_il": "20:14",
    "entry_progress": 0.3439560439560437,
    "exit_rule": "סגירה מתחת ל-80.40 (כשל הפריצה של 21.9) או מתחת ל-78.40 · מעודכן 24.9: גם יציאה אם WTI חוזר מעל 100$ — נפט נסגר היום 95.22 (+3.32%), מעל רמת יום הכניסה 94.96",
-   "last": 82.93,
-   "market_value": 1492.74,
+   "last": 84.03,
+   "market_value": 1512.54,
    "price_source": "CNBC live",
-   "progress": 0.49780219780219825,
+   "progress": 0.6186813186813186,
    "shares": 18,
    "stop": 78.4,
-   "stop_pct": -5.46,
+   "stop_pct": -6.7,
    "symbol": "DAL",
    "target": 87.5,
-   "target_pct": 5.51,
+   "target_pct": 4.13,
    "thesis": "מרוויח מהתרסקות הנפט (WTI ‎-5.3% ל-94.96$, היום הרביעי ברצף): דלק סילוני הוא ההוצאה הגדולה של חברות התעופה. דלתא פרצה מעל טווח 5 הימים (79.4-80.4) עם +2.4%",
-   "unreal": 25.2,
-   "unreal_pct": 1.72
+   "unreal": 45.0,
+   "unreal_pct": 3.07
   }
  ],
  "rules": [

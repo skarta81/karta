@@ -11,30 +11,6 @@
    "reason": "ביצוע מכני של רמה שפורסמה מראש — סטופ 79.25",
    "shares": 17,
    "symbol": "LEN"
-  },
-  {
-   "close_il": "2026-10-02",
-   "entry": 516.65,
-   "exit": 529.3,
-   "fees": 10.0,
-   "gross": 37.95,
-   "net": 27.95,
-   "open_il": "2026-10-01",
-   "reason": "סגירת יום אחרון (שישי) — cron הסיכום נכשל בפסק זמן ספק, בוצע ידנית",
-   "shares": 3,
-   "symbol": "AMAT"
-  },
-  {
-   "close_il": "2026-10-02",
-   "entry": 407.25,
-   "exit": 420.42,
-   "fees": 10.0,
-   "gross": 52.68,
-   "net": 42.68,
-   "open_il": "2026-10-01",
-   "reason": "סגירת יום אחרון (שישי) — cron הסיכום נכשל בפסק זמן ספק, בוצע ידנית",
-   "shares": 4,
-   "symbol": "MPC"
   }
  ],
  "curve": [
@@ -76,35 +52,6 @@
   }
  ],
  "journal": [
-  {
-   "actions": [
-    {
-     "fee": 5,
-     "notional": 1587.9,
-     "pnl": 27.95,
-     "price": 529.3,
-     "shares": 3,
-     "side": "SELL",
-     "symbol": "AMAT",
-     "time_il": "00:43"
-    },
-    {
-     "fee": 5,
-     "notional": 1681.68,
-     "pnl": 42.68,
-     "price": 420.42,
-     "shares": 4,
-     "side": "SELL",
-     "symbol": "MPC",
-     "time_il": "00:43"
-    }
-   ],
-   "date": "2026-10-02",
-   "label": "יום שישי 2.10",
-   "prep_html": "",
-   "sort": "2026-10-02",
-   "summary_html": ""
-  },
   {
    "actions": [
     {
@@ -274,11 +221,11 @@
  "source_note": "מחירים: CNBC restQuote (זמן אמת/טרום-מסחר) ו-Nasdaq API (סגירות רשמיות). הספר: state.json.",
  "stats": {
   "avg_loss": -91.43,
-  "avg_win": 35.31,
+  "avg_win": null,
   "fees": 20.0,
   "losses": 1,
-  "total_trades": 6,
-  "win_rate": 66.7,
-  "wins": 2
+  "total_trades": 4,
+  "win_rate": 0.0,
+  "wins": 0
  }
 }

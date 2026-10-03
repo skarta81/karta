@@ -38,5 +38,45 @@
 
 <script src="data.js?v=3"></script>
 <script src="app.js?v=3"></script>
+
+<style>
+  #exam-wrap{max-width:760px;margin:28px auto;padding:0 16px;direction:rtl;font-family:inherit}
+  #exam-wrap h2{font-size:1.15rem;font-weight:600;letter-spacing:-.01em;margin:0 0 4px}
+  #exam-wrap .sub{font-size:.82rem;opacity:.6;margin:0 0 14px}
+  #exam-wrap ul{list-style:none;margin:0;padding:0}
+  #exam-wrap li{display:flex;gap:12px;align-items:baseline;padding:11px 14px;border:1px solid rgba(128,128,128,.22);border-radius:12px;margin-bottom:8px;background:rgba(128,128,128,.04)}
+  #exam-wrap li.soon{border-color:rgba(220,150,60,.55);background:rgba(220,150,60,.08)}
+  #exam-wrap .d{min-width:78px;font-variant-numeric:tabular-nums;font-size:.82rem;opacity:.75}
+  #exam-wrap .s{font-weight:600;font-size:.95rem}
+  #exam-wrap .n{font-size:.78rem;opacity:.65;margin-inline-start:auto;text-align:left}
+  #exam-wrap details{margin-top:14px;font-size:.82rem;opacity:.8}
+  #exam-wrap details li{display:block;border:0;padding:3px 0;margin:0;background:none}
+</style>
+<section id="exam-wrap">
+  <h2>📝 לוח מבחנים — נוי (מחצית א׳)</h2>
+  <p class="sub">חטיבה צומחת צור יצחק · תשפ״ז · החומר נמסר עד שבוע לפני כל מבחן</p>
+  <ul id="exam-list"></ul>
+  <details><summary>כללי המבחנים</summary><ul id="exam-rules"></ul></details>
+</section>
+<script>
+(function(){
+  var tries=0;
+  function render(){
+    var E=(typeof EXAMS!=='undefined')?EXAMS:null;
+    if(!E){ if(++tries<30) setTimeout(render,250); return; }
+    var today=new Date().toISOString().slice(0,10), out=[];
+    E.slice().sort(function(a,b){return a.date<b.date?-1:1}).forEach(function(e){
+      if(e.date<today) return;
+      var dx=(new Date(e.date+'T00:00:00')-new Date(today+'T00:00:00'))/864e5;
+      out.push('<li class="'+(dx<=7?'soon':'')+'"><span class="d">'+e.date.slice(8)+'.'+e.date.slice(5,7)+' · '+e.day+'</span><span class="s">'+e.subject+'</span>'+(e.note?'<span class="n">'+e.note+'</span>':'')+'</li>');
+    });
+    document.getElementById('exam-list').innerHTML=out.join('')||'<li>אין מבחנים מתוכננים</li>';
+    var R=(typeof EXAM_RULES!=='undefined')?EXAM_RULES:[];
+    document.getElementById('exam-rules').innerHTML=R.map(function(r){return '<li>• '+r+'</li>'}).join('');
+  }
+  render();
+})();
+</script>
+
 </body>
 </html>

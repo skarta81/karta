@@ -113,6 +113,13 @@
    "d": "02.10",
    "date": "2026-10-02",
    "equity": 9915.11,
+   "pct": -0.85,
+   "pnl": -84.89
+  },
+  {
+   "d": "05.10",
+   "date": "2026-10-05",
+   "equity": 9915.11,
    "live": true,
    "pct": -0.85,
    "pnl": -84.89
@@ -294,8 +301,8 @@
  ],
  "kpis": {
   "cash": 9915.11,
-  "day_pct": -0.73,
-  "day_pnl": -73.01,
+  "day_pct": 0.0,
+  "day_pnl": 0.0,
   "equity": 9915.11,
   "exposure": 0,
   "fees": 60.0,
@@ -310,12 +317,12 @@
   "day_index": 5,
   "feed_status": null,
   "indices": {},
-  "market_open": false,
-  "market_status": "POST_MKT",
+  "market_open": true,
+  "market_status": "REG_MKT",
   "start_equity": 10000,
   "title": "משחק המסחר — 10,000$ וירטואלי",
   "total_days": 5,
-  "updated_il": "02.10.2026 23:14",
+  "updated_il": "05.10.2026 17:10",
   "week": "2026-09-28 → 2026-10-02"
  },
  "positions": [],

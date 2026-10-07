@@ -145,10 +145,10 @@
   {
    "d": "07.10",
    "date": "2026-10-07",
-   "equity": 9744.79,
+   "equity": 9743.21,
    "live": true,
-   "pct": -2.55,
-   "pnl": -255.21
+   "pct": -2.57,
+   "pnl": -256.79
   }
  ],
  "journal": [
@@ -409,33 +409,33 @@
  ],
  "kpis": {
   "cash": 3320.61,
-  "day_pct": -1.84,
-  "day_pnl": -182.96,
-  "equity": 9744.79,
-  "exposure": 6424.18,
+  "day_pct": -1.86,
+  "day_pnl": -184.54,
+  "equity": 9743.21,
+  "exposure": 6422.6,
   "fees": 85.0,
   "max_positions": 5,
   "open_count": 3,
   "realized": -139.45,
-  "total_pct": -2.55,
-  "total_pnl": -255.21,
-  "unrealized": -40.76
+  "total_pct": -2.57,
+  "total_pnl": -256.79,
+  "unrealized": -42.34
  },
  "meta": {
   "day_index": 3,
   "feed_status": "REG_MKT",
   "indices": {
    ".IXIC": {
-    "chg": "-0.30%",
-    "last": "27,518.351"
+    "chg": "-0.27%",
+    "last": "27,524.932"
    },
    ".SPX": {
-    "chg": "-0.21%",
-    "last": "7,802.67"
+    "chg": "-0.17%",
+    "last": "7,805.26"
    },
    ".VIX": {
-    "chg": "+0.73%",
-    "last": "15.12"
+    "chg": "+0.27%",
+    "last": "15.05"
    }
   },
   "market_open": true,
@@ -443,7 +443,7 @@
   "start_equity": 10000,
   "title": "משחק המסחר — 10,000$ וירטואלי",
   "total_days": 5,
-  "updated_il": "07.10.2026 21:45",
+  "updated_il": "07.10.2026 22:00",
   "week": "2026-10-05 → 2026-10-09"
  },
  "positions": [
@@ -452,37 +452,37 @@
    "entry_il": "16:30",
    "entry_progress": 0.3778723404255317,
    "exit_rule": "",
-   "last": 156.68,
-   "market_value": 2193.52,
+   "last": 156.63,
+   "market_value": 2192.82,
    "price_source": "CNBC live",
-   "progress": 0.29191489361702183,
+   "progress": 0.2876595744680847,
    "shares": 14,
    "stop": 153.25,
-   "stop_pct": -2.19,
+   "stop_pct": -2.16,
    "symbol": "JCI",
    "target": 165.0,
-   "target_pct": 5.31,
+   "target_pct": 5.34,
    "thesis": "",
-   "unreal": -14.14,
-   "unreal_pct": -0.64
+   "unreal": -14.84,
+   "unreal_pct": -0.67
   },
   {
    "entry": 372.75,
    "entry_il": "16:30",
    "entry_progress": 0.30128205128205127,
    "exit_rule": "",
-   "last": 373.81,
-   "market_value": 2242.86,
+   "last": 373.78,
+   "market_value": 2242.68,
    "price_source": "CNBC live",
-   "progress": 0.3284615384615385,
+   "progress": 0.327692307692307,
    "shares": 6,
    "stop": 361.0,
-   "stop_pct": -3.43,
+   "stop_pct": -3.42,
    "symbol": "AVGO",
    "target": 400.0,
    "target_pct": 7.01,
    "thesis": "",
-   "unreal": 6.36,
+   "unreal": 6.18,
    "unreal_pct": 0.28
   },
   {
@@ -490,19 +490,19 @@
    "entry_il": "16:30",
    "entry_progress": 0.22078260869565206,
    "exit_rule": "",
-   "last": 993.9,
-   "market_value": 1987.8,
+   "last": 993.55,
+   "market_value": 1987.1,
    "price_source": "CNBC live",
-   "progress": 0.07739130434782589,
+   "progress": 0.07434782608695613,
    "shares": 2,
    "stop": 985.0,
-   "stop_pct": -0.9,
+   "stop_pct": -0.86,
    "symbol": "GEV",
    "target": 1100.0,
-   "target_pct": 10.68,
+   "target_pct": 10.71,
    "thesis": "",
-   "unreal": -32.98,
-   "unreal_pct": -1.63
+   "unreal": -33.68,
+   "unreal_pct": -1.67
   }
  ],
  "rules": [

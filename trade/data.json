@@ -164,10 +164,10 @@
   {
    "d": "08.10",
    "date": "2026-10-08",
-   "equity": 9664.69,
+   "equity": 9650.32,
    "live": true,
-   "pct": -3.35,
-   "pnl": -335.31
+   "pct": -3.5,
+   "pnl": -349.68
   }
  ],
  "journal": [
@@ -192,6 +192,16 @@
      "side": "SELL",
      "symbol": "GEV",
      "time_il": "16:30"
+    },
+    {
+     "fee": 5.0,
+     "notional": 1890.94,
+     "pnl": null,
+     "price": 945.47,
+     "shares": 2,
+     "side": "BUY",
+     "symbol": "COST",
+     "time_il": "16:45"
     }
    ],
    "date": "2026-10-08",
@@ -459,34 +469,34 @@
   }
  ],
  "kpis": {
-  "cash": 3025.82,
-  "day_pct": -0.94,
-  "day_pnl": -91.96,
-  "equity": 9664.69,
-  "exposure": 6638.87,
-  "fees": 95.0,
+  "cash": 1129.88,
+  "day_pct": -1.09,
+  "day_pnl": -106.33,
+  "equity": 9650.32,
+  "exposure": 8520.44,
+  "fees": 100.0,
   "max_positions": 5,
-  "open_count": 3,
+  "open_count": 4,
   "realized": -192.69,
-  "total_pct": -3.35,
-  "total_pnl": -335.31,
-  "unrealized": -57.62
+  "total_pct": -3.5,
+  "total_pnl": -349.68,
+  "unrealized": -66.99
  },
  "meta": {
   "day_index": 4,
   "feed_status": "REG_MKT",
   "indices": {
    ".IXIC": {
-    "chg": "-0.51%",
-    "last": "27,399.534"
+    "chg": "-0.57%",
+    "last": "27,381.243"
    },
    ".SPX": {
-    "chg": "-0.38%",
-    "last": "7,772.44"
+    "chg": "-0.35%",
+    "last": "7,774.56"
    },
    ".VIX": {
-    "chg": "+2.92%",
-    "last": "15.52"
+    "chg": "+3.18%",
+    "last": "15.56"
    }
   },
   "market_open": true,
@@ -494,7 +504,7 @@
   "start_equity": 10000,
   "title": "משחק המסחר — 10,000$ וירטואלי",
   "total_days": 5,
-  "updated_il": "08.10.2026 16:30",
+  "updated_il": "08.10.2026 16:45",
   "week": "2026-10-05 → 2026-10-09"
  },
  "positions": [
@@ -503,54 +513,73 @@
    "entry_il": "16:30",
    "entry_progress": 0.3778723404255317,
    "exit_rule": "",
-   "last": 154.41,
-   "market_value": 2161.74,
+   "last": 154.38,
+   "market_value": 2161.32,
    "price_source": "CNBC live",
-   "progress": 0.09872340425531886,
+   "progress": 0.09617021276595707,
    "shares": 14,
    "stop": 153.25,
-   "stop_pct": -0.75,
+   "stop_pct": -0.73,
    "symbol": "JCI",
    "target": 165.0,
-   "target_pct": 6.86,
+   "target_pct": 6.88,
    "thesis": "",
-   "unreal": -45.92,
-   "unreal_pct": -2.08
+   "unreal": -46.34,
+   "unreal_pct": -2.1
   },
   {
    "entry": 372.75,
    "entry_il": "16:30",
    "entry_progress": 0.30128205128205127,
    "exit_rule": "",
-   "last": 370.8,
-   "market_value": 2224.8,
+   "last": 368.43,
+   "market_value": 2210.58,
    "price_source": "CNBC live",
-   "progress": 0.25128205128205156,
+   "progress": 0.19051282051282067,
    "shares": 6,
    "stop": 361.0,
-   "stop_pct": -2.64,
+   "stop_pct": -2.02,
    "symbol": "AVGO",
    "target": 400.0,
-   "target_pct": 7.87,
+   "target_pct": 8.57,
    "thesis": "",
-   "unreal": -11.7,
-   "unreal_pct": -0.52
+   "unreal": -25.92,
+   "unreal_pct": -1.16
   },
   {
    "entry": 132.49,
    "entry_il": "16:30",
    "entry_progress": 0.33985507246376906,
    "exit_rule": "",
-   "last": 132.49,
-   "market_value": 2252.33,
+   "last": 132.8,
+   "market_value": 2257.6,
    "price_source": "CNBC live",
-   "progress": 0.33985507246376906,
+   "progress": 0.36231884057971125,
    "shares": 17,
    "stop": 127.8,
-   "stop_pct": -3.54,
+   "stop_pct": -3.77,
    "symbol": "COP",
    "target": 141.6,
-   "target_pct": 6.88,
+   "target_pct": 6.63,
+   "thesis": "",
+   "unreal": 5.27,
+   "unreal_pct": 0.23
+  },
+  {
+   "entry": 945.47,
+   "entry_il": "16:45",
+   "entry_progress": 0.2288073394495418,
+   "exit_rule": "",
+   "last": 945.47,
+   "market_value": 1890.94,
+   "price_source": "CNBC live",
+   "progress": 0.2288073394495418,
+   "shares": 2,
+   "stop": 933.0,
+   "stop_pct": -1.32,
+   "symbol": "COST",
+   "target": 987.5,
+   "target_pct": 4.45,
    "thesis": "",
    "unreal": 0.0,
    "unreal_pct": 0.0
@@ -570,9 +599,9 @@
  "stats": {
   "avg_loss": -76.27,
   "avg_win": 39.55,
-  "fees": 95.0,
+  "fees": 100.0,
   "losses": 5,
-  "total_trades": 19,
+  "total_trades": 20,
   "win_rate": 37.5,
   "wins": 3
  }

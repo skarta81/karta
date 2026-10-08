@@ -95,6 +95,18 @@
    "reason": "ביצוע מכני של רמה שפורסמה מראש — סטופ 985.0",
    "shares": 2,
    "symbol": "GEV"
+  },
+  {
+   "close_il": "2026-10-08",
+   "entry": 157.69,
+   "exit": 152.36,
+   "fees": 10.0,
+   "gross": -74.62,
+   "net": -84.62,
+   "open_il": "2026-10-06",
+   "reason": "ביצוע מכני של רמה שפורסמה מראש — סטופ 153.25",
+   "shares": 14,
+   "symbol": "JCI"
   }
  ],
  "curve": [
@@ -164,10 +176,10 @@
   {
    "d": "08.10",
    "date": "2026-10-08",
-   "equity": 9618.38,
+   "equity": 9612.9,
    "live": true,
-   "pct": -3.82,
-   "pnl": -381.62
+   "pct": -3.87,
+   "pnl": -387.1
   }
  ],
  "journal": [
@@ -202,6 +214,16 @@
      "side": "BUY",
      "symbol": "COST",
      "time_il": "16:45"
+    },
+    {
+     "fee": 5.0,
+     "notional": 2133.04,
+     "pnl": -84.62,
+     "price": 152.36,
+     "shares": 14,
+     "side": "SELL",
+     "symbol": "JCI",
+     "time_il": "20:00"
     }
    ],
    "date": "2026-10-08",
@@ -469,30 +491,30 @@
   }
  ],
  "kpis": {
-  "cash": 1129.88,
-  "day_pct": -1.42,
-  "day_pnl": -138.27,
-  "equity": 9618.38,
-  "exposure": 8488.5,
-  "fees": 100.0,
+  "cash": 3257.92,
+  "day_pct": -1.47,
+  "day_pnl": -143.75,
+  "equity": 9612.9,
+  "exposure": 6354.98,
+  "fees": 105.0,
   "max_positions": 5,
-  "open_count": 4,
-  "realized": -192.69,
-  "total_pct": -3.82,
-  "total_pnl": -381.62,
-  "unrealized": -98.93
+  "open_count": 3,
+  "realized": -277.31,
+  "total_pct": -3.87,
+  "total_pnl": -387.1,
+  "unrealized": -24.79
  },
  "meta": {
   "day_index": 4,
   "feed_status": "REG_MKT",
   "indices": {
    ".IXIC": {
-    "chg": "-1.21%",
-    "last": "27,204.891"
+    "chg": "-1.22%",
+    "last": "27,202.177"
    },
    ".SPX": {
-    "chg": "-0.63%",
-    "last": "7,752.58"
+    "chg": "-0.64%",
+    "last": "7,751.66"
    },
    ".VIX": {
     "chg": "+4.64%",
@@ -509,42 +531,23 @@
  },
  "positions": [
   {
-   "entry": 157.69,
-   "entry_il": "16:30",
-   "entry_progress": 0.3778723404255317,
-   "exit_rule": "",
-   "last": 152.36,
-   "market_value": 2133.04,
-   "price_source": "CNBC live",
-   "progress": 0.0,
-   "shares": 14,
-   "stop": 153.25,
-   "stop_pct": 0.58,
-   "symbol": "JCI",
-   "target": 165.0,
-   "target_pct": 8.3,
-   "thesis": "",
-   "unreal": -74.62,
-   "unreal_pct": -3.38
-  },
-  {
    "entry": 372.75,
    "entry_il": "16:30",
    "entry_progress": 0.30128205128205127,
    "exit_rule": "",
-   "last": 364.2,
-   "market_value": 2185.2,
+   "last": 364.12,
+   "market_value": 2184.72,
    "price_source": "CNBC live",
-   "progress": 0.08205128205128176,
+   "progress": 0.08000000000000011,
    "shares": 6,
    "stop": 361.0,
-   "stop_pct": -0.88,
+   "stop_pct": -0.86,
    "symbol": "AVGO",
    "target": 400.0,
-   "target_pct": 9.83,
+   "target_pct": 9.85,
    "thesis": "",
-   "unreal": -51.3,
-   "unreal_pct": -2.29
+   "unreal": -51.78,
+   "unreal_pct": -2.32
   },
   {
    "entry": 132.49,
@@ -597,12 +600,12 @@
  ],
  "source_note": "מחירים: CNBC restQuote (זמן אמת/טרום-מסחר) ו-Nasdaq API (סגירות רשמיות). הספר: state.json.",
  "stats": {
-  "avg_loss": -76.27,
+  "avg_loss": -77.66,
   "avg_win": 39.55,
-  "fees": 100.0,
-  "losses": 5,
-  "total_trades": 20,
-  "win_rate": 37.5,
+  "fees": 105.0,
+  "losses": 6,
+  "total_trades": 21,
+  "win_rate": 33.3,
   "wins": 3
  }
 }

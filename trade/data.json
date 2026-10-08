@@ -176,10 +176,10 @@
   {
    "d": "08.10",
    "date": "2026-10-08",
-   "equity": 9612.9,
+   "equity": 9601.2,
    "live": true,
-   "pct": -3.87,
-   "pnl": -387.1
+   "pct": -3.99,
+   "pnl": -398.8
   }
  ],
  "journal": [
@@ -492,33 +492,33 @@
  ],
  "kpis": {
   "cash": 3257.92,
-  "day_pct": -1.47,
-  "day_pnl": -143.75,
-  "equity": 9612.9,
-  "exposure": 6354.98,
+  "day_pct": -1.59,
+  "day_pnl": -155.45,
+  "equity": 9601.2,
+  "exposure": 6343.28,
   "fees": 105.0,
   "max_positions": 5,
   "open_count": 3,
   "realized": -277.31,
-  "total_pct": -3.87,
-  "total_pnl": -387.1,
-  "unrealized": -24.79
+  "total_pct": -3.99,
+  "total_pnl": -398.8,
+  "unrealized": -36.49
  },
  "meta": {
   "day_index": 4,
   "feed_status": "REG_MKT",
   "indices": {
    ".IXIC": {
-    "chg": "-1.22%",
-    "last": "27,202.177"
+    "chg": "-1.53%",
+    "last": "27,117.362"
    },
    ".SPX": {
-    "chg": "-0.64%",
-    "last": "7,751.66"
+    "chg": "-0.74%",
+    "last": "7,743.99"
    },
    ".VIX": {
-    "chg": "+4.64%",
-    "last": "15.78"
+    "chg": "+5.90%",
+    "last": "15.97"
    }
   },
   "market_open": true,
@@ -526,7 +526,7 @@
   "start_equity": 10000,
   "title": "משחק המסחר — 10,000$ וירטואלי",
   "total_days": 5,
-  "updated_il": "08.10.2026 20:00",
+  "updated_il": "08.10.2026 21:00",
   "week": "2026-10-05 → 2026-10-09"
  },
  "positions": [
@@ -535,57 +535,57 @@
    "entry_il": "16:30",
    "entry_progress": 0.30128205128205127,
    "exit_rule": "",
-   "last": 364.12,
-   "market_value": 2184.72,
+   "last": 360.95,
+   "market_value": 2165.7,
    "price_source": "CNBC live",
-   "progress": 0.08000000000000011,
+   "progress": 0.0,
    "shares": 6,
    "stop": 361.0,
-   "stop_pct": -0.86,
+   "stop_pct": 0.01,
    "symbol": "AVGO",
    "target": 400.0,
-   "target_pct": 9.85,
+   "target_pct": 10.82,
    "thesis": "",
-   "unreal": -51.78,
-   "unreal_pct": -2.32
+   "unreal": -70.8,
+   "unreal_pct": -3.17
   },
   {
    "entry": 132.49,
    "entry_il": "16:30",
    "entry_progress": 0.33985507246376906,
    "exit_rule": "",
-   "last": 133.7,
-   "market_value": 2272.9,
+   "last": 134.14,
+   "market_value": 2280.38,
    "price_source": "CNBC live",
-   "progress": 0.4275362318840574,
+   "progress": 0.4594202898550718,
    "shares": 17,
    "stop": 127.8,
-   "stop_pct": -4.41,
+   "stop_pct": -4.73,
    "symbol": "COP",
    "target": 141.6,
-   "target_pct": 5.91,
+   "target_pct": 5.56,
    "thesis": "",
-   "unreal": 20.57,
-   "unreal_pct": 0.91
+   "unreal": 28.05,
+   "unreal_pct": 1.25
   },
   {
    "entry": 945.47,
    "entry_il": "16:45",
    "entry_progress": 0.2288073394495418,
    "exit_rule": "",
-   "last": 948.68,
-   "market_value": 1897.36,
+   "last": 948.6,
+   "market_value": 1897.2,
    "price_source": "CNBC live",
-   "progress": 0.28770642201834773,
+   "progress": 0.28623853211009215,
    "shares": 2,
    "stop": 933.0,
-   "stop_pct": -1.65,
+   "stop_pct": -1.64,
    "symbol": "COST",
    "target": 987.5,
-   "target_pct": 4.09,
+   "target_pct": 4.1,
    "thesis": "",
-   "unreal": 6.42,
-   "unreal_pct": 0.34
+   "unreal": 6.26,
+   "unreal_pct": 0.33
   }
  ],
  "rules": [

@@ -195,10 +195,10 @@
   {
    "d": "09.10",
    "date": "2026-10-09",
-   "equity": 9611.09,
+   "equity": 9609.18,
    "live": true,
-   "pct": -3.89,
-   "pnl": -388.91
+   "pct": -3.91,
+   "pnl": -390.82
   }
  ],
  "journal": [
@@ -532,33 +532,33 @@
  ],
  "kpis": {
   "cash": 5418.62,
-  "day_pct": 0.16,
-  "day_pnl": 14.89,
-  "equity": 9611.09,
-  "exposure": 4192.47,
+  "day_pct": 0.14,
+  "day_pnl": 12.98,
+  "equity": 9609.18,
+  "exposure": 4190.56,
   "fees": 110.0,
   "max_positions": 5,
   "open_count": 2,
   "realized": -328.11,
-  "total_pct": -3.89,
-  "total_pnl": -388.91,
-  "unrealized": 49.2
+  "total_pct": -3.91,
+  "total_pnl": -390.82,
+  "unrealized": 47.29
  },
  "meta": {
   "day_index": 5,
   "feed_status": "REG_MKT",
   "indices": {
    ".IXIC": {
-    "chg": "+0.31%",
-    "last": "27,276.662"
+    "chg": "+0.55%",
+    "last": "27,342.856"
    },
    ".SPX": {
-    "chg": "+0.27%",
-    "last": "7,786.23"
+    "chg": "+0.45%",
+    "last": "7,800.57"
    },
    ".VIX": {
-    "chg": "-2.34%",
-    "last": "15.05"
+    "chg": "-2.86%",
+    "last": "14.97"
    }
   },
   "market_open": true,
@@ -566,7 +566,7 @@
   "start_equity": 10000,
   "title": "משחק המסחר — 10,000$ וירטואלי",
   "total_days": 5,
-  "updated_il": "09.10.2026 17:00",
+  "updated_il": "09.10.2026 18:00",
   "week": "2026-10-05 → 2026-10-09"
  },
  "positions": [
@@ -575,38 +575,38 @@
    "entry_il": "16:30",
    "entry_progress": 0.33985507246376906,
    "exit_rule": "",
-   "last": 135.41,
-   "market_value": 2301.97,
+   "last": 135.22,
+   "market_value": 2298.74,
    "price_source": "CNBC live",
-   "progress": 0.5514492753623189,
+   "progress": 0.53768115942029,
    "shares": 17,
    "stop": 127.8,
-   "stop_pct": -5.62,
+   "stop_pct": -5.49,
    "symbol": "COP",
    "target": 141.6,
-   "target_pct": 4.57,
+   "target_pct": 4.72,
    "thesis": "",
-   "unreal": 49.64,
-   "unreal_pct": 2.2
+   "unreal": 46.41,
+   "unreal_pct": 2.06
   },
   {
    "entry": 945.47,
    "entry_il": "16:45",
    "entry_progress": 0.2288073394495418,
    "exit_rule": "",
-   "last": 945.25,
-   "market_value": 1890.5,
+   "last": 945.91,
+   "market_value": 1891.82,
    "price_source": "CNBC live",
-   "progress": 0.22477064220183487,
+   "progress": 0.23688073394495354,
    "shares": 2,
    "stop": 933.0,
-   "stop_pct": -1.3,
+   "stop_pct": -1.36,
    "symbol": "COST",
    "target": 987.5,
-   "target_pct": 4.47,
+   "target_pct": 4.4,
    "thesis": "",
-   "unreal": -0.44,
-   "unreal_pct": -0.02
+   "unreal": 0.88,
+   "unreal_pct": 0.05
   }
  ],
  "rules": [

@@ -238,10 +238,10 @@
   {
    "d": "13.10",
    "date": "2026-10-13",
-   "equity": 9531.77,
+   "equity": 9530.33,
    "live": true,
-   "pct": -4.68,
-   "pnl": -468.23
+   "pct": -4.7,
+   "pnl": -469.67
   }
  ],
  "journal": [
@@ -638,33 +638,33 @@
  ],
  "kpis": {
   "cash": 6861.53,
-  "day_pct": -0.6,
-  "day_pnl": -57.26,
-  "equity": 9531.77,
-  "exposure": 2670.24,
+  "day_pct": -0.61,
+  "day_pnl": -58.7,
+  "equity": 9530.33,
+  "exposure": 2668.8,
   "fees": 135.0,
   "max_positions": 4,
   "open_count": 1,
   "realized": -338.35,
-  "total_pct": -4.68,
-  "total_pnl": -468.23,
-  "unrealized": -4.88
+  "total_pct": -4.7,
+  "total_pnl": -469.67,
+  "unrealized": -6.32
  },
  "meta": {
   "day_index": 12,
   "feed_status": "REG_MKT",
   "indices": {
    ".IXIC": {
-    "chg": "-0.27%",
-    "last": "27,171.718"
+    "chg": "-0.18%",
+    "last": "27,196.355"
    },
    ".SPX": {
-    "chg": "-0.15%",
-    "last": "7,795.61"
+    "chg": "-0.03%",
+    "last": "7,805.04"
    },
    ".VIX": {
-    "chg": "+2.10%",
-    "last": "15.53"
+    "chg": "+1.64%",
+    "last": "15.46"
    }
   },
   "market_open": true,
@@ -672,7 +672,7 @@
   "start_equity": 10000,
   "title": "משחק המסחר — 10,000$ וירטואלי",
   "total_days": 5,
-  "updated_il": "13.10.2026 21:00",
+  "updated_il": "13.10.2026 22:00",
   "week": "2026-10-05 → 2026-10-09"
  },
  "positions": [
@@ -681,19 +681,19 @@
    "entry_il": "17:00",
    "entry_progress": 0.30275862068965426,
    "exit_rule": "",
-   "last": 333.78,
-   "market_value": 2670.24,
+   "last": 333.6,
+   "market_value": 2668.8,
    "price_source": "CNBC live",
-   "progress": 0.26068965517241194,
+   "progress": 0.2482758620689671,
    "shares": 8,
    "stop": 330.0,
-   "stop_pct": -1.13,
+   "stop_pct": -1.08,
    "symbol": "JPM",
    "target": 344.5,
-   "target_pct": 3.21,
+   "target_pct": 3.27,
    "thesis": "",
-   "unreal": -4.88,
-   "unreal_pct": -0.18
+   "unreal": -6.32,
+   "unreal_pct": -0.24
   }
  ],
  "rules": [

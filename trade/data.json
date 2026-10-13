@@ -143,6 +143,18 @@
    "reason": "סגירה כפויה של סוף המשחק לפי הכלל שפורסם — flat by 22:30 IL (אין החזקה מעבר לסגירה)",
    "shares": 2,
    "symbol": "COST"
+  },
+  {
+   "close_il": "2026-10-13",
+   "entry": 384.48,
+   "exit": 379.14,
+   "fees": 10.0,
+   "gross": -37.38,
+   "net": -47.38,
+   "open_il": "2026-10-13",
+   "reason": "ביצוע מכני של רמה שפורסמה מראש — סטופ 380.0",
+   "shares": 7,
+   "symbol": "UNH"
   }
  ],
  "curve": [
@@ -226,10 +238,10 @@
   {
    "d": "13.10",
    "date": "2026-10-13",
-   "equity": 9546.65,
+   "equity": 9536.25,
    "live": true,
-   "pct": -4.53,
-   "pnl": -453.35
+   "pct": -4.64,
+   "pnl": -463.75
   }
  ],
  "journal": [
@@ -244,6 +256,26 @@
      "side": "BUY",
      "symbol": "UNH",
      "time_il": "16:45"
+    },
+    {
+     "fee": 5.0,
+     "notional": 2675.12,
+     "pnl": null,
+     "price": 334.39,
+     "shares": 8,
+     "side": "BUY",
+     "symbol": "JPM",
+     "time_il": "17:00"
+    },
+    {
+     "fee": 5.0,
+     "notional": 2653.98,
+     "pnl": -47.38,
+     "price": 379.14,
+     "shares": 7,
+     "side": "SELL",
+     "symbol": "UNH",
+     "time_il": "17:00"
     }
    ],
    "date": "2026-10-13",
@@ -605,18 +637,18 @@
   }
  ],
  "kpis": {
-  "cash": 6892.67,
-  "day_pct": -0.44,
-  "day_pnl": -42.38,
-  "equity": 9546.65,
-  "exposure": 2653.98,
-  "fees": 125.0,
+  "cash": 6861.53,
+  "day_pct": -0.55,
+  "day_pnl": -52.78,
+  "equity": 9536.25,
+  "exposure": 2674.72,
+  "fees": 135.0,
   "max_positions": 4,
   "open_count": 1,
-  "realized": -290.97,
-  "total_pct": -4.53,
-  "total_pnl": -453.35,
-  "unrealized": -37.38
+  "realized": -338.35,
+  "total_pct": -4.64,
+  "total_pnl": -463.75,
+  "unrealized": -0.4
  },
  "meta": {
   "day_index": 12,
@@ -631,8 +663,8 @@
     "last": "7,805.36"
    },
    ".VIX": {
-    "chg": "+0.33%",
-    "last": "15.26"
+    "chg": "+0.46%",
+    "last": "15.28"
    }
   },
   "market_open": true,
@@ -645,23 +677,23 @@
  },
  "positions": [
   {
-   "entry": 384.48,
-   "entry_il": "16:45",
-   "entry_progress": 0.17568627450980465,
+   "entry": 334.39,
+   "entry_il": "17:00",
+   "entry_progress": 0.30275862068965426,
    "exit_rule": "",
-   "last": 379.14,
-   "market_value": 2653.98,
+   "last": 334.34,
+   "market_value": 2674.72,
    "price_source": "CNBC live",
-   "progress": 0.0,
-   "shares": 7,
-   "stop": 380.0,
-   "stop_pct": 0.23,
-   "symbol": "UNH",
-   "target": 405.5,
-   "target_pct": 6.95,
+   "progress": 0.2993103448275845,
+   "shares": 8,
+   "stop": 330.0,
+   "stop_pct": -1.3,
+   "symbol": "JPM",
+   "target": 344.5,
+   "target_pct": 3.04,
    "thesis": "",
-   "unreal": -37.38,
-   "unreal_pct": -1.39
+   "unreal": -0.4,
+   "unreal_pct": -0.01
   }
  ],
  "rules": [
@@ -676,12 +708,12 @@
  ],
  "source_note": "מחירים: CNBC restQuote (זמן אמת/טרום-מסחר) ו-Nasdaq API (סגירות רשמיות). הספר: state.json.",
  "stats": {
-  "avg_loss": -69.37,
+  "avg_loss": -66.93,
   "avg_win": 36.01,
-  "fees": 125.0,
-  "losses": 8,
-  "total_trades": 25,
-  "win_rate": 33.3,
+  "fees": 135.0,
+  "losses": 9,
+  "total_trades": 27,
+  "win_rate": 30.8,
   "wins": 4
  }
 }

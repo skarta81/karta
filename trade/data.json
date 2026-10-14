@@ -252,10 +252,10 @@
   {
    "d": "14.10",
    "date": "2026-10-14",
-   "equity": 9582.37,
+   "equity": 9592.93,
    "live": true,
-   "pct": -4.18,
-   "pnl": -417.63
+   "pct": -4.07,
+   "pnl": -407.07
   }
  ],
  "journal": [
@@ -678,33 +678,33 @@
  ],
  "kpis": {
   "cash": 4147.89,
-  "day_pct": 0.92,
-  "day_pnl": 87.2,
-  "equity": 9582.37,
-  "exposure": 5434.48,
+  "day_pct": 1.03,
+  "day_pnl": 97.76,
+  "equity": 9592.93,
+  "exposure": 5445.04,
   "fees": 140.0,
   "max_positions": 4,
   "open_count": 2,
   "realized": -328.35,
-  "total_pct": -4.18,
-  "total_pnl": -417.63,
-  "unrealized": 50.72
+  "total_pct": -4.07,
+  "total_pnl": -407.07,
+  "unrealized": 61.28
  },
  "meta": {
   "day_index": 3,
   "feed_status": "REG_MKT",
   "indices": {
    ".IXIC": {
-    "chg": "-2.01%",
-    "last": "26,657.714"
+    "chg": "-2.09%",
+    "last": "26,636.937"
    },
    ".SPX": {
-    "chg": "-1.34%",
-    "last": "7,700.65"
+    "chg": "-1.33%",
+    "last": "7,701.58"
    },
    ".VIX": {
-    "chg": "+12.77%",
-    "last": "17.22"
+    "chg": "+12.18%",
+    "last": "17.13"
    }
   },
   "market_open": true,
@@ -712,7 +712,7 @@
   "start_equity": 10000,
   "title": "משחק המסחר — 10,000$ וירטואלי",
   "total_days": 5,
-  "updated_il": "14.10.2026 21:00",
+  "updated_il": "14.10.2026 22:00",
   "week": "2026-10-05 → 2026-10-09"
  },
  "positions": [
@@ -721,38 +721,38 @@
    "entry_il": "17:00",
    "entry_progress": 0.30275862068965426,
    "exit_rule": "",
-   "last": 333.38,
-   "market_value": 2667.04,
+   "last": 334.01,
+   "market_value": 2672.08,
    "price_source": "CNBC live",
-   "progress": 0.23310344827586177,
+   "progress": 0.2765517241379304,
    "shares": 8,
    "stop": 330.0,
-   "stop_pct": -1.01,
+   "stop_pct": -1.2,
    "symbol": "JPM",
    "target": 344.5,
-   "target_pct": 3.34,
+   "target_pct": 3.14,
    "thesis": "",
-   "unreal": -8.08,
-   "unreal_pct": -0.3
+   "unreal": -3.04,
+   "unreal_pct": -0.11
   },
   {
    "entry": 112.86,
    "entry_il": "22:30",
    "entry_progress": 0.32131147540983535,
    "exit_rule": "",
-   "last": 115.31,
-   "market_value": 2767.44,
+   "last": 115.54,
+   "market_value": 2772.96,
    "price_source": "CNBC live",
-   "progress": 0.7229508196721313,
+   "progress": 0.7606557377049188,
    "shares": 24,
    "stop": 110.9,
-   "stop_pct": -3.82,
+   "stop_pct": -4.02,
    "symbol": "WMT",
    "target": 117.0,
-   "target_pct": 1.47,
+   "target_pct": 1.26,
    "thesis": "",
-   "unreal": 58.8,
-   "unreal_pct": 2.17
+   "unreal": 64.32,
+   "unreal_pct": 2.37
   }
  ],
  "rules": [

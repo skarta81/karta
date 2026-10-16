@@ -10,7 +10,7 @@
   :root{--cream:#fff9f3;--ink:#211d18;--mut:#7a6f63;--coral:#ff5a3c;--amber:#ffb020;--teal:#0aa3a3;
         --violet:#6c5ce7;--line:#efe4d6;--card:#ffffff;--shadow:0 10px 30px rgba(70,50,20,.08)}
   *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
-  html{scroll-behavior:smooth}
+  html{scroll-padding-top:78px}
   body{background:var(--cream);color:var(--ink);line-height:1.65;
        font-family:'Heebo',system-ui,-apple-system,sans-serif;-webkit-font-smoothing:antialiased;
        background-image:radial-gradient(700px 420px at 88% -60px,rgba(255,176,32,.28),transparent 70%),
@@ -39,8 +39,8 @@
         box-shadow:var(--shadow);font-size:15px}
   .chip:nth-child(2n){color:var(--teal)} .chip:nth-child(3n){color:var(--coral)}
   nav{position:sticky;top:0;z-index:30;margin:26px -18px 0;padding:10px 14px;
-      background:rgba(255,249,243,.86);backdrop-filter:blur(12px);border-bottom:1px solid var(--line);
-      display:flex;gap:8px;overflow-x:auto;scrollbar-width:none}
+      background:#fffaf4;border-bottom:1px solid var(--line);
+      display:flex;gap:8px;overflow-x:auto;scrollbar-width:none;contain:paint}
   nav::-webkit-scrollbar{display:none}
   .navchip{flex:0 0 auto;display:flex;align-items:center;gap:7px;text-decoration:none;color:var(--ink);
            background:#fff;border:1px solid var(--line);border-radius:999px;padding:9px 15px;font-size:14px;
@@ -83,6 +83,15 @@
   .agency span{display:block;color:var(--mut);font-size:12.5px}
   .agency b,.agency a{font-weight:900;color:var(--ink);text-decoration:none;font-size:15px}
   .agency a{color:var(--teal)}
+  .secbody details{margin:16px 0;border:1px solid var(--line);border-radius:16px;background:#fff;
+                   box-shadow:var(--shadow);overflow:hidden}
+  .secbody summary{cursor:pointer;padding:14px 18px;font-weight:900;font-size:18px;list-style:none;
+                   display:flex;align-items:flex-start;gap:10px;background:linear-gradient(180deg,#fff,#fffdf9)}
+  .secbody summary::-webkit-details-marker{display:none}
+  .secbody summary:before{content:"▸";color:var(--coral);flex:0 0 auto;transition:transform .25s ease}
+  .secbody details[open] summary:before{transform:rotate(90deg)}
+  .secbody details > *:not(summary){padding-inline:18px}
+  .secbody details > *:last-child{padding-bottom:18px}
   .secbody h2{font-size:21px;font-weight:900;margin:26px 0 8px}
   .secbody h3{font-size:18px;font-weight:900;margin:22px 0 6px;color:var(--coral)}
   .secbody h4{font-size:16px;font-weight:700;margin:16px 0 4px}
@@ -98,7 +107,7 @@
   .secbody hr{border:0;border-top:1px dashed var(--line);margin:22px 0}
   .check{background:#fff;border:1px solid var(--line);border-radius:20px;padding:20px 24px;box-shadow:var(--shadow)}
   .check li{margin:10px 0;font-size:16px} .check li::marker{content:"☐  "}
-  .rev{opacity:0;transform:translateY(22px)} .rev.in{opacity:1;transform:none;transition:opacity .7s ease,transform .7s cubic-bezier(.2,.7,.3,1)}
+  .rev{opacity:0} .rev.in{opacity:1;transform:none;transition:opacity .7s ease,transform .7s cubic-bezier(.2,.7,.3,1)}
   .cta{margin-top:52px;background:linear-gradient(120deg,var(--coral),var(--amber));border-radius:24px;padding:32px 24px;
        text-align:center;color:#fff;box-shadow:0 18px 40px rgba(255,90,60,.28)}
   .cta h2{font-size:clamp(24px,5.4vw,36px);font-weight:900}
@@ -219,11 +228,12 @@
     <div class="sechead"><span class="num">03</span><h2>🗓️ לוח זמנים — יום אחר יום</h2></div>
     <p class="sub">שעות, מעברים ומה להזמין מראש.</p>
     <div class="secbody"><p><!-- תוכן בעברית, מיועד לעמוד RTL --></p>
-<h2>בודפשט 2027 — מדריך אטרקציות, אוכל ושתייה ל-5 חברים</h2>
+<details open><summary>בודפשט 2027 — מדריך אטרקציות, אוכל ושתייה ל-5 חברים</summary>
 <p><b>18–21 בפברואר 2027 · 3 לילות · בסיס: מרכז פשט (רובע V/VI/VII — דיאק טר / הרובע היהודי / הפרלמנט)</b></p>
 <p>> <b>כל השעות והמחירים נבדקו מול האתר הרשמי של כל מקום (אוקטובר 2026).</b> כל קישור בעמוד הוחזר בבדיקה עם קוד HTTP 200. מקום שבו לא נמצא מקור רשמי מסומן במפורש <b>"לא אומת"</b>. מחירי הקיץ/חורף ואפשרויות "הזמנה מראש" משתנים — מומלץ לבדוק שוב סמוך לנסיעה.</p>
 <hr>
-<h2>4. תוכנית יום-אחר-יום</h2>
+</details>
+<details open><summary>4. תוכנית יום-אחר-יום</summary>
 <h3>יום ה' 18.2 — נחיתה + מרכז פשט (חצי יום)</h3>
 <ul>
 <li><b>12:45</b> נחיתה ב-BUD.</li>
@@ -268,18 +278,20 @@
 <li><b>21:05</b> טיסה.</li>
 </ul>
 <p>> <b>אזהרת תזמון:</b> סנטאנדרה ביום היציאה היא אפשרית אך צפופה. כדי להקטין סיכון, אפשר להעביר את סנטאנדרה ליום ו' בבוקר ולהחליף את הפרלמנט ליום שבת — אבל לפרלמנט יש פחות סיורים באנגלית בסוף שבוע, ולכן מומלץ להשאיר את הפרלמנט ביום חול.</p>
-<hr></div>
+<hr>
+</details></div>
   </section>
   
   <section class="sec rev" id="attr">
     <div class="sechead"><span class="num">04</span><h2>♨️ אטרקציות</h2></div>
     
     <div class="secbody"><p><!-- תוכן בעברית, מיועד לעמוד RTL --></p>
-<h2>בודפשט 2027 — מדריך אטרקציות, אוכל ושתייה ל-5 חברים</h2>
+<details open><summary>בודפשט 2027 — מדריך אטרקציות, אוכל ושתייה ל-5 חברים</summary>
 <p><b>18–21 בפברואר 2027 · 3 לילות · בסיס: מרכז פשט (רובע V/VI/VII — דיאק טר / הרובע היהודי / הפרלמנט)</b></p>
 <p>> <b>כל השעות והמחירים נבדקו מול האתר הרשמי של כל מקום (אוקטובר 2026).</b> כל קישור בעמוד הוחזר בבדיקה עם קוד HTTP 200. מקום שבו לא נמצא מקור רשמי מסומן במפורש <b>"לא אומת"</b>. מחירי הקיץ/חורף ואפשרויות "הזמנה מראש" משתנים — מומלץ לבדוק שוב סמוך לנסיעה.</p>
 <hr>
-<h2>1. עובדות בסיס</h2>
+</details>
+<details open><summary>1. עובדות בסיס</summary>
 <ul>
 <li><b>הגעה:</b> נחיתה בנמל פרנץ ליסט (BUD) ביום ה' 18.2.2027 בשעה 12:45.</li>
 <li><b>יציאה:</b> טיסה ביום א' 21.2.2027 ב-21:05 → יש להיות בשדה בערך ב-18:30 (כ-2.5 שעות לפני).</li>
@@ -294,7 +306,8 @@
 <li><b>המלצה טובה לקבוצת גברים בחורף:</b> דווקא <b>מרחצאות סצ'ני</b> ולא גלרט (ראו סעיף 1 — גלרט סגור לשיפוץ). המרחצאות החיצוניים חמימים גם בקור, וזו חוויית "קלאסיקה בודפשטית" אמיתית.</li>
 </ul>
 <hr>
-<h2>2. אטרקציות (13)</h2>
+</details>
+<details open><summary>2. אטרקציות (13)</summary>
 <h3>1) מרחצאות סצ'ני — Széchenyi Gyógyfürdő · "סצ'ני" (תעתיק: סֶצֵ'נִי)</h3>
 <ul>
 <li><b>מה זה:</b> מרחצאות תרמיים מפורסמים בכיכר הגיבורים, מים חמים בבריכות מקורות ופתוחות, סאונות וחדרי אדים.</li>
@@ -411,7 +424,8 @@
 <li><b>קישורים:</b> עיריית סנטאנדרה — https://szentendre.hu/ · כרטיס H5 "tour" (BKK) — https://bkk.hu/en/tickets-and-passes/prices/suburban-railway-tour-ticket-h5-h8-h9-full-fare/</li>
 </ul>
 <hr>
-<h2>5. רשימת "להזמין מראש" (מה שנגמר)</h2>
+</details>
+<details open><summary>5. רשימת "להזמין מראש" (מה שנגמר)</summary>
 <table>
 <tr><th>מה</th><th>למה מראש</th><th>קישור הזמנה</th></tr>
 <tr><td>סיור הפרלמנט</td><td>נגמר שבועות מראש; שעות ביקור חורף 08:00–16:00</td><td>https://jegymester.hu/production/480000/parlamenti-latogatas?preferredLanguage=en</td></tr>
@@ -426,7 +440,8 @@
 </table>
 <p><b>לא צריך/לא אפשר מראש:</b> בית הטרור (אין מכירה מקוונת — כרטיס במקום), השוק הגדול (חינם), מצודת הדייגים (כרטיס במקום), Szimpla (כניסה חינם), תחבורה ציבורית (BKK: https://bkk.hu/en/tickets-and-passes/prices/).</p>
 <hr>
-<h2>6. מקורות (כל הקישורים הוחזרו בבדיקה בקוד HTTP 200)</h2>
+</details>
+<details open><summary>6. מקורות (כל הקישורים הוחזרו בבדיקה בקוד HTTP 200)</summary>
 <p><b>מרחצאות</b></p>
 <ul>
 <li>סצ'ני — שעות: https://www.szechenyibath.hu/opening-hours · מחירים: https://www.szechenyibath.hu/prices</li>
@@ -468,18 +483,20 @@
 <li>סנטאנדרה — https://szentendre.hu/</li>
 </ul>
 <p><b>לא אומת (דורש בדיקה נוספת סמוך לנסיעה):</b> שעות Open של Café Kör (אין אתר רשמי זמין), שעות Szimpla Kert, שעות חורף רשמיות לכנסיית מתיאש, ושעות/מחירי המוזיאונים בסנטאנדרה.</p>
-<p><i>נבדק לאחרונה: 16 באוקטובר 2026.</i></p></div>
+<p><i>נבדק לאחרונה: 16 באוקטובר 2026.</i></p>
+</details></div>
   </section>
   
   <section class="sec rev" id="food">
     <div class="sechead"><span class="num">05</span><h2>🥩 אוכל ושתייה</h2></div>
     
     <div class="secbody"><p><!-- תוכן בעברית, מיועד לעמוד RTL --></p>
-<h2>בודפשט 2027 — מדריך אטרקציות, אוכל ושתייה ל-5 חברים</h2>
+<details open><summary>בודפשט 2027 — מדריך אטרקציות, אוכל ושתייה ל-5 חברים</summary>
 <p><b>18–21 בפברואר 2027 · 3 לילות · בסיס: מרכז פשט (רובע V/VI/VII — דיאק טר / הרובע היהודי / הפרלמנט)</b></p>
 <p>> <b>כל השעות והמחירים נבדקו מול האתר הרשמי של כל מקום (אוקטובר 2026).</b> כל קישור בעמוד הוחזר בבדיקה עם קוד HTTP 200. מקום שבו לא נמצא מקור רשמי מסומן במפורש <b>"לא אומת"</b>. מחירי הקיץ/חורף ואפשרויות "הזמנה מראש" משתנים — מומלץ לבדוק שוב סמוך לנסיעה.</p>
 <hr>
-<h2>3. אוכל ושתייה (10)</h2>
+</details>
+<details open><summary>3. אוכל ושתייה (10)</summary>
 <p>> <b>רמת מחיר</b> משוערת לאדם כולל שתייה. בסיס המרה: €1≈365 Ft, ₪1≈95 Ft. <b>מקום שרוצה הזמנה — כדאי להזמין ימים מראש, במיוחד לחמישי–שבת.</b></p>
 <h3>1) Gettó Gulyás — אוכל הונגרי ביתי</h3>
 <ul>
@@ -571,19 +588,21 @@
 <li><b>הזמנה:</b> לא נדרשת.</li>
 <li><b>קישור:</b> https://szimpla.hu/</li>
 </ul>
-<hr></div>
+<hr>
+</details></div>
   </section>
   
   <section class="sec rev" id="logi">
     <div class="sechead"><span class="num">06</span><h2>🧳 לוגיסטיקה, תחבורה וציוד</h2></div>
     
-    <div class="secbody"><h2>בודפשט — מדריך לוגיסטי מלא</h2>
+    <div class="secbody"><details open><summary>בודפשט — מדריך לוגיסטי מלא</summary>
 <h3>5 חברים · 18–22.2.2027 · 3 לילות במרכז בודפשט</h3>
 <p>> <b>מסמך בעברית, מיועד לתצוגה RTL.</b></p>
 <p>> נכון ל‑<b>16.10.2026</b>. כל מחיר/כלל שמופיע כאן נבדק מול מקור חי (כתובות בסוף המסמך, כולן החזירו HTTP 200). מה שלא ניתן היה לאמת מסומן במפורש <b>"לא אומת"</b>.</p>
 <p>> <b>הערה חשובה:</b> טיסות בפברואר 2027 — מחירים/לוחות של רכבות, תחבורה וטיסות עשויים להשתנות. מחירי BKK, המרחצאות וויז אייר הם המחירים הרשמיים <b>המפורסמים היום</b>; יש לבדוק שוב לפני הנסיעה.</p>
 <hr>
-<h2>1. שדה התעופה ↔ העיר</h2>
+</details>
+<details open><summary>1. שדה התעופה ↔ העיר</summary>
 <h3>1.1 אוטובוס 100E (Airport Express) — האפשרות המומלצת</h3>
 <table>
 <tr><th>פרט</th><th>נתון (מקור רשמי: BKK)</th></tr>
@@ -634,7 +653,8 @@
 </ul>
 <p>> <b>חלופות יציאה מהעיר:</b> כיוון ש‑21:05 הוא מוצאי שבת/ראשון בלילה, יש גם רכבות/אוטובוסים ליליים — אבל עם 5 אנשים ומזוודות, 100E או מונית זו האפשרות הפשוטה.</p>
 <hr>
-<h2>2. תחבורה ציבורית בבודפשט (מחירי BKK 2026)</h2>
+</details>
+<details open><summary>2. תחבורה ציבורית בבודפשט (מחירי BKK 2026)</summary>
 <h3>2.1 מחירי כרטיסים ומנויים (אתר BKK הרשמי)</h3>
 <table>
 <tr><th>מוצר</th><th>מחיר</th></tr>
@@ -667,7 +687,8 @@
 <li><b>שימו לב:</b> כניסה למטרו ללא כרטיס מאומת היא קנס של 12,000–50,000 פורינט לאדם. לקנות לפני. בעלי כרטיס נייד — לוודא שהקוד מאומת לפני שהרכבת מגיעה.</li>
 </ul>
 <hr>
-<h2>4. מזג אוויר בפברואר + מה לארוז</h2>
+</details>
+<details open><summary>4. מזג אוויר בפברואר + מה לארוז</summary>
 <h3>4.1 טמפרטורות (ממוצעי פברואר, בודפשט)</h3>
 <table>
 <tr><th>מקור</th><th>נתון</th></tr>
@@ -700,7 +721,8 @@
 <p><b>מומלץ:</b> קרם לחות לשפתיים/פנים, מטען נייד, גרביים נוספות.</p>
 <p><b>לא חיוני:</b> בגדים רבים — 3 לילות הם מספיק; עדיף לכבס/להתלבש בשכבות מאשר לקחת מזוודה גדולה ולשלם עליה.</p>
 <hr>
-<h2>5. מרחצאות תרמיות — נימוסים ומה באמת צריך</h2>
+</details>
+<details open><summary>5. מרחצאות תרמיות — נימוסים ומה באמת צריך</summary>
 <h3>5.1 מה להביא ואיפה כל מלכודת</h3>
 <ul>
 <li><b>בגד ים — חובה</b> בשעות המעורבות. רודאש מגדיר במפורש "co-ed turkish bath, in bathing suit" עבור שעות הרחצה המעורבות.</li>
@@ -746,7 +768,8 @@
 <li>סגירת קופות שעה לפני, פינוי בריכות 20 דק' לפני. לתכנן בהתאם.</li>
 </ul>
 <hr>
-<h2>6. Wizz Air — כבודה וצ׳ק־אין (כפי שמפורסם ב‑wizzair.com, נבדק 16.10.2026)</h2>
+</details>
+<details open><summary>6. Wizz Air — כבודה וצ׳ק־אין (כפי שמפורסם ב‑wizzair.com, נבדק 16.10.2026)</summary>
 <h3>6.1 כבודה — המספרים המדויקים</h3>
 <table>
 <tr><th>סוג</th><th>מידות</th><th>משקל</th><th>עלות</th></tr>
@@ -782,7 +805,8 @@
 <li><b>המלצה כספית:</b> אם מצטברים לכם תיקי גלגלים/מזוודות — <b>לקנות אותם בזמן ההזמנה</b>, לא אחר כך ולא בשדה. המחיר רק עולה.</li>
 </ul>
 <hr>
-<h2>7. ביטחון וסקאמים נפוצים</h2>
+</details>
+<details open><summary>7. ביטחון וסקאמים נפוצים</summary>
 <h3>7.1 מספרי חירום</h3>
 <table>
 <tr><th>שירות</th><th>מספר</th></tr>
@@ -820,7 +844,8 @@
 <li><b>112</b> אם במקרה — אבל רוב הסיכוי שתתקלו בבעיה זה <b>חשבון מוגזם</b>, לא פשע.</li>
 </ul>
 <hr>
-<h2>8. מה חייבים להזמין מראש — 5 דברים</h2>
+</details>
+<details open><summary>8. מה חייבים להזמין מראש — 5 דברים</summary>
 <p>עבור סוף שבוע בפברואר (חמישי 18.2 → ראשון 21.2.2027), אלה הדברים שנגמרים:</p>
 <h3>1. סיור מודרך בפרלמנט ההונגרי</h3>
 <ul>
@@ -860,7 +885,8 @@
 <li>Budapest Card (כרטיס תיירות) — https://www.budapestinfo.hu/budapest-card — משתלם רק אם מבקרים בהרבה אטרקציות; <b>לא חובה</b>.</li>
 </ul>
 <hr>
-<h2>9. מקורות (כולם נבדקו ב‑16.10.2026 והחזירו HTTP 200)</h2>
+</details>
+<details open><summary>9. מקורות (כולם נבדקו ב‑16.10.2026 והחזירו HTTP 200)</summary>
 <h3>תחבורה</h3>
 <table>
 <tr><th>נושא</th><th>מקור</th><th>סטטוס</th></tr>
@@ -934,19 +960,21 @@
 <tr><td><b>מדריך ספארי לילדים/חגי חורף הונגריים בפברואר</b></td><td>❌ <b>לא נבדק</b></td></tr>
 </table>
 <hr>
-<p><b>נכתב במיוחד עבור הקבוצה: 5 חברים מישראל, 18–22.2.2027, 3 לילות במרכז בודפשט.</b></p></div>
+<p><b>נכתב במיוחד עבור הקבוצה: 5 חברים מישראל, 18–22.2.2027, 3 לילות במרכז בודפשט.</b></p>
+</details></div>
   </section>
   
   <section class="sec rev" id="money">
     <div class="sechead"><span class="num">07</span><h2>💱 כספים, מחירים וטיפים</h2></div>
     
-    <div class="secbody"><h2>בודפשט — מדריך לוגיסטי מלא</h2>
+    <div class="secbody"><details open><summary>בודפשט — מדריך לוגיסטי מלא</summary>
 <h3>5 חברים · 18–22.2.2027 · 3 לילות במרכז בודפשט</h3>
 <p>> <b>מסמך בעברית, מיועד לתצוגה RTL.</b></p>
 <p>> נכון ל‑<b>16.10.2026</b>. כל מחיר/כלל שמופיע כאן נבדק מול מקור חי (כתובות בסוף המסמך, כולן החזירו HTTP 200). מה שלא ניתן היה לאמת מסומן במפורש <b>"לא אומת"</b>.</p>
 <p>> <b>הערה חשובה:</b> טיסות בפברואר 2027 — מחירים/לוחות של רכבות, תחבורה וטיסות עשויים להשתנות. מחירי BKK, המרחצאות וויז אייר הם המחירים הרשמיים <b>המפורסמים היום</b>; יש לבדוק שוב לפני הנסיעה.</p>
 <hr>
-<h2>3. כספים — מטבע, שערים, כספומטים וטיפים</h2>
+</details>
+<details open><summary>3. כספים — מטבע, שערים, כספומטים וטיפים</summary>
 <h3>3.1 מטבע ושער חליפין</h3>
 <ul>
 <li>המטבע: <b>פורינט הונגרי (HUF)</b>. הונגריה <b>לא</b> בגוש האירו.</li>
@@ -994,7 +1022,8 @@
 <tr><td>מים 0.5 ל' בקיוסק</td><td>500–800 פורינט (מי ברז בבודפשט בטוחים לשתייה)</td></tr>
 </table>
 <p>⚠️ <b>מלכודת ואצי אוצ׳ה (Váci utca):</b> ארוחת ערב למבוגר 8,000–15,000 פורינט לעומת 5,000–8,000 במקבילית. אותה אוכל, רחוב אחד הצידה — פער של 30–60%. שווה גם לצפות ל"דמי כיסוי" של 1,000–1,500 פורינט לאדם על לחם שלא ביקשתם.</p>
-<hr></div>
+<hr>
+</details></div>
   </section>
   
   <section class="sec rev" id="check">

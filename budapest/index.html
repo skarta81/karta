@@ -48,12 +48,13 @@
   .navchip span{font-size:16px}
   .navchip:active{transform:scale(.96)}
   .navchip.on{background:var(--ink);color:#fff;border-color:var(--ink)}
-  .scenes{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;margin:26px 0 8px}
-  .scenecard{position:relative;border-radius:20px;overflow:hidden;box-shadow:var(--shadow);border:1px solid var(--line);
-             aspect-ratio:16/10;transform:translateZ(0)}
+  .scenes{display:grid;grid-template-columns:repeat(auto-fit,minmax(148px,1fr));gap:10px;margin:4px 0 14px}
+  .scenecard{position:relative;border-radius:16px;overflow:hidden;box-shadow:var(--shadow);border:1px solid var(--line);
+             aspect-ratio:4/3;transform:translateZ(0)}
+  .scenecard figcaption{font-size:13.5px;padding:18px 10px 8px;font-weight:900}
   .scene{width:100%;height:100%;display:block;transition:transform .5s ease}
   .scenecard:hover .scene{transform:scale(1.06)}
-  .scenecard figcaption{position:absolute;inset:auto 0 0 0;padding:24px 14px 12px;color:#fff;font-weight:900;font-size:17px;
+  .scenecard figcaption{position:absolute;inset:auto 0 0 0;color:#fff;
                         background:linear-gradient(transparent,rgba(0,0,0,.55))}
   .sec{margin-top:56px;scroll-margin-top:78px}
   .sechead{display:flex;align-items:center;gap:14px;margin-bottom:8px}
@@ -137,35 +138,6 @@
       <div><b id="m">—</b><span>דקות</span></div><div><b id="s">—</b><span>שניות</span></div>
     </div>
     <div class="chips"><span class="chip">יוסי</span><span class="chip">קנפו</span><span class="chip">סעדו</span><span class="chip">שקד</span><span class="chip">יניב</span></div>
-    <div class="scenes">
-      <figure class="scenecard"><svg viewBox="0 0 640 400" class="scene" preserveAspectRatio="xMidYMid slice">
-<defs><linearGradient id="g1" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ffd9a0"/><stop offset="1" stop-color="#ff9d6c"/></linearGradient></defs>
-<rect width="640" height="400" fill="url(#g1)"/><circle cx="500" cy="90" r="52" fill="#fff3c4" opacity=".9"/>
-<rect y="255" width="640" height="145" fill="#7fd3d0"/><ellipse cx="320" cy="258" rx="300" ry="26" fill="#6ac6c2"/>
-<g opacity=".5" fill="#fff">['<circle cx="60" cy="150" r="16"/>', '<circle cx="106" cy="124" r="21"/>', '<circle cx="152" cy="98" r="26"/>', '<circle cx="198" cy="150" r="31"/>', '<circle cx="244" cy="124" r="16"/>', '<circle cx="290" cy="98" r="21"/>', '<circle cx="336" cy="150" r="26"/>', '<circle cx="382" cy="124" r="31"/>', '<circle cx="428" cy="98" r="16"/>', '<circle cx="474" cy="150" r="21"/>', '<circle cx="520" cy="124" r="26"/>', '<circle cx="566" cy="98" r="31"/>', '<circle cx="612" cy="150" r="16"/>']</g>
-<path d="M0 300 q80 -26 160 0 t160 0 t160 0 t160 0 v100 H0z" fill="#0aa3a3" opacity=".35"/></svg><figcaption>♨️ מרחצאות חמים</figcaption></figure>
-      <figure class="scenecard"><svg viewBox="0 0 640 400" class="scene" preserveAspectRatio="xMidYMid slice">
-<defs><linearGradient id="g2" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#2b3a67"/><stop offset="1" stop-color="#f4a259"/></linearGradient></defs>
-<rect width="640" height="400" fill="url(#g2)"/>
-<path d="M120 250 h400 v30 h-400z" fill="#1d2440"/><path d="M200 250 V170 h240 v80z" fill="#232c4f"/>
-<path d="M320 170 l-70 -34 l140 0 z" fill="#2e3860"/><rect x="300" y="110" width="40" height="30" fill="#39436b"/>
-<g fill="#ffd98a">['<rect x="150" y="200" width="7" height="14" opacity="0.50"/>', '<rect x="172" y="200" width="7" height="14" opacity="0.75"/>', '<rect x="194" y="200" width="7" height="14" opacity="1.00"/>', '<rect x="216" y="200" width="7" height="14" opacity="0.50"/>', '<rect x="238" y="200" width="7" height="14" opacity="0.75"/>', '<rect x="260" y="200" width="7" height="14" opacity="1.00"/>', '<rect x="282" y="200" width="7" height="14" opacity="0.50"/>', '<rect x="304" y="200" width="7" height="14" opacity="0.75"/>', '<rect x="326" y="200" width="7" height="14" opacity="1.00"/>', '<rect x="348" y="200" width="7" height="14" opacity="0.50"/>', '<rect x="370" y="200" width="7" height="14" opacity="0.75"/>', '<rect x="392" y="200" width="7" height="14" opacity="1.00"/>', '<rect x="414" y="200" width="7" height="14" opacity="0.50"/>', '<rect x="436" y="200" width="7" height="14" opacity="0.75"/>', '<rect x="458" y="200" width="7" height="14" opacity="1.00"/>', '<rect x="480" y="200" width="7" height="14" opacity="0.50"/>', '<rect x="502" y="200" width="7" height="14" opacity="0.75"/>', '<rect x="524" y="200" width="7" height="14" opacity="1.00"/>']</g>
-<rect y="280" width="640" height="120" fill="#141a33"/><g fill="#ffcb77" opacity=".8">['<circle cx="40" cy="320" r="4"/>', '<circle cx="92" cy="336" r="4"/>', '<circle cx="144" cy="320" r="4"/>', '<circle cx="196" cy="336" r="4"/>', '<circle cx="248" cy="320" r="4"/>', '<circle cx="300" cy="336" r="4"/>', '<circle cx="352" cy="320" r="4"/>', '<circle cx="404" cy="336" r="4"/>', '<circle cx="456" cy="320" r="4"/>', '<circle cx="508" cy="336" r="4"/>', '<circle cx="560" cy="320" r="4"/>', '<circle cx="612" cy="336" r="4"/>']</g></svg><figcaption>🏛️ פרלמנט על הדנובה</figcaption></figure>
-      <figure class="scenecard"><svg viewBox="0 0 640 400" class="scene" preserveAspectRatio="xMidYMid slice">
-<rect width="640" height="400" fill="#20143a"/>
-<g opacity=".9">['<path d="M50 300 V120" stroke="#ff5a3c" stroke-width="5" fill="none" opacity="0.40"/>', '<path d="M130 300 V160" stroke="#ff5a3c" stroke-width="5" fill="none" opacity="0.55"/>', '<path d="M210 300 V200" stroke="#ff5a3c" stroke-width="5" fill="none" opacity="0.70"/>', '<path d="M290 300 V120" stroke="#ff5a3c" stroke-width="5" fill="none" opacity="0.85"/>', '<path d="M370 300 V160" stroke="#ff5a3c" stroke-width="5" fill="none" opacity="0.40"/>', '<path d="M450 300 V200" stroke="#ff5a3c" stroke-width="5" fill="none" opacity="0.55"/>', '<path d="M530 300 V120" stroke="#ff5a3c" stroke-width="5" fill="none" opacity="0.70"/>', '<path d="M610 300 V160" stroke="#ff5a3c" stroke-width="5" fill="none" opacity="0.85"/>']</g>
-<g fill="#ffb020" opacity=".85">['<circle cx="90" cy="110" r="11"/>', '<circle cx="180" cy="140" r="11"/>', '<circle cx="270" cy="170" r="11"/>', '<circle cx="360" cy="110" r="11"/>', '<circle cx="450" cy="140" r="11"/>', '<circle cx="540" cy="170" r="11"/>', '<circle cx="630" cy="110" r="11"/>']</g>
-<g fill="#6c5ce7" opacity=".8">['<rect x="60" y="330" width="44" height="70" rx="8"/>', '<rect x="134" y="330" width="44" height="70" rx="8"/>', '<rect x="208" y="330" width="44" height="70" rx="8"/>', '<rect x="282" y="330" width="44" height="70" rx="8"/>', '<rect x="356" y="330" width="44" height="70" rx="8"/>', '<rect x="430" y="330" width="44" height="70" rx="8"/>', '<rect x="504" y="330" width="44" height="70" rx="8"/>', '<rect x="578" y="330" width="44" height="70" rx="8"/>']</g>
-<circle cx="520" cy="90" r="40" fill="#0aa3a3" opacity=".5"/></svg><figcaption>🍻 פאבי חורבות</figcaption></figure>
-      <figure class="scenecard"><svg viewBox="0 0 640 400" class="scene" preserveAspectRatio="xMidYMid slice">
-<defs><linearGradient id="g4" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#fff0d4"/><stop offset="1" stop-color="#ffb020"/></linearGradient></defs>
-<rect width="640" height="400" fill="url(#g4)"/>
-<ellipse cx="320" cy="250" rx="200" ry="110" fill="#b3402a"/><ellipse cx="320" cy="238" rx="176" ry="94" fill="#d9552f"/>
-<ellipse cx="320" cy="232" rx="150" ry="76" fill="#e86a3a"/>
-<g fill="#7a2e1c">['<circle cx="250" cy="210" r="7"/>', '<circle cx="274" cy="210" r="7"/>', '<circle cx="298" cy="210" r="7"/>', '<circle cx="322" cy="210" r="7"/>', '<circle cx="346" cy="210" r="7"/>', '<circle cx="370" cy="210" r="7"/>', '<circle cx="394" cy="210" r="7"/>', '<circle cx="250" cy="240" r="7"/>', '<circle cx="274" cy="240" r="7"/>', '<circle cx="298" cy="240" r="7"/>', '<circle cx="322" cy="240" r="7"/>', '<circle cx="346" cy="240" r="7"/>', '<circle cx="370" cy="240" r="7"/>', '<circle cx="394" cy="240" r="7"/>', '<circle cx="250" cy="270" r="7"/>', '<circle cx="274" cy="270" r="7"/>', '<circle cx="298" cy="270" r="7"/>', '<circle cx="322" cy="270" r="7"/>', '<circle cx="346" cy="270" r="7"/>', '<circle cx="370" cy="270" r="7"/>', '<circle cx="394" cy="270" r="7"/>']</g>
-<g fill="#3f8f3f">['<ellipse cx="280" cy="196" rx="10" ry="5"/>', '<ellipse cx="302" cy="196" rx="10" ry="5"/>', '<ellipse cx="324" cy="196" rx="10" ry="5"/>', '<ellipse cx="346" cy="196" rx="10" ry="5"/>']</g>
-<path d="M150 120 q60 -50 150 -30" stroke="#fff" stroke-width="7" fill="none" opacity=".55"/></svg><figcaption>🥘 גולאש וחבריו</figcaption></figure>
-    </div>
   </header>
 
   <nav id="nav"><a href="#flights" class="navchip" data-nav="flights"><span>✈️</span>טיסות</a><a href="#hotel" class="navchip" data-nav="hotel"><span>🏨</span>מלון</a><a href="#plan" class="navchip" data-nav="plan"><span>🗓️</span>לוח זמנים</a><a href="#attr" class="navchip" data-nav="attr"><span>♨️</span>אטרקציות</a><a href="#food" class="navchip" data-nav="food"><span>🥩</span>אוכל</a><a href="#logi" class="navchip" data-nav="logi"><span>🧳</span>לוגיסטיקה</a><a href="#money" class="navchip" data-nav="money"><span>💱</span>כספים</a><a href="#check" class="navchip" data-nav="check"><span>✅</span>צ׳ק-ליסט</a></nav>
@@ -285,7 +257,30 @@
   <section class="sec rev" id="attr">
     <div class="sechead"><span class="num">04</span><h2>♨️ אטרקציות</h2></div>
     
-    <div class="secbody"><p><!-- תוכן בעברית, מיועד לעמוד RTL --></p>
+    <div class="secbody"><div class="scenes"><figure class="scenecard"><svg viewBox="0 0 640 400" class="scene" preserveAspectRatio="xMidYMid slice">
+<defs><linearGradient id="g1" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ffd9a0"/><stop offset="1" stop-color="#ff9d6c"/></linearGradient></defs>
+<rect width="640" height="400" fill="url(#g1)"/><circle cx="500" cy="90" r="52" fill="#fff3c4" opacity=".9"/>
+<rect y="255" width="640" height="145" fill="#7fd3d0"/><ellipse cx="320" cy="258" rx="300" ry="26" fill="#6ac6c2"/>
+<g opacity=".5" fill="#fff">['<circle cx="60" cy="150" r="16"/>', '<circle cx="106" cy="124" r="21"/>', '<circle cx="152" cy="98" r="26"/>', '<circle cx="198" cy="150" r="31"/>', '<circle cx="244" cy="124" r="16"/>', '<circle cx="290" cy="98" r="21"/>', '<circle cx="336" cy="150" r="26"/>', '<circle cx="382" cy="124" r="31"/>', '<circle cx="428" cy="98" r="16"/>', '<circle cx="474" cy="150" r="21"/>', '<circle cx="520" cy="124" r="26"/>', '<circle cx="566" cy="98" r="31"/>', '<circle cx="612" cy="150" r="16"/>']</g>
+<path d="M0 300 q80 -26 160 0 t160 0 t160 0 t160 0 v100 H0z" fill="#0aa3a3" opacity=".35"/></svg><figcaption>♨️ מרחצאות</figcaption></figure><figure class="scenecard"><svg viewBox="0 0 640 400" class="scene" preserveAspectRatio="xMidYMid slice">
+<defs><linearGradient id="g2" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#2b3a67"/><stop offset="1" stop-color="#f4a259"/></linearGradient></defs>
+<rect width="640" height="400" fill="url(#g2)"/>
+<path d="M120 250 h400 v30 h-400z" fill="#1d2440"/><path d="M200 250 V170 h240 v80z" fill="#232c4f"/>
+<path d="M320 170 l-70 -34 l140 0 z" fill="#2e3860"/><rect x="300" y="110" width="40" height="30" fill="#39436b"/>
+<g fill="#ffd98a">['<rect x="150" y="200" width="7" height="14" opacity="0.50"/>', '<rect x="172" y="200" width="7" height="14" opacity="0.75"/>', '<rect x="194" y="200" width="7" height="14" opacity="1.00"/>', '<rect x="216" y="200" width="7" height="14" opacity="0.50"/>', '<rect x="238" y="200" width="7" height="14" opacity="0.75"/>', '<rect x="260" y="200" width="7" height="14" opacity="1.00"/>', '<rect x="282" y="200" width="7" height="14" opacity="0.50"/>', '<rect x="304" y="200" width="7" height="14" opacity="0.75"/>', '<rect x="326" y="200" width="7" height="14" opacity="1.00"/>', '<rect x="348" y="200" width="7" height="14" opacity="0.50"/>', '<rect x="370" y="200" width="7" height="14" opacity="0.75"/>', '<rect x="392" y="200" width="7" height="14" opacity="1.00"/>', '<rect x="414" y="200" width="7" height="14" opacity="0.50"/>', '<rect x="436" y="200" width="7" height="14" opacity="0.75"/>', '<rect x="458" y="200" width="7" height="14" opacity="1.00"/>', '<rect x="480" y="200" width="7" height="14" opacity="0.50"/>', '<rect x="502" y="200" width="7" height="14" opacity="0.75"/>', '<rect x="524" y="200" width="7" height="14" opacity="1.00"/>']</g>
+<rect y="280" width="640" height="120" fill="#141a33"/><g fill="#ffcb77" opacity=".8">['<circle cx="40" cy="320" r="4"/>', '<circle cx="92" cy="336" r="4"/>', '<circle cx="144" cy="320" r="4"/>', '<circle cx="196" cy="336" r="4"/>', '<circle cx="248" cy="320" r="4"/>', '<circle cx="300" cy="336" r="4"/>', '<circle cx="352" cy="320" r="4"/>', '<circle cx="404" cy="336" r="4"/>', '<circle cx="456" cy="320" r="4"/>', '<circle cx="508" cy="336" r="4"/>', '<circle cx="560" cy="320" r="4"/>', '<circle cx="612" cy="336" r="4"/>']</g></svg><figcaption>🏛️ פרלמנט</figcaption></figure><figure class="scenecard"><svg viewBox="0 0 640 400" class="scene" preserveAspectRatio="xMidYMid slice">
+<rect width="640" height="400" fill="#20143a"/>
+<g opacity=".9">['<path d="M50 300 V120" stroke="#ff5a3c" stroke-width="5" fill="none" opacity="0.40"/>', '<path d="M130 300 V160" stroke="#ff5a3c" stroke-width="5" fill="none" opacity="0.55"/>', '<path d="M210 300 V200" stroke="#ff5a3c" stroke-width="5" fill="none" opacity="0.70"/>', '<path d="M290 300 V120" stroke="#ff5a3c" stroke-width="5" fill="none" opacity="0.85"/>', '<path d="M370 300 V160" stroke="#ff5a3c" stroke-width="5" fill="none" opacity="0.40"/>', '<path d="M450 300 V200" stroke="#ff5a3c" stroke-width="5" fill="none" opacity="0.55"/>', '<path d="M530 300 V120" stroke="#ff5a3c" stroke-width="5" fill="none" opacity="0.70"/>', '<path d="M610 300 V160" stroke="#ff5a3c" stroke-width="5" fill="none" opacity="0.85"/>']</g>
+<g fill="#ffb020" opacity=".85">['<circle cx="90" cy="110" r="11"/>', '<circle cx="180" cy="140" r="11"/>', '<circle cx="270" cy="170" r="11"/>', '<circle cx="360" cy="110" r="11"/>', '<circle cx="450" cy="140" r="11"/>', '<circle cx="540" cy="170" r="11"/>', '<circle cx="630" cy="110" r="11"/>']</g>
+<g fill="#6c5ce7" opacity=".8">['<rect x="60" y="330" width="44" height="70" rx="8"/>', '<rect x="134" y="330" width="44" height="70" rx="8"/>', '<rect x="208" y="330" width="44" height="70" rx="8"/>', '<rect x="282" y="330" width="44" height="70" rx="8"/>', '<rect x="356" y="330" width="44" height="70" rx="8"/>', '<rect x="430" y="330" width="44" height="70" rx="8"/>', '<rect x="504" y="330" width="44" height="70" rx="8"/>', '<rect x="578" y="330" width="44" height="70" rx="8"/>']</g>
+<circle cx="520" cy="90" r="40" fill="#0aa3a3" opacity=".5"/></svg><figcaption>🍻 פאבים</figcaption></figure><figure class="scenecard"><svg viewBox="0 0 640 400" class="scene" preserveAspectRatio="xMidYMid slice">
+<defs><linearGradient id="g4" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#fff0d4"/><stop offset="1" stop-color="#ffb020"/></linearGradient></defs>
+<rect width="640" height="400" fill="url(#g4)"/>
+<ellipse cx="320" cy="250" rx="200" ry="110" fill="#b3402a"/><ellipse cx="320" cy="238" rx="176" ry="94" fill="#d9552f"/>
+<ellipse cx="320" cy="232" rx="150" ry="76" fill="#e86a3a"/>
+<g fill="#7a2e1c">['<circle cx="250" cy="210" r="7"/>', '<circle cx="274" cy="210" r="7"/>', '<circle cx="298" cy="210" r="7"/>', '<circle cx="322" cy="210" r="7"/>', '<circle cx="346" cy="210" r="7"/>', '<circle cx="370" cy="210" r="7"/>', '<circle cx="394" cy="210" r="7"/>', '<circle cx="250" cy="240" r="7"/>', '<circle cx="274" cy="240" r="7"/>', '<circle cx="298" cy="240" r="7"/>', '<circle cx="322" cy="240" r="7"/>', '<circle cx="346" cy="240" r="7"/>', '<circle cx="370" cy="240" r="7"/>', '<circle cx="394" cy="240" r="7"/>', '<circle cx="250" cy="270" r="7"/>', '<circle cx="274" cy="270" r="7"/>', '<circle cx="298" cy="270" r="7"/>', '<circle cx="322" cy="270" r="7"/>', '<circle cx="346" cy="270" r="7"/>', '<circle cx="370" cy="270" r="7"/>', '<circle cx="394" cy="270" r="7"/>']</g>
+<g fill="#3f8f3f">['<ellipse cx="280" cy="196" rx="10" ry="5"/>', '<ellipse cx="302" cy="196" rx="10" ry="5"/>', '<ellipse cx="324" cy="196" rx="10" ry="5"/>', '<ellipse cx="346" cy="196" rx="10" ry="5"/>']</g>
+<path d="M150 120 q60 -50 150 -30" stroke="#fff" stroke-width="7" fill="none" opacity=".55"/></svg><figcaption>🥘 גולאש</figcaption></figure></div><p><!-- תוכן בעברית, מיועד לעמוד RTL --></p>
 <details open><summary>בודפשט 2027 — מדריך אטרקציות, אוכל ושתייה ל-5 חברים</summary>
 <p><b>18–21 בפברואר 2027 · 3 לילות · בסיס: מרכז פשט (רובע V/VI/VII — דיאק טר / הרובע היהודי / הפרלמנט)</b></p>
 <p>> <b>כל השעות והמחירים נבדקו מול האתר הרשמי של כל מקום (אוקטובר 2026).</b> כל קישור בעמוד הוחזר בבדיקה עם קוד HTTP 200. מקום שבו לא נמצא מקור רשמי מסומן במפורש <b>"לא אומת"</b>. מחירי הקיץ/חורף ואפשרויות "הזמנה מראש" משתנים — מומלץ לבדוק שוב סמוך לנסיעה.</p>

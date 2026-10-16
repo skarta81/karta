@@ -89,7 +89,8 @@
   .secbody p{margin:9px 0} .secbody ul{margin:9px 22px 14px 0} .secbody li{margin:6px 0}
   .secbody li::marker{color:var(--amber)}
   .secbody table{width:100%;border-collapse:collapse;margin:14px 0;font-size:14.5px;background:#fff;
-                 border-radius:14px;overflow:hidden;box-shadow:var(--shadow);display:table}
+                 border-radius:14px;overflow:hidden;box-shadow:var(--shadow);display:block;overflow-x:auto;
+                 -webkit-overflow-scrolling:touch;max-width:100%}
   .secbody th{background:var(--ink);color:#fff;text-align:right;padding:10px;font-weight:700}
   .secbody td{padding:10px;border-top:1px solid var(--line);vertical-align:top}
   .secbody a{color:var(--teal);text-decoration:none;border-bottom:1px solid rgba(10,163,163,.35)}
@@ -1032,18 +1033,29 @@
   const secs = [...document.querySelectorAll('.sec')];
   const chips = [...document.querySelectorAll('.navchip')];
   const navEl = document.getElementById('nav');
+  let ticking = false;
   function onScroll(){
-    const h = document.documentElement;
-    document.getElementById('prog').style.width = (h.scrollTop/(h.scrollHeight-h.clientHeight)*100)+'%';
-    let cur = secs[0]?.id;
-    for (const s of secs) if (s.getBoundingClientRect().top <= 120) cur = s.id;
-    chips.forEach(c => {
-      const on = c.dataset.nav === cur;
-      c.classList.toggle('on', on);
-      if (on && window.innerWidth < 700) c.scrollIntoView({inline:'center', block:'nearest', behavior:'smooth'});
+    if (ticking) return; ticking = true;
+    requestAnimationFrame(() => {
+      const h = document.documentElement;
+      const max = h.scrollHeight - h.clientHeight;
+      document.getElementById('prog').style.width = (max > 0 ? (h.scrollTop/max*100) : 0) + '%';
+      let cur = secs.length ? secs[0].id : null;
+      for (const s of secs) if (s.getBoundingClientRect().top <= 130) cur = s.id;
+      chips.forEach(c => c.classList.toggle('on', c.dataset.nav === cur));
+      ticking = false;
     });
   }
   addEventListener('scroll', onScroll, {passive:true}); onScroll();
+  chips.forEach(c => c.addEventListener('click', () => {
+    if (navEl && window.innerWidth < 700) c.scrollIntoView({inline:'center', block:'nearest', behavior:'smooth'});
+  }));
+  const reveal = () => document.querySelectorAll('.rev:not(.in)').forEach(el => el.classList.add('in'));
+  setTimeout(() => document.querySelectorAll('.rev:not(.in)').forEach(el => {
+    const r = el.getBoundingClientRect();
+    if (r.top < innerHeight + 300) el.classList.add('in');
+  }), 1200);
+  setTimeout(reveal, 5000);
 </script>
 </body>
 </html>

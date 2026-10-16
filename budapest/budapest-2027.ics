@@ -1,0 +1,51 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//karta//budapest-2027//HE
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+X-WR-CALNAME:בודפשט 2027
+BEGIN:VEVENT
+UID:bud-trip-2027@karta
+DTSTAMP:20261016T053000Z
+DTSTART;VALUE=DATE:20270218
+DTEND;VALUE=DATE:20270222
+SUMMARY:🇭🇺 בודפשט · 3 לילות (18–22.2.2027)
+DESCRIPTION:MAX Travel 8559619 · PNR יוצא IM3IYC · PNR חוזר H09DKT\nניהול: https://www.maxtravel.co.il/my-bookings · מייל הזמנה: shakedkarta8559619@skyginis.co.il
+SEQUENCE:0
+END:VEVENT
+BEGIN:VEVENT
+UID:bud-out-2027@karta
+DTSTAMP:20261016T053000Z
+DTSTART:20270218T081000Z
+DTEND:20270218T114500Z
+SUMMARY:✈️ TLV → BUD · Wizz Air · 10:10–12:45
+LOCATION:נתב"ג טרמינל 1/3 · בודפשט פרנץ ליסט
+DESCRIPTION:המראה 10:10 (שעון ישראל) · נחיתה 12:45 (שעון בודפשט) · 3:35 טיסה ישירה\nהזמנה MAX Travel 8559619 · PNR IM3IYC\nצ׳ק-אין ONLINE חובה (Wizz גובה על צ׳ק-אין בנמל) — נפתח 30 יום לפני ונסגר 3 שעות לפני
+BEGIN:VALARM
+TRIGGER:-P1D
+ACTION:DISPLAY
+DESCRIPTION:מחר טיסה לבודפשט 10:10 — צ׳ק-אין אונליין + הדפסת בורדינג פאס
+END:VALARM
+BEGIN:VALARM
+TRIGGER:-PT3H
+ACTION:DISPLAY
+DESCRIPTION:טיסה בעוד 3 שעות — יציאה לשדה
+END:VALARM
+SEQUENCE:0
+END:VEVENT
+BEGIN:VEVENT
+UID:bud-ret-2027@karta
+DTSTAMP:20261016T053000Z
+DTSTART:20270221T200500Z
+DTEND:20270221T231000Z
+SUMMARY:✈️ BUD → TLV · Arkia · 21:05–01:10 (+1)
+LOCATION:בודפשט פרנץ ליסט · נתב"ג
+DESCRIPTION:המראה 21:05 (שעון בודפשט) · נחיתה 01:10 בלילה שבין 21–22.2 (שעון ישראל) · 3:05 טיסה ישירה\nהזמנה MAX Travel 8559619 · PNR H09DKT\nשימו לב: נחיתה ב-01:10 — לסדר הסעה מהשדה הביתה מראש
+BEGIN:VALARM
+TRIGGER:-PT5H
+ACTION:DISPLAY
+DESCRIPTION:טיסה חזרה היום 21:05 — להיות בשדה ~18:30
+END:VALARM
+SEQUENCE:0
+END:VEVENT
+END:VCALENDAR

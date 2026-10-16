@@ -1,0 +1,611 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>בודפשט 2027 · 5 חברים · 18–22.2</title>
+<link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;700;900&display=swap" rel="stylesheet">
+<style>
+  :root{--bg:#0a0c10;--panel:#121821;--panel2:#182130;--line:rgba(255,255,255,.08);
+        --tx:#f4f6f8;--mut:#8b95a3;--acc:#d97706;--acc2:#f0a13a;}
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{background:var(--bg);color:var(--tx);font-family:'Heebo',system-ui,-apple-system,sans-serif;
+       line-height:1.65;-webkit-font-smoothing:antialiased;
+       background-image:radial-gradient(1100px 700px at 50% -80px,#16202e 0%,transparent 70%)}
+  .wrap{max-width:1080px;margin:0 auto;padding:0 22px 120px}
+  header{padding:96px 0 56px;text-align:center}
+  .eyebrow{color:var(--acc);font-weight:700;letter-spacing:.14em;font-size:14px;margin-bottom:18px}
+  h1{font-size:clamp(38px,7vw,68px);font-weight:900;line-height:1.08;letter-spacing:-.02em}
+  h1 small{display:block;font-size:.36em;font-weight:400;color:var(--mut);letter-spacing:0;margin-top:16px}
+  .cd{display:flex;gap:14px;justify-content:center;margin:40px 0 8px;flex-wrap:wrap}
+  .cd div{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:16px 22px;min-width:104px}
+  .cd b{display:block;font-size:34px;font-weight:900;font-variant-numeric:tabular-nums}
+  .cd span{font-size:13px;color:var(--mut)}
+  .chips{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:26px}
+  .chip{background:var(--panel2);border:1px solid var(--line);border-radius:999px;padding:7px 18px;font-weight:700;font-size:15px}
+  .sec{margin-top:74px}
+  .sechead{display:flex;align-items:baseline;gap:16px;border-bottom:1px solid var(--line);padding-bottom:14px;margin-bottom:26px}
+  .sechead .num{color:var(--acc);font-weight:900;font-size:15px;letter-spacing:.1em}
+  .sechead h2{font-size:clamp(24px,3.4vw,34px);font-weight:900;letter-spacing:-.01em}
+  .sub{color:var(--mut);margin:-14px 0 22px}
+  .grid2{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:18px}
+  .grid4{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin:22px 0}
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:20px;padding:26px;
+        transition:border-color .25s ease,transform .25s ease}
+  .card:hover{border-color:rgba(217,119,6,.45);transform:translateY(-2px)}
+  .card.wide{padding:30px}
+  .tagline{color:var(--acc);font-weight:700;font-size:15px;margin-bottom:12px}
+  .big{font-size:42px;font-weight:900;letter-spacing:-.02em;font-variant-numeric:tabular-nums}
+  .big .arrow{color:var(--mut);font-weight:400;margin:0 8px}
+  .big sup{font-size:.4em;color:var(--acc);vertical-align:super}
+  .h3big{font-size:22px;font-weight:900;margin:6px 0 6px}
+  .muted{color:var(--mut);font-size:15px}
+  .kv{display:flex;justify-content:space-between;gap:16px;padding:9px 0;border-bottom:1px solid var(--line);font-size:16px}
+  .kv:last-of-type{border-bottom:0}
+  .kv span{color:var(--mut)}
+  .kv b{font-weight:700;text-align:left}
+  .stat{background:var(--panel2);border:1px solid var(--line);border-radius:14px;padding:14px}
+  .stat span{display:block;color:var(--mut);font-size:13px;margin-bottom:4px}
+  .stat b{font-size:17px;font-weight:900}
+  .note{background:rgba(217,119,6,.08);border:1px solid rgba(217,119,6,.28);border-radius:14px;
+        padding:14px 16px;margin-top:18px;font-size:15px}
+  .agency{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:14px;margin-top:18px;
+          background:var(--panel2);border:1px solid var(--line);border-radius:16px;padding:20px}
+  .agency span{display:block;color:var(--mut);font-size:13px}
+  .agency b,.agency a{font-weight:700;color:var(--tx);text-decoration:none;font-size:15px}
+  .agency a{color:var(--acc2);border-bottom:1px solid rgba(240,161,58,.4)}
+  .secbody h2{font-size:22px;font-weight:900;margin:30px 0 10px;color:var(--tx)}
+  .secbody h3{font-size:18px;font-weight:900;margin:24px 0 8px;color:var(--acc2)}
+  .secbody h4{font-size:16px;font-weight:700;margin:18px 0 6px}
+  .secbody p{margin:10px 0}
+  .secbody ul{margin:10px 24px 16px 0}
+  .secbody li{margin:7px 0}
+  .secbody li::marker{color:var(--acc)}
+  .secbody table{width:100%;border-collapse:collapse;margin:16px 0;font-size:15px;display:block;overflow-x:auto}
+  .secbody th{background:var(--panel2);color:var(--acc);font-weight:700;text-align:right;padding:11px 12px;white-space:nowrap}
+  .secbody td{padding:11px 12px;border-top:1px solid var(--line);vertical-align:top}
+  .secbody a{color:var(--acc2);text-decoration:none;border-bottom:1px solid rgba(240,161,58,.4)}
+  .secbody code{background:var(--panel2);padding:2px 7px;border-radius:7px;font-size:.92em}
+  .secbody hr{border:0;border-top:1px solid var(--line);margin:26px 0}
+  .pending{color:var(--mut);font-style:italic}
+  .check{background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:24px 28px}
+  .check li{margin:11px 0;font-size:16px}
+  footer{margin-top:80px;padding-top:26px;border-top:1px solid var(--line);color:var(--mut);font-size:14px;text-align:center}
+  footer a{color:var(--acc2);text-decoration:none}
+  @media(max-width:640px){.big{font-size:34px} .kv{flex-direction:column;gap:2px} .kv b{text-align:right}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div class="eyebrow">18–22 בפברואר 2027 · 3 לילות</div>
+    <h1>בודפשט <small>חמישה חברים · טיסות ישירות · מלון במרכז העיר</small></h1>
+    <div class="cd" id="cd">
+      <div><b id="d">—</b><span>ימים</span></div>
+      <div><b id="h">—</b><span>שעות</span></div>
+      <div><b id="m">—</b><span>דקות</span></div>
+      <div><b id="s">—</b><span>שניות</span></div>
+    </div>
+    <div class="chips"><span class="chip">יוסי</span><span class="chip">קנפו</span><span class="chip">סעדו</span><span class="chip">שקד</span><span class="chip">יניב</span></div>
+  </header>
+
+  
+  <section class="sec">
+    <div class="sechead"><span class="num">01</span><h2>טיסות והזמנה</h2></div>
+    
+    <div class="secbody">
+<div class="grid2">
+  <div class="card">
+    <div class="tagline">✈️ הלוך · יום ה׳ 18.2.2027</div>
+    <div class="big">10:10 <span class="arrow">→</span> 12:45</div>
+    <div class="muted">Wizz Air · טיסה ישירה · W6 2326</div>
+    <div class="kv"><span>מסלול</span><b>תל אביב (TLV) → בודפשט (BUD)</b></div>
+    <div class="kv"><span>משך</span><b>3 שעות 35 דקות</b></div>
+    <div class="kv"><span>PNR</span><b>IM3IYC</b></div>
+    <div class="note">🛂 <b>צ׳ק-אין אונליין חובה</b> — Wizz גובה קנס על צ׳ק-אין בשדה. נפתח 30 יום לפני, נסגר 3 שעות לפני. בשדה: ~3 שעות לפני (07:00).</div>
+  </div>
+  <div class="card">
+    <div class="tagline">✈️ חזור · יום א׳ 21.2.2027</div>
+    <div class="big">21:05 <span class="arrow">→</span> 01:10<sup>+1</sup></div>
+    <div class="muted">Arkia · טיסה ישירה · IZ1 (flagged: PDF bidi-garbled — verify in portal)</div>
+    <div class="kv"><span>מסלול</span><b>בודפשט (BUD) → תל אביב (TLV)</b></div>
+    <div class="kv"><span>נחיתה</span><b>לילה ב׳ 22.2, 01:10</b></div>
+    <div class="kv"><span>PNR</span><b>H09DKT</b></div>
+    <div class="note">🌙 נחיתה אחרי חצות — <b>להזמין הסעה מראש</b> מהשדה. להיות בשדה ~18:30.</div>
+  </div>
+</div>
+<div class="agency">
+  <div><span>ספק</span><b>MAX Travel (by SKYGINI)</b></div>
+  <div><span>מספר הזמנה</span><b>8559619</b></div>
+  <div><span>אזור אישי</span><b>9169558</b></div>
+  <div><span>מייל הזמנה</span><b>shakedkarta8559619@skyginis.co.il</b></div>
+  <div><span>ניהול</span><a href="https://www.maxtravel.co.il/my-bookings" target="_blank" rel="noopener">maxtravel.co.il/my-bookings</a></div>
+  <div><span>תשלום</span><b>$0 — 702 נקודות SKYMAX</b></div>
+</div></div>
+  </section>
+  
+  <section class="sec">
+    <div class="sechead"><span class="num">02</span><h2>המלון</h2></div>
+    
+    <div class="secbody">
+<div class="card wide">
+  <div class="tagline">🏨 Three Corners Downtown Hotel</div>
+  <h3 class="h3big">1051 Budapest, 20 Október 6. utca, Hungary</h3>
+  <p class="muted">רובע V (בלווארוש) — כ-200 מ׳ מבזיליקת סנט אישטוון, הליכה לדיאק טר. <a href="https://www.google.com/maps/search/?api=1&query=Three+Corners+Downtown+Hotel+Oktober+6+utca+20+Budapest" target="_blank" rel="noopener">מפה ↗</a></p>
+  <div class="grid4">
+    <div class="stat"><span>צ׳ק-אין</span><b>18.2 מ-14:00</b></div>
+    <div class="stat"><span>צ׳ק-אאוט</span><b>21.2 עד 11:00</b></div>
+    <div class="stat"><span>לילות</span><b>3 · 5 מבוגרים</b></div>
+    <div class="stat"><span>חדרים</span><b>2 (טריפל + זוגי)</b></div>
+  </div>
+  <div class="kv"><span>ארוחת בוקר</span><b>כלולה בשני החדרים ✓</b></div>
+  <div class="kv"><span>מחיר</span><b>€944.8</b> (חדרים €866.79 + מע״מ €43.34 + מס עירוני €34.67)</div>
+  <div class="kv"><span>תשלום</span><b>במלון, בשעתיים (HUF)</b> — המס העירוני משולם במקום</div>
+  <div class="kv"><span>ביטול חינם</span><b>עד 16.2.2027 23:59</b> — אחרי כן €164 / €115.94</div>
+  <div class="kv"><span>הזמנה</span><b>Booking.com 6440216735</b> · PIN 6186 (confidential)</div>
+  <div class="kv"><span>טלפון המלון</span><b>+36 70 460 7379</b></div>
+  <div class="note">⚠️ שים לב: <b>המלון לא מקבל מסיבות/מסיבות רווקים</b>. חניה €40 ללילה (מקומות מוגבלים — להזמין מראש). טרם נמסרו שמות 5 האורחים — שווה לשלוח הודעה למלון דרך Booking.com.</div>
+</div></div>
+  </section>
+  
+  <section class="sec">
+    <div class="sechead"><span class="num">03</span><h2>לוח זמנים — יום אחר יום</h2></div>
+    <p class="sub">תוכנית מפורטת עם שעות, מעברים והזמנות מראש.</p>
+    <div class="secbody"><p class="pending">בהכנה — הנתונים בסבב אימות.</p></div>
+  </section>
+  
+  <section class="sec">
+    <div class="sechead"><span class="num">04</span><h2>אטרקציות</h2></div>
+    <p class="sub">שעות פתיחה ומחירים לאומתים לתאריכים שלנו (פברואר).</p>
+    <div class="secbody"><p class="pending">בהכנה — הנתונים בסבב אימות.</p></div>
+  </section>
+  
+  <section class="sec">
+    <div class="sechead"><span class="num">05</span><h2>אוכל ושתייה</h2></div>
+    <p class="sub">מסעדות וברים בסטייל שלנו — בשר, אסייני, קוקטיילים והאפי-אוור.</p>
+    <div class="secbody"><p class="pending">בהכנה — הנתונים בסבב אימות.</p></div>
+  </section>
+  
+  <section class="sec">
+    <div class="sechead"><span class="num">06</span><h2>ציוד ומה לארוז</h2></div>
+    <p class="sub">חורף בבודפשט, מזוודה של Wizz, ומרחצאות.</p>
+    <div class="secbody"><h2>בודפשט — מדריך לוגיסטי מלא</h2>
+<h3>5 חברים · 18–22.2.2027 · 3 לילות במרכז בודפשט</h3>
+<p>> <b>מסמך בעברית, מיועד לתצוגה RTL.</b></p>
+<p>> נכון ל‑<b>16.10.2026</b>. כל מחיר/כלל שמופיע כאן נבדק מול מקור חי (כתובות בסוף המסמך, כולן החזירו HTTP 200). מה שלא ניתן היה לאמת מסומן במפורש <b>"לא אומת"</b>.</p>
+<p>> <b>הערה חשובה:</b> טיסות בפברואר 2027 — מחירים/לוחות של רכבות, תחבורה וטיסות עשויים להשתנות. מחירי BKK, המרחצאות וויז אייר הם המחירים הרשמיים <b>המפורסמים היום</b>; יש לבדוק שוב לפני הנסיעה.</p>
+<hr>
+<h2>1. שדה התעופה ↔ העיר</h2>
+<h3>1.1 אוטובוס 100E (Airport Express) — האפשרות המומלצת</h3>
+<table>
+<tr><th>פרט</th><th>נתון (מקור רשמי: BKK)</th></tr>
+<tr><td>מסלול</td><td>שדה התעופה ליסט פרנץ ↔ <b>דיאק פרנץ טר (Deák Ferenc tér)</b> דרך קלווין טר (Kálvin tér)</td></tr>
+<tr><td>משך נסיעה</td><td><b>40 דקות</b> למרכז העיר</td></tr>
+<tr><td>תדירות</td><td>24/7. ביום: כל 6–10 דק' (שני/שישי), 7–10 דק' (יתר הימים), 10–15 דק' (בוקר/ערב), <b>בלילה: כל 30–40 דק' בממוצע</b></td></tr>
+<tr><td>כרטיס</td><td><b>2,500 פורינט</b> ("Airport shuttle bus single ticket") — זה הכרטיס <b>היחיד</b> שתקף בקו</td></tr>
+<tr><td>איך משלמים</td><td>מכשיר <b>Budapest Pay&GO</b> באוטובוס — מצמידים כרטיס בנק וקונים + מאמתים בבת אחת. גם באפליקציית <b>BudapestGO</b>, בקופות BKK ובמכונות אוטומטיות</td></tr>
+<tr><td>עלייה לרכב</td><td><b>רק מהדלת הקדמית</b>. כרטיס נייר נאמת על ידי סדרן; כרטיס נייד — סורקים QR בחלק החיצוני של האוטובוס לפני העלייה</td></tr>
+<tr><td>כבודה</td><td>אוטובוסים מפרקיים נמוכי רצפה, ממוזגים, עם מקום רב למזוודות</td></tr>
+<tr><td>פטורים</td><td>ילדים מתחת ל‑14 עם תעודת תלמיד הונגרית, אזרחי כל מדינה מעל גיל 65, ונכים/זכאים</td></tr>
+</table>
+<p>⚠️ <b>הכרטיסים והמנויים הרגילים של BKK — כולל כרטיס 72 שעות — לא תקפים בקו 100E.</b> את זה כתוב במפורש באתר BKK.</p>
+<ul>
+<li>קיים <b>"כרטיס השלמה" (add‑on) ב‑1,000 פורינט</b> ל‑100E — אבל רק למי שמחזיק מנוי Budapest‑pass תקף (למעט מנוי 15 יום), Pest County Pass או Hungary Pass. אם אין לכם מנוי — לא רלוונטי.</li>
+<li>קו <b>200E</b> פועל גם הוא 24/7, אבל נוסע לכיוון אחר (מטרו M3) — <b>הכרטיס של 100E לא תקף בו</b>, ולהפך.</li>
+</ul>
+<h3>1.2 מונית רשמית (Főtaxi) — הנתונים הרשמיים של שדה התעופה</h3>
+<p>לפי אתר שדה התעופה (bud.hu), התעריף המוסדר לנסיעות שדה תעופה:</p>
+<ul>
+<li><b>2,100 פורינט דמי פתיחה</b> + <b>520 פורינט לק"מ</b> + <b>130 פורינט לדקת המתנה</b></li>
+<li>החברה הרשמית בשדה היא <b>Főtaxi</b>; מחיר הנסיעה <b>מחושב מראש</b> לפי הכתובת המדויקת לפני תחילת הנסיעה</li>
+<li>כל הרכבים מצוידים במסופון — <b>אפשר לשלם בכרטיס אשראי</b></li>
+<li>עמדות הזמנה בכניסות <b>טרמינל 2A ו‑2B</b></li>
+<li>מרחק מהשדה לדיאק פרנץ טר: <b>כ‑21 ק"מ</b> → לפי התעריף הרשמי יוצא <b>כ‑13,000–14,000 פורינט</b> לנסיעה (חישוב שלנו: 2,100 + 21×520 ≈ 12,900 + זמן המתנה). משך: <b>25–40 דק'</b>.</li>
+<li>🔴 <b>אזהרה רשמית של bud.hu:</b> שימוש בחברות מוניות לא‑מאושרות שמציעות שירות <b>בתוך הטרמינל</b> הוא מסוכן — הן לא כפופות לתעריף הזה.</li>
+<li>"תוספת שדה תעופה" של 800 פורינט שמופיעה במדריכים פרטיים — <b>לא אומת</b> באתר הרשמי.</li>
+</ul>
+<h3>1.3 Bolt / Uber</h3>
+<ul>
+<li><b>Bolt פועל בבודפשט ובשדה התעופה</b> (עמוד רשמי של Bolt לקהילת בודפשט ולשדה BUD קיים ותקין).</li>
+<li><b>מחירי Bolt דינמיים ואינם מפורסמים באתר החברה</b> → טווחים שמפורסמים במדריכי טיסה (סביב <b>8,000–13,000 פורינט</b> משדה התעופה למרכז) הם <b>לא אומת</b> מול מקור רשמי. הדרך הנכונה: לפתוח את האפליקציה ולראות מחיר מוצג מראש לפני אישור.</li>
+<li><b>המלצה פרקטית:</b> להתקין Bolt <b>לפני</b> הנחיתה. זה גם החיסכון וגם הביטחון — כל "סקאם" המוניות נמנע ברגע שהמחיר מוצג באפליקציה.</li>
+</ul>
+<h3>1.4 מה עושים בפועל — לפי הטיסות שלכם</h3>
+<p><b>נחיתה:יום חמישי 18.2.2027 בשעה 12:45</b></p>
+<ul>
+<li>זה חלון היום העמוס של 100E — תדירות של 7–10 דקות.</li>
+<li>זמן משוער: ~30–45 דק' עד יציאה מהטרמינל (דרכונים + מזוודות) + 40 דק' נסיעה → <b>במרכז העיר בערך ב‑14:00–14:30</b>.</li>
+<li>שימו לב: בטרמינל יש עמדות של חברות מוניות לא‑מאושרות. ללכת לעמדת <b>Főtaxi</b> הרשמית או להזמין Bolt.</li>
+</ul>
+<p><b>המראה: יום ראשון 21.2.2027 בשעה 21:05</b> (חוקי וויז אייר ל־BUD):</p>
+<ul>
+<li>צ׳ק‑אין ודרופ מזוודות בשדה: <b>נפתחים 2 שעות לפני ההמראה (19:05) ונסגרים 40 דקות לפני (20:25)</b></li>
+<li><b>השער נסגר 30 דקות לפני ההמראה (20:35)</b></li>
+<li>לכן: <b>להיות בשדה ב‑18:45–19:00</b>. 100E לוקח 40 דק' מדיאק טר → <b>לצאת מהמרכז עד 17:45–18:00 לכל המאוחר</b>.</li>
+<li>💡 <b>כלל אצבע: לצאת מהעיר כ‑3 שעות לפני ההמראה.</b></li>
+</ul>
+<p>> <b>חלופות יציאה מהעיר:</b> כיוון ש‑21:05 הוא מוצאי שבת/ראשון בלילה, יש גם רכבות/אוטובוסים ליליים — אבל עם 5 אנשים ומזוודות, 100E או מונית זו האפשרות הפשוטה.</p>
+<hr>
+<h2>2. תחבורה ציבורית בבודפשט (מחירי BKK 2026)</h2>
+<h3>2.1 מחירי כרטיסים ומנויים (אתר BKK הרשמי)</h3>
+<table>
+<tr><th>מוצר</th><th>מחיר</th></tr>
+<tr><td>כרטיס בודד (רכישה מראש)</td><td><b>500 פורינט</b></td></tr>
+<tr><td>כרטיס בודד "במקום" (on the spot)</td><td><b>700 פורינט</b></td></tr>
+<tr><td>חבילת 10 כרטיסים</td><td><b>4,500 פורינט</b></td></tr>
+<tr><td>כרטיס 30 דקות</td><td>600 פורינט</td></tr>
+<tr><td>כרטיס 90 דקות</td><td>850 פורינט</td></tr>
+<tr><td><b>כרטיס נסיעות 24 שעות</b></td><td><b>2,750 פורינט</b></td></tr>
+<tr><td><b>כרטיס נסיעות 72 שעות</b></td><td><b>5,750 פורינט</b></td></tr>
+<tr><td>Budapest Card 24/48/72 שעות</td><td>17,990 / 23,990 / 29,990 פורינט</td></tr>
+<tr><td><b>כרטיס 100E (Airport shuttle)</b></td><td><b>2,500 פורינט</b> (בנפרד, לא נכלל בשום מנוי)</td></tr>
+<tr><td>קנס על נסיעה בלי כרטיס</td><td>12,000 במקום / 25,000 רגיל / 50,000 באיחור</td></tr>
+</table>
+<h3>2.2 מה בדיוק מכסה כרטיס 72 השעות — ומה לא</h3>
+<p>✅ מכסה: כל שירותי BKK <b>בתוך גבולות בודפשט</b> — קווים 1–99, 101–299, 900–999, מטרו M1–M4, D14, רכבות פרברים (HÉV) H5–H9, רכבות MÁV במחלקה 2 בתוך בודפשט, ואוטובוסים נבחרים של VOLÁN.</p>
+<p>❌ <b>לא מכסה את קו 100E Airport Express. נקודה.</b></p>
+<h3>2.3 איפה קונים</h3>
+<ul>
+<li><b>אפליקציית BudapestGO</b> — כרטיסים ניידים + תכנון מסלולים. דורש <b>תעודה מזהה</b> בזמן שימוש (לא צילום) ו<b>חיבור אינטרנט פעיל</b>; כרטיס נייד תקף <b>2 דקות</b> אחרי רכישה מוצלחת.</li>
+<li>מרכזי שירות של BKK, קופות, ומכונות אוטומטיות (זמינות 24/7).</li>
+<li><b>בקווי הלילה</b>: אפשר לקנות מהנהג או מהמאבטח שעל האוטובוס. תעריפים רגילים חלים על קווי לילה.</li>
+<li>אפליקציית MÁV (רכבת) — כרטיסי רכבת, אין צורך באימות נפרד.</li>
+</ul>
+<h3>2.4 המלצה לחבורה של 5 לשלושה ימים</h3>
+<ul>
+<li><b>כרטיס 72 שעות (5,750 פורינט לאדם)</b> הוא המשתלם לשלושת הימים (תיירות מרובה) — מפעילים אותו בחמישי אחה״צ ומקבלים כיסוי עד ראשון.</li>
+<li><b>בנפרד: 2,500 פורינט לאדם לכל כיוון של 100E</b> = 5,000 פורינט לאדם הלוך־חזור. אין דרך לעקוף את זה עם מנוי.</li>
+<li>אופציית חיסכון אם התנועה מועטה: כרטיסים בודדים ב‑500 פורינט לנסיעה (במקום 72 שעות).</li>
+<li><b>שימו לב:</b> כניסה למטרו ללא כרטיס מאומת היא קנס של 12,000–50,000 פורינט לאדם. לקנות לפני. בעלי כרטיס נייד — לוודא שהקוד מאומת לפני שהרכבת מגיעה.</li>
+</ul>
+<hr>
+<h2>3. כספים — מטבע, שערים, כספומטים וטיפים</h2>
+<h3>3.1 מטבע ושער חליפין</h3>
+<ul>
+<li>המטבע: <b>פורינט הונגרי (HUF)</b>. הונגריה <b>לא</b> בגוש האירו.</li>
+<li><b>שער רשמי (ECB, 16.10.2026): 1 EUR = 363.60 HUF</b></li>
+<li><b>שער מול שקל (open.er-api, 16.10.2026): 1 ILS = 104.61 HUF</b></li>
+<li>1,000 פורינט ≈ <b>9.56 ₪</b></li>
+<li>2,500 פורינט (כרטיס 100E) ≈ <b>23.9 ₪</b></li>
+<li>5,750 פורינט (כרטיס 72 שעות) ≈ <b>55 ₪</b></li>
+<li>13,200 פורינט (מרחצאות סצ׳ני, יום חול) ≈ <b>126 ₪</b></li>
+<li>מדריכי טיולים רבים עדיין כותבים "1 EUR ≈ 400 HUF" — <b>זה שער מיושן</b>. השער החי נמוך יותר.</li>
+</ul>
+<h3>3.2 כרטיסי אשראי — כן, כמעט בכל מקום</h3>
+<ul>
+<li>מקובל ברוב המלונות, המסעדות, המרחצאות, מוניות מוסמכות (מסופון בכל רכב), מכשירי Pay&GO ב‑100E, ומכונות כרטיסים.</li>
+<li><b>מזומן</b> שימושי בשווקים, במקומות קטנים, ובקופות של חלק מהמרחצאות: <b>רודאש מציין במפורש "לתשלום במזומן אנחנו מקבלים רק פורינט הונגרי"</b>.</li>
+<li>אפשר גם: בכניסה מסוימת של סצ׳ני התשלום הוא <b>רק בכרטיס בנק</b>.</li>
+</ul>
+<h3>3.3 מלכודות כספומט/המרה שכדאי להימנע מהן</h3>
+<p>1. <b>כספומטים של Euronet</b> (כתומים, סט্যান্ডאלון) — עמלה קבועה גבוהה וגרוע מכך: הם מציעים <b>המרה למטבע הבית שלך (DCC)</b> בשער גרוע מאוד. <b>תמיד לבחור HUF.</b></p>
+<p>2. <b>DCC בקופה</b>: כשמשלמים בכרטיס, הקופה עשויה לשאול אם לחייב ב‑HUF או בשקלים/אירו. <b>תמיד לבחור HUF</b> — "הנוחות" של חיוב בשקל נועלת את השער של בית העסק, שהוא תמיד גרוע יותר משער הכרטיס.</p>
+<p>3. <b>עמדות החלפת מטבע בשדה התעופה</b> — שערים שנועדו לנוסעים "לכודים". אם צריך מזומן בשדה: להשתמש בכספומט בנק במקום.</p>
+<p>4. <b>כספומטים מומלצים:</b> של בנקים הונגריים — OTP Bank (הרשת הגדולה), K&H, Raiffeisen, UniCredit. או כרטיסי Wise/Revolut.</p>
+<p>5. <b>מוכרי כרטיסים מזויפים/מוגזמים מחוץ לסצ׳ני</b> — לקנות רק בקופה הרשמית בפנים או אונליין מראש.</p>
+<h3>3.4 טיפים — מתי כמה</h3>
+<table>
+<tr><th>הקשר</th><th>נהוג</th></tr>
+<tr><td>מסעדה (ישיבה)</td><td><b>10–15%</b> אם אין "דמי שירות" בחשבון</td></tr>
+<tr><td>"szervizdíj" (service charge) בחשבון</td><td>אם כבר נוסף (לרוב 10–12%) — <b>לא חייבים להוסיף</b> עוד</td></tr>
+<tr><td>מונית</td><td>לעגל כלפי מעלה, או ~10% בנסיעה ארוכה/עם עזרה במזוודות</td></tr>
+<tr><td>בר</td><td>לעגל כלפי מעלה / טיפ צנוע בסוף החשבון</td></tr>
+</table>
+<ul>
+<li><b>תמיד לבדוק את החשבון</b> לפני התשלום אם נוסף שירות. ברוב המסעדות בבודפשט כבר מוסיפים דמי שירות.</li>
+</ul>
+<h3>3.5 מחירים טיפוסיים (2026)</h3>
+<table>
+<tr><th>פריט</th><th>מחיר טיפוסי</th></tr>
+<tr><td>בירה מהחבית (pint) בבר רגיל</td><td><b>900–1,500 פורינט</b> (בטרסה ברחוב ואצי — כמעט כפול)</td></tr>
+<tr><td>קפה</td><td><b>500–900 פורינט</b></td></tr>
+<tr><td>מנה עיקרית במסעדה בינונית</td><td><b>3,500–8,000 פורינט</b></td></tr>
+<tr><td>מנה עיקרית בצהריים / מסעדה מזדמנת</td><td>2,500–5,000 פורינט</td></tr>
+<tr><td>מרק / קינוח</td><td>1,200–2,500 פורינט</td></tr>
+<tr><td>כוס יין הונגרי</td><td>1,000–2,500 פורינט</td></tr>
+<tr><td>לנש (lángos) / קירטושקלאץ'</td><td>600–1,200 / 800–1,500 פורינט</td></tr>
+<tr><td>מים 0.5 ל' בקיוסק</td><td>500–800 פורינט (מי ברז בבודפשט בטוחים לשתייה)</td></tr>
+</table>
+<p>⚠️ <b>מלכודת ואצי אוצ׳ה (Váci utca):</b> ארוחת ערב למבוגר 8,000–15,000 פורינט לעומת 5,000–8,000 במקבילית. אותה אוכל, רחוב אחד הצידה — פער של 30–60%. שווה גם לצפות ל"דמי כיסוי" של 1,000–1,500 פורינט לאדם על לחם שלא ביקשתם.</p>
+<hr>
+<h2>4. מזג אוויר בפברואר + מה לארוז</h2>
+<h3>4.1 טמפרטורות (ממוצעי פברואר, בודפשט)</h3>
+<table>
+<tr><th>מקור</th><th>נתון</th></tr>
+<tr><td>climate-data.org</td><td>ממוצע חודשי <b>1°C</b> · מקסימום <b>4.9°C</b> · מינימום <b>-2.8°C</b> · גשם <b>38 מ"מ</b></td></tr>
+<tr><td>weather2travel</td><td><b>~3 שעות שמש</b> ביום · <b>11 ימי גשם</b> בחודש · 32 מ"מ</td></tr>
+<tr><td>תיאור כללי (מספר מקורות)</td><td>טווח מציאותי לביקור: <b>-5°C עד +7°C</b>, עם רוח שמגבירה את תחושת הקור</td></tr>
+</table>
+<h3>4.2 שעות אור — מחושב מדויק לתאריכים שלכם</h3>
+<p>חישוב רשמי (sunrise-sunset.org, אזור זמן Europe/Budapest):</p>
+<table>
+<tr><th>תאריך</th><th>זריחה</th><th>שקיעה</th><th>אורך היום</th></tr>
+<tr><td>18.2.2027 (חמישי)</td><td>06:42</td><td>17:12</td><td>10 שעות 30 דק'</td></tr>
+<tr><td>19.2.2027 (שישי)</td><td>06:41</td><td>17:14</td><td>10 שעות 33 דק'</td></tr>
+<tr><td>20.2.2027 (שבת)</td><td>06:39</td><td>17:15</td><td>10 שעות 36 דק'</td></tr>
+<tr><td>21.2.2027 (ראשון)</td><td>06:37</td><td>17:17</td><td>10 שעות 39 דק'</td></tr>
+</table>
+<p><b>משמעות מעשית:</b> להתייחס ל‑<b>17:00 בערך</b> כשעת חשיכה. סיורי חוץ, נקודות תצפית וגשר השלשלאות — לתכנן ליום. אחה״צ אחרי 16:00 מתאים למרחצאות, מוזיאונים, וברי החורבות.</p>
+<h3>4.3 מה לארוז — בהתחשב בכך שאתם טסים ב-Wizz Air הלוך</h3>
+<p>🔴 <b>המגבלה הקריטית:</b> אם אין לכם WIZZ Priority, יש לכם <b>רק תיק יד קטן אחד 40×30×20 ס"מ, עד 10 ק"ג, מתחת למושב</b>. אין מזוודת גלגלים חינם. <b>לארוז בהתאם.</b></p>
+<p><b>חובה (essential):</b></p>
+<ul>
+<li><b>שכבות תרמיות</b> (גופייה/גרבי משי תרמיים) — הבסיס לחום בגוף</li>
+<li><b>מעיל חורף אטום לרוח</b> (ארוך, עם ברדס) — ללבוש עליכם במטוס כדי לחסוך מקום בתיק</li>
+<li><b>כובע, כפפות וצעיף</b> — בפברואר הרוח ליד הדנובה קרה חודרנית</li>
+<li><b>מכנסיים ארוכים</b> (עדיף לא ג'ינס דק — עדיף בד עבה או תרמי)</li>
+<li><b>נעליים אטומות למים</b> עם אחיזה — שלג/בצל/רפש</li>
+<li><b>מטרייה קומפקטית</b></li>
+<li><b>בגד ים + מגבת</b> למרחצאות (אם מתכננים — ראו סעיף 5)</li>
+</ul>
+<p><b>מומלץ:</b> קרם לחות לשפתיים/פנים, מטען נייד, גרביים נוספות.</p>
+<p><b>לא חיוני:</b> בגדים רבים — 3 לילות הם מספיק; עדיף לכבס/להתלבש בשכבות מאשר לקחת מזוודה גדולה ולשלם עליה.</p>
+<hr>
+<h2>5. מרחצאות תרמיות — נימוסים ומה באמת צריך</h2>
+<h3>5.1 מה להביא ואיפה כל מלכודת</h3>
+<ul>
+<li><b>בגד ים — חובה</b> בשעות המעורבות. רודאש מגדיר במפורש "co-ed turkish bath, in bathing suit" עבור שעות הרחצה המעורבות.</li>
+<li><b>מגבת, כפכפים וכובע ים — להביא מהבית.</b></li>
+<li>🔴 <b>בל נשכח: "שירות השכרה אינו זמין כרגע"</b> — זה מופיע רשמית בדף התעריפים של סצ׳ני, רודאש ולוקאץ׳. אין השכרת מגבות.</li>
+<li>אם שוכחים — קונים במקום: מגבת <b>6,900 פורינט</b>, חלוק <b>12,600</b>, כפכפים <b>4,200</b>, בגד ים <b>6,300</b>, כובע ים <b>2,100</b>.</li>
+</ul>
+<h3>5.2 מחירי כרטיסים 2026 (רשמי)</h3>
+<table>
+<tr><th>מרחצאות</th><th>יום חול (ב׳–ה׳)</th><th>שישי–ראשון</th><th>חגים/שיא</th></tr>
+<tr><td><b>סצ׳ני (Széchenyi)</b> — כרטיס יומי עם לוקר</td><td><b>13,200</b></td><td><b>14,800</b></td><td><b>15,800</b></td></tr>
+<tr><td>סצ׳ני — "Good morning Budapest" (כניסה עד 9:00)</td><td>10,500</td><td>11,800 (שישי בלבד)</td><td>—</td></tr>
+<tr><td>סצ׳ני — Fast Track עם לוקר (אונליין בלבד)</td><td>15,200</td><td>16,800</td><td>17,800</td></tr>
+<tr><td><b>רודאש (Rudas)</b> — כרטיס יומי לכל האזורים</td><td><b>12,000</b></td><td><b>15,000</b></td><td><b>16,000</b></td></tr>
+<tr><td><b>רודאש — כרטיס לילה (שישי ושבת)</b></td><td>—</td><td><b>15,000</b></td><td>—</td></tr>
+<tr><td><b>לוקאץ׳ (Lukács)</b></td><td><b>7,000</b></td><td><b>8,000</b></td><td>—</td></tr>
+<tr><td>לוקאץ׳ — כרטיסים מורכבים (אונליין בלבד)</td><td>—</td><td>8,900</td><td>—</td></tr>
+<tr><td><b>גלרט (Gellért)</b></td><td>❌ <b>סגור</b> מ‑1.10.2025, פתיחה צפויה <b>2028</b></td><td></td><td></td></tr>
+</table>
+<p><b>תוספות (בכל המרחצאות):</b> תא הלבשה/קייבין (cabin ticket) <b>1,000 פורינט</b> · כספת <b>1,100</b> · כרטיס Budapest Card מתקבל לכרטיסים יומיים עם לוקר.</p>
+<h3>5.3 שעות פתיחה (רשמי)</h3>
+<ul>
+<li><b>סצ׳ני:</b> כל יום. ראשון–חמישי 07:00–20:00 · <b>שישי 07:00–22:00</b> · שבת–ראשון 08:00–20:00. הבריכות/סאונות: עד 19:40 (שישי: 21:40). קופות נסגרות <b>שעה</b> לפני סגירה; אזור הבריכות יש לפנות <b>20 דק'</b> לפני הסגירה.</li>
+<li><b>רודאש:</b> כל יום. Wellness 06:00–20:00 (שישי 06:00–22:00) · סאונות 08:00–20:00 (שישי עד 22:00) · <b>רחצת לילה: שישי ושבת 22:00–03:00</b>.</li>
+<li><b>רודאש — חשוב:</b> <b>אסור להיכנס מתחת לגיל 14</b>. כרטיסי לילה <b>נמכרים רק אונליין</b> (לא בקופה!). בימי חול בבוקר יש שעות נפרדות — <b>רחצה טורקית לגברים בלבד</b> (ב׳, ד׳, ה׳ עד 10:45; ג׳ נשים בלבד).</li>
+</ul>
+<h3>5.4 כמה זמן להישאר ובאיזה מרחצאות לבחור בחורף</h3>
+<ul>
+<li><b>ממוצע לביקור:</b> 2–4 שעות. זה טיול רגלי איטי, לא מקלחת.</li>
+<li><b>ההמלצה שלנו לפברואר (שיקול דעת, לא מספר רשמי):</b></li>
+<li><b>רודאש</b> — הכי אטרקטיבי בחורף: הטורקי ההיסטורי סגור ומקורה, והגג עם הבריכה החמה ממש מנצח כשקר בחוץ. יתרון: יש <b>רחצת לילה</b> בשישי/שבת (מושלם לערב שלכם). חסרון: אסור מתחת ל‑14, וקייבין קטן יותר.</li>
+<li><b>סצ׳ני</b> — הגדול והאייקוני, הבריכות בחוץ פתוחות (נחשב פתוח כל השנה, כולל חורף — <i>מקור שלישי, לא אומת רשמית</i>); הכי הרבה בריכות. מתאים במיוחד לשבת בבוקר.</li>
+<li><b>לוקאץ׳</b> — הזול (7,000–8,000), שקט, מקומי. מתאים אם רוצים חוויה פחות תיירותית.</li>
+<li><b>גלרט</b> — סגור עד 2028. <b>לא לתכנן עליו.</b></li>
+<li><b>טיפ:</b> במקומות עם כרטיס 15,000-13,000 — כרטיס ה‑Fast Track (אונליין) חוסך תור, שווה אם מגיעים בשעות עמוסות.</li>
+</ul>
+<h3>5.5 נימוסים</h3>
+<ul>
+<li>מקלחת <b>לפני</b> הכניסה לבריכה — זה חלק מהנימוס בכל מרחצאות בודפשט.</li>
+<li>צילום — לא לכולם יש כללים אחידים; בכלל מרשים בבריכות, לא באזורי ההלבשה/סאונה. <b>לא אומת רשמית</b> — לבדוק שלטים במקום.</li>
+<li>כניסה עם נעליים/כפכפים לאזורי הבריכות — נהוג, אבל <b>כפכפים לא נכנסים למים</b>.</li>
+<li>אין להשמיע מוזיקה/לצעוק בבריכות המנוחה. אם אתם קבוצה של 5 — זה עדיין לא אומר שהמקום שלכם.</li>
+<li>סגירת קופות שעה לפני, פינוי בריכות 20 דק' לפני. לתכנן בהתאם.</li>
+</ul>
+<hr>
+<h2>6. Wizz Air — כבודה וצ׳ק־אין (כפי שמפורסם ב‑wizzair.com, נבדק 16.10.2026)</h2>
+<h3>6.1 כבודה — המספרים המדויקים</h3>
+<table>
+<tr><th>סוג</th><th>מידות</th><th>משקל</th><th>עלות</th></tr>
+<tr><td><b>תיק יד (Carry-on)</b></td><td><b>40 × 30 × 20 ס"מ</b> (חייב להיכנס <b>מתחת למושב</b>)</td><td><b>מקס׳ 10 ק"ג</b></td><td><b>חינם — לכל נוסע</b></td></tr>
+<tr><td><b>תיק גלגלים (Trolley)</b></td><td><b>55 × 40 × 23 ס"מ</b> (מתאים לתא מעל הראש)</td><td>מקס׳ 10 ק"ג</td><td><b>רק עם WIZZ Priority</b> (ואז 2 פריטים בסה"כ על הסיפון)</td></tr>
+<tr><td><b>מזוודה לתא המטען</b></td><td><b>עד 149 × 119 × 171 ס"מ</b></td><td>10 / 20 / 26 / 32 ק"ג</td><td><b>רכישה</b> (בתעריף הבסיסי אין כלום). מקס׳ 6 פריטים לנוסע; רק <b>אחת</b> של 10 ק"ג</td></tr>
+</table>
+<p><b>נקודות קריטיות:</b></p>
+<ul>
+<li><b>התיק החינמי לא ניתן להעביר לתא המטען בחינם</b> — הוא חייב לעלות לסיפון.</li>
+<li><b>תוספת משקל עודף בשדה: 13 EUR לק"ג</b> אם מזוודה שוקלת בין 10–20 ק"ג או בין 20–32 ק"ג. לשקול בבית!</li>
+<li><b>מחיר Trolley/Priority/מזוודות נוספים משתנה דינמית ואינו מפורסם כמחיר קבוע באתר.</b> המחיר שמופיע בזמן ההזמנה הוא המחיר. <b>רכישה בשדה יקרה יותר.</b></li>
+<li><b>נוזלים בכבודת יד:</b> מיכלים עד 100 מ"ל בבקבוקון שקוף נסגר של 1 ליטר (20×20 ס"מ), מוצג בנפרד בבידוק.</li>
+<li>מזוודות ממונעות (motorized suitcases) <b>אסורות</b> לגמרי — לא בסיפון ולא בתא המטען.</li>
+<li>כרית צוואר <b>לא</b> נחשבת פריט חינם נפרד — חייבת להיכנס לתיק.</li>
+</ul>
+<h3>6.2 צ׳ק־אין — הכלל החשוב</h3>
+<ul>
+<li>🟢 <b>צ׳ק־אין אונליין הוא חינם.</b> נפתח <b>30 יום</b> לפני ההמראה אם קניתם מושב, או <b>24 שעות</b> לפני אם לא קניתם. נסגר <b>3 שעות</b> לפני ההמראה.</li>
+<li>🟢 גם דרך <b>אפליקציית WIZZ</b> — חינם, כרטיס עלייה נייד.</li>
+<li>🔴 <b>צ׳ק־אין בשדה התעופה הוא בתשלום</b> — wizzair.com מגדיר זאת כ‑**"PAID\*"<b> ומציין "</b>זול יותר אם נרכש מראש**".</li>
+<li>החריג: בשדות תעופה שבהם צ׳ק־אין אונליין <b>אינו</b> זמין — הצ׳ק־אין בשדה <b>חינם</b>.</li>
+<li><b>המחיר המדויק לא מפורסם כמספר קבוע באתר wizzair.com.</b></li>
+<li>מקורות שלישיים (AirHelp, "verified July 2026") מדווחים: <b>€13</b> אם רוכשים מראש באתר, <b>€40–50</b> אם משלמים בשדה. <b>→ לא אומת רשמית.</b></li>
+<li>✅ <b>המסקנה המעשית: לבדוק אונליין חובה. תחסכו עשרות אירו לאדם.</b></li>
+<li><b>זמנים בשדה (BUD):</b> צ׳ק־אין ודרופ מזוודות <b>נפתחים 2 שעות לפני ההמראה ונסגרים 40 דקות לפני</b>. השער נסגר <b>30 דקות</b> לפני ההמראה.</li>
+<li><b>חשוב למי שאין דרכון ביומטרי:</b> מי שמחזיק במסמכי נסיעה שאינם של האיחוד האירופי — <b>חייב</b> לעבור לדלפק הצ׳ק־אין לאימות המסמכים ולהחתמת כרטיס העלייה.</li>
+</ul>
+<h3>6.3 מה זה אומר לכם ב‑18–22.2.2027</h3>
+<ul>
+<li><b>חמישי 18.2, המראה מהארץ → 12:45 נחיתה ב‑BUD</b> — אין בעיה מיוחדת.</li>
+<li><b>ראשון 21.2, המראה 21:05:</b> לוודא שכולם עשו צ׳ק־אין אונליין <b>לפני</b> היציאה מהמלון.</li>
+<li><b>המלצה כספית:</b> אם מצטברים לכם תיקי גלגלים/מזוודות — <b>לקנות אותם בזמן ההזמנה</b>, לא אחר כך ולא בשדה. המחיר רק עולה.</li>
+</ul>
+<hr>
+<h2>7. ביטחון וסקאמים נפוצים</h2>
+<h3>7.1 מספרי חירום</h3>
+<table>
+<tr><th>שירות</th><th>מספר</th></tr>
+<tr><td><b>חירום כללי (איחוד אירופאי, 24/7, עם דוברי אנגלית)</b></td><td><b>112</b></td></tr>
+<tr><td><b>משטרה</b></td><td><b>107</b></td></tr>
+<tr><td><b>אמבולנס / מד"א</b></td><td><b>104</b></td></tr>
+<tr><td><b>כבאים</b></td><td><b>105</b></td></tr>
+<tr><td>גרירה/חילוץ</td><td>188</td></tr>
+</table>
+<p><i>(112 מאושר באתר המשטרה ההונגרית police.hu ובאתר התיירות הרשמי visithungary.com; 104/105/107 באתר visithungary.com הרשמי.)</i></p>
+<h3>7.2 התמונה האמיתית</h3>
+<p>בודפשט <b>בטוחה יחסית</b> ביחס לבירות אירופה. <b>פשע אלים נגד תיירים נדיר</b>. הסיכון האמיתי הוא <b>כלכלי</b> — הונאה, חיובי יתר ומלכודות כספומט. אלה ניתנים למניעה בהיכרות בסיסית.</p>
+<table>
+<tr><th>אזור</th><th>הערכה</th></tr>
+<tr><td>רובע V (בלווארוש)</td><td>בטוח מאוד, מתויר, נוכחות משטרתית. הסיכון: חיוב יתר במסעדות</td></tr>
+<tr><td>רובע VI (טרזווארוש)</td><td>בטוח, מגורים+תיירים. סיכון כייסות נמוך</td></tr>
+<tr><td><b>רובע VII (הרובע היהודי / אזור הברים)</b></td><td>בטוח מפשע אלים, אבל <b>ריכוז החבלות הכספיות</b>: סקאם הבר, חיוב מופרז. <b>שישי/שבת בלילה</b> — קהל גדול של שתויים ותיירים = כייסות</td></tr>
+<tr><td>רובע VIII (יוז׳פבארוש — אזור בלהה לואיזה טר)</td><td>מעורב. <b>הכי פחות נוח לתיירים</b> במרכז פשט. להיזהר בלילה</td></tr>
+<tr><td>אזור טירת בודה</td><td>בטוח מאוד. הבעיה: תחבורה לילית דלילה — להשתמש ב‑Bolt</td></tr>
+</table>
+<h3>7.3 הסקאמים שצריך להכיר</h3>
+<p>1. <b>מוניות לא מורשות</b> — ליד השדה, תחנות רכבת, ואזורי ברי חורבות. תעריפים מופרזים פי 5–10. <b>פתרון: Bolt (או Főtaxi הרשמית).</b> אף פעם לא "לתפוס מונית" ברחוב. אף פעם לא לקחת "הצעה טובה" מגבר שניגש אליכם בטרמינל.</p>
+<p>2. <b>הסקאם של "konzumlány"</b> — אישה שמתיידדת עם תייר בודד ומזמינה אותו לבר, שם מגישים חשבון ענק. <b>ממוקד בגברים בודדים.</b> אף פעם לא ללכת לבר שמישהו זר המליץ. לא להשאיר משקה בלי השגחה.</p>
+<p>3. <b>חשבון מנופח בבר</b> — חיוב כפול, מחירי שתייה מוגזמים. לבדוק את החשבון, לשים לב ל"דמי קונסומציה" שלא קיבלתם.</p>
+<p>4. <b>ביום ראשון/ראשון מסביב לברי החורבות</b> — "ברי חורבות" אמיתיים בטוחים; אבל יש "שכבת לוויין" של מקומות שמחקים אותם עם סקאמים (בעיקר על מסלולי "ברי פאב קרואל"). לקרוא ביקורות אחרונות.</p>
+<p>5. <b>128 ATMs של Euronet</b> — ראו סעיף 3.3. <b>תמיד לבחור HUF.</b></p>
+<p>6. <b>מוכרים לא רשמיים של כרטיסי מרחצאות</b> מחוץ לסצ׳ני — כרטיסים מזויפים או במחיר מוגזם.</p>
+<p>7. <b>ואצי אוצ׳ה</b> — "דמי כיסוי" (1,000–1,500 פורינט על לחם) ו"דמי שירות" שמתווספים לחשבון. לאכול ברחוב מקביל.</p>
+<p>8. <b>כייסות</b> — בעיקר ברכבות מטרו עמוסות (M2, M3), במרכזים הומים וברובע VII בסופי שבוע. טלפון בכיס, לא ביד.</p>
+<h3>7.4 שורה תחתונה</h3>
+<ul>
+<li>להתקין <b>Bolt</b> לפני הנחיתה.</li>
+<li>לשלם <b>ב‑HUF</b>, תמיד.</li>
+<li>לא לעקוב אחרי הזמנות של זרים לברים.</li>
+<li><b>112</b> אם במקרה — אבל רוב הסיכוי שתתקלו בבעיה זה <b>חשבון מוגזם</b>, לא פשע.</li>
+</ul>
+<hr>
+<h2>8. מה חייבים להזמין מראש — 5 דברים</h2>
+<p>עבור סוף שבוע בפברואר (חמישי 18.2 → ראשון 21.2.2027), אלה הדברים שנגמרים:</p>
+<h3>1. סיור מודרך בפרלמנט ההונגרי</h3>
+<ul>
+<li><b>המוכר הרשמי היחידי:</b> https://www.jegymester.hu/parlament</li>
+<li>אתר הפרלמנט הרשמי (parlament.hu) מציין במפורש ש‑jegymester.hu הוא ספק הכרטיסים הרשמי, ומזהיר מפני אתרים אחרים.</li>
+<li>כרטיסים מראש — <b>רק אונליין</b>; בדלפק המבקרים אין כרטיסי מראש.</li>
+<li>🔴 <b>נגמר שבועות מראש.</b> במיוחד בסופי שבוע. להזמין ברגע שיודעים תאריך.</li>
+</ul>
+<h3>2. כרטיסים למרחצאות סצ׳ני — אונליין</h3>
+<ul>
+<li>https://tickets.szechenyibath.hu/</li>
+<li>סופי שבוע בחורף + "Good morning Budapest" בבוקר — הכי עמוסים.</li>
+<li>היתרון: מדלגים על התור בקופה, ויש גם כרטיסי <b>Fast Track</b> שזמינים <b>רק אונליין</b>.</li>
+</ul>
+<h3>3. רחצת לילה ברודאש — שישי ושבת (22:00–03:00)</h3>
+<ul>
+<li>https://tickets.rudasfurdo.hu/</li>
+<li>🔴 <b>רק אונליין</b> — <i>"כרטיסי רחצת לילה נמכרים רק אונליין"</i> (לא בקופה). 15,000 פורינט.</li>
+<li>קורה <b>רק בשישי ושבת</b> — כלומר אצלכם: <b>שישי 19.2 או שבת 20.2</b>. קיבולת מוגבלת → להזמין מראש.</li>
+</ul>
+<h3>4. Sparty — מסיבת המרחצאות בסצ׳ני</h3>
+<ul>
+<li>https://spartybooking.com/ (האתר הרשמי של מסיבות המרחצאות של בודפשט)</li>
+<li>מסיבות לילה בתוך המרחצאות, <b>קורה בשבת בלילה</b> — אצלכם: <b>שבת 20.2.2027</b>.</li>
+<li>כרטיסים הם <b>תאריך‑ספציפיים</b> ונגמרים. יש גם כרטיס SpartyPay לטעינה — פיקדון 3,000 פורינט מתוך 20,000.</li>
+</ul>
+<h3>5. ארוחת ערב בשישי/שבת במסעדה פופולרית</h3>
+<ul>
+<li>כל מסעדה פופולרית במרכז (למשל <b>New York Café</b> — https://newyorkcafe.hu/en/) <b>דורשת הזמנה מראש</b> בסופ"ש, במיוחד לקבוצה של 5.</li>
+<li>הכלל: כל מסעדה שאתם חושבים עליה — <b>להזמין דרך האתר הרשמי שלה</b> או בטלפון, <b>2–4 שבועות מראש</b>.</li>
+<li>🔴 <b>נמנעים מ</b>ואצי אוצ׳ה ורחובות תיירותיים באותו אופן.</li>
+</ul>
+<p><b>בונוסים (אם יש זמן):</b></p>
+<ul>
+<li>שייט ערב בדנובה — https://legenda.hu/en</li>
+<li>Budapest Card (כרטיס תיירות) — https://www.budapestinfo.hu/budapest-card — משתלם רק אם מבקרים בהרבה אטרקציות; <b>לא חובה</b>.</li>
+</ul>
+<hr>
+<h2>9. מקורות (כולם נבדקו ב‑16.10.2026 והחזירו HTTP 200)</h2>
+<h3>תחבורה</h3>
+<table>
+<tr><th>נושא</th><th>מקור</th><th>סטטוס</th></tr>
+<tr><td>100E Airport Express — מסלול, תדירות, כרטיס 2,500, add‑on 1,000, חוסר תקפות מנויים</td><td>https://bkk.hu/en/travel-information/airport-express/</td><td>✅ 200</td></tr>
+<tr><td>מחירי BKK הרשמיים</td><td>https://bkk.hu/en/tickets-and-passes/prices/</td><td>✅ 200</td></tr>
+<tr><td>כרטיס 72 שעות — מה מכסה ומה לא</td><td>https://bkk.hu/en/tickets-and-passes/prices/72-hour-budapest-travelcard/</td><td>✅ 200</td></tr>
+<tr><td>כרטיס 100E בודד</td><td>https://bkk.hu/en/tickets-and-passes/prices/airport-shuttle-bus-single-ticket/</td><td>✅ 200</td></tr>
+<tr><td>BudapestGO</td><td>https://bkk.hu/en/tickets-and-passes/budapestgo/</td><td>✅ 200</td></tr>
+<tr><td>תחבורה לילית — 24/7, תעריפים רגילים</td><td>https://bkk.hu/en/travel-information/night-transport/</td><td>✅ 200</td></tr>
+<tr><td>תעריף מונית רשמי בשדה (Főtaxi, 2,100 + 520/ק"מ + 130/דק')</td><td>https://www.bud.hu/en/parking-transport/transportation/taxi-uber/taxi</td><td>✅ 200</td></tr>
+<tr><td>Bolt בבודפשט</td><td>https://bolt.eu/en/cities/budapest/</td><td>✅ 200</td></tr>
+<tr><td>Bolt בשדה התעופה</td><td>https://bolt.eu/en/airports/bud/</td><td>✅ 200</td></tr>
+<tr><td>Főtaxi</td><td>https://fotaxi.hu/en/</td><td>✅ 200</td></tr>
+<tr><td>Minibud (שאטל שיתופי)</td><td>https://minibud.hu/en/</td><td>✅ 200</td></tr>
+</table>
+<h3>מרחצאות</h3>
+<table>
+<tr><th>נושא</th><th>מקור</th><th>סטטוס</th></tr>
+<tr><td>סצ׳ני — מחירי 2026, מוצרים, "אין השכרה"</td><td>https://www.szechenyibath.hu/prices</td><td>✅ 200</td></tr>
+<tr><td>סצ׳ני — שעות פתיחה</td><td>https://www.szechenyibath.hu/opening-hours</td><td>✅ 200</td></tr>
+<tr><td>רודאש — מחירי 2026, כרטיס לילה 15,000</td><td>https://www.rudasfurdo.hu/en/prices-2026</td><td>✅ 200</td></tr>
+<tr><td>רודאש — שעות פתיחה + רחצת לילה</td><td>https://www.rudasfurdo.hu/en/opening-hours</td><td>✅ 200</td></tr>
+<tr><td>לוקאץ׳ — מחירי 2026</td><td>https://www.lukacsfurdo.hu/en/prices</td><td>✅ 200</td></tr>
+<tr><td>גלרט — סגור עד 2028 (רשמי)</td><td>https://www.gellertfurdo.hu/en</td><td>✅ 200</td></tr>
+<tr><td>כרטיסי סצ׳ני אונליין</td><td>https://tickets.szechenyibath.hu/</td><td>✅ 200</td></tr>
+<tr><td>כרטיסי רודאש אונליין</td><td>https://tickets.rudasfurdo.hu/</td><td>✅ 200</td></tr>
+</table>
+<h3>וויז אייר</h3>
+<table>
+<tr><th>נושא</th><th>מקור</th><th>סטטוס</th></tr>
+<tr><td>כבודה מותרת — 40×30×20 חינם, Trolley 55×40×23, מזוודות</td><td>https://www.wizzair.com/en-gb/help-centre/booking-information-and-services/baggage/baggage-allowance</td><td>✅ 200</td></tr>
+<tr><td>תיק יד — כללי מפורטים, נוזלים, מתחת למושב</td><td>https://www.wizzair.com/en-gb/help-centre/booking-information-and-services/baggage/baggage-allowance/cabin-baggage</td><td>✅ 200</td></tr>
+<tr><td>מזוודות לתא המטען + 13 EUR/ק"ג</td><td>https://www.wizzair.com/en-gb/help-centre/booking-information-and-services/baggage/baggage-allowance/checked-in-baggage</td><td>✅ 200</td></tr>
+<tr><td>צ׳ק־אין — אונליין חינם, שדה "PAID"</td><td>https://www.wizzair.com/en-gb/help-centre/check-in-and-boarding/check-in</td><td>✅ 200</td></tr>
+<tr><td>תהליך הצ׳ק־אין — 30 יום / 24 שעות / 3 שעות</td><td>https://www.wizzair.com/en-gb/help-centre/check-in-and-boarding/check-in/check-in-process</td><td>✅ 200</td></tr>
+<tr><td>זמני צ׳ק־אין וסגירת מזוודות — 2 שעות / 40 דקות</td><td>https://www.wizzair.com/en-gb/help-centre/check-in-and-boarding/check-in/check-in-and-baggage-drop-off-times</td><td>✅ 200</td></tr>
+</table>
+<h3>כספים, מזג אוויר, ביטחון, חירום</h3>
+<table>
+<tr><th>נושא</th><th>מקור</th><th>סטטוס</th></tr>
+<tr><td>שער ECB רשמי EUR/HUF</td><td>https://www.ecb.europa.eu/stats/eurofxref/eurofxref-daily.xml</td><td>✅ 200</td></tr>
+<tr><td>שער HUF/ILS</td><td>https://open.er-api.com/v6/latest/HUF</td><td>✅ 200</td></tr>
+<tr><td>זריחה/שקיעה לתאריכי הנסיעה</td><td>https://api.sunrise-sunset.org/json?lat=47.4979&lng=19.0402&date=2027-02-18&tzid=Europe/Budapest</td><td>✅ 200</td></tr>
+<tr><td>מזג אוויר בפברואר</td><td>https://en.climate-data.org/europe/hungary/budapest/budapest-1218/t/february-2/</td><td>✅ 200</td></tr>
+<tr><td>מזג אוויר בפברואר (שמש/גשם)</td><td>https://www.weather2travel.com/hungary/budapest/february/</td><td>✅ 200</td></tr>
+<tr><td>מספרי חירום רשמיים (112/104/105/107)</td><td>https://visithungary.com/articles/emergency-and-important-numbers</td><td>✅ 200</td></tr>
+<tr><td>משטרה — 112</td><td>https://www.police.hu/en</td><td>✅ 200</td></tr>
+<tr><td>סקאמים ומלכודות תיירים</td><td>https://www.budapest-trip.com/guides/budapest-tourist-traps/</td><td>✅ 200</td></tr>
+<tr><td>ביטחון תיירים 2026</td><td>https://www.budapest-trip.com/guides/is-budapest-safe/</td><td>✅ 200</td></tr>
+<tr><td>מחירי מזון/שתייה</td><td>https://www.budapest-trip.com/guides/is-budapest-expensive/</td><td>✅ 200</td></tr>
+<tr><td>מחירי מדדים בבודפשט</td><td>https://www.numbeo.com/cost-of-living/in/Budapest</td><td>✅ 200</td></tr>
+<tr><td>סיור פרלמנט — המוכר הרשמי</td><td>https://www.jegymester.hu/parlament</td><td>✅ 200</td></tr>
+<tr><td>פרלמנט — אתר רשמי, כרטיסים</td><td>https://www.parlament.hu/web/visitors/ticket-prices</td><td>✅ 200</td></tr>
+<tr><td>פרלמנט — רכישה מראש רק אונליין</td><td>https://www.parlament.hu/web/visitors/purchasing-tickets</td><td>✅ 200</td></tr>
+<tr><td>Sparty</td><td>https://spartybooking.com/</td><td>✅ 200</td></tr>
+<tr><td>Budapest Card</td><td>https://www.budapestinfo.hu/budapest-card</td><td>✅ 200</td></tr>
+<tr><td>שייט בדנובה</td><td>https://legenda.hu/en</td><td>✅ 200</td></tr>
+<tr><td>New York Café</td><td>https://newyorkcafe.hu/en/</td><td>✅ 200</td></tr>
+</table>
+<h3>🔴 מקורות שליליים / מה שלא אומת</h3>
+<table>
+<tr><th>נושא</th><th>סטטוס</th></tr>
+<tr><td><b>מחיר מדויק של צ׳ק־אין בשדה ב‑וויז אייר</b></td><td>❌ <b>לא אומת.</b> wizzair.com מציין "PAID, זול יותר מראש" — <b>בלי מספר</b>. דיווחים שלישיים: €13 מראש / €40–50 בשדה (AirHelp) — לא מאושר רשמית</td></tr>
+<tr><td><b>מחירי WIZZ Priority / Trolley / מזוודות</b></td><td>❌ <b>לא מפורסם כמחיר קבוע.</b> דינמי ומוצג בזמן ההזמנה</td></tr>
+<tr><td><b>מחירי Bolt משדה התעופה</b></td><td>❌ <b>לא מפורסם</b> — דינמי באפליקציה. טווח 8,000–13,000 פורינט ממדריכים שלישיים</td></tr>
+<tr><td><b>"תוספת שדה תעופה 800 פורינט" במוניות</b></td><td>❌ <b>לא אומת</b> באתר bud.hu</td></tr>
+<tr><td><b>שכר דירה/השכרת מגבות במרחצאות</b></td><td>❌ <b>שירות ההשכרה אינו זמין כרגע</b> (רשמי) — חייבים להביא מהבית</td></tr>
+<tr><td><b>כללי צילום במרחצאות</b></td><td>❌ <b>לא אומת רשמית</b> — לבדוק שלטים במקום</td></tr>
+<tr><td><b>בריכות חוץ בסצ׳ני פתוחות בחורף</b></td><td>⚠️ מקור שלישי בלבד, לא אומת רשמית</td></tr>
+<tr><td><b>מספר "משטרת תיירים" (+36 1 438 8080)</b></td><td>❌ <b>לא אומת</b> מול מקור רשמי — להשתמש ב‑112</td></tr>
+<tr><td><b>מדריך ספארי לילדים/חגי חורף הונגריים בפברואר</b></td><td>❌ <b>לא נבדק</b></td></tr>
+</table>
+<hr>
+<p><b>נכתב במיוחד עבור הקבוצה: 5 חברים מישראל, 18–22.2.2027, 3 לילות במרכז בודפשט.</b></p></div>
+  </section>
+  
+  <section class="sec">
+    <div class="sechead"><span class="num">07</span><h2>תקציב וכספים</h2></div>
+    
+    <div class="secbody"><p class="pending">בהכנה — הנתונים בסבב אימות.</p></div>
+  </section>
+  
+  <section class="sec">
+    <div class="sechead"><span class="num">08</span><h2>צ׳ק-ליסט לפני הטיסה</h2></div>
+    
+    <div class="secbody"><div class="check"><ul><li>verify Arkia flight number in the airline portal</li><li>message property for 5 guest names / room sharing</li><li>book airport transfer for the 01:10 night arrival</li><li>confirm what luggage was purchased (Wizz basic = small cabin bag only)</li><li>online check-in Wizz — mandatory, opens 30 days before</li></ul></div></div>
+  </section>
+
+  <footer>
+    <p>אתר הטיול של karta · <a href="/karta/">כל האתרים</a> · <a href="budapest-2027.ics" download>הוספה ליומן (.ics)</a></p>
+    <p style="margin-top:8px">נבנה ע״י רמבו · הנתונים מאומתים מול ההזמנות; מה שלא אומת מסומן במפורש.</p>
+  </footer>
+</div>
+<script>
+  const target = new Date('2027-02-18T08:10:00Z').getTime();
+  function tick(){
+    let t = target - Date.now();
+    if (t < 0) t = 0;
+    const d = Math.floor(t/864e5), h = Math.floor(t%864e5/36e5), m = Math.floor(t%36e5/6e4), s = Math.floor(t%6e4/1e3);
+    document.getElementById('d').textContent = d;
+    document.getElementById('h').textContent = String(h).padStart(2,'0');
+    document.getElementById('m').textContent = String(m).padStart(2,'0');
+    document.getElementById('s').textContent = String(s).padStart(2,'0');
+  }
+  tick(); setInterval(tick, 1000);
+</script>
+</body>
+</html>

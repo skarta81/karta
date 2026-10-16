@@ -2,157 +2,221 @@
 <html lang="he" dir="rtl">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#fff9f3">
 <title>בודפשט 2027 · 5 חברים · 18–22.2</title>
 <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;700;900&display=swap" rel="stylesheet">
 <style>
-  :root{--bg:#0a0c10;--panel:#121821;--panel2:#182130;--line:rgba(255,255,255,.08);
-        --tx:#f4f6f8;--mut:#8b95a3;--acc:#d97706;--acc2:#f0a13a;}
-  *{margin:0;padding:0;box-sizing:border-box}
-  body{background:var(--bg);color:var(--tx);font-family:'Heebo',system-ui,-apple-system,sans-serif;
-       line-height:1.65;-webkit-font-smoothing:antialiased;
-       background-image:radial-gradient(1100px 700px at 50% -80px,#16202e 0%,transparent 70%)}
-  .wrap{max-width:1080px;margin:0 auto;padding:0 22px 120px}
-  header{padding:96px 0 56px;text-align:center}
-  .eyebrow{color:var(--acc);font-weight:700;letter-spacing:.14em;font-size:14px;margin-bottom:18px}
-  h1{font-size:clamp(38px,7vw,68px);font-weight:900;line-height:1.08;letter-spacing:-.02em}
-  h1 small{display:block;font-size:.36em;font-weight:400;color:var(--mut);letter-spacing:0;margin-top:16px}
-  .cd{display:flex;gap:14px;justify-content:center;margin:40px 0 8px;flex-wrap:wrap}
-  .cd div{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:16px 22px;min-width:104px}
-  .cd b{display:block;font-size:34px;font-weight:900;font-variant-numeric:tabular-nums}
-  .cd span{font-size:13px;color:var(--mut)}
-  .chips{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:26px}
-  .chip{background:var(--panel2);border:1px solid var(--line);border-radius:999px;padding:7px 18px;font-weight:700;font-size:15px}
-  .sec{margin-top:74px}
-  .sechead{display:flex;align-items:baseline;gap:16px;border-bottom:1px solid var(--line);padding-bottom:14px;margin-bottom:26px}
-  .sechead .num{color:var(--acc);font-weight:900;font-size:15px;letter-spacing:.1em}
-  .sechead h2{font-size:clamp(24px,3.4vw,34px);font-weight:900;letter-spacing:-.01em}
-  .sub{color:var(--mut);margin:-14px 0 22px}
-  .grid2{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:18px}
-  .grid4{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin:22px 0}
-  .card{background:var(--panel);border:1px solid var(--line);border-radius:20px;padding:26px;
-        transition:border-color .25s ease,transform .25s ease}
-  .card:hover{border-color:rgba(217,119,6,.45);transform:translateY(-2px)}
-  .card.wide{padding:30px}
-  .tagline{color:var(--acc);font-weight:700;font-size:15px;margin-bottom:12px}
-  .big{font-size:42px;font-weight:900;letter-spacing:-.02em;font-variant-numeric:tabular-nums}
-  .big .arrow{color:var(--mut);font-weight:400;margin:0 8px}
-  .big sup{font-size:.4em;color:var(--acc);vertical-align:super}
-  .h3big{font-size:22px;font-weight:900;margin:6px 0 6px}
+  :root{--cream:#fff9f3;--ink:#211d18;--mut:#7a6f63;--coral:#ff5a3c;--amber:#ffb020;--teal:#0aa3a3;
+        --violet:#6c5ce7;--line:#efe4d6;--card:#ffffff;--shadow:0 10px 30px rgba(70,50,20,.08)}
+  *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+  html{scroll-behavior:smooth}
+  body{background:var(--cream);color:var(--ink);line-height:1.65;
+       font-family:'Heebo',system-ui,-apple-system,sans-serif;-webkit-font-smoothing:antialiased;
+       background-image:radial-gradient(700px 420px at 88% -60px,rgba(255,176,32,.28),transparent 70%),
+                        radial-gradient(600px 380px at 4% 8%,rgba(10,163,163,.18),transparent 70%)}
+  .wrap{max-width:1060px;margin:0 auto;padding:0 18px 90px}
+  #prog{position:fixed;top:0;right:0;height:4px;width:0;z-index:40;
+        background:linear-gradient(90deg,var(--coral),var(--amber),var(--teal))}
+  header{padding:64px 0 26px;text-align:center;position:relative}
+  .eyebrow{display:inline-block;background:#fff;border:1px solid var(--line);border-radius:999px;
+           padding:7px 18px;font-weight:700;color:var(--coral);font-size:14px;box-shadow:var(--shadow)}
+  h1{font-size:clamp(40px,8.5vw,76px);font-weight:900;line-height:1.03;letter-spacing:-.03em;margin-top:20px}
+  h1 em{font-style:normal;background:linear-gradient(92deg,var(--coral),var(--amber) 60%,var(--teal));
+        -webkit-background-clip:text;background-clip:text;color:transparent}
+  header p.lead{color:var(--mut);font-size:clamp(16px,2.4vw,20px);margin-top:14px;font-weight:400}
+  .floaters{position:absolute;inset:0;pointer-events:none;font-size:34px;opacity:.9}
+  .floaters span{position:absolute;animation:fl 6s ease-in-out infinite}
+  .floaters span:nth-child(1){right:6%;top:22%} .floaters span:nth-child(2){left:7%;top:12%;animation-delay:.8s}
+  .floaters span:nth-child(3){right:14%;top:62%;animation-delay:1.6s} .floaters span:nth-child(4){left:12%;top:56%;animation-delay:2.4s}
+  @keyframes fl{0%,100%{transform:translateY(0) rotate(-3deg)}50%{transform:translateY(-16px) rotate(4deg)}}
+  .cd{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:30px auto 6px;max-width:560px}
+  .cd div{background:#fff;border:1px solid var(--line);border-radius:18px;padding:14px 6px;box-shadow:var(--shadow)}
+  .cd b{display:block;font-size:clamp(24px,6vw,38px);font-weight:900;font-variant-numeric:tabular-nums;color:var(--coral)}
+  .cd span{font-size:12px;color:var(--mut)}
+  .chips{display:flex;gap:9px;justify-content:center;flex-wrap:wrap;margin:22px 0 4px}
+  .chip{background:#fff;border:1px solid var(--line);border-radius:999px;padding:8px 20px;font-weight:700;
+        box-shadow:var(--shadow);font-size:15px}
+  .chip:nth-child(2n){color:var(--teal)} .chip:nth-child(3n){color:var(--coral)}
+  nav{position:sticky;top:0;z-index:30;margin:26px -18px 0;padding:10px 14px;
+      background:rgba(255,249,243,.86);backdrop-filter:blur(12px);border-bottom:1px solid var(--line);
+      display:flex;gap:8px;overflow-x:auto;scrollbar-width:none}
+  nav::-webkit-scrollbar{display:none}
+  .navchip{flex:0 0 auto;display:flex;align-items:center;gap:7px;text-decoration:none;color:var(--ink);
+           background:#fff;border:1px solid var(--line);border-radius:999px;padding:9px 15px;font-size:14px;
+           font-weight:700;transition:.25s;white-space:nowrap}
+  .navchip span{font-size:16px}
+  .navchip:active{transform:scale(.96)}
+  .navchip.on{background:var(--ink);color:#fff;border-color:var(--ink)}
+  .scenes{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;margin:26px 0 8px}
+  .scenecard{position:relative;border-radius:20px;overflow:hidden;box-shadow:var(--shadow);border:1px solid var(--line);
+             aspect-ratio:16/10;transform:translateZ(0)}
+  .scene{width:100%;height:100%;display:block;transition:transform .5s ease}
+  .scenecard:hover .scene{transform:scale(1.06)}
+  .scenecard figcaption{position:absolute;inset:auto 0 0 0;padding:24px 14px 12px;color:#fff;font-weight:900;font-size:17px;
+                        background:linear-gradient(transparent,rgba(0,0,0,.55))}
+  .sec{margin-top:56px;scroll-margin-top:78px}
+  .sechead{display:flex;align-items:center;gap:14px;margin-bottom:8px}
+  .num{background:var(--ink);color:#fff;border-radius:12px;padding:4px 11px;font-weight:900;font-size:14px}
+  .sechead h2{font-size:clamp(23px,4.4vw,34px);font-weight:900;letter-spacing:-.02em}
+  .sub{color:var(--mut);margin:0 0 18px}
+  .grid2{display:grid;grid-template-columns:repeat(auto-fit,minmax(290px,1fr));gap:14px}
+  .grid4{display:grid;grid-template-columns:repeat(auto-fit,minmax(132px,1fr));gap:10px;margin:18px 0}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:22px;padding:22px;box-shadow:var(--shadow);
+        transition:transform .3s ease,box-shadow .3s ease}
+  .card:hover{transform:translateY(-3px);box-shadow:0 16px 40px rgba(70,50,20,.12)}
+  .card.fly{border-top:5px solid var(--coral)} .card.fly:nth-child(2){border-top-color:var(--teal)}
+  .card.wide{padding:26px}
+  .tagline{color:var(--coral);font-weight:900;font-size:15px;margin-bottom:10px}
+  .big{font-size:clamp(28px,7vw,44px);font-weight:900;letter-spacing:-.02em;font-variant-numeric:tabular-nums}
+  .big .arrow{color:var(--mut);font-weight:400;margin:0 6px} .big sup{font-size:.38em;color:var(--coral)}
+  .h3big{font-size:21px;font-weight:900;margin:4px 0 4px}
   .muted{color:var(--mut);font-size:15px}
-  .kv{display:flex;justify-content:space-between;gap:16px;padding:9px 0;border-bottom:1px solid var(--line);font-size:16px}
-  .kv:last-of-type{border-bottom:0}
-  .kv span{color:var(--mut)}
-  .kv b{font-weight:700;text-align:left}
-  .stat{background:var(--panel2);border:1px solid var(--line);border-radius:14px;padding:14px}
-  .stat span{display:block;color:var(--mut);font-size:13px;margin-bottom:4px}
-  .stat b{font-size:17px;font-weight:900}
-  .note{background:rgba(217,119,6,.08);border:1px solid rgba(217,119,6,.28);border-radius:14px;
-        padding:14px 16px;margin-top:18px;font-size:15px}
-  .agency{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:14px;margin-top:18px;
-          background:var(--panel2);border:1px solid var(--line);border-radius:16px;padding:20px}
-  .agency span{display:block;color:var(--mut);font-size:13px}
-  .agency b,.agency a{font-weight:700;color:var(--tx);text-decoration:none;font-size:15px}
-  .agency a{color:var(--acc2);border-bottom:1px solid rgba(240,161,58,.4)}
-  .secbody h2{font-size:22px;font-weight:900;margin:30px 0 10px;color:var(--tx)}
-  .secbody h3{font-size:18px;font-weight:900;margin:24px 0 8px;color:var(--acc2)}
-  .secbody h4{font-size:16px;font-weight:700;margin:18px 0 6px}
-  .secbody p{margin:10px 0}
-  .secbody ul{margin:10px 24px 16px 0}
-  .secbody li{margin:7px 0}
-  .secbody li::marker{color:var(--acc)}
-  .secbody table{width:100%;border-collapse:collapse;margin:16px 0;font-size:15px;display:block;overflow-x:auto}
-  .secbody th{background:var(--panel2);color:var(--acc);font-weight:700;text-align:right;padding:11px 12px;white-space:nowrap}
-  .secbody td{padding:11px 12px;border-top:1px solid var(--line);vertical-align:top}
-  .secbody a{color:var(--acc2);text-decoration:none;border-bottom:1px solid rgba(240,161,58,.4)}
-  .secbody code{background:var(--panel2);padding:2px 7px;border-radius:7px;font-size:.92em}
-  .secbody hr{border:0;border-top:1px solid var(--line);margin:26px 0}
-  .pending{color:var(--mut);font-style:italic}
-  .check{background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:24px 28px}
-  .check li{margin:11px 0;font-size:16px}
-  footer{margin-top:80px;padding-top:26px;border-top:1px solid var(--line);color:var(--mut);font-size:14px;text-align:center}
-  footer a{color:var(--acc2);text-decoration:none}
-  @media(max-width:640px){.big{font-size:34px} .kv{flex-direction:column;gap:2px} .kv b{text-align:right}}
+  .kv{display:flex;justify-content:space-between;gap:14px;padding:8px 0;border-bottom:1px dashed var(--line);font-size:15.5px}
+  .kv:last-of-type{border-bottom:0} .kv span{color:var(--mut)} .kv b{text-align:left}
+  .stat{background:var(--cream);border:1px solid var(--line);border-radius:15px;padding:12px}
+  .stat span{display:block;color:var(--mut);font-size:12.5px} .stat b{font-size:16px;font-weight:900}
+  .tip{background:linear-gradient(180deg,#fff7e8,#fff3dd);border:1px solid #ffe0ad;border-radius:15px;
+       padding:13px 15px;margin-top:14px;font-size:15px}
+  .agency{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:12px;margin-top:14px;
+          background:#fff;border:1px solid var(--line);border-radius:18px;padding:18px;box-shadow:var(--shadow)}
+  .agency span{display:block;color:var(--mut);font-size:12.5px}
+  .agency b,.agency a{font-weight:900;color:var(--ink);text-decoration:none;font-size:15px}
+  .agency a{color:var(--teal)}
+  .secbody h2{font-size:21px;font-weight:900;margin:26px 0 8px}
+  .secbody h3{font-size:18px;font-weight:900;margin:22px 0 6px;color:var(--coral)}
+  .secbody h4{font-size:16px;font-weight:700;margin:16px 0 4px}
+  .secbody p{margin:9px 0} .secbody ul{margin:9px 22px 14px 0} .secbody li{margin:6px 0}
+  .secbody li::marker{color:var(--amber)}
+  .secbody table{width:100%;border-collapse:collapse;margin:14px 0;font-size:14.5px;background:#fff;
+                 border-radius:14px;overflow:hidden;box-shadow:var(--shadow);display:table}
+  .secbody th{background:var(--ink);color:#fff;text-align:right;padding:10px;font-weight:700}
+  .secbody td{padding:10px;border-top:1px solid var(--line);vertical-align:top}
+  .secbody a{color:var(--teal);text-decoration:none;border-bottom:1px solid rgba(10,163,163,.35)}
+  .secbody code{background:var(--cream);padding:2px 7px;border-radius:7px;font-size:.93em}
+  .secbody hr{border:0;border-top:1px dashed var(--line);margin:22px 0}
+  .check{background:#fff;border:1px solid var(--line);border-radius:20px;padding:20px 24px;box-shadow:var(--shadow)}
+  .check li{margin:10px 0;font-size:16px} .check li::marker{content:"☐  "}
+  .rev{opacity:0;transform:translateY(22px)} .rev.in{opacity:1;transform:none;transition:opacity .7s ease,transform .7s cubic-bezier(.2,.7,.3,1)}
+  .cta{margin-top:52px;background:linear-gradient(120deg,var(--coral),var(--amber));border-radius:24px;padding:32px 24px;
+       text-align:center;color:#fff;box-shadow:0 18px 40px rgba(255,90,60,.28)}
+  .cta h2{font-size:clamp(24px,5.4vw,36px);font-weight:900}
+  .cta p{margin:10px 0 18px;opacity:.95}
+  .cta a{display:inline-block;background:#fff;color:var(--coral);font-weight:900;border-radius:999px;
+         padding:13px 28px;text-decoration:none}
+  footer{margin-top:48px;text-align:center;color:var(--mut);font-size:13.5px;line-height:2}
+  footer a{color:var(--teal);text-decoration:none}
+  @media(max-width:600px){
+    header{padding:44px 0 18px} .kv{flex-direction:column;gap:1px} .kv b{text-align:right}
+    .card{padding:18px;border-radius:18px} nav{margin:20px -18px 0}
+    .sec{margin-top:44px} .secbody table{font-size:13.5px}
+  }
+  @media (prefers-reduced-motion:reduce){.rev{opacity:1;transform:none} .floaters span{animation:none}}
 </style>
 </head>
 <body>
+<div id="prog"></div>
 <div class="wrap">
   <header>
-    <div class="eyebrow">18–22 בפברואר 2027 · 3 לילות</div>
-    <h1>בודפשט <small>חמישה חברים · טיסות ישירות · מלון במרכז העיר</small></h1>
+    <div class="floaters"><span>✈️</span><span>♨️</span><span>🍻</span><span>🥩</span></div>
+    <div class="eyebrow">18–22 בפברואר 2027 · 3 לילות · 5 חברים</div>
+    <h1>יאללה <em>בודפשט</em></h1>
+    <p class="lead">טיסות ישירות · מלון במרכז · מרחצאות חמים · אוכל טוב וברים טובים יותר</p>
     <div class="cd" id="cd">
-      <div><b id="d">—</b><span>ימים</span></div>
-      <div><b id="h">—</b><span>שעות</span></div>
-      <div><b id="m">—</b><span>דקות</span></div>
-      <div><b id="s">—</b><span>שניות</span></div>
+      <div><b id="d">—</b><span>ימים</span></div><div><b id="h">—</b><span>שעות</span></div>
+      <div><b id="m">—</b><span>דקות</span></div><div><b id="s">—</b><span>שניות</span></div>
     </div>
     <div class="chips"><span class="chip">יוסי</span><span class="chip">קנפו</span><span class="chip">סעדו</span><span class="chip">שקד</span><span class="chip">יניב</span></div>
+    <div class="scenes">
+      <figure class="scenecard"><svg viewBox="0 0 640 400" class="scene" preserveAspectRatio="xMidYMid slice">
+<defs><linearGradient id="g1" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ffd9a0"/><stop offset="1" stop-color="#ff9d6c"/></linearGradient></defs>
+<rect width="640" height="400" fill="url(#g1)"/><circle cx="500" cy="90" r="52" fill="#fff3c4" opacity=".9"/>
+<rect y="255" width="640" height="145" fill="#7fd3d0"/><ellipse cx="320" cy="258" rx="300" ry="26" fill="#6ac6c2"/>
+<g opacity=".5" fill="#fff">['<circle cx="60" cy="150" r="16"/>', '<circle cx="106" cy="124" r="21"/>', '<circle cx="152" cy="98" r="26"/>', '<circle cx="198" cy="150" r="31"/>', '<circle cx="244" cy="124" r="16"/>', '<circle cx="290" cy="98" r="21"/>', '<circle cx="336" cy="150" r="26"/>', '<circle cx="382" cy="124" r="31"/>', '<circle cx="428" cy="98" r="16"/>', '<circle cx="474" cy="150" r="21"/>', '<circle cx="520" cy="124" r="26"/>', '<circle cx="566" cy="98" r="31"/>', '<circle cx="612" cy="150" r="16"/>']</g>
+<path d="M0 300 q80 -26 160 0 t160 0 t160 0 t160 0 v100 H0z" fill="#0aa3a3" opacity=".35"/></svg><figcaption>♨️ מרחצאות חמים</figcaption></figure>
+      <figure class="scenecard"><svg viewBox="0 0 640 400" class="scene" preserveAspectRatio="xMidYMid slice">
+<defs><linearGradient id="g2" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#2b3a67"/><stop offset="1" stop-color="#f4a259"/></linearGradient></defs>
+<rect width="640" height="400" fill="url(#g2)"/>
+<path d="M120 250 h400 v30 h-400z" fill="#1d2440"/><path d="M200 250 V170 h240 v80z" fill="#232c4f"/>
+<path d="M320 170 l-70 -34 l140 0 z" fill="#2e3860"/><rect x="300" y="110" width="40" height="30" fill="#39436b"/>
+<g fill="#ffd98a">['<rect x="150" y="200" width="7" height="14" opacity="0.50"/>', '<rect x="172" y="200" width="7" height="14" opacity="0.75"/>', '<rect x="194" y="200" width="7" height="14" opacity="1.00"/>', '<rect x="216" y="200" width="7" height="14" opacity="0.50"/>', '<rect x="238" y="200" width="7" height="14" opacity="0.75"/>', '<rect x="260" y="200" width="7" height="14" opacity="1.00"/>', '<rect x="282" y="200" width="7" height="14" opacity="0.50"/>', '<rect x="304" y="200" width="7" height="14" opacity="0.75"/>', '<rect x="326" y="200" width="7" height="14" opacity="1.00"/>', '<rect x="348" y="200" width="7" height="14" opacity="0.50"/>', '<rect x="370" y="200" width="7" height="14" opacity="0.75"/>', '<rect x="392" y="200" width="7" height="14" opacity="1.00"/>', '<rect x="414" y="200" width="7" height="14" opacity="0.50"/>', '<rect x="436" y="200" width="7" height="14" opacity="0.75"/>', '<rect x="458" y="200" width="7" height="14" opacity="1.00"/>', '<rect x="480" y="200" width="7" height="14" opacity="0.50"/>', '<rect x="502" y="200" width="7" height="14" opacity="0.75"/>', '<rect x="524" y="200" width="7" height="14" opacity="1.00"/>']</g>
+<rect y="280" width="640" height="120" fill="#141a33"/><g fill="#ffcb77" opacity=".8">['<circle cx="40" cy="320" r="4"/>', '<circle cx="92" cy="336" r="4"/>', '<circle cx="144" cy="320" r="4"/>', '<circle cx="196" cy="336" r="4"/>', '<circle cx="248" cy="320" r="4"/>', '<circle cx="300" cy="336" r="4"/>', '<circle cx="352" cy="320" r="4"/>', '<circle cx="404" cy="336" r="4"/>', '<circle cx="456" cy="320" r="4"/>', '<circle cx="508" cy="336" r="4"/>', '<circle cx="560" cy="320" r="4"/>', '<circle cx="612" cy="336" r="4"/>']</g></svg><figcaption>🏛️ פרלמנט על הדנובה</figcaption></figure>
+      <figure class="scenecard"><svg viewBox="0 0 640 400" class="scene" preserveAspectRatio="xMidYMid slice">
+<rect width="640" height="400" fill="#20143a"/>
+<g opacity=".9">['<path d="M50 300 V120" stroke="#ff5a3c" stroke-width="5" fill="none" opacity="0.40"/>', '<path d="M130 300 V160" stroke="#ff5a3c" stroke-width="5" fill="none" opacity="0.55"/>', '<path d="M210 300 V200" stroke="#ff5a3c" stroke-width="5" fill="none" opacity="0.70"/>', '<path d="M290 300 V120" stroke="#ff5a3c" stroke-width="5" fill="none" opacity="0.85"/>', '<path d="M370 300 V160" stroke="#ff5a3c" stroke-width="5" fill="none" opacity="0.40"/>', '<path d="M450 300 V200" stroke="#ff5a3c" stroke-width="5" fill="none" opacity="0.55"/>', '<path d="M530 300 V120" stroke="#ff5a3c" stroke-width="5" fill="none" opacity="0.70"/>', '<path d="M610 300 V160" stroke="#ff5a3c" stroke-width="5" fill="none" opacity="0.85"/>']</g>
+<g fill="#ffb020" opacity=".85">['<circle cx="90" cy="110" r="11"/>', '<circle cx="180" cy="140" r="11"/>', '<circle cx="270" cy="170" r="11"/>', '<circle cx="360" cy="110" r="11"/>', '<circle cx="450" cy="140" r="11"/>', '<circle cx="540" cy="170" r="11"/>', '<circle cx="630" cy="110" r="11"/>']</g>
+<g fill="#6c5ce7" opacity=".8">['<rect x="60" y="330" width="44" height="70" rx="8"/>', '<rect x="134" y="330" width="44" height="70" rx="8"/>', '<rect x="208" y="330" width="44" height="70" rx="8"/>', '<rect x="282" y="330" width="44" height="70" rx="8"/>', '<rect x="356" y="330" width="44" height="70" rx="8"/>', '<rect x="430" y="330" width="44" height="70" rx="8"/>', '<rect x="504" y="330" width="44" height="70" rx="8"/>', '<rect x="578" y="330" width="44" height="70" rx="8"/>']</g>
+<circle cx="520" cy="90" r="40" fill="#0aa3a3" opacity=".5"/></svg><figcaption>🍻 פאבי חורבות</figcaption></figure>
+      <figure class="scenecard"><svg viewBox="0 0 640 400" class="scene" preserveAspectRatio="xMidYMid slice">
+<defs><linearGradient id="g4" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#fff0d4"/><stop offset="1" stop-color="#ffb020"/></linearGradient></defs>
+<rect width="640" height="400" fill="url(#g4)"/>
+<ellipse cx="320" cy="250" rx="200" ry="110" fill="#b3402a"/><ellipse cx="320" cy="238" rx="176" ry="94" fill="#d9552f"/>
+<ellipse cx="320" cy="232" rx="150" ry="76" fill="#e86a3a"/>
+<g fill="#7a2e1c">['<circle cx="250" cy="210" r="7"/>', '<circle cx="274" cy="210" r="7"/>', '<circle cx="298" cy="210" r="7"/>', '<circle cx="322" cy="210" r="7"/>', '<circle cx="346" cy="210" r="7"/>', '<circle cx="370" cy="210" r="7"/>', '<circle cx="394" cy="210" r="7"/>', '<circle cx="250" cy="240" r="7"/>', '<circle cx="274" cy="240" r="7"/>', '<circle cx="298" cy="240" r="7"/>', '<circle cx="322" cy="240" r="7"/>', '<circle cx="346" cy="240" r="7"/>', '<circle cx="370" cy="240" r="7"/>', '<circle cx="394" cy="240" r="7"/>', '<circle cx="250" cy="270" r="7"/>', '<circle cx="274" cy="270" r="7"/>', '<circle cx="298" cy="270" r="7"/>', '<circle cx="322" cy="270" r="7"/>', '<circle cx="346" cy="270" r="7"/>', '<circle cx="370" cy="270" r="7"/>', '<circle cx="394" cy="270" r="7"/>']</g>
+<g fill="#3f8f3f">['<ellipse cx="280" cy="196" rx="10" ry="5"/>', '<ellipse cx="302" cy="196" rx="10" ry="5"/>', '<ellipse cx="324" cy="196" rx="10" ry="5"/>', '<ellipse cx="346" cy="196" rx="10" ry="5"/>']</g>
+<path d="M150 120 q60 -50 150 -30" stroke="#fff" stroke-width="7" fill="none" opacity=".55"/></svg><figcaption>🥘 גולאש וחבריו</figcaption></figure>
+    </div>
   </header>
 
+  <nav id="nav"><a href="#flights" class="navchip" data-nav="flights"><span>✈️</span>טיסות</a><a href="#hotel" class="navchip" data-nav="hotel"><span>🏨</span>מלון</a><a href="#plan" class="navchip" data-nav="plan"><span>🗓️</span>לוח זמנים</a><a href="#attr" class="navchip" data-nav="attr"><span>♨️</span>אטרקציות</a><a href="#food" class="navchip" data-nav="food"><span>🥩</span>אוכל</a><a href="#logi" class="navchip" data-nav="logi"><span>🧳</span>לוגיסטיקה</a><a href="#money" class="navchip" data-nav="money"><span>💱</span>כספים</a><a href="#check" class="navchip" data-nav="check"><span>✅</span>צ׳ק-ליסט</a></nav>
+
   
-  <section class="sec">
-    <div class="sechead"><span class="num">01</span><h2>טיסות והזמנה</h2></div>
+  <section class="sec rev" id="flights">
+    <div class="sechead"><span class="num">01</span><h2>✈️ טיסות והזמנה</h2></div>
     
     <div class="secbody">
 <div class="grid2">
-  <div class="card">
+  <div class="card fly">
     <div class="tagline">✈️ הלוך · יום ה׳ 18.2.2027</div>
     <div class="big">10:10 <span class="arrow">→</span> 12:45</div>
-    <div class="muted">Wizz Air · טיסה ישירה · W6 2326</div>
-    <div class="kv"><span>מסלול</span><b>תל אביב (TLV) → בודפשט (BUD)</b></div>
-    <div class="kv"><span>משך</span><b>3 שעות 35 דקות</b></div>
+    <div class="muted">Wizz Air · ישירה · <b>W6 2326</b></div>
+    <div class="kv"><span>מסלול</span><b>תל אביב (TLV) → בודפשט (BUD T2B)</b></div>
     <div class="kv"><span>PNR</span><b>IM3IYC</b></div>
-    <div class="note">🛂 <b>צ׳ק-אין אונליין חובה</b> — נפתח 24 שעות לפני (עם מושב: 30 יום) ונסגר 3 שעות לפני; בשדה ~3 שעות לפני (07:00). 🧳 <b>כבודה:</b> בכרטיס ללא WIZZ Priority מותר <b>תיק אחד 40×30×20</b> בלבד; טרולי 55×40×23 רק עם Priority. עודף משקל: 13€/ק״ג.</div>
+    <div class="tip">🛂 <b>צ׳ק-אין אונליין חובה</b> — 24 שעות לפני (נסגר 3 שעות לפני ההמראה).<br>🧳 ללא WIZZ Priority: תיק אחד <b>40×30×20</b> בלבד.</div>
   </div>
-  <div class="card">
+  <div class="card fly">
     <div class="tagline">✈️ חזור · יום א׳ 21.2.2027</div>
     <div class="big">21:05 <span class="arrow">→</span> 01:10<sup>+1</sup></div>
-    <div class="muted">Arkia · טיסה ישירה · IZ 1292</div>
-    <div class="kv"><span>מסלול</span><b>בודפשט (BUD) → תל אביב (TLV)</b></div>
-    <div class="kv"><span>נחיתה</span><b>לילה ב׳ 22.2, 01:10</b></div>
+    <div class="muted">Arkia · Airbus A320 · <b>IZ 1292</b></div>
+    <div class="kv"><span>מסלול</span><b>בודפשט (BUD T2B) → נתב״ג (T3)</b></div>
     <div class="kv"><span>PNR</span><b>H09DKT</b></div>
-    <div class="note">🌙 נחיתה אחרי חצות. ⏰ <b>טיימינג קריטי:</b> צ׳ק-אין/מסירת מזוודות בשדה נסגר <b>20:25</b>, השער 20:35 ⇒ <b>יוצאים מהמרכז ב-17:45–18:00</b>. כדאי <b>להזמין הסעה מראש</b> (גם הביתה מהנתב״ג).</div>
+    <div class="tip">⏰ <b>יוצאים מהמרכז ב-17:45–18:00</b> — מסירת מזוודות נסגרת 20:25.<br>🌙 נחיתה 01:10 — לסדר הסעה הביתה מראש.</div>
   </div>
 </div>
 <div class="agency">
-  <div><span>ספק</span><b>MAX Travel (by SKYGINI)</b></div>
-  <div><span>מספר הזמנה</span><b>8559619</b></div>
+  <div><span>הזמנה</span><b>MAX Travel (by SKYGINI) · 8559619</b></div>
   <div><span>אזור אישי</span><b>9169558</b></div>
-  <div><span>מייל הזמנה</span><b>shakedkarta8559619@skyginis.co.il</b></div>
-  <div><span>ניהול</span><a href="https://www.maxtravel.co.il/my-bookings" target="_blank" rel="noopener">maxtravel.co.il/my-bookings</a></div>
-  <div><span>תשלום</span><b>$0 — 702 נקודות SKYMAX</b></div>
+  <div><span>תשלום</span><b>$0 — 702 נק׳ SKYMAX</b></div>
+  <div><span>ניהול</span><a href="https://www.maxtravel.co.il/my-bookings" target="_blank" rel="noopener">my-bookings ↗</a></div>
 </div></div>
   </section>
   
-  <section class="sec">
-    <div class="sechead"><span class="num">02</span><h2>המלון</h2></div>
+  <section class="sec rev" id="hotel">
+    <div class="sechead"><span class="num">02</span><h2>🏨 המלון</h2></div>
     
     <div class="secbody">
 <div class="card wide">
   <div class="tagline">🏨 Three Corners Downtown Hotel</div>
   <h3 class="h3big">1051 Budapest, 20 Október 6. utca, Hungary</h3>
-  <p class="muted">רובע V (בלווארוש) — כ-200 מ׳ מבזיליקת סנט אישטוון, הליכה לדיאק טר. <a href="https://www.google.com/maps/search/?api=1&query=Three+Corners+Downtown+Hotel+Oktober+6+utca+20+Budapest" target="_blank" rel="noopener">מפה ↗</a></p>
-  <div class="kv"><span>דירוג Booking</span><b>9.3/10 מ-5,589 חוות דעת · מיקום 9.9/10 (Booking.com)</b></div>
-  <div class="kv"><span>תחבורה</span><b>450 מ׳ מתחנת המטרו Arany János utca (M3)</b></div>
+  <p class="muted">רובע V · כ-200 מ׳ מבזיליקת סנט אישטוון · הליכה לדיאק טר · <a href="https://www.google.com/maps/search/?api=1&query=Three+Corners+Downtown+Hotel+Oktober+6+utca+20+Budapest" target="_blank" rel="noopener">מפה ↗</a></p>
   <div class="grid4">
     <div class="stat"><span>צ׳ק-אין</span><b>18.2 מ-14:00</b></div>
     <div class="stat"><span>צ׳ק-אאוט</span><b>21.2 עד 11:00</b></div>
-    <div class="stat"><span>לילות</span><b>3 · 5 מבוגרים</b></div>
-    <div class="stat"><span>חדרים</span><b>2 (טריפל + זוגי)</b></div>
+    <div class="stat"><span>חדרים</span><b>2 · 5 מבוגרים</b></div>
+    <div class="stat"><span>בוקר</span><b>כלול ✓</b></div>
   </div>
-  <div class="kv"><span>ארוחת בוקר</span><b>כלולה בשני החדרים ✓</b></div>
-  <div class="kv"><span>מחיר</span><b>€944.8</b> (חדרים €866.79 + מע״מ €43.34 + מס עירוני €34.67)</div>
-  <div class="kv"><span>תשלום</span><b>במלון, בשעתיים (HUF)</b> — המס העירוני משולם במקום</div>
-  <div class="kv"><span>ביטול חינם</span><b>עד 16.2.2027 23:59</b> — אחרי כן €164 / €115.94</div>
-  <div class="kv"><span>הזמנה</span><b>Booking.com 6440216735</b> · PIN 6186 (confidential)</div>
-  <div class="kv"><span>טלפון המלון</span><b>+36 70 460 7379</b></div>
-  <div class="note">⚠️ שים לב: <b>המלון לא מקבל מסיבות/מסיבות רווקים</b>. חניה €40 ללילה (מקומות מוגבלים — להזמין מראש). טרם נמסרו שמות 5 האורחים — שווה לשלוח הודעה למלון דרך Booking.com.</div>
+  <div class="kv"><span>דירוג</span><b>9.3/10 מ-5,589 חוות דעת · מיקום 9.9/10 (Booking.com)</b></div>
+  <div class="kv"><span>תחבורה</span><b>450 מ׳ מתחנת המטרו Arany János utca (M3)</b></div>
+  <div class="kv"><span>מחיר</span><b>€944.8</b> — תשלום במקום ב-HUF</div>
+  <div class="kv"><span>ביטול חינם</span><b>עד 16.2.2027 23:59</b></div>
+  <div class="kv"><span>הזמנה</span><b>Booking 6440216735</b></div>
+  <div class="tip">⚠️ המלון לא מקבל מסיבות · חניה €40/לילה · כדאי לשלוח למלון את שמות 5 האורחים.</div>
 </div></div>
   </section>
   
-  <section class="sec">
-    <div class="sechead"><span class="num">03</span><h2>לוח זמנים — יום אחר יום</h2></div>
-    <p class="sub">תוכנית מפורטת עם שעות, מעברים והזמנות מראש.</p>
+  <section class="sec rev" id="plan">
+    <div class="sechead"><span class="num">03</span><h2>🗓️ לוח זמנים — יום אחר יום</h2></div>
+    <p class="sub">שעות, מעברים ומה להזמין מראש.</p>
     <div class="secbody"><p><!-- תוכן בעברית, מיועד לעמוד RTL --></p>
 <h2>בודפשט 2027 — מדריך אטרקציות, אוכל ושתייה ל-5 חברים</h2>
 <p><b>18–21 בפברואר 2027 · 3 לילות · בסיס: מרכז פשט (רובע V/VI/VII — דיאק טר / הרובע היהודי / הפרלמנט)</b></p>
@@ -206,9 +270,9 @@
 <hr></div>
   </section>
   
-  <section class="sec">
-    <div class="sechead"><span class="num">04</span><h2>אטרקציות</h2></div>
-    <p class="sub">שעות פתיחה ומחירים לאומתים לתאריכים שלנו (פברואר).</p>
+  <section class="sec rev" id="attr">
+    <div class="sechead"><span class="num">04</span><h2>♨️ אטרקציות</h2></div>
+    
     <div class="secbody"><p><!-- תוכן בעברית, מיועד לעמוד RTL --></p>
 <h2>בודפשט 2027 — מדריך אטרקציות, אוכל ושתייה ל-5 חברים</h2>
 <p><b>18–21 בפברואר 2027 · 3 לילות · בסיס: מרכז פשט (רובע V/VI/VII — דיאק טר / הרובע היהודי / הפרלמנט)</b></p>
@@ -406,9 +470,9 @@
 <p><i>נבדק לאחרונה: 16 באוקטובר 2026.</i></p></div>
   </section>
   
-  <section class="sec">
-    <div class="sechead"><span class="num">05</span><h2>אוכל ושתייה</h2></div>
-    <p class="sub">מסעדות וברים בסטייל שלנו — בשר, אסייני, קוקטיילים והאפי-אוור.</p>
+  <section class="sec rev" id="food">
+    <div class="sechead"><span class="num">05</span><h2>🥩 אוכל ושתייה</h2></div>
+    
     <div class="secbody"><p><!-- תוכן בעברית, מיועד לעמוד RTL --></p>
 <h2>בודפשט 2027 — מדריך אטרקציות, אוכל ושתייה ל-5 חברים</h2>
 <p><b>18–21 בפברואר 2027 · 3 לילות · בסיס: מרכז פשט (רובע V/VI/VII — דיאק טר / הרובע היהודי / הפרלמנט)</b></p>
@@ -509,9 +573,9 @@
 <hr></div>
   </section>
   
-  <section class="sec">
-    <div class="sechead"><span class="num">06</span><h2>לוגיסטיקה, תחבורה וציוד</h2></div>
-    <p class="sub">חורף בבודפשט, מזוודה של Wizz, ומרחצאות.</p>
+  <section class="sec rev" id="logi">
+    <div class="sechead"><span class="num">06</span><h2>🧳 לוגיסטיקה, תחבורה וציוד</h2></div>
+    
     <div class="secbody"><h2>בודפשט — מדריך לוגיסטי מלא</h2>
 <h3>5 חברים · 18–22.2.2027 · 3 לילות במרכז בודפשט</h3>
 <p>> <b>מסמך בעברית, מיועד לתצוגה RTL.</b></p>
@@ -872,8 +936,8 @@
 <p><b>נכתב במיוחד עבור הקבוצה: 5 חברים מישראל, 18–22.2.2027, 3 לילות במרכז בודפשט.</b></p></div>
   </section>
   
-  <section class="sec">
-    <div class="sechead"><span class="num">07</span><h2>כספים, מחירים וטיפים</h2></div>
+  <section class="sec rev" id="money">
+    <div class="sechead"><span class="num">07</span><h2>💱 כספים, מחירים וטיפים</h2></div>
     
     <div class="secbody"><h2>בודפשט — מדריך לוגיסטי מלא</h2>
 <h3>5 חברים · 18–22.2.2027 · 3 לילות במרכז בודפשט</h3>
@@ -932,29 +996,54 @@
 <hr></div>
   </section>
   
-  <section class="sec">
-    <div class="sechead"><span class="num">08</span><h2>צ׳ק-ליסט לפני הטיסה</h2></div>
+  <section class="sec rev" id="check">
+    <div class="sechead"><span class="num">08</span><h2>✅ צ׳ק-ליסט לפני הטיסה</h2></div>
     
     <div class="secbody"><div class="check"><ul><li>לקרוא את פירוט הכבודה בדף ההזמנה (Wizz בסיסי = תיק יד בלבד?)</li><li>לשלוח למלון שמות 5 האורחים וחלוקת החדרים דרך Booking.com</li><li>להזמין הסעה משדה בודפשט + הסעה הביתה מהנתב"ג אחרי הנחיתה ב-01:10</li><li>צ׳ק-אין אונליין ל-Wizz 24 שעות לפני (חובה — יש קנס על צ׳ק-אין בשדה)</li><li>לאמת מראש איזה שבוע זמני-שהות נופל על 18–22.2</li></ul></div></div>
   </section>
 
+  <div class="cta rev">
+    <h2>💥 5 חברים, 3 לילות, בודפשט</h2>
+    <p>כל הפרטים, השעות והמחירים — בעמוד הזה. שיהיה!</p>
+    <a href="budapest-2027.ics" download>הוספה ליומן (.ics)</a>
+  </div>
+
   <footer>
-    <p>אתר הטיול של karta · <a href="/karta/">כל האתרים</a> · <a href="budapest-2027.ics" download>הוספה ליומן (.ics)</a></p>
-    <p style="margin-top:8px">נבנה ע״י רמבו · הנתונים מאומתים מול ההזמנות; מה שלא אומת מסומן במפורש.</p>
+    <p><b>בודפשט 2027</b> · <a href="/karta/">שאר האתרים של karta</a></p>
+    <p>האיורים מצוירים בקוד (אין תמונות סטוק) · מה שלא אומת מסומן במפורש · נבנה ע״י רמבו</p>
   </footer>
 </div>
 <script>
   const target = new Date('2027-02-18T08:10:00Z').getTime();
+  const pad = n => String(n).padStart(2,'0');
   function tick(){
-    let t = target - Date.now();
-    if (t < 0) t = 0;
-    const d = Math.floor(t/864e5), h = Math.floor(t%864e5/36e5), m = Math.floor(t%36e5/6e4), s = Math.floor(t%6e4/1e3);
-    document.getElementById('d').textContent = d;
-    document.getElementById('h').textContent = String(h).padStart(2,'0');
-    document.getElementById('m').textContent = String(m).padStart(2,'0');
-    document.getElementById('s').textContent = String(s).padStart(2,'0');
+    let t = Math.max(0, target - Date.now());
+    document.getElementById('d').textContent = Math.floor(t/864e5);
+    document.getElementById('h').textContent = pad(Math.floor(t%864e5/36e5));
+    document.getElementById('m').textContent = pad(Math.floor(t%36e5/6e4));
+    document.getElementById('s').textContent = pad(Math.floor(t%6e4/1e3));
   }
-  tick(); setInterval(tick, 1000);
+  tick(); setInterval(tick,1000);
+
+  const io = new IntersectionObserver(es => es.forEach(e => e.isIntersecting && e.target.classList.add('in')),
+                                     {rootMargin:'0px 0px -8% 0px'});
+  document.querySelectorAll('.rev').forEach(el => io.observe(el));
+
+  const secs = [...document.querySelectorAll('.sec')];
+  const chips = [...document.querySelectorAll('.navchip')];
+  const navEl = document.getElementById('nav');
+  function onScroll(){
+    const h = document.documentElement;
+    document.getElementById('prog').style.width = (h.scrollTop/(h.scrollHeight-h.clientHeight)*100)+'%';
+    let cur = secs[0]?.id;
+    for (const s of secs) if (s.getBoundingClientRect().top <= 120) cur = s.id;
+    chips.forEach(c => {
+      const on = c.dataset.nav === cur;
+      c.classList.toggle('on', on);
+      if (on && window.innerWidth < 700) c.scrollIntoView({inline:'center', block:'nearest', behavior:'smooth'});
+    });
+  }
+  addEventListener('scroll', onScroll, {passive:true}); onScroll();
 </script>
 </body>
 </html>

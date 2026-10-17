@@ -32,10 +32,24 @@
     const ic = L.divIcon({className:'', iconSize:[30,30], iconAnchor:[15,15],
       html:'<div style="width:30px;height:30px;border-radius:50% 50% 50% 0;transform:rotate(-45deg);background:'+p.c+';border:3px solid #fff;box-shadow:0 3px 10px rgba(0,0,0,.35)"></div>'});
     const mk = L.marker([p.lat,p.lng], {icon:ic}).addTo(m);
-    mk.bindPopup('<b style="font-size:15px">'+p.n+'</b><br><span style="color:#555">'+p.note+
-      '</span><br><a href="'+p.g+'" target="_blank" rel="noopener">פתח בגוגל מפות ↗</a>');
+    mk.bindPopup('<b style="font-size:15px">'+p.n+'</b><br><span style="color:#555">'+(p.desc||'')+
+      (p.desc?'<br>':'')+p.note+'</span><br><a href="'+p.g+'" target="_blank" rel="noopener">פתח בגוגל מפות ↗</a>');
     pins.push(mk); byName[p.n] = mk;
   });
-  if (pins.length) m.fitBounds(L.featureGroup(pins).getBounds().pad(0.14));
+  // perspective: stay on Budapest (the TLV pin would zoom the whole continent)
+  m.setView([47.4979, 19.0402], 13);
+  window.__bp = {map: m, byName: byName};
+  document.querySelectorAll('.catcard li').forEach(function(li){
+    li.addEventListener('click', function(ev){
+      if (ev.target.tagName === 'A') return;
+      var la = parseFloat(li.dataset.lat), lo = parseFloat(li.dataset.lng);
+      if (!isFinite(la) || !isFinite(lo)) return;
+      var mk = byName[li.dataset.n];
+      var box = document.getElementById('bmap');
+      if (box) box.scrollIntoView({behavior:'smooth', block:'center'});
+      m.flyTo([la, lo], 17, {duration: 0.9});
+      if (mk) setTimeout(function(){ mk.openPopup(); }, 600);
+    });
+  });
 })();
 </script></section>

@@ -5,10 +5,21 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#fff9f3">
 <title>בודפשט 2027 · 5 חברים · 18–22.2</title>
-<link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;700;900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;700;900&family=Frank+Ruhl+Libre:wght@500;700;900&display=swap" rel="stylesheet">
 <style>
   :root{--cream:#fff9f3;--ink:#211d18;--mut:#7a6f63;--coral:#ff5a3c;--amber:#ffb020;--teal:#0aa3a3;
         --violet:#6c5ce7;--line:#efe4d6;--card:#ffffff;--shadow:0 10px 30px rgba(70,50,20,.08)}
+  /* ---- taste pass: editorial serif display, tightened palette, real focus states ---- */
+  h1,h2,.sechead h2,.cta h2,.cd b,.daybox h4{font-family:'Frank Ruhl Libre',Georgia,serif;letter-spacing:-.015em}
+  h1{font-size:clamp(38px,8.6vw,68px);line-height:1.03;font-weight:900}
+  h1 em{font-style:normal;color:var(--coral)}
+  :root{--coral:#e3543a;--teal:#0b8c8c;--violet:#5b4fd6;--amber:#eda42a;--line:#ece1d3}
+  a:focus-visible,button:focus-visible,.navchip:focus-visible,summary:focus-visible,input:focus-visible{outline:2px solid var(--coral);outline-offset:3px;border-radius:10px}
+  .secbody a{text-decoration:none;border-bottom:1px solid rgba(11,140,140,.35)}
+  .secbody a:hover{border-bottom-color:var(--teal)}
+  .floaters{display:none}
+  .card:hover,.chip:hover{transform:translateY(-2px)}
+  .sechead .num{font-variant-numeric:tabular-nums}
   *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
   html{scroll-padding-top:78px}
   body{background:var(--cream);color:var(--ink);line-height:1.65;

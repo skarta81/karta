@@ -14,7 +14,7 @@
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='88'%3E%E2%99%A8%EF%B8%8F%3C/text%3E%3C/svg%3E">
 <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;700;900&family=Frank+Ruhl+Libre:wght@500;700;900&display=swap" rel="stylesheet">
 <style>
-  :root{--cream:#fff9f3;--ink:#211d18;--mut:#7a6f63;--coral:#ff5a3c;--amber:#ffb020;--teal:#0aa3a3;
+  :root{--cream:#fff9f3;--ink:#211d18;--mut:#655b51;--coral:#ff5a3c;--amber:#ffb020;--teal:#0aa3a3;
         --violet:#6c5ce7;--line:#efe4d6;--card:#ffffff;--shadow:0 10px 30px rgba(70,50,20,.08)}
   /* ---- taste pass: editorial serif display, tightened palette, real focus states ---- */
   h1,h2,.sechead h2,.cta h2,.cd b,.daybox h4{font-family:'Frank Ruhl Libre',Georgia,serif;letter-spacing:-.015em}
@@ -63,6 +63,21 @@
   .navchip{flex:0 0 auto;display:flex;align-items:center;gap:7px;text-decoration:none;color:var(--ink);
            background:#fff;border:1px solid var(--line);border-radius:999px;padding:9px 15px;font-size:14px;
            transition:background .2s ease,color .2s ease,transform .2s ease;white-space:nowrap}
+  /* horizontal rails: day cards and point lists */
+  .dayrail{display:flex;gap:14px;overflow-x:auto;overflow-y:hidden;scroll-snap-type:x mandatory;
+            padding:6px 2px 16px;-webkit-overflow-scrolling:touch;scrollbar-width:thin}
+  .dayrail::-webkit-scrollbar{height:6px}
+  .dayrail::-webkit-scrollbar-thumb{background:var(--line);border-radius:99px}
+  .daycard{flex:0 0 84%;max-width:340px;scroll-snap-align:start;background:var(--card);border:1px solid var(--line);
+            border-radius:20px;padding:18px 20px;box-shadow:var(--shadow)}
+  .daycard h4{font-family:'Frank Ruhl Libre',Georgia,serif;font-size:20px;font-weight:700;margin-bottom:10px;color:var(--coral)}
+  .daycard table{display:block;overflow-x:auto;width:100%;border-collapse:collapse;font-size:14px}
+  .daycard td{padding:7px 6px;border-bottom:1px dashed var(--line);vertical-align:top}
+  .daycard td:first-child{white-space:nowrap;font-weight:700;color:var(--mut);font-size:13px}
+  .daycard tr:last-child td{border-bottom:0}
+  .days{display:flex;gap:12px;overflow-x:auto;padding-bottom:12px;scroll-snap-type:x proximity}
+  .daybox{flex:0 0 82%;max-width:330px;scroll-snap-align:start}
+  @media (max-width:380px){.cd{grid-template-columns:repeat(2,1fr)}}
   .sec{margin-top:56px;scroll-margin-top:78px}
   .sechead{display:flex;align-items:center;gap:14px;margin-bottom:8px}
   .num{background:var(--ink);color:#fff;border-radius:12px;padding:4px 11px;font-weight:900;font-size:14px}
@@ -247,64 +262,7 @@
   <section class="sec rev" id="plan">
     <div class="sechead"><span class="num">03</span><h2>🗓️ לוח זמנים — יום אחר יום</h2></div>
     <p class="sub">שעות, מעברים ומה להזמין מראש.</p>
-    <div class="secbody"><p><!-- תוכן בעברית, מיועד לעמוד RTL --></p>
-<details open><summary>בודפשט 2027 — מדריך אטרקציות, אוכל ושתייה ל-5 חברים</summary>
-<p><b>18–21 בפברואר 2027 · 3 לילות · בסיס: מרכז פשט (רובע V/VI/VII — דיאק טר / הרובע היהודי / הפרלמנט)</b></p>
-<p>> <b>כל השעות והמחירים נבדקו מול האתר הרשמי של כל מקום (אוקטובר 2026).</b> כל קישור בעמוד הוחזר בבדיקה עם קוד HTTP 200. מקום שבו לא נמצא מקור רשמי מסומן במפורש <b>"לא אומת"</b>. מחירי הקיץ/חורף ואפשרויות "הזמנה מראש" משתנים — מומלץ לבדוק שוב סמוך לנסיעה.</p>
-<hr>
-</details>
-<details open><summary>4. תוכנית יום-אחר-יום</summary>
-<h3>יום ה' 18.2 — נחיתה + מרכז פשט (חצי יום)</h3>
-<ul>
-<li><b>12:45</b> נחיתה ב-BUD.</li>
-<li><b><bdi dir="ltr">13:00–14:30</bdi></b> העברה למלון: אוטובוס <b>100E</b> (2,500 Ft, ~40 דק' לדיאק טר) או מונית/Bolt (~30 דק'). צ'ק-אין/השארת מזוודות.</li>
-<li><b><bdi dir="ltr">14:45–16:00</bdi></b> הליכה רגלית ב-<b>ואצי אוצ'ה</b> ו<b>כיכר Vörösmarty</b>, קפה (Gerbeaud) — התמצאות בעיר.</li>
-<li><b><bdi dir="ltr">16:15–17:30</bdi></b> <b>בזיליקת סטפן הקדוש</b> — עלייה לכיפת התצפית + האוצר (<bdi dir="ltr">09:00–19:00</bdi>). נוף אחר-הצהריים/דמדומים.</li>
-<li><b><bdi dir="ltr">18:00–19:30</bdi></b> ארוחת ערב: <b>Gettó Gulyás</b> (הונגרי) או <b>Mazel Tov</b> (ברובע היהודי) — הליכה ~10–15 דק'.</li>
-<li><b><bdi dir="ltr">20:30–23:00</bdi></b> קוקטייל פתיחה ב-<b>High Note SkyBar</b> (צמוד לבזיליקה). אופציה: המשך לילה קל ב<b>רובע היהודי</b> / Szimpla.</li>
-</ul>
-<h3>יום ו' 19.2 — פרלמנט, אנדראשי, פארק העיר ומרחצאות (יום מלא)</h3>
-<ul>
-<li><b>08:45</b> כיכר קושוט (M2, Kossuth Lajos tér). <b>09:00 סיור הפרלמנט</b> (45 דק', הזמנה מראש — שעות ביקור חורף <bdi dir="ltr">08:00–16:00</bdi>).</li>
-<li><b>10:15</b> הליכה לכיכר החירות (Szabadság tér), ואז <b>M1</b> מתחנת Bajcsy-Zsilinszky út לתחנת Vörösmarty utca.</li>
-<li><b><bdi dir="ltr">10:45–12:15</bdi></b> <b>בית הטרור</b> (אנדראשי út 60) — סגור בימי שני (יום ו' פתוח).</li>
-<li><b><bdi dir="ltr">12:30–13:30</bdi></b> צהריים באזור / לאורך אנדראשי.</li>
-<li><b>13:45</b> <b>M1</b> ל-<b>כיכר הגיבורים (Hősök tere)</b> והליכה בפארק העיר (Városliget) ליד טירת ויידהונייאד (חינם).</li>
-<li><b><bdi dir="ltr">14:30–18:00</bdi></b> <b>מרחצאות סצ'ני</b> — מרחצאות, סאונות ובריכה חיצונית חמה; <b>ביום שישי פתוח עד 22:00</b> (כרטיס שישי 14,800 Ft). מומלץ להזמין "Fast Track" מקוון.</li>
-<li><b><bdi dir="ltr">19:30–22:00</bdi></b> ארוחת ערב: בשר — <b>Prime Steak & Wine</b> (Sas utca, פתוח שישי <bdi dir="ltr">18:00–23:00</bdi>) או <b>Le Petit Beefbar</b> / <b>Nobu</b>.</li>
-<li><b>22:00–</b> ברים: <b>Szimpla Kert</b> + <b>Mazel Tov</b> / <b>Boutiq' Bar</b> ברובע המסיבות.</li>
-</ul>
-<h3>יום שבת 20.2 — רובע המצודה, השוק הגדול ושייט ערב</h3>
-<ul>
-<li><b>09:15</b> אוטובוס <b>16</b> (מדיאק טר) ל-<b>Dísz tér</b> / פוניקולר לטירה. סיור רגלי ברובע המצודה.</li>
-<li><b><bdi dir="ltr">09:45–11:00</bdi></b> <b>מצודת הדייגים</b> (מגדלים עליונים בתשלום עד 19:00) + <b>כנסיית מתיאש</b> (מחירון רשמי; מגדל בהזמנה).</li>
-<li><b><bdi dir="ltr">11:15–12:15</bdi></b> <b>בית החולים בסלע</b> (סיור מודרך של שעה, פתוח <bdi dir="ltr">10:00–19:00</bdi>, הזמנה מקוונת מומלצת).</li>
-<li><b><bdi dir="ltr">12:30–14:00</bdi></b> צהריים באזור המצודה.</li>
-<li><b><bdi dir="ltr">14:30–16:00</bdi></b> ירידה לפשט — <b>השוק הגדול</b> (שבת <bdi dir="ltr">06:00–16:00</bdi>; חינם).</li>
-<li><b><bdi dir="ltr">16:15–17:00</bdi></b> אופציה: <b>גבעת גלרט/ציטדלה</b> לתצפית, או הליכה לאורך הדנובה (נעליים על שפת הדנובה).</li>
-<li><b><bdi dir="ltr">18:00–19:15</bdi></b> <b>שייט ערב בדנובה</b> — Legenda "Danube Legend" (שעה, 25 EUR; מזח 7, Jane Haining rakpart). מומלץ להזמין שעה מראש.</li>
-<li><b><bdi dir="ltr">19:45–22:30</bdi></b> ארוחת ערב: <b>Stand25 Bisztró</b> (בודה, פתוח שבת; סגור ראשון) — או <b>Gettó Gulyás</b>.</li>
-<li><b>22:30–</b> ברים/חורבות לפי מצב הרוח.</li>
-</ul>
-<h3>יום א' 21.2 — סנטאנדרה / בוקר פשט, ואז שדה התעופה</h3>
-<ul>
-<li><b>08:45</b> <b>H5</b> מתחנת Batthyány tér ל-<b>סנטאנדרה</b> (~40 דק'; צריך כרטיס פרברים בנוסף).</li>
-<li><b><bdi dir="ltr">09:30–13:00</bdi></b> שוטטות בסנטאנדרה: גלריות, חנויות מלאכה, טיילת הדנובה, צהריים מקומיים.</li>
-<li><b>13:15</b> חזרה ל-BUD? לא — חזרה לבודפשט (Batthyány tér) ~14:00.</li>
-<li><b>אופציה חלופית קרובה:</b> לוותר על סנטאנדרה, ולעשות בוקר פשט רגוע — <b>בית הכנסת הגדול ברחוב דוהאן</b> (הרובע היהודי) + שוק/קפה, פחות סיכון ללוח הזמנים.</li>
-<li><b><bdi dir="ltr">14:30–15:30</bdi></b> ארוחה קלה/ארוז, איסוף מזוודות.</li>
-<li><b><bdi dir="ltr">17:15–17:30</bdi></b> יציאה מהמרכז לשדה: <b>100E</b> (2,500 Ft, ~40 דק'), הגעה ~<bdi dir="ltr">18:00–18:15</bdi> (כ-3 שעות לפני ההמראה).</li>
-<li><b><bdi dir="ltr">17:00–17:30</bdi></b> הגעה ל-BUD (יעד: 18:30), צ'ק-אין וביטחון.</li>
-<li><b>21:05</b> טיסה.</li>
-</ul>
-<p>> <b>אזהרת תזמון:</b> סנטאנדרה ביום היציאה היא אפשרית אך צפופה. כדי להקטין סיכון, אפשר להעביר את סנטאנדרה ליום ו' בבוקר ולהחליף את הפרלמנט ליום שבת — אבל לפרלמנט יש פחות סיורים באנגלית בסוף שבוע, ולכן מומלץ להשאיר את הפרלמנט ביום חול.</p>
-<hr>
-<ul>
-<li>להזמין מראש: סיור פרלמנט, סצ׳ני Fast Track, שייט Legenda, רחצת לילה ברודאש (אונליין בלבד)</li>
-<li>לוודא פירוט כבודה של ארקיע לטיסת החזור</li>
-<li>לוודא שעות טיסה מול MAX שבוע לפני הנסיעה</li>
-</ul>
-</details></div>
+    <div class="secbody"><div class="dayrail"></div></div>
   </section>
   
   <section class="sec rev" id="attr">
@@ -363,12 +321,12 @@
 <li><b>מחיר (מחירון 2026, כרטיס יומי עם לוקר):</b> שני–חמישי <b>13,200 Ft (≈€36)</b>; שישי וסופ"ש <b>14,800 Ft (≈€41)</b>; שיא/חגים 15,800 Ft (≈€43). כרטיס "Fast Track" מקוון: 15,200–17,800 Ft. כרטיס בוקר "Good Morning Budapest" (כניסה עד 09:00): 10,500 Ft (שישי 11,800 Ft).</li>
 <li><b>משך:</b> 2.5–3 שעות.</li>
 <li><b>הזמנה מראש:</b> לא חובה אך מומלץ להזמין מקוון (Fast Track) כדי לחסוך תור.</li>
-<li><b>קישורים:</b> שעות — https://www.szechenyibath.hu/opening-hours · מחירים — https://www.szechenyibath.hu/prices</li>
+<li><b>קישורים:</b> שעות — <a href="https://www.szechenyibath.hu/opening-hours" target="_blank" rel="noopener">קישורים: שעות</a> · מחירים — https://www.szechenyibath.hu/prices</li>
 </ul>
 <h3>2) מרחצאות גלרט — Gellért Gyógyfürdő · "גלרט"</h3>
 <ul>
 <li><b>סגור.</b> האתר הרשמי מעיד: "The bath is closed from October 1, 2025. Planned reopening in 2028." — כלומר בפברואר 2027 <b>סגור לשיפוץ</b>. לכן לקבוצה מומלץ <b>סצ'ני</b> (סעיף 1).</li>
-<li><b>קישור:</b> https://www.gellertbath.hu/</li>
+<li><b>קישור:</b> <a href="https://www.gellertbath.hu/" target="_blank" rel="noopener">קישור</a></li>
 </ul>
 <h3>3) בית הטרור — Terror Háza Múzeum (תעתיק: טֶרוֹר הַאזָה)</h3>
 <ul>
@@ -377,7 +335,7 @@
 <li><b>מחיר:</b> מבוגר <b>4,000 Ft (≈€11)</b>; כרטיס מוזל 2,000 Ft. <b>אין מכירה מקוונת — קונים במקום בלבד.</b></li>
 <li><b>משך:</b> 1.5–2 שעות.</li>
 <li><b>הזמנה מראש:</b> לא נדרשת לפרטיים (רק לקבוצות של 10+).</li>
-<li><b>קישור:</b> https://www.terrorhaza.hu/en/visitor-information</li>
+<li><b>קישור:</b> <a href="https://www.terrorhaza.hu/en/visitor-information" target="_blank" rel="noopener">קישור</a></li>
 </ul>
 <h3>4) בית החולים בסלע — Sziklakórház (תעתיק: סִיקלַקוֹרְהַאז)</h3>
 <ul>
@@ -386,7 +344,7 @@
 <li><b>מחיר:</b> סיור מודרך כלול במחיר. מבוגר, סיור באנגלית: <b>30 EUR (≈11,000 Ft)</b>; סיור בהונגרית 9,500 Ft. יש אוזניות תרגום (כולל עברית בכמה מסלולים).</li>
 <li><b>משך:</b> כ-60 דקות (סיור מודרך הוא דרך הכניסה היחידה).</li>
 <li><b>הזמנה מראש:</b> מומלץ מאוד להזמין מקוון — קיבולת מוגבלת, ורק בסיור מודרך.</li>
-<li><b>קישורים:</b> מחירים — https://www.sziklakorhaz.eu/en/prices · מידע — https://www.sziklakorhaz.eu/en/information · כרטיסים — https://www.sziklakorhaz.eu/en/online-tickets</li>
+<li><b>קישורים:</b> מחירים — <a href="https://www.sziklakorhaz.eu/en/prices" target="_blank" rel="noopener">קישורים: מחירים</a> · מידע — https://www.sziklakorhaz.eu/en/information · כרטיסים — https://www.sziklakorhaz.eu/en/online-tickets</li>
 </ul>
 <h3>5) סיור בבית הפרלמנט — Országház (תעתיק: אוֹרְסָאגְהָאז)</h3>
 <ul>
@@ -395,7 +353,7 @@
 <li><b>מחיר (מחירון רשמי 2026, סיור 45 דק'):</b> <b>מבקר שאינו תושב/אזרח האיחוד (כמו ישראלי): 14,000 Ft (≈€38)</b>. אזרחי הונגריה/EEE: 7,000 Ft. סטודנט לא-EEE 6–24: 7,000 Ft; מתחת ל-6 חינם.</li>
 <li><b>משך:</b> ~45 דקות הסיור + ~30 דק' ביקורת ביטחון (בסך הכול ~1.25 שעות).</li>
 <li><b>הזמנה מראש:</b> <b>חובה כמעט תמיד</b> (מקומות נגמרים שבועות מראש). שפות עם מדריך: הו, אנגלית, צרפתית, גרמנית, איטלקית, ספרדית; <b>עברית זמינה באוזניות בלבד</b> (audioguide).</li>
-<li><b>קישורים:</b> כרטיסים — https://jegymester.hu/production/480000/parlamenti-latogatas?preferredLanguage=en (אתר רשמי של לשכת הפרלמנט) · פורטל סוכנים/שעות — https://parlament.jegymester.hu/ · מחירון רשמי (PDF) — https://parlament.jegymester.hu/docs/parlament/2021/dijtetel_tablazat_20260101.pdf</li>
+<li><b>קישורים:</b> כרטיסים — <a href="https://jegymester.hu/production/480000/parlamenti-latogatas?preferredLanguage=en" target="_blank" rel="noopener">קישורים: כרטיסים</a> (אתר רשמי של לשכת הפרלמנט) · פורטל סוכנים/שעות — https://parlament.jegymester.hu/ · מחירון רשמי (PDF) — https://parlament.jegymester.hu/docs/parlament/2021/dijtetel_tablazat_20260101.pdf</li>
 </ul>
 <h3>6) כיפת בזיליקת סטפן הקדוש — Szent István Bazilika (תעתיק: סֶנט אִישתְוָאן בָּזִילִיקָה)</h3>
 <ul>
@@ -404,7 +362,7 @@
 <li><b>מחיר (מחירון רשמי מ-1.12.2025):</b> מבוגר — אולם הכנסייה <b>2,600 Ft (≈€7)</b>; כיפת תצפית + אוצר <b>5,000 Ft (≈€14)</b>; כרטיס משולב "הכול באחד" <b>6,800 Ft (≈€19)</b>. יש הנחה לסטודנט/אזרח ותיק.</li>
 <li><b>משך:</b> 45–60 דקות.</li>
 <li><b>הזמנה מראש:</b> לא חובה, אך מומלץ בכרטיס מקוון (מסלול "reserved" ללא תור).</li>
-<li><b>קישורים:</b> מחירון — https://bazilikabudapest.hu/en/jegyarak/ · פוסטר המחירים הרשמי — https://bazilikabudapest.hu/wp-content/uploads/2026/04/Szent-Istvan-Bazilika-2025-Jegypenztar-Arlista-B1-707-x-1000-Eng-nyomda-scaled.jpg</li>
+<li><b>קישורים:</b> מחירון — <a href="https://bazilikabudapest.hu/en/jegyarak/" target="_blank" rel="noopener">קישורים: מחירון</a> · פוסטר המחירים הרשמי — https://bazilikabudapest.hu/wp-content/uploads/2026/04/Szent-Istvan-Bazilika-2025-Jegypenztar-Arlista-B1-707-x-1000-Eng-nyomda-scaled.jpg</li>
 </ul>
 <h3>7) השוק הגדול — Nagy Vásárcsarnok (תעתיק: נַאד' וָאשָרְצַ'רְנוֹק)</h3>
 <ul>
@@ -413,7 +371,7 @@
 <li><b>מחיר:</b> חינם.</li>
 <li><b>משך:</b> 1–1.5 שעות.</li>
 <li><b>הזמנה מראש:</b> לא נדרשת.</li>
-<li><b>קישור:</b> https://piaconline.hu/nagycsarnok/</li>
+<li><b>קישור:</b> <a href="https://piaconline.hu/nagycsarnok/" target="_blank" rel="noopener">קישור</a></li>
 </ul>
 <h3>8) מצודת הדייגים — Halászbástya (תעתיק: הַלָאסְבָּאשטְיָה)</h3>
 <ul>
@@ -422,7 +380,7 @@
 <li><b>מחיר:</b> מבוגר למגדלים העליונים <b>1,700 Ft (≈€4.7)</b> (ניתן לרכוש במקום, כרטיס בלבד). יש כרטיס משולב עם מגדל כנסיית מגדלנה ב-2,500 Ft.</li>
 <li><b>משך:</b> 30–45 דקות.</li>
 <li><b>הזמנה מראש:</b> לא חובה; כרטיסים נמכרים ע"י עיריית רובע המצודה (גם אונליין).</li>
-<li><b>קישורים:</b> שעות — https://fishermansbastion.com/opening-hours · מחירים — https://fishermansbastion.com/fishermans-bastion-prices</li>
+<li><b>קישורים:</b> שעות — <a href="https://fishermansbastion.com/opening-hours" target="_blank" rel="noopener">קישורים: שעות</a> · מחירים — https://fishermansbastion.com/fishermans-bastion-prices</li>
 </ul>
 <h3>9) כנסיית מתיאש — Mátyás-templom (תעתיק: מָאטְיָאש טֶמפְלוֹם)</h3>
 <ul>
@@ -431,7 +389,7 @@
 <li><b>מחיר (רשמי):</b> מבוגר — כנסייה <b>3,400 Ft (≈€9)</b>; כנסייה + אודיו-מדריך 5,000 Ft; <b>מגדל (סיור קצר של 10 דק') — 4,000 Ft (≈€11)</b>.</li>
 <li><b>משך:</b> 45–60 דקות.</li>
 <li><b>הזמנה מראש:</b> למגדל מומלץ מאוד להזמין שעה מראש אונליין.</li>
-<li><b>קישורים:</b> מידע — https://matyas-templom.hu/en/ · כרטיסים — https://matyas-templom.hu/en/buy-tickets/</li>
+<li><b>קישורים:</b> מידע — <a href="https://matyas-templom.hu/en/" target="_blank" rel="noopener">קישורים: מידע</a> · כרטיסים — https://matyas-templom.hu/en/buy-tickets/</li>
 </ul>
 <h3>10) טירת בודה / המוזיאון להיסטוריה של בודפשט — Budavári Palota / BHM Vármúzeum (תעתיק: בּוּדָוָוארִי פָּלוטָה)</h3>
 <ul>
@@ -440,7 +398,7 @@
 <li><b>מחיר (רשמי):</b> מבוגר <b>3,800 Ft (≈€10)</b>; כרטיס BTM+ (כניסה לכמה אתרי BTM למשך חודש) 5,500 Ft. אולם סטפן הקדוש (Szent István-terem) — <b>בהזמנה מראש בלבד</b> דרך szentistvanterem.hu.</li>
 <li><b>משך:</b> 1.5–2 שעות.</li>
 <li><b>הזמנה מראש:</b> לא חובה למוזיאון; חובה לאולם סטפן הקדוש.</li>
-<li><b>קישורים:</b> כרטיסים — https://varmuzeum.hu/en/ticket-informations/ · ביקור — https://varmuzeum.hu/en/visit/</li>
+<li><b>קישורים:</b> כרטיסים — <a href="https://varmuzeum.hu/en/ticket-informations/" target="_blank" rel="noopener">קישורים: כרטיסים</a> · ביקור — https://varmuzeum.hu/en/visit/</li>
 </ul>
 <h3>11) שייט ערב בדנובה — Legenda "Danube Legend" (תעתיק: לֶגֶ'נדָה דָנוּב לֶגֶ'נד)</h3>
 <ul>
@@ -450,7 +408,7 @@
 <li><b>משך:</b> שעה (ערב) / כ-1.5 שעות (יום).</li>
 <li><b>נקודת יציאה:</b> Legenda, <b>מזח 7, Jane Haining rakpart</b> (ליד Vigadó tér, פשט).</li>
 <li><b>הזמנה מראש:</b> מומלץ, במיוחד לשעות הערב.</li>
-<li><b>קישורים:</b> הפלגה — https://legenda.hu/en/danube-legend · מחירים — https://legenda.hu/en/prices · לוח זמנים — https://legenda.hu/en/timetable · הגעה — https://legenda.hu/en/directions</li>
+<li><b>קישורים:</b> הפלגה — <a href="https://legenda.hu/en/danube-legend" target="_blank" rel="noopener">קישורים: הפלגה</a> · מחירים — https://legenda.hu/en/prices · לוח זמנים — https://legenda.hu/en/timetable · הגעה — https://legenda.hu/en/directions</li>
 </ul>
 <h3>12) פאבי-חורבות — Szimpla Kert (תעתיק: סִימפְּלָה קֶרְט)</h3>
 <ul>
@@ -459,7 +417,7 @@
 <li><b>מחיר:</b> כניסה חינם; שתייה לפי תפריט.</li>
 <li><b>משך:</b> 1–2 שעות (או יותר).</li>
 <li><b>הזמנה מראש:</b> לא נדרשת; בלילה צפוף מאוד — שווה להגיע מוקדם.</li>
-<li><b>קישור:</b> https://szimpla.hu/ (ה-אתר הרשמי; שעות אינן מפורסמות)</li>
+<li><b>קישור:</b> <a href="https://szimpla.hu/" target="_blank" rel="noopener">קישור</a> (ה-אתר הרשמי; שעות אינן מפורסמות)</li>
 </ul>
 <h3>13) סנטאנדרה — Szentendre (יום טיול) (תעתיק: סֶנטֶנְדְרֶה)</h3>
 <ul>
@@ -469,66 +427,66 @@
 <li><b>מחיר כניסות באתר:</b> משתנה לפי מוזיאון; <b>לא אומת</b> מחיר כניסה ספציפי.</li>
 <li><b>משך:</b> חצי יום (4–5 שעות כולל נסיעה).</li>
 <li><b>הזמנה מראש:</b> לא נדרשת.</li>
-<li><b>קישורים:</b> עיריית סנטאנדרה — https://szentendre.hu/ · כרטיס H5 "tour" (BKK) — https://bkk.hu/en/tickets-and-passes/prices/suburban-railway-tour-ticket-h5-h8-h9-full-fare/</li>
+<li><b>קישורים:</b> עיריית סנטאנדרה — <a href="https://szentendre.hu/" target="_blank" rel="noopener">קישורים: עיריית סנטאנדרה</a> · כרטיס H5 "tour" (BKK) — https://bkk.hu/en/tickets-and-passes/prices/suburban-railway-tour-ticket-h5-h8-h9-full-fare/</li>
 </ul>
 <hr>
 </details>
 <details open><summary>5. רשימת "להזמין מראש" (מה שנגמר)</summary>
 <table>
 <tr><th>מה</th><th>למה מראש</th><th>קישור הזמנה</th></tr>
-<tr><td>סיור הפרלמנט</td><td>נגמר שבועות מראש; שעות ביקור חורף <bdi dir="ltr">08:00–16:00</bdi></td><td>https://jegymester.hu/production/480000/parlamenti-latogatas?preferredLanguage=en</td></tr>
-<tr><td>שייט ערב Legenda (Danube Legend)</td><td>ערבים מלאים; להבטיח שעה</td><td>https://legenda.hu/en/danube-legend</td></tr>
-<tr><td>מרחצאות סצ'ני (Fast Track)</td><td>תור בכניסה</td><td>https://www.szechenyibath.hu/prices</td></tr>
-<tr><td>בית החולים בסלע (סיור מודרך)</td><td>קיבולת מוגבלת, סיור בשעה קבועה</td><td>https://www.sziklakorhaz.eu/en/online-tickets</td></tr>
-<tr><td>בזיליקה — כיפת תצפית</td><td>תור בכרטיסים</td><td>https://bazilikabudapest.hu/en/jegyarak/</td></tr>
-<tr><td>כנסיית מתיאש — מגדל</td><td>שעה קבועה נמכרת מראש</td><td>https://matyas-templom.hu/en/buy-tickets/</td></tr>
-<tr><td>אולם סטפן הקדוש (בטירה)</td><td>בהזמנה מראש בלבד</td><td>https://szentistvanterem.hu/</td></tr>
-<tr><td>Prime Steak & Wine</td><td>חובה + ערבות כרטיס</td><td>https://www.primesteakhouse.hu/en/</td></tr>
+<tr><td>סיור הפרלמנט</td><td>נגמר שבועות מראש; שעות ביקור חורף <bdi dir="ltr">08:00–16:00</bdi></td><td><a href="https://jegymester.hu/production/480000/parlamenti-latogatas?preferredLanguage=en" target="_blank" rel="noopener">קישור</a></td></tr>
+<tr><td>שייט ערב Legenda (Danube Legend)</td><td>ערבים מלאים; להבטיח שעה</td><td><a href="https://legenda.hu/en/danube-legend" target="_blank" rel="noopener">קישור</a></td></tr>
+<tr><td>מרחצאות סצ'ני (Fast Track)</td><td>תור בכניסה</td><td><a href="https://www.szechenyibath.hu/prices" target="_blank" rel="noopener">קישור</a></td></tr>
+<tr><td>בית החולים בסלע (סיור מודרך)</td><td>קיבולת מוגבלת, סיור בשעה קבועה</td><td><a href="https://www.sziklakorhaz.eu/en/online-tickets" target="_blank" rel="noopener">קישור</a></td></tr>
+<tr><td>בזיליקה — כיפת תצפית</td><td>תור בכרטיסים</td><td><a href="https://bazilikabudapest.hu/en/jegyarak/" target="_blank" rel="noopener">קישור</a></td></tr>
+<tr><td>כנסיית מתיאש — מגדל</td><td>שעה קבועה נמכרת מראש</td><td><a href="https://matyas-templom.hu/en/buy-tickets/" target="_blank" rel="noopener">קישור</a></td></tr>
+<tr><td>אולם סטפן הקדוש (בטירה)</td><td>בהזמנה מראש בלבד</td><td><a href="https://szentistvanterem.hu/" target="_blank" rel="noopener">קישור</a></td></tr>
+<tr><td>Prime Steak & Wine</td><td>חובה + ערבות כרטיס</td><td><a href="https://www.primesteakhouse.hu/en/" target="_blank" rel="noopener">קישור</a></td></tr>
 <tr><td>Mazel Tov / Gettó Gulyás / Stand25 / Nobu / Beefbar / High Note SkyBar</td><td>צפוף בחמישי–שבת</td><td>האתרים בסעיף 3</td></tr>
 </table>
-<p><b>לא צריך/לא אפשר מראש:</b> בית הטרור (אין מכירה מקוונת — כרטיס במקום), השוק הגדול (חינם), מצודת הדייגים (כרטיס במקום), Szimpla (כניסה חינם), תחבורה ציבורית (BKK: https://bkk.hu/en/tickets-and-passes/prices/).</p>
+<p><b>לא צריך/לא אפשר מראש:</b> בית הטרור (אין מכירה מקוונת — כרטיס במקום), השוק הגדול (חינם), מצודת הדייגים (כרטיס במקום), Szimpla (כניסה חינם), תחבורה ציבורית (BKK: <a href="https://bkk.hu/en/tickets-and-passes/prices/" target="_blank" rel="noopener"> Szimpla (כניסה חינם), תחבורה ציבורית (BKK</a>).</p>
 <hr>
 </details>
 <details open><summary>6. מקורות (כל הקישורים הוחזרו בבדיקה בקוד HTTP 200)</summary>
 <p><b>מרחצאות</b></p>
 <ul>
-<li>סצ'ני — שעות: https://www.szechenyibath.hu/opening-hours · מחירים: https://www.szechenyibath.hu/prices</li>
-<li>גלרט — הודעת סגירה: https://www.gellertbath.hu/</li>
+<li>סצ'ני — שעות: <a href="https://www.szechenyibath.hu/opening-hours" target="_blank" rel="noopener">שעות</a> · מחירים: https://www.szechenyibath.hu/prices</li>
+<li>גלרט — הודעת סגירה: <a href="https://www.gellertbath.hu/" target="_blank" rel="noopener">הודעת סגירה</a></li>
 </ul>
 <p><b>מוזיאונים וסיורים</b></p>
 <ul>
-<li>בית הטרור — מידע ומחירים: https://www.terrorhaza.hu/en/visitor-information · מחירים: https://www.terrorhaza.hu/en/visitor-information/jegyarak</li>
-<li>בית החולים בסלע — מחירים: https://www.sziklakorhaz.eu/en/prices · מידע: https://www.sziklakorhaz.eu/en/information · כרטיסים: https://www.sziklakorhaz.eu/en/online-tickets</li>
-<li>הפרלמנט — כרטיסים: https://jegymester.hu/production/480000/parlamenti-latogatas?preferredLanguage=en · פורטל רשמי: https://parlament.jegymester.hu/ · מחירון 2026 (PDF): https://parlament.jegymester.hu/docs/parlament/2021/dijtetel_tablazat_20260101.pdf</li>
-<li>בזיליקת סטפן — מחירים: https://bazilikabudapest.hu/en/jegyarak/ · פוסטר מחירים רשמי: https://bazilikabudapest.hu/wp-content/uploads/2026/04/Szent-Istvan-Bazilika-2025-Jegypenztar-Arlista-B1-707-x-1000-Eng-nyomda-scaled.jpg</li>
-<li>השוק הגדול — https://piaconline.hu/nagycsarnok/</li>
-<li>מצודת הדייגים — שעות: https://fishermansbastion.com/opening-hours · מחירים: https://fishermansbastion.com/fishermans-bastion-prices</li>
-<li>כנסיית מתיאש — https://matyas-templom.hu/en/ · כרטיסים: https://matyas-templom.hu/en/buy-tickets/</li>
-<li>טירת בודה / BHM — כרטיסים: https://varmuzeum.hu/en/ticket-informations/ · ביקור: https://varmuzeum.hu/en/visit/</li>
+<li>בית הטרור — מידע ומחירים: <a href="https://www.terrorhaza.hu/en/visitor-information" target="_blank" rel="noopener">מידע ומחירים</a> · מחירים: https://www.terrorhaza.hu/en/visitor-information/jegyarak</li>
+<li>בית החולים בסלע — מחירים: <a href="https://www.sziklakorhaz.eu/en/prices" target="_blank" rel="noopener">מחירים</a> · מידע: https://www.sziklakorhaz.eu/en/information · כרטיסים: https://www.sziklakorhaz.eu/en/online-tickets</li>
+<li>הפרלמנט — כרטיסים: <a href="https://jegymester.hu/production/480000/parlamenti-latogatas?preferredLanguage=en" target="_blank" rel="noopener">כרטיסים</a> · פורטל רשמי: https://parlament.jegymester.hu/ · מחירון 2026 (PDF): https://parlament.jegymester.hu/docs/parlament/2021/dijtetel_tablazat_20260101.pdf</li>
+<li>בזיליקת סטפן — מחירים: <a href="https://bazilikabudapest.hu/en/jegyarak/" target="_blank" rel="noopener">מחירים</a> · פוסטר מחירים רשמי: https://bazilikabudapest.hu/wp-content/uploads/2026/04/Szent-Istvan-Bazilika-2025-Jegypenztar-Arlista-B1-707-x-1000-Eng-nyomda-scaled.jpg</li>
+<li>השוק הגדול — <a href="https://piaconline.hu/nagycsarnok/" target="_blank" rel="noopener">השוק הגדול</a></li>
+<li>מצודת הדייגים — שעות: <a href="https://fishermansbastion.com/opening-hours" target="_blank" rel="noopener">שעות</a> · מחירים: https://fishermansbastion.com/fishermans-bastion-prices</li>
+<li>כנסיית מתיאש — <a href="https://matyas-templom.hu/en/" target="_blank" rel="noopener">כנסיית מתיאש</a> · כרטיסים: https://matyas-templom.hu/en/buy-tickets/</li>
+<li>טירת בודה / BHM — כרטיסים: <a href="https://varmuzeum.hu/en/ticket-informations/" target="_blank" rel="noopener">כרטיסים</a> · ביקור: https://varmuzeum.hu/en/visit/</li>
 </ul>
 <p><b>שייט</b></p>
 <ul>
-<li>Legenda Danube Legend — https://legenda.hu/en/danube-legend · מחירים: https://legenda.hu/en/prices · לוח זמנים: https://legenda.hu/en/timetable · הגעה: https://legenda.hu/en/directions</li>
+<li>Legenda Danube Legend — <a href="https://legenda.hu/en/danube-legend" target="_blank" rel="noopener">Legenda Danube Legend</a> · מחירים: https://legenda.hu/en/prices · לוח זמנים: https://legenda.hu/en/timetable · הגעה: https://legenda.hu/en/directions</li>
 </ul>
 <p><b>ברים</b></p>
 <ul>
-<li>Szimpla Kert — https://szimpla.hu/ (שעות אינן מפורסמות)</li>
-<li>High Note SkyBar — https://highnoteskybar.hu/en/</li>
-<li>Boutiq' Bar — https://boutiqbar.com/</li>
+<li>Szimpla Kert — <a href="https://szimpla.hu/" target="_blank" rel="noopener">Szimpla Kert</a> (שעות אינן מפורסמות)</li>
+<li>High Note SkyBar — <a href="https://highnoteskybar.hu/en/" target="_blank" rel="noopener">High Note SkyBar</a></li>
+<li>Boutiq' Bar — <a href="https://boutiqbar.com/" target="_blank" rel="noopener">Boutiq' Bar</a></li>
 </ul>
 <p><b>אוכל</b></p>
 <ul>
-<li>Gettó Gulyás — https://gettogulyas.hu/</li>
-<li>Mazel Tov — https://mazeltov.hu/en/</li>
-<li>Stand25 Bisztró — https://www.stand25.hu/</li>
-<li>Prime Steak & Wine — https://www.primesteakhouse.hu/en/</li>
-<li>Le Petit Beefbar — https://beefbar.com/petit-beefbar-budapest/</li>
-<li>Nobu Budapest — https://www.noburestaurants.com/budapest/contact-and-hours</li>
+<li>Gettó Gulyás — <a href="https://gettogulyas.hu/" target="_blank" rel="noopener">Gettó Gulyás</a></li>
+<li>Mazel Tov — <a href="https://mazeltov.hu/en/" target="_blank" rel="noopener">Mazel Tov</a></li>
+<li>Stand25 Bisztró — <a href="https://www.stand25.hu/" target="_blank" rel="noopener">Stand25 Bisztró</a></li>
+<li>Prime Steak & Wine — <a href="https://www.primesteakhouse.hu/en/" target="_blank" rel="noopener">Prime Steak & Wine</a></li>
+<li>Le Petit Beefbar — <a href="https://beefbar.com/petit-beefbar-budapest/" target="_blank" rel="noopener">Le Petit Beefbar</a></li>
+<li>Nobu Budapest — <a href="https://www.noburestaurants.com/budapest/contact-and-hours" target="_blank" rel="noopener">Nobu Budapest</a></li>
 </ul>
 <p><b>תחבורה</b></p>
 <ul>
-<li>BKK — מחירון: https://bkk.hu/en/tickets-and-passes/prices/ · כרטיס 72 שעות: https://bkk.hu/en/tickets-and-passes/prices/72-hour-budapest-travelcard/ · כרטיס H5 לסנטאנדרה: https://bkk.hu/en/tickets-and-passes/prices/suburban-railway-tour-ticket-h5-h8-h9-full-fare/</li>
-<li>סנטאנדרה — https://szentendre.hu/</li>
+<li>BKK — מחירון: <a href="https://bkk.hu/en/tickets-and-passes/prices/" target="_blank" rel="noopener">מחירון</a> · כרטיס 72 שעות: https://bkk.hu/en/tickets-and-passes/prices/72-hour-budapest-travelcard/ · כרטיס H5 לסנטאנדרה: https://bkk.hu/en/tickets-and-passes/prices/suburban-railway-tour-ticket-h5-h8-h9-full-fare/</li>
+<li>סנטאנדרה — <a href="https://szentendre.hu/" target="_blank" rel="noopener">סנטאנדרה</a></li>
 </ul>
 <p><b>לא אומת (דורש בדיקה נוספת סמוך לנסיעה):</b> שעות Open של Café Kör (אין אתר רשמי זמין), שעות Szimpla Kert, שעות חורף רשמיות לכנסיית מתיאש, ושעות/מחירי המוזיאונים בסנטאנדרה.</p>
 <p><i>נבדק לאחרונה: 16 באוקטובר 2026.</i></p>
@@ -553,7 +511,7 @@
 <li><b>למה מתאים:</b> קלאסיקה הונגרית, אווירה צעירה, מרחק הליכה מ-Szimpla.</li>
 <li><b>שעות (רשמי):</b> <b>ראשון–שבת <bdi dir="ltr">12:00–23:00</bdi>.</b></li>
 <li><b>הזמנה:</b> מומלצת, במיוחד בערבים.</li>
-<li><b>קישור:</b> https://gettogulyas.hu/</li>
+<li><b>קישור:</b> <a href="https://gettogulyas.hu/" target="_blank" rel="noopener">קישור</a></li>
 </ul>
 <h3>2) Mazel Tov — מטבח יהודי חדש / ים תיכוני</h3>
 <ul>
@@ -562,7 +520,7 @@
 <li><b>למה מתאים:</b> אווירה מעולה, מתאים לקבוצה, בר חי בערבים.</li>
 <li><b>שעות (רשמי):</b> שני–חמישי <bdi dir="ltr">12:00–23:00</bdi>; שישי–ראשון <bdi dir="ltr">12:00–24:00</bdi> (המטבח נסגר 22:00/22:30).</li>
 <li><b>הזמנה:</b> מומלצת מאוד (המתנה של 30+ דק' למי שלא הזמין).</li>
-<li><b>קישור:</b> https://mazeltov.hu/en/</li>
+<li><b>קישור:</b> <a href="https://mazeltov.hu/en/" target="_blank" rel="noopener">קישור</a></li>
 </ul>
 <h3>3) Café Kör — ביסטרו הונגרי קלאסי</h3>
 <ul>
@@ -580,7 +538,7 @@
 <li><b>למה מתאים:</b> האוכל ההונגרי המודרני הטוב בעיר, אווירה נינוחה לקבוצה.</li>
 <li><b>שעות (רשמי):</b> שני–שבת — צהריים <bdi dir="ltr">12:00–16:00</bdi> (הזמנה אחרונה 14:30), ערב <bdi dir="ltr">17:30–24:00</bdi> (הזמנה אחרונה 21:30). <b>ראשון סגור.</b></li>
 <li><b>הזמנה:</b> מומלצת.</li>
-<li><b>קישור:</b> https://www.stand25.hu/</li>
+<li><b>קישור:</b> <a href="https://www.stand25.hu/" target="_blank" rel="noopener">קישור</a></li>
 </ul>
 <h3>5) Prime Steak & Wine — סטייקה-האוס יוקרתי</h3>
 <ul>
@@ -589,7 +547,7 @@
 <li><b>למה מתאים:</b> הבחירה הכי "בשרית" ויוקרתית; קרוב לבזיליקה.</li>
 <li><b>שעות (רשמי):</b> שלישי–שישי <bdi dir="ltr">18:00–23:00</bdi>; שבת <bdi dir="ltr">12:00–23:00</bdi>; <b>ראשון ושני סגור.</b></li>
 <li><b>הזמנה:</b> <b>חובה</b> — כולל ערבות כרטיס אשראי וקנס אי-הגעה 10,000 Ft לאדם. לבושים חכם-קז'ואל.</li>
-<li><b>קישור:</b> https://www.primesteakhouse.hu/en/</li>
+<li><b>קישור:</b> <a href="https://www.primesteakhouse.hu/en/" target="_blank" rel="noopener">קישור</a></li>
 </ul>
 <h3>6) Le Petit Beefbar — בשר / בראסרי צרפתי</h3>
 <ul>
@@ -598,7 +556,7 @@
 <li><b>למה מתאים:</b> בשר איכותי + אווירה אופנתית על שדרת אנדראשי.</li>
 <li><b>שעות:</b> צהריים <bdi dir="ltr">12:00–15:00</bdi>; ערב ראשון–חמישי <bdi dir="ltr">18:00–23:00</bdi>, שישי–שבת <bdi dir="ltr">18:00–24:00</bdi>.</li>
 <li><b>הזמנה:</b> מומלצת.</li>
-<li><b>קישור:</b> https://beefbar.com/petit-beefbar-budapest/</li>
+<li><b>קישור:</b> <a href="https://beefbar.com/petit-beefbar-budapest/" target="_blank" rel="noopener">קישור</a></li>
 </ul>
 <h3>7) Nobu Budapest — יפני-פרואני</h3>
 <ul>
@@ -607,7 +565,7 @@
 <li><b>למה מתאים:</b> האופציה האסיאתית הכי איכותית במרכז; בר מצוין להמשך לילה.</li>
 <li><b>שעות (רשמי):</b> מסעדה — כל יום <bdi dir="ltr">12:00–23:00</bdi>; הבר ראשון–חמישי עד 24:00, שישי–שבת עד 02:00.</li>
 <li><b>הזמנה:</b> מומלצת.</li>
-<li><b>קישור:</b> https://www.noburestaurants.com/budapest/contact-and-hours</li>
+<li><b>קישור:</b> <a href="https://www.noburestaurants.com/budapest/contact-and-hours" target="_blank" rel="noopener">קישור</a></li>
 </ul>
 <h3>8) High Note SkyBar — בר רופטופ</h3>
 <ul>
@@ -616,7 +574,7 @@
 <li><b>למה מתאים:</b> פתיחה מושלמת לערב ראשון, נוף, ללא דמי כניסה.</li>
 <li><b>שעות (רשמי):</b> שני–חמישי <bdi dir="ltr">16:00–24:00</bdi>; שישי–ראשון <bdi dir="ltr">14:00–24:00</bdi>.</li>
 <li><b>הזמנה:</b> מומלצת (אין דמי כניסה, אך צפוף).</li>
-<li><b>קישור:</b> https://highnoteskybar.hu/en/</li>
+<li><b>קישור:</b> <a href="https://highnoteskybar.hu/en/" target="_blank" rel="noopener">קישור</a></li>
 </ul>
 <h3>9) Boutiq' Bar — בר קוקטיילים עטור פרסים</h3>
 <ul>
@@ -625,7 +583,7 @@
 <li><b>למה מתאים:</b> קוקטיילים ברמה עולמית ברובע המסיבות.</li>
 <li><b>שעות:</b> רביעי–שבת מ-18:00 (רשמי).</li>
 <li><b>הזמנה:</b> מומלצת בערבי סוף שבוע.</li>
-<li><b>קישור:</b> https://boutiqbar.com/</li>
+<li><b>קישור:</b> <a href="https://boutiqbar.com/" target="_blank" rel="noopener">קישור</a></li>
 </ul>
 <h3>10) Szimpla Kert — בר חורבות (רובע היהודי)</h3>
 <ul>
@@ -634,7 +592,7 @@
 <li><b>למה מתאים:</b> חובה לחוויית "בודפשט האמיתית" בקבוצה.</li>
 <li><b>שעות:</b> <b>לא אומת רשמית</b> (האתר הרשמי אינו מפרסם שעות).</li>
 <li><b>הזמנה:</b> לא נדרשת.</li>
-<li><b>קישור:</b> https://szimpla.hu/</li>
+<li><b>קישור:</b> <a href="https://szimpla.hu/" target="_blank" rel="noopener">קישור</a></li>
 </ul>
 <hr>
 </details></div>
@@ -898,7 +856,7 @@
 <p>עבור סוף שבוע בפברואר (חמישי 18.2 → ראשון 21.2.2027), אלה הדברים שנגמרים:</p>
 <h3>1. סיור מודרך בפרלמנט ההונגרי</h3>
 <ul>
-<li><b>המוכר הרשמי היחידי:</b> https://www.jegymester.hu/parlament</li>
+<li><b>המוכר הרשמי היחידי:</b> <a href="https://www.jegymester.hu/parlament" target="_blank" rel="noopener">המוכר הרשמי היחידי</a></li>
 <li>אתר הפרלמנט הרשמי (parlament.hu) מציין במפורש ש‑jegymester.hu הוא ספק הכרטיסים הרשמי, ומזהיר מפני אתרים אחרים ("אין אנו אחראים לנזקים — כרטיסים במחיר מופרז או מזויפים — שנגרמו מכרטיסים שנרכשו באתרים אחרים").</li>
 <li>כרטיסים מראש — <b>רק אונליין</b>; בדלפק המבקרים אין כרטיסי מראש.</li>
 <li>🔴 <b>נגמר מראש.</b> לפי מדריכים פרטיים — שבועות מראש, במיוחד בסופי שבוע; <b>"התפוסה נגמרת 2–3 שבועות מראש"</b> — <i>מקור שלישי, לא אומת רשמית</i>. בכל מקרה: להזמין ברגע שיודעים תאריך.</li>
@@ -906,33 +864,33 @@
 </ul>
 <h3>2. כרטיסים למרחצאות סצ׳ני — אונליין</h3>
 <ul>
-<li>https://tickets.szechenyibath.hu/</li>
+<li><a href="https://tickets.szechenyibath.hu/" target="_blank" rel="noopener">tickets.szechenyibath.hu</a></li>
 <li>סופי שבוע בחורף + "Good morning Budapest" בבוקר — הכי עמוסים.</li>
 <li>היתרון: מדלגים על התור בקופה, ויש גם כרטיסי <b>Fast Track</b> שזמינים <b>רק אונליין</b>.</li>
 </ul>
 <h3>3. רחצת לילה ברודאש — שישי ושבת (<bdi dir="ltr">22:00–03:00</bdi>)</h3>
 <ul>
-<li>https://tickets.rudasfurdo.hu/</li>
+<li><a href="https://tickets.rudasfurdo.hu/" target="_blank" rel="noopener">tickets.rudasfurdo.hu</a></li>
 <li>🔴 <b>רק אונליין</b> — <i>"כרטיסי רחצת לילה נמכרים רק אונליין"</i> (לא בקופה). 15,000 פורינט.</li>
 <li>קורה <b>רק בשישי ושבת</b> — כלומר אצלכם: <b>שישי 19.2 או שבת 20.2</b>. קיבולת מוגבלת → להזמין מראש.</li>
 </ul>
 <h3>4. Sparty — מסיבת המרחצאות בסצ׳ני</h3>
 <ul>
-<li>https://spartybooking.com/ (האתר הרשמי של מסיבות המרחצאות של בודפשט)</li>
+<li><a href="https://spartybooking.com/" target="_blank" rel="noopener">spartybooking.com</a> (האתר הרשמי של מסיבות המרחצאות של בודפשט)</li>
 <li>מסיבות לילה בתוך המרחצאות, <b>קורה בשבת בלילה</b> — אצלכם: <b>שבת 20.2.2027</b>.</li>
 <li><b>תאריכי פברואר 2027 טרם נפתחו למכירה</b> ב-spartybooking.com — לבדוק שוב כשנפתחים.</li>
 <li>כרטיסים הם <b>תאריך‑ספציפיים</b> ונגמרים. יש גם כרטיס SpartyPay לטעינה — פיקדון 3,000 פורינט מתוך 20,000.</li>
 </ul>
 <h3>5. ארוחת ערב בשישי/שבת במסעדה פופולרית</h3>
 <ul>
-<li>כל מסעדה פופולרית במרכז (למשל <b>New York Café</b> — https://newyorkcafe.hu/en/) <b>דורשת הזמנה מראש</b> בסופ"ש, במיוחד לקבוצה של 5.</li>
+<li>כל מסעדה פופולרית במרכז (למשל <b>New York Café</b> — <a href="https://newyorkcafe.hu/en/" target="_blank" rel="noopener">ל מסעדה פופולרית במרכז (למשל New York Café</a>) <b>דורשת הזמנה מראש</b> בסופ"ש, במיוחד לקבוצה של 5.</li>
 <li>הכלל: כל מסעדה שאתם חושבים עליה — <b>להזמין דרך האתר הרשמי שלה</b> או בטלפון, <b>2–4 שבועות מראש</b>.</li>
 <li>🔴 <b>נמנעים מ</b>ואצי אוצ׳ה ורחובות תיירותיים באותו אופן.</li>
 </ul>
 <p><b>בונוסים (אם יש זמן):</b></p>
 <ul>
-<li>שייט ערב בדנובה — https://legenda.hu/en</li>
-<li>Budapest Card (כרטיס תיירות) — https://www.budapestinfo.hu/budapest-card — משתלם רק אם מבקרים בהרבה אטרקציות; <b>לא חובה</b>.</li>
+<li>שייט ערב בדנובה — <a href="https://legenda.hu/en" target="_blank" rel="noopener">שייט ערב בדנובה</a></li>
+<li>Budapest Card (כרטיס תיירות) — <a href="https://www.budapestinfo.hu/budapest-card" target="_blank" rel="noopener">Budapest Card (כרטיס תיירות)</a> — משתלם רק אם מבקרים בהרבה אטרקציות; <b>לא חובה</b>.</li>
 </ul>
 <hr>
 </details>
@@ -940,61 +898,61 @@
 <h3>תחבורה</h3>
 <table>
 <tr><th>נושא</th><th>מקור</th><th>סטטוס</th></tr>
-<tr><td>100E Airport Express — מסלול, תדירות, כרטיס 2,500, add‑on 1,000, חוסר תקפות מנויים</td><td>https://bkk.hu/en/travel-information/airport-express/</td><td>✅ 200</td></tr>
-<tr><td>מחירי BKK הרשמיים</td><td>https://bkk.hu/en/tickets-and-passes/prices/</td><td>✅ 200</td></tr>
-<tr><td>כרטיס 72 שעות — מה מכסה ומה לא</td><td>https://bkk.hu/en/tickets-and-passes/prices/72-hour-budapest-travelcard/</td><td>✅ 200</td></tr>
-<tr><td>כרטיס 100E בודד</td><td>https://bkk.hu/en/tickets-and-passes/prices/airport-shuttle-bus-single-ticket/</td><td>✅ 200</td></tr>
-<tr><td>BudapestGO</td><td>https://bkk.hu/en/tickets-and-passes/budapestgo/</td><td>✅ 200</td></tr>
-<tr><td>תחבורה לילית — 24/7, תעריפים רגילים</td><td>https://bkk.hu/en/travel-information/night-transport/</td><td>✅ 200</td></tr>
-<tr><td>תעריף מונית רשמי בשדה (Főtaxi, 2,100 + 520/ק"מ + 130/דק')</td><td>https://www.bud.hu/en/parking-transport/transportation/taxi-uber/taxi</td><td>✅ 200</td></tr>
-<tr><td>Bolt בבודפשט</td><td>https://bolt.eu/en/cities/budapest/</td><td>✅ 200</td></tr>
-<tr><td>Bolt בשדה התעופה</td><td>https://bolt.eu/en/airports/bud/</td><td>✅ 200</td></tr>
-<tr><td>Főtaxi</td><td>https://fotaxi.hu/en/</td><td>✅ 200</td></tr>
-<tr><td>Minibud (שאטל שיתופי)</td><td>https://minibud.hu/en/</td><td>✅ 200</td></tr>
+<tr><td>100E Airport Express — מסלול, תדירות, כרטיס 2,500, add‑on 1,000, חוסר תקפות מנויים</td><td><a href="https://bkk.hu/en/travel-information/airport-express/" target="_blank" rel="noopener">קישור</a></td><td>✅ 200</td></tr>
+<tr><td>מחירי BKK הרשמיים</td><td><a href="https://bkk.hu/en/tickets-and-passes/prices/" target="_blank" rel="noopener">קישור</a></td><td>✅ 200</td></tr>
+<tr><td>כרטיס 72 שעות — מה מכסה ומה לא</td><td><a href="https://bkk.hu/en/tickets-and-passes/prices/72-hour-budapest-travelcard/" target="_blank" rel="noopener">קישור</a></td><td>✅ 200</td></tr>
+<tr><td>כרטיס 100E בודד</td><td><a href="https://bkk.hu/en/tickets-and-passes/prices/airport-shuttle-bus-single-ticket/" target="_blank" rel="noopener">קישור</a></td><td>✅ 200</td></tr>
+<tr><td>BudapestGO</td><td><a href="https://bkk.hu/en/tickets-and-passes/budapestgo/" target="_blank" rel="noopener">קישור</a></td><td>✅ 200</td></tr>
+<tr><td>תחבורה לילית — 24/7, תעריפים רגילים</td><td><a href="https://bkk.hu/en/travel-information/night-transport/" target="_blank" rel="noopener">קישור</a></td><td>✅ 200</td></tr>
+<tr><td>תעריף מונית רשמי בשדה (Főtaxi, 2,100 + 520/ק"מ + 130/דק')</td><td><a href="https://www.bud.hu/en/parking-transport/transportation/taxi-uber/taxi" target="_blank" rel="noopener">קישור</a></td><td>✅ 200</td></tr>
+<tr><td>Bolt בבודפשט</td><td><a href="https://bolt.eu/en/cities/budapest/" target="_blank" rel="noopener">קישור</a></td><td>✅ 200</td></tr>
+<tr><td>Bolt בשדה התעופה</td><td><a href="https://bolt.eu/en/airports/bud/" target="_blank" rel="noopener">קישור</a></td><td>✅ 200</td></tr>
+<tr><td>Főtaxi</td><td><a href="https://fotaxi.hu/en/" target="_blank" rel="noopener">קישור</a></td><td>✅ 200</td></tr>
+<tr><td>Minibud (שאטל שיתופי)</td><td><a href="https://minibud.hu/en/" target="_blank" rel="noopener">קישור</a></td><td>✅ 200</td></tr>
 </table>
 <h3>מרחצאות</h3>
 <table>
 <tr><th>נושא</th><th>מקור</th><th>סטטוס</th></tr>
-<tr><td>סצ׳ני — מחירי 2026, מוצרים, "אין השכרה"</td><td>https://www.szechenyibath.hu/prices</td><td>✅ 200</td></tr>
-<tr><td>סצ׳ני — שעות פתיחה</td><td>https://www.szechenyibath.hu/opening-hours</td><td>✅ 200</td></tr>
-<tr><td>רודאש — מחירי 2026, כרטיס לילה 15,000</td><td>https://www.rudasfurdo.hu/en/prices-2026</td><td>✅ 200</td></tr>
-<tr><td>רודאש — שעות פתיחה + רחצת לילה</td><td>https://www.rudasfurdo.hu/en/opening-hours</td><td>✅ 200</td></tr>
-<tr><td>לוקאץ׳ — מחירי 2026</td><td>https://www.lukacsfurdo.hu/en/prices</td><td>✅ 200</td></tr>
-<tr><td>גלרט — סגור עד 2028 (רשמי)</td><td>https://www.gellertfurdo.hu/en</td><td>✅ 200</td></tr>
-<tr><td>כרטיסי סצ׳ני אונליין</td><td>https://tickets.szechenyibath.hu/</td><td>✅ 200</td></tr>
-<tr><td>כרטיסי רודאש אונליין</td><td>https://tickets.rudasfurdo.hu/</td><td>✅ 200</td></tr>
+<tr><td>סצ׳ני — מחירי 2026, מוצרים, "אין השכרה"</td><td><a href="https://www.szechenyibath.hu/prices" target="_blank" rel="noopener">קישור</a></td><td>✅ 200</td></tr>
+<tr><td>סצ׳ני — שעות פתיחה</td><td><a href="https://www.szechenyibath.hu/opening-hours" target="_blank" rel="noopener">קישור</a></td><td>✅ 200</td></tr>
+<tr><td>רודאש — מחירי 2026, כרטיס לילה 15,000</td><td><a href="https://www.rudasfurdo.hu/en/prices-2026" target="_blank" rel="noopener">קישור</a></td><td>✅ 200</td></tr>
+<tr><td>רודאש — שעות פתיחה + רחצת לילה</td><td><a href="https://www.rudasfurdo.hu/en/opening-hours" target="_blank" rel="noopener">קישור</a></td><td>✅ 200</td></tr>
+<tr><td>לוקאץ׳ — מחירי 2026</td><td><a href="https://www.lukacsfurdo.hu/en/prices" target="_blank" rel="noopener">קישור</a></td><td>✅ 200</td></tr>
+<tr><td>גלרט — סגור עד 2028 (רשמי)</td><td><a href="https://www.gellertfurdo.hu/en" target="_blank" rel="noopener">קישור</a></td><td>✅ 200</td></tr>
+<tr><td>כרטיסי סצ׳ני אונליין</td><td><a href="https://tickets.szechenyibath.hu/" target="_blank" rel="noopener">קישור</a></td><td>✅ 200</td></tr>
+<tr><td>כרטיסי רודאש אונליין</td><td><a href="https://tickets.rudasfurdo.hu/" target="_blank" rel="noopener">קישור</a></td><td>✅ 200</td></tr>
 </table>
 <h3>וויז אייר</h3>
 <table>
 <tr><th>נושא</th><th>מקור</th><th>סטטוס</th></tr>
-<tr><td>כבודה מותרת — 40×30×20 חינם, Trolley 55×40×23, מזוודות</td><td>https://www.wizzair.com/en-gb/help-centre/booking-information-and-services/baggage/baggage-allowance</td><td>✅ 200</td></tr>
-<tr><td>תיק יד — כללי מפורטים, נוזלים, מתחת למושב</td><td>https://www.wizzair.com/en-gb/help-centre/booking-information-and-services/baggage/baggage-allowance/cabin-baggage</td><td>✅ 200</td></tr>
-<tr><td>מזוודות לתא המטען + 13 EUR/ק"ג</td><td>https://www.wizzair.com/en-gb/help-centre/booking-information-and-services/baggage/baggage-allowance/checked-in-baggage</td><td>✅ 200</td></tr>
-<tr><td>צ׳ק־אין — אונליין חינם, שדה "PAID"</td><td>https://www.wizzair.com/en-gb/help-centre/check-in-and-boarding/check-in</td><td>✅ 200</td></tr>
-<tr><td>תהליך הצ׳ק־אין — 30 יום / 24 שעות / 3 שעות</td><td>https://www.wizzair.com/en-gb/help-centre/check-in-and-boarding/check-in/check-in-process</td><td>✅ 200</td></tr>
-<tr><td>זמני צ׳ק־אין וסגירת מזוודות — 2 שעות / 40 דקות</td><td>https://www.wizzair.com/en-gb/help-centre/check-in-and-boarding/check-in/check-in-and-baggage-drop-off-times</td><td>✅ 200</td></tr>
+<tr><td>כבודה מותרת — 40×30×20 חינם, Trolley 55×40×23, מזוודות</td><td><a href="https://www.wizzair.com/en-gb/help-centre/booking-information-and-services/baggage/baggage-allowance" target="_blank" rel="noopener">קישור</a></td><td>✅ 200</td></tr>
+<tr><td>תיק יד — כללי מפורטים, נוזלים, מתחת למושב</td><td><a href="https://www.wizzair.com/en-gb/help-centre/booking-information-and-services/baggage/baggage-allowance/cabin-baggage" target="_blank" rel="noopener">קישור</a></td><td>✅ 200</td></tr>
+<tr><td>מזוודות לתא המטען + 13 EUR/ק"ג</td><td><a href="https://www.wizzair.com/en-gb/help-centre/booking-information-and-services/baggage/baggage-allowance/checked-in-baggage" target="_blank" rel="noopener">קישור</a></td><td>✅ 200</td></tr>
+<tr><td>צ׳ק־אין — אונליין חינם, שדה "PAID"</td><td><a href="https://www.wizzair.com/en-gb/help-centre/check-in-and-boarding/check-in" target="_blank" rel="noopener">קישור</a></td><td>✅ 200</td></tr>
+<tr><td>תהליך הצ׳ק־אין — 30 יום / 24 שעות / 3 שעות</td><td><a href="https://www.wizzair.com/en-gb/help-centre/check-in-and-boarding/check-in/check-in-process" target="_blank" rel="noopener">קישור</a></td><td>✅ 200</td></tr>
+<tr><td>זמני צ׳ק־אין וסגירת מזוודות — 2 שעות / 40 דקות</td><td><a href="https://www.wizzair.com/en-gb/help-centre/check-in-and-boarding/check-in/check-in-and-baggage-drop-off-times" target="_blank" rel="noopener">קישור</a></td><td>✅ 200</td></tr>
 </table>
 <h3>כספים, מזג אוויר, ביטחון, חירום</h3>
 <table>
 <tr><th>נושא</th><th>מקור</th><th>סטטוס</th></tr>
-<tr><td>שער ECB רשמי EUR/HUF</td><td>https://www.ecb.europa.eu/stats/eurofxref/eurofxref-daily.xml</td><td>✅ 200</td></tr>
-<tr><td>שער HUF/ILS</td><td>https://open.er-api.com/v6/latest/HUF</td><td>✅ 200</td></tr>
-<tr><td>זריחה/שקיעה לתאריכי הנסיעה</td><td>https://api.sunrise-sunset.org/json?lat=47.4979&lng=19.0402&date=2027-02-18&tzid=Europe/Budapest</td><td>✅ 200</td></tr>
-<tr><td>מזג אוויר בפברואר</td><td>https://en.climate-data.org/europe/hungary/budapest/budapest-1218/t/february-2/</td><td>✅ 200</td></tr>
-<tr><td>מזג אוויר בפברואר (שמש/גשם)</td><td>https://www.weather2travel.com/hungary/budapest/february/</td><td>✅ 200</td></tr>
-<tr><td>מספרי חירום רשמיים (112/104/105/107)</td><td>https://visithungary.com/articles/emergency-and-important-numbers</td><td>✅ 200</td></tr>
-<tr><td>משטרה — 112</td><td>https://www.police.hu/en</td><td>✅ 200</td></tr>
-<tr><td>סקאמים ומלכודות תיירים</td><td>https://www.budapest-trip.com/guides/budapest-tourist-traps/</td><td>✅ 200</td></tr>
-<tr><td>ביטחון תיירים 2026</td><td>https://www.budapest-trip.com/guides/is-budapest-safe/</td><td>✅ 200</td></tr>
-<tr><td>מחירי מזון/שתייה</td><td>https://www.budapest-trip.com/guides/is-budapest-expensive/</td><td>✅ 200</td></tr>
-<tr><td>מחירי מדדים בבודפשט</td><td>https://www.numbeo.com/cost-of-living/in/Budapest</td><td>✅ 200</td></tr>
-<tr><td>סיור פרלמנט — המוכר הרשמי</td><td>https://www.jegymester.hu/parlament</td><td>✅ 200</td></tr>
-<tr><td>פרלמנט — אתר רשמי, כרטיסים</td><td>https://www.parlament.hu/web/visitors/ticket-prices</td><td>✅ 200 (מוגן CAPTCHA)</td></tr>
-<tr><td>פרלמנט — רכישה מראש רק אונליין</td><td>https://www.parlament.hu/web/visitors/purchasing-tickets</td><td>✅ 200 (מוגן CAPTCHA)</td></tr>
-<tr><td>Sparty</td><td>https://spartybooking.com/</td><td>✅ 200</td></tr>
-<tr><td>Budapest Card</td><td>https://www.budapestinfo.hu/budapest-card</td><td>✅ 200</td></tr>
-<tr><td>שייט בדנובה</td><td>https://legenda.hu/en</td><td>✅ 200</td></tr>
-<tr><td>New York Café</td><td>https://newyorkcafe.hu/en/</td><td>✅ 200</td></tr>
+<tr><td>שער ECB רשמי EUR/HUF</td><td><a href="https://www.ecb.europa.eu/stats/eurofxref/eurofxref-daily.xml" target="_blank" rel="noopener">קישור</a></td><td>✅ 200</td></tr>
+<tr><td>שער HUF/ILS</td><td><a href="https://open.er-api.com/v6/latest/HUF" target="_blank" rel="noopener">קישור</a></td><td>✅ 200</td></tr>
+<tr><td>זריחה/שקיעה לתאריכי הנסיעה</td><td><a href="https://api.sunrise-sunset.org/json?lat=47.4979&lng=19.0402&date=2027-02-18&tzid=Europe/Budapest" target="_blank" rel="noopener">קישור</a></td><td>✅ 200</td></tr>
+<tr><td>מזג אוויר בפברואר</td><td><a href="https://en.climate-data.org/europe/hungary/budapest/budapest-1218/t/february-2/" target="_blank" rel="noopener">קישור</a></td><td>✅ 200</td></tr>
+<tr><td>מזג אוויר בפברואר (שמש/גשם)</td><td><a href="https://www.weather2travel.com/hungary/budapest/february/" target="_blank" rel="noopener">קישור</a></td><td>✅ 200</td></tr>
+<tr><td>מספרי חירום רשמיים (112/104/105/107)</td><td><a href="https://visithungary.com/articles/emergency-and-important-numbers" target="_blank" rel="noopener">קישור</a></td><td>✅ 200</td></tr>
+<tr><td>משטרה — 112</td><td><a href="https://www.police.hu/en" target="_blank" rel="noopener">קישור</a></td><td>✅ 200</td></tr>
+<tr><td>סקאמים ומלכודות תיירים</td><td><a href="https://www.budapest-trip.com/guides/budapest-tourist-traps/" target="_blank" rel="noopener">קישור</a></td><td>✅ 200</td></tr>
+<tr><td>ביטחון תיירים 2026</td><td><a href="https://www.budapest-trip.com/guides/is-budapest-safe/" target="_blank" rel="noopener">קישור</a></td><td>✅ 200</td></tr>
+<tr><td>מחירי מזון/שתייה</td><td><a href="https://www.budapest-trip.com/guides/is-budapest-expensive/" target="_blank" rel="noopener">קישור</a></td><td>✅ 200</td></tr>
+<tr><td>מחירי מדדים בבודפשט</td><td><a href="https://www.numbeo.com/cost-of-living/in/Budapest" target="_blank" rel="noopener">קישור</a></td><td>✅ 200</td></tr>
+<tr><td>סיור פרלמנט — המוכר הרשמי</td><td><a href="https://www.jegymester.hu/parlament" target="_blank" rel="noopener">קישור</a></td><td>✅ 200</td></tr>
+<tr><td>פרלמנט — אתר רשמי, כרטיסים</td><td><a href="https://www.parlament.hu/web/visitors/ticket-prices" target="_blank" rel="noopener">קישור</a></td><td>✅ 200 (מוגן CAPTCHA)</td></tr>
+<tr><td>פרלמנט — רכישה מראש רק אונליין</td><td><a href="https://www.parlament.hu/web/visitors/purchasing-tickets" target="_blank" rel="noopener">קישור</a></td><td>✅ 200 (מוגן CAPTCHA)</td></tr>
+<tr><td>Sparty</td><td><a href="https://spartybooking.com/" target="_blank" rel="noopener">קישור</a></td><td>✅ 200</td></tr>
+<tr><td>Budapest Card</td><td><a href="https://www.budapestinfo.hu/budapest-card" target="_blank" rel="noopener">קישור</a></td><td>✅ 200</td></tr>
+<tr><td>שייט בדנובה</td><td><a href="https://legenda.hu/en" target="_blank" rel="noopener">קישור</a></td><td>✅ 200</td></tr>
+<tr><td>New York Café</td><td><a href="https://newyorkcafe.hu/en/" target="_blank" rel="noopener">קישור</a></td><td>✅ 200</td></tr>
 </table>
 <h3>🔴 מקורות שליליים / מה שלא אומת</h3>
 <table>
@@ -1087,7 +1045,6 @@
 <li>שייט Legenda (אם לוקחים): <b>€25</b> (≈₪2,680)</li>
 <li>אוכל ושתייה: <b>להערכה אישית</b> — לא נכלל</li>
 </ul>
-<p><b>לא נכלל:</b> הטיסות — שולמו ב-0$ באמצעות נקודות SKYMAX.</p>
 </details></div>
   </section>
   

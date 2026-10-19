@@ -285,10 +285,10 @@
   {
    "d": "19.10",
    "date": "2026-10-19",
-   "equity": 9695.62,
+   "equity": 9693.97,
    "live": true,
-   "pct": -3.04,
-   "pnl": -304.38
+   "pct": -3.06,
+   "pnl": -306.03
   }
  ],
  "journal": [
@@ -759,33 +759,33 @@
  ],
  "kpis": {
   "cash": 4123.8,
-  "day_pct": -0.79,
-  "day_pnl": -77.24,
-  "equity": 9695.62,
-  "exposure": 5571.82,
+  "day_pct": -0.81,
+  "day_pnl": -78.89,
+  "equity": 9693.97,
+  "exposure": 5570.17,
   "fees": 150.0,
   "max_positions": 4,
   "open_count": 2,
   "realized": -157.71,
-  "total_pct": -3.04,
-  "total_pnl": -304.38,
-  "unrealized": 3.33
+  "total_pct": -3.06,
+  "total_pnl": -306.03,
+  "unrealized": 1.68
  },
  "meta": {
   "day_index": 17,
   "feed_status": "REG_MKT",
   "indices": {
    ".IXIC": {
-    "chg": "+1.47%",
-    "last": "26,524.928"
+    "chg": "+1.65%",
+    "last": "26,571.22"
    },
    ".SPX": {
-    "chg": "+0.68%",
-    "last": "7,711.64"
+    "chg": "+0.79%",
+    "last": "7,720.11"
    },
    ".VIX": {
-    "chg": "-10.91%",
-    "last": "17.81"
+    "chg": "-11.41%",
+    "last": "17.71"
    }
   },
   "market_open": true,
@@ -793,7 +793,7 @@
   "start_equity": 10000,
   "title": "משחק המסחר — 10,000$ וירטואלי",
   "total_days": 5,
-  "updated_il": "19.10.2026 18:00",
+  "updated_il": "19.10.2026 19:00",
   "week": "2026-10-19 → 2026-10-23"
  },
  "positions": [
@@ -802,38 +802,38 @@
    "entry_il": "17:00",
    "entry_progress": 0.30275862068965426,
    "exit_rule": "",
-   "last": 338.65,
-   "market_value": 2709.2,
+   "last": 336.65,
+   "market_value": 2693.2,
    "price_source": "CNBC live",
-   "progress": 0.5965517241379295,
+   "progress": 0.45862068965517083,
    "shares": 8,
    "stop": 330.0,
-   "stop_pct": -2.55,
+   "stop_pct": -1.98,
    "symbol": "JPM",
    "target": 344.5,
-   "target_pct": 1.73,
+   "target_pct": 2.33,
    "thesis": "",
-   "unreal": 34.08,
-   "unreal_pct": 1.27
+   "unreal": 18.08,
+   "unreal_pct": 0.68
   },
   {
    "entry": 70.57,
    "entry_il": "16:45",
    "entry_progress": 0.2719141323792478,
    "exit_rule": "",
-   "last": 69.82,
-   "market_value": 2862.62,
+   "last": 70.17,
+   "market_value": 2876.97,
    "price_source": "CNBC live",
-   "progress": 0.1377459749552765,
+   "progress": 0.2003577817531313,
    "shares": 41,
    "stop": 69.05,
-   "stop_pct": -1.1,
+   "stop_pct": -1.6,
    "symbol": "PEG",
    "target": 74.64,
-   "target_pct": 6.9,
+   "target_pct": 6.37,
    "thesis": "",
-   "unreal": -30.75,
-   "unreal_pct": -1.06
+   "unreal": -16.4,
+   "unreal_pct": -0.57
   }
  ],
  "rules": [

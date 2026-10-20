@@ -286,9 +286,16 @@
    "d": "19.10",
    "date": "2026-10-19",
    "equity": 9674.08,
-   "live": true,
    "pct": -3.26,
    "pnl": -325.92
+  },
+  {
+   "d": "20.10",
+   "date": "2026-10-20",
+   "equity": 9675.16,
+   "live": true,
+   "pct": -3.25,
+   "pnl": -324.84
   }
  ],
  "journal": [
@@ -759,20 +766,20 @@
  ],
  "kpis": {
   "cash": 4123.8,
-  "day_pct": -1.01,
-  "day_pnl": -98.78,
-  "equity": 9674.08,
-  "exposure": 5550.28,
+  "day_pct": 0.01,
+  "day_pnl": 1.08,
+  "equity": 9675.16,
+  "exposure": 5551.36,
   "fees": 150.0,
   "max_positions": 4,
   "open_count": 2,
   "realized": -157.71,
-  "total_pct": -3.26,
-  "total_pnl": -325.92,
-  "unrealized": -18.21
+  "total_pct": -3.25,
+  "total_pnl": -324.84,
+  "unrealized": -17.13
  },
  "meta": {
-  "day_index": 1,
+  "day_index": 2,
   "feed_status": "REG_MKT",
   "indices": {
    ".IXIC": {
@@ -784,16 +791,16 @@
     "last": "7,690.73"
    },
    ".VIX": {
-    "chg": "-7.85%",
-    "last": "18.42"
+    "chg": "-7.75%",
+    "last": "18.44"
    }
   },
   "market_open": false,
-  "market_status": "POST_MKT",
+  "market_status": "CLOSED",
   "start_equity": 10000,
   "title": "משחק המסחר — 10,000$ וירטואלי",
   "total_days": 5,
-  "updated_il": "19.10.2026 23:13",
+  "updated_il": "20.10.2026 06:56",
   "week": "2026-10-19 → 2026-10-23"
  },
  "positions": [
@@ -802,38 +809,38 @@
    "entry_il": "17:00",
    "entry_progress": 0.30275862068965426,
    "exit_rule": "",
-   "last": 333.6,
-   "market_value": 2668.8,
-   "price_source": "סגירה רשמית של נאסדק (16:00 ET)",
-   "progress": 0.2482758620689671,
+   "last": 333.53,
+   "market_value": 2668.24,
+   "price_source": "CNBC live",
+   "progress": 0.24344827586206708,
    "shares": 8,
    "stop": 330.0,
-   "stop_pct": -1.08,
+   "stop_pct": -1.06,
    "symbol": "JPM",
    "target": 344.5,
-   "target_pct": 3.27,
+   "target_pct": 3.29,
    "thesis": "",
-   "unreal": -6.32,
-   "unreal_pct": -0.24
+   "unreal": -6.88,
+   "unreal_pct": -0.26
   },
   {
    "entry": 70.57,
    "entry_il": "16:45",
    "entry_progress": 0.2719141323792478,
    "exit_rule": "",
-   "last": 70.28,
-   "market_value": 2881.48,
-   "price_source": "סגירה רשמית של נאסדק (16:00 ET)",
-   "progress": 0.22003577817531364,
+   "last": 70.32,
+   "market_value": 2883.12,
+   "price_source": "CNBC live",
+   "progress": 0.22719141323792402,
    "shares": 41,
    "stop": 69.05,
-   "stop_pct": -1.75,
+   "stop_pct": -1.81,
    "symbol": "PEG",
    "target": 74.64,
-   "target_pct": 6.2,
+   "target_pct": 6.14,
    "thesis": "",
-   "unreal": -11.89,
-   "unreal_pct": -0.41
+   "unreal": -10.25,
+   "unreal_pct": -0.35
   }
  ],
  "rules": [
@@ -842,7 +849,7 @@
   "אחזקה: עד סטופ/יעד — עד 3 שבועות מקסימום (מ-14.10; אין סגירה כפויה בסוף שבוע, רק ביום האחרון של המשחק)",
   "עמלה: 5$ לכל צד · מכסת 3 סבבים בשבוע בלבד (העמלה אכלה ~30% מההפסד בשבוע 3)",
   "כל פעולה מפורסמת לפני ביצוע — נימוק, יעד ומה מבטל; אין דיווח בדיעבד",
-  "סיכון ≤ 1% מההון לפוזיציה · פוזיציה 2,500-3,000$ · סטופ מבני בלבד (מתחת לרמה רלוונטית + 0.3xATR), ≤ 3%",
+  "סיכון ≤ 1% מההון לפוזיציה · פוזיציה 2,100-3,000$ · סטופ מבני בלבד (מתחת לרמה רלוונטית + 0.3xATR), ≤ 3%",
   "R:R ≥ 1.8 להתנגדות מבנית אמיתית · סטופ מבני ≤ 3% · כניסה ברט-טסט (חזרה לרמה) ולא בפריצה · אין מרדף",
   "מסנן משטר: אין כניסה לסקטור שירד 2%+ בסשן הקודם; אין כניסות ביום שנפתח 0.7%- מתחת לסגירה"
  ],

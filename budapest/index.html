@@ -205,6 +205,48 @@
   }
   @media (prefers-reduced-motion:reduce){.rev{opacity:1;transform:none} .floaters span{animation:none}}
 </style>
+
+<style id="storycss">
+#story{position:relative;background:#141110;color:#f6efe6;margin:0}
+#story .sticky{position:sticky;top:0;height:100vh;height:100svh;overflow:hidden;z-index:0}
+#story .frame{position:absolute;inset:0;opacity:0;transition:opacity 1s cubic-bezier(.4,0,.2,1)}
+#story .frame img{width:100%;height:100%;object-fit:cover;display:block;transform:scale(1.04);
+  transition:transform 7s ease-out;filter:saturate(1.05)}
+#story .frame.on{opacity:1}
+#story .frame.on img{transform:scale(1.12)}
+#story .scrim{position:absolute;inset:0;background:
+  linear-gradient(180deg,rgba(15,13,11,.55) 0%,rgba(15,13,11,.15) 35%,rgba(15,13,11,.72) 78%,rgba(15,13,11,.94) 100%)}
+#story .top{position:absolute;top:calc(18px + env(safe-area-inset-top));right:0;left:0;padding:0 26px;
+  display:flex;justify-content:space-between;align-items:center;font-size:12.5px;letter-spacing:.14em;
+  text-transform:uppercase;color:rgba(246,239,230,.72)}
+#story .top .cnt{font-variant-numeric:tabular-nums}
+#story .bar{position:absolute;bottom:0;right:0;left:0;height:2px;background:rgba(246,239,230,.16)}
+#story .bar i{display:block;height:100%;width:0;background:#e0674a;transition:width .25s linear}
+#story .steps{position:relative;z-index:2;margin-top:-100vh}
+#story .step{height:100vh;height:100svh;display:flex;align-items:flex-end;padding:0 26px 12vh}
+#story .card{max-width:520px;opacity:0;transform:translateY(18px);
+  transition:opacity .55s ease,transform .55s cubic-bezier(.22,1,.36,1)}
+#story .step.on .card{opacity:1;transform:none}
+#story .kicker{font:600 11.5px/1 Inter,system-ui,sans-serif;letter-spacing:.2em;text-transform:uppercase;
+  color:#f0a48f;margin-bottom:14px}
+#story .card h3{font-family:"Frank Ruhl Libre",Georgia,serif;font-weight:700;font-size:clamp(28px,7.4vw,52px);
+  line-height:1.06;letter-spacing:-.02em;margin:0 0 12px;color:#fffaf4;text-wrap:balance}
+#story .card p{margin:0;font-size:clamp(15px,3.9vw,18px);line-height:1.6;color:rgba(246,239,230,.86);max-width:40ch}
+#story .card .meta{display:inline-block;margin-top:16px;padding:7px 13px;border:1px solid rgba(246,239,230,.28);
+  border-radius:999px;font-size:12.5px;color:rgba(246,239,230,.8)}
+@media (max-width:600px){
+  #story .step{padding:0 20px 10vh}
+  #story .card{max-width:none}
+  #story .card p{max-width:none}
+}
+@media (prefers-reduced-motion:reduce){
+  #story .sticky{position:relative;height:58vh}
+  #story .steps{margin-top:0}
+  #story .step{height:auto;padding:26px 20px}
+  #story .card{opacity:1;transform:none;transition:none}
+  #story .frame img{transition:none;transform:none}
+}
+</style>
 </head>
 <body>
 <div id="prog"></div>
@@ -220,6 +262,7 @@
     </div>
     <div class="chips"><span class="chip">יוסי</span><span class="chip">קנפו</span><span class="chip">סעדו</span><span class="chip">שקד</span><span class="chip">יניב</span></div>
   </header>
+<!--STORY--><section id="story" aria-label="פתיח"><div class="sticky"><div class="scrim"></div><div class="frame on"><img src="img/hero.jpg" alt="חמישה חברים · שלוש לילות" loading="eager" decoding="async"></div><div class="frame"><img src="img/baths.jpg" alt="קודם כל מרחצאות" loading="lazy" decoding="async"></div><div class="frame"><img src="img/parliament.jpg" alt="פרלמנט מואר על הדנובה" loading="lazy" decoding="async"></div><div class="frame"><img src="img/ruinbar.jpg" alt="ואז האוכל והפאבים" loading="lazy" decoding="async"></div><div class="top"><span>בודפשט 2027</span><span class="cnt"><b id="sidx">01</b> / 04</span></div><div class="bar"><i id="sbar"></i></div></div><div class="steps"><div class="step on" data-i="0"><div class="card"><div class="kicker">18–21 בפברואר 2027</div><h3>חמישה חברים · שלוש לילות</h3><p>יוצאים מבודפשט בלי תוכניות מיותרות: טיסה בבוקר, מלון מאתיים מטר מהבזיליקה, וארבעה ימים שנבנו סביב אוכל, מים חמים ופאבים.</p><span class="meta">TLV → BUD · 10:10</span></div></div><div class="step" data-i="1"><div class="card"><div class="kicker">סצ׳ני, רודאס, לוקאץ׳</div><h3>קודם כל מרחצאות</h3><p>בפברואר בודפשט קרה — וזה בדיוק הזמן למים התרמיים. סצ׳ני בחוץ, רודאס על הגג, ושעות פתיחה ששווה לבדוק לפני שיוצאים.</p><span class="meta">13,200–14,800 Ft</span></div></div><div class="step" data-i="2"><div class="card"><div class="kicker">גשר השלשלאות בשקיעה</div><h3>פרלמנט מואר על הדנובה</h3><p>השעה היחידה שבה בודפשט נראית כמו גלויה: אור אחרון על הגדה, הפרלמנט נדלק, והגשר נסגר להולכי רגל.</p><span class="meta">שקיעה ~17:00</span></div></div><div class="step" data-i="3"><div class="card"><div class="kicker">רובע VII</div><h3>ואז האוכל והפאבים</h3><p>גולאש, גדו גולייש ומאזל טוב — ואחר כך שמפלה, אינסטנט ופאבי חורבות עד שאין כוח. זה כל הטיול בעצם.</p><span class="meta">Szimpla · Instant · 360</span></div></div></div></section>
 
   <nav id="nav"><a href="#flights" class="navchip" data-nav="flights"><span>✈️</span>טיסות</a><a href="#hotel" class="navchip" data-nav="hotel"><span>🏨</span>מלון</a><a href="#plan" class="navchip" data-nav="plan"><span>🗓️</span>לוח זמנים</a><a href="#attr" class="navchip" data-nav="attr"><span>♨️</span>אטרקציות</a><a href="#food" class="navchip" data-nav="food"><span>🥩</span>אוכל</a><a href="#logi" class="navchip" data-nav="logi"><span>🧳</span>לוגיסטיקה</a><a href="#money" class="navchip" data-nav="money"><span>💱</span>כספים</a><a href="#check" class="navchip" data-nav="check"><span>✅</span>צ׳ק-ליסט</a></nav>
 
@@ -977,6 +1020,34 @@
     if (r.top < innerHeight + 300) el.classList.add('in');
   }), 1200);
   setTimeout(reveal, 5000);
+</script>
+
+<script id="storyjs">
+(function(){
+  var sec=document.getElementById('story'); if(!sec) return;
+  var frames=[].slice.call(sec.querySelectorAll('.frame'));
+  var steps=[].slice.call(sec.querySelectorAll('.step'));
+  var idx=document.getElementById('sidx'), bar=document.getElementById('sbar');
+  function set(i){
+    if(i===set.cur) return; set.cur=i;
+    frames.forEach(function(f,k){ f.classList.toggle('on',k===i); });
+    steps.forEach(function(s,k){ s.classList.toggle('on',k===i); });
+    if(idx) idx.textContent=('0'+(i+1)).slice(-2);
+  }
+  set.cur=-1; set(0);
+  var ticking=false;
+  function upd(){
+    var r=sec.getBoundingClientRect(), vh=window.innerHeight;
+    var total=sec.offsetHeight-vh;
+    var p=Math.min(1,Math.max(0,(-r.top)/(total||1)));
+    if(bar) bar.style.width=(p*100).toFixed(1)+'%';
+    var i=Math.min(frames.length-1,Math.floor(p*frames.length+0.0001));
+    set(i); ticking=false;
+  }
+  window.addEventListener('scroll',function(){ if(!ticking){ ticking=true; requestAnimationFrame(upd);} },{passive:true});
+  window.addEventListener('resize',upd);
+  upd();
+})();
 </script>
 </body>
 </html>

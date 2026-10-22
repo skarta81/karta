@@ -306,10 +306,10 @@
   {
    "d": "22.10",
    "date": "2026-10-22",
-   "equity": 9776.26,
+   "equity": 9796.37,
    "live": true,
-   "pct": -2.24,
-   "pnl": -223.74
+   "pct": -2.04,
+   "pnl": -203.63
   }
  ],
  "journal": [
@@ -804,41 +804,41 @@
  ],
  "kpis": {
   "cash": 4123.8,
-  "day_pct": 0.62,
-  "day_pnl": 60.26,
-  "equity": 9776.26,
-  "exposure": 5652.46,
+  "day_pct": 0.83,
+  "day_pnl": 80.37,
+  "equity": 9796.37,
+  "exposure": 5672.57,
   "fees": 150.0,
   "max_positions": 4,
   "open_count": 2,
   "realized": -157.71,
-  "total_pct": -2.24,
-  "total_pnl": -223.74,
-  "unrealized": 83.97
+  "total_pct": -2.04,
+  "total_pnl": -203.63,
+  "unrealized": 104.08
  },
  "meta": {
   "day_index": 4,
   "feed_status": "REG_MKT",
   "indices": {
    ".IXIC": {
-    "chg": "-2.88%",
-    "last": "25,933.747"
+    "chg": "-2.61%",
+    "last": "26,005.85"
    },
    ".SPX": {
-    "chg": "-1.51%",
-    "last": "7,640.31"
+    "chg": "-1.22%",
+    "last": "7,662.54"
    },
    ".VIX": {
-    "chg": "+20.50%",
-    "last": "20.10"
+    "chg": "+14.63%",
+    "last": "19.12"
    }
   },
-  "market_open": true,
-  "market_status": "REG_MKT",
+  "market_open": false,
+  "market_status": "POST_MKT",
   "start_equity": 10000,
   "title": "משחק המסחר — 10,000$ וירטואלי",
   "total_days": 5,
-  "updated_il": "22.10.2026 22:00",
+  "updated_il": "22.10.2026 23:00",
   "week": "2026-10-19 → 2026-10-23"
  },
  "positions": [
@@ -847,38 +847,38 @@
    "entry_il": "17:00",
    "entry_progress": 0.30275862068965426,
    "exit_rule": "",
-   "last": 334.79,
-   "market_value": 2678.32,
-   "price_source": "CNBC live",
-   "progress": 0.3303448275862083,
+   "last": 336.51,
+   "market_value": 2692.08,
+   "price_source": "סגירה רשמית של נאסדק (16:00 ET)",
+   "progress": 0.4489655172413787,
    "shares": 8,
    "stop": 330.0,
-   "stop_pct": -1.43,
+   "stop_pct": -1.93,
    "symbol": "JPM",
    "target": 344.5,
-   "target_pct": 2.9,
+   "target_pct": 2.37,
    "thesis": "",
-   "unreal": 3.2,
-   "unreal_pct": 0.12
+   "unreal": 16.96,
+   "unreal_pct": 0.63
   },
   {
    "entry": 70.57,
    "entry_il": "16:45",
    "entry_progress": 0.2719141323792478,
    "exit_rule": "",
-   "last": 72.54,
-   "market_value": 2974.14,
-   "price_source": "CNBC live",
-   "progress": 0.6243291592128813,
+   "last": 72.69,
+   "market_value": 2980.49,
+   "price_source": "סגירה רשמית של נאסדק (16:00 ET)",
+   "progress": 0.6520572450804998,
    "shares": 41,
    "stop": 69.05,
-   "stop_pct": -4.81,
+   "stop_pct": -5.01,
    "symbol": "PEG",
    "target": 74.64,
-   "target_pct": 2.89,
+   "target_pct": 2.68,
    "thesis": "",
-   "unreal": 80.77,
-   "unreal_pct": 2.79
+   "unreal": 87.12,
+   "unreal_pct": 3.01
   }
  ],
  "rules": [

@@ -170,6 +170,30 @@
   .mockbar.loading{background:#fbfaf7;border-color:var(--line);color:var(--faint)}
   .mockbar.loading b.tag{background:#fff;border-color:var(--line);color:var(--faint)}
 
+  /* ---------- banner + refresh control ---------- */
+  .bannerbar{display:flex;gap:10px;align-items:flex-start;flex-wrap:wrap;margin-bottom:16px}
+  .bannerbar .mockbar{margin-bottom:0;flex:1 1 320px;min-width:0}
+  .refresh{display:flex;flex-direction:column;gap:5px;align-items:stretch;flex:0 0 auto}
+  .refresh-btn{
+    display:inline-flex;align-items:center;justify-content:center;gap:7px;
+    min-height:40px;min-width:104px;padding:0 14px;font-family:inherit;
+    font-size:13px;font-weight:600;color:var(--blue);background:#fff;
+    border:1px solid #cfdce8;border-radius:10px;cursor:pointer;
+    box-shadow:var(--shadow);transition:background .15s,border-color .15s,color .15s;
+  }
+  .refresh-btn:hover{background:var(--blue-bg);border-color:#b9cfe2}
+  .refresh-btn:focus-visible{outline:2px solid var(--blue);outline-offset:2px}
+  .refresh-btn[disabled]{cursor:progress;color:var(--muted);border-color:var(--line);background:#fbfaf7}
+  .refresh-btn svg{flex:0 0 auto}
+  .refresh-btn[data-busy="1"] svg{animation:rspin 1s linear infinite}
+  @keyframes rspin{to{transform:rotate(360deg)}}
+  @media (prefers-reduced-motion:reduce){
+    .refresh-btn[data-busy="1"] svg{animation:none;opacity:.6}
+  }
+  .refresh-note{font-size:11px;line-height:1.5;min-height:16px;color:var(--muted);text-align:center}
+  .refresh-note.ok{color:var(--green);font-weight:700}
+  .refresh-note.err{color:#8d2b20;font-weight:600}
+
   /* ---------- header ---------- */
   header.top{display:block;margin-bottom:18px}
   .brand{display:flex;gap:12px;align-items:flex-start}
@@ -701,6 +725,73 @@
     font-size:10.5px;line-height:1.55;color:var(--faint);
     padding:6px 2px 0;border-top:1px solid var(--line-2);margin-top:6px;
   }
+  /* ---------- המלצות היום — the computed picks card ---------- */
+  .recs{border-inline-start:3px solid #ded9cd}
+  .recs.has{border-inline-start-color:var(--green)}
+  .recs.none{border-inline-start-color:#ded9cd}
+  .recs.loading{border-inline-start-color:#eae6dc}
+  .recs .card-head{padding-bottom:0}
+  .recs .count-chip{font-weight:700;color:var(--muted);background:#f4f2ec;min-width:26px;text-align:center}
+  .recs.has .count-chip{color:var(--green);background:var(--green-bg);border-color:#cbe6da}
+  .recs-empty{margin:0;font-size:13.5px;line-height:1.75;color:var(--ink)}
+  .recs-sub{margin:7px 0 0;font-size:12.5px;line-height:1.7;color:var(--muted)}
+  .recs-loading{margin:0;font-size:13px;line-height:1.7;color:var(--faint)}
+  .rec-list{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:minmax(0,1fr);gap:10px}
+  .rec-row{
+    border:1px solid var(--line);border-radius:12px;background:#fdfcf9;
+    padding:11px 13px;cursor:pointer;min-width:0;
+    transition:border-color .15s,background .15s,box-shadow .15s;
+  }
+  .rec-row:hover,.rec-row:focus-visible{border-color:#bcd8c9;background:#fbfdfb;outline:none;box-shadow:0 0 0 2px rgba(15,138,95,.10)}
+  .rec-top{display:flex;align-items:baseline;gap:8px;flex-wrap:wrap}
+  .rec-rank{
+    font-family:var(--num);font-size:10.5px;line-height:1.7;color:var(--faint);
+    border:1px solid var(--line);border-radius:5px;padding:0 5px;flex:0 0 auto;
+  }
+  .rec-top .tk{font-size:15px;font-weight:700;letter-spacing:.01em;direction:ltr;unicode-bidi:isolate}
+  .rec-name{font-size:12.5px;color:var(--muted)}
+  .rec-top .capped{
+    font-size:10.5px;color:#8a5a12;background:#fdf3e2;border:1px solid #f0e0c2;
+    border-radius:999px;padding:1px 7px;
+  }
+  .rec-price{margin-inline-start:auto;font-size:12px;color:var(--muted);font-family:var(--num);direction:ltr;unicode-bidi:isolate}
+  .rec-act{margin:7px 0 0;font-size:13px;line-height:1.95;color:var(--ink)}
+  .rec-act .seg{display:inline-block;white-space:nowrap}
+  .rec-act .sep{color:#c9c4b6;margin:0 2px}
+  .rec-loss{margin:2px 0 0;font-size:12px;line-height:1.75;color:var(--muted);overflow-wrap:anywhere}
+  .rec-loss b{color:var(--red);font-weight:700}
+  .rec-why{
+    margin:7px 0 0;padding-top:7px;border-top:1px solid var(--line-2);
+    font-size:11.5px;line-height:1.7;color:var(--muted);overflow-wrap:anywhere;
+  }
+  .rec-why .ltag{
+    display:inline-block;font-size:10px;font-weight:700;letter-spacing:.04em;
+    color:var(--green);background:var(--green-bg);border:1px solid #cbe6da;
+    border-radius:4px;padding:0 5px;margin-inline-end:4px;line-height:1.7;
+  }
+  .rec-note{
+    margin:10px 0 0;font-size:11.5px;line-height:1.7;color:#8d2b20;
+    background:var(--red-bg);border:1px solid #efd5d1;border-radius:9px;padding:7px 10px;
+  }
+  .recs-foot{
+    margin-top:12px;padding-top:9px;border-top:1px solid var(--line-2);
+    font-size:11px;line-height:1.65;color:var(--faint);
+  }
+  .recs-foot[hidden]{display:none}
+  @media (max-width:560px){
+    .recs .card-head{padding:14px 14px 0;gap:7px}
+    .recs .card-body{padding:11px 14px 15px}
+    .recs .card-head h2{font-size:16.5px}
+    .rec-top .tk{font-size:14px}
+    .rec-price{width:100%;margin-inline-start:0;font-size:11.5px}
+    .rec-act{font-size:12.5px;line-height:2.05}
+    .rec-row{padding:10px 11px}
+    .recs-foot{font-size:10.5px}
+    .bannerbar{gap:8px}
+    .refresh{flex-direction:row;align-items:center;gap:8px;width:100%}
+    .refresh-btn{flex:1 1 auto;min-width:0}
+    .refresh-note{flex:1 1 60%;text-align:start;min-height:0}
+  }
   @media (max-width:560px){
     .legend{font-size:11px;gap:4px 10px;padding:7px 10px}
   }
@@ -710,9 +801,20 @@
 <a class="sr-only" href="#resultsTitle">דלג לתוצאות</a>
 <div class="wrap">
 
-  <div class="mockbar loading" id="mockbar" role="status" aria-live="polite">
-    <b class="tag">טוען</b>
-    <span>טוען נתוני שוק…</span>
+  <div class="bannerbar">
+    <div class="mockbar loading" id="mockbar" role="status" aria-live="polite">
+      <b class="tag">טוען</b>
+      <span>טוען נתוני שוק…</span>
+    </div>
+    <div class="refresh">
+      <button class="refresh-btn" type="button" id="refreshBtn" aria-label="רענון נתוני השוק וחישוב ההמלצות מחדש" aria-busy="false" data-busy="0">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M20.5 11a8.5 8.5 0 1 0-2.6 6.4"/><path d="M20.5 4.5V11h-6.3"/>
+        </svg>
+        <span class="rlabel">רענון</span>
+      </button>
+      <span class="refresh-note" id="refreshNote" role="status" aria-live="polite"></span>
+    </div>
   </div>
 
   <header class="top">
@@ -782,6 +884,21 @@
       <div class="ob"><span class="n">3</span><div><div class="t">קרא את השורה</div><div class="d">כמה לקנות, איפה הסטופ, יעד 2R. שלושה מספרים ודי.</div></div></div>
     </div>
   </header>
+
+  <!-- ===== המלצות היום — computed from the live data + risk settings ===== -->
+  <section class="card recs loading" id="recsCard" aria-labelledby="recsTitle">
+    <div class="card-head">
+      <h2 id="recsTitle">המלצות היום</h2>
+      <span class="count-chip" id="recsChip" hidden>0</span>
+      <span class="hint" id="recsHint">מחכה לנתוני השוק</span>
+    </div>
+    <div class="card-body">
+      <div id="recsBody">
+        <p class="recs-loading">טוען נתונים…</p>
+      </div>
+      <div class="recs-foot" id="recsFoot" hidden></div>
+    </div>
+  </section>
 
   <!-- ===== בקרת סיכון ===== -->
   <section class="card" aria-labelledby="riskTitle">
@@ -1150,7 +1267,8 @@
      price / day change / technicals are touched; fundamentals
      (mcap, beta, P/E, ROE, EPS, instOwn) stay static reference.
      ============================================================ */
-  var DATA = { loaded:false, asOf:null, source:null, generatedAt:null, failed:[], updatedLabel:null, count:0 };
+  var DATA = { loaded:false, asOf:null, source:null, generatedAt:null, failed:[], updatedLabel:null, count:0,
+               settled:false, refreshedAt:null };
 
   var IND_FIELDS = [
     ["price", "price"], ["dayChange", "dayChangePct"],
@@ -1636,6 +1754,203 @@
       });
       row.addEventListener("keydown", function(ev){
         if (ev.key === "Enter" || ev.key === " ") { ev.preventDefault(); open(); }
+      });
+    });
+  }
+
+  /* ============================================================
+     DAILY PICKS — the 'המלצות היום' card at the top of the page
+     It is derived, never curated: the names that clear every active
+     layer, sized with the user's own portfolio / risk / cap, ranked
+     by position size (RVOL breaks the tie). A stop at or above the
+     entry is not a trade, so that name is dropped — same rule the
+     table uses. Nothing passes → the card says so and names the
+     closest miss instead of inventing a pick.
+     ============================================================ */
+  var REC_MAX = 3;
+
+  function recPicks(){
+    var rows = passing().map(function(s){ return { s:s, z:sizing(s) }; });
+    var ok = rows.filter(function(r){ return !r.z.invalid && r.z.shares > 0; });
+    var blocked = rows.filter(function(r){ return r.z.invalid || !(r.z.shares > 0); });
+    ok.sort(function(a, b){
+      if (b.z.shares !== a.z.shares) return b.z.shares - a.z.shares;
+      return b.s.rvol - a.s.rvol;
+    });
+    return { picks: ok.slice(0, REC_MAX), found: rows.length, blocked: blocked, total: STOCKS.length };
+  }
+
+  function recWhy(s, nLayers){
+    var bits = [];
+    bits.push((s.price > s.sma20 && s.sma20 > s.sma50 && s.sma50 > s.sma200)
+      ? "מגמה מעל 20/50/200" : "מבנה מעורב");
+    bits.push("RSI " + N(s.rsi.toFixed(0)));
+    bits.push("שינוי יומי " + N(fmtPct(s.dayChange, 1)));
+    bits.push("RVOL " + N(s.rvol.toFixed(1) + "x"));
+    return "עוברת את " + (nLayers === 4 ? "4 השכבות" : nLayers + " השכבות הפעילות") + ": " + bits.join(", ");
+  }
+
+  /* Which active check turned away the most names today. Only used for
+     the plain-Hebrew "why nothing passed" line — never for pass/fail,
+     which stays with layerFails(). Thresholds mirror layerFails(). */
+  var REC_CHECKS = [
+    { on:function(s){ return !!state.layers["1"] && !(s.mcap > 2e9); },           id:"mcap",  label:"שווי השוק מתחת ל-2 מיליארד דולר" },
+    { on:function(s){ return !!state.layers["1"] && !(s.avgVol > 1e6); },         id:"vol",   label:"נפח המסחר היומי מתחת למיליון מניות" },
+    { on:function(s){ return !!state.layers["2"] && !(s.epsGrowth > 10); },       id:"fund",  label:"הצמיחה העסקית לא עוברת את רף L2" },
+    { on:function(s){ return !!state.layers["3"] && !(s.price > s.sma20); },      id:"trend", label:"המחיר מתחת לממוצע 20 יום" },
+    { on:function(s){ return !!state.layers["3"] && !(s.sma20 > s.sma50 && s.sma50 > s.sma200); }, id:"stack", label:"הממוצעים לא מסודרים 20>50>200" },
+    { on:function(s){ return !!state.layers["3"] && !(s.perf3m > 0 && s.perf6m > 0); }, id:"perf", label:"התשואה ב-3 או ב-6 חודשים שלילית" },
+    { on:function(s){ return !!state.layers["4"] && !(s.rsi >= 50 && s.rsi <= 65) && s.rsi < 50; }, id:"rsiLow",  label:"RSI מתחת ל-50 (אין כוח קנייה)" },
+    { on:function(s){ return !!state.layers["4"] && !(s.rsi >= 50 && s.rsi <= 65) && s.rsi > 65; }, id:"rsiHigh", label:"RSI מעל 65 (המניה כבר רצה)" },
+    { on:function(s){ return !!state.layers["4"] && !(s.dayChange > 1 && s.dayChange < 5) && s.dayChange <= 1; }, id:"dayLow",  label:"השינוי היומי מתחת ל-+1%" },
+    { on:function(s){ return !!state.layers["4"] && !(s.dayChange > 1 && s.dayChange < 5) && s.dayChange >= 5; }, id:"dayHigh", label:"השינוי היומי מעל +5% (זינוק חד)" },
+    { on:function(s){ return !!state.layers["4"] && !(s.rvol > 1.2); },           id:"rvol",  label:"נפח יחסי מתחת ל-1.2x" },
+    { on:function(s){ return !!state.layers["4"] && !(s.closeStrength > 65); },   id:"close", label:"חוזק סגירה מתחת ל-65%" }
+  ];
+
+  var REC_CAUSE = {
+    trend: "רוב השמות נסחרים מתחת לממוצע הקצר, ולכן מסנן המגמה לא מוצא מועמדות — זה בדיוק מה שהוא נועד לעשות ביום ירידות.",
+    stack: "הממוצעים עוד לא התהפכו לסדר עולה, וזה מה שמסמן מגמה אמיתית ולא תיקון זמני.",
+    dayLow:  "ביום שבו רוב המדגם לא עולה, אין מה לרדוף אחרי — וזה תקין.",
+    dayHigh: "השמות שזינקו כבר עברו את הטווח שהשכבה מרשה, וכניסה אחרי זינוק היא רדיפה.",
+    rsiLow:  "כשהמחירים יורדים, ה-RSI של רוב המדגם נשבר מתחת ל-50 — סימן שאין קונים, ולכן אין כניסה.",
+    rsiHigh: "השמות שכן במגמה כבר רצו חזק מדי, והשכבה הזאת קיימת כדי לא לקנות בקצה העלייה.",
+    rvol:  "אין נפח חריג מאחורי התנועה — בלעדיו אין מי שיחזיק את המחיר.",
+    close: "המניות נסגרו חלש בתוך טווח היום, ולכן אין להן את הדחיפה שנדרשת לכניסה.",
+    perf:  "התשואה ב-3 או ב-6 חודשים שלילית — זאת לא מגמה עולה, גם אם היום היה ירוק.",
+    fund:  "הנתונים העסקיים (רווח, מכירות, תשואה על ההון) לא עומדים ברף של L2.",
+    mcap:  "אין במדגם שם קטן מדי — הבעיה כאן היא לא גודל החברה.",
+    vol:   "נפח המסחר היומי דק מדי, ולכן אי אפשר להיכנס ולצאת בלי להזיז את המחיר."
+  };
+
+  function recCause(){
+    var best = null, bestN = 0;
+    REC_CHECKS.forEach(function(c){
+      var n = 0;
+      STOCKS.forEach(function(s){ if (c.on(s)) n++; });
+      if (n > bestN) { bestN = n; best = c; }
+    });
+    if (!best) return "";
+    var head = "הבדיקה שפסלה הכי הרבה שמות היום: " + best.label +
+      " (" + bestN + " מתוך " + STOCKS.length + "). ";
+    return head + (REC_CAUSE[best.id] || "המסנן עובד כמו שהוא אמור — עדיף בלי עסקה מאשר עם אחת חלשה.");
+  }
+
+  function recRowHTML(r, rank, nLayers){
+    var s = r.s, z = r.z;
+    var capPct = state.portfolio ? (z.cost / state.portfolio) * 100 : 0;
+    var riskPctOfPort = state.portfolio ? (z.cashRisk / state.portfolio) * 100 : 0;
+    var stopUnder = s.price ? Math.abs((z.stop - s.price) / s.price) * 100 : 0;
+    return '<li class="rec-row" data-rec="' + esc(s.ticker) + '" tabindex="0" role="button" ' +
+        'data-shares="' + z.shares + '" data-stop="' + z.stop.toFixed(2) + '" data-target="' + z.target.toFixed(2) + '" ' +
+        'data-cost="' + z.cost.toFixed(2) + '" data-risk="' + z.cashRisk.toFixed(2) + '" ' +
+        'data-riskpct="' + riskPctOfPort.toFixed(2) + '" data-cappct="' + capPct.toFixed(1) + '" ' +
+        'aria-label="פתיחת תוכנית הסיכון של ' + esc(s.ticker) + '">' +
+      '<div class="rec-top">' +
+        '<span class="rec-rank">' + rank + '</span>' +
+        '<span class="tk">' + esc(s.ticker) + '</span>' +
+        '<span class="rec-name">' + esc(s.nameHe) + '</span>' +
+        (z.capped ? '<span class="capped">בתקרה</span>' : '') +
+        '<span class="rec-price">' + N(fmtMoney(s.price)) + ' · ' + N(fmtPct(s.dayChange, 2)) + '</span>' +
+      '</div>' +
+      '<p class="rec-act">' + [
+        '<span class="seg">כניסה ' + N(fmtMoney(s.price)) + '</span>',
+        '<span class="seg"><span class="sep">·</span> סטופ ' + N(fmtMoney(z.stop)) + ' (' + N(stopUnder.toFixed(1) + "%") + ' מתחת)</span>',
+        '<span class="seg"><span class="sep">·</span> ' + N(fmtInt(z.shares)) + ' מניות</span>',
+        '<span class="seg"><span class="sep">·</span> סה״כ ' + N(fmtMoney(z.cost, 0)) + ' (' + N(capPct.toFixed(1) + "%") + ' מהתיק)</span>',
+        '<span class="seg"><span class="sep">·</span> יעד 2R ' + N(fmtMoney(z.target)) + '</span>'
+      ].join(" ") + '</p>' +
+      '<p class="rec-loss">הפסד מקסימלי אם הסטופ נפגע: <b>' + N(fmtMoney(z.cashRisk, 0)) + '</b> · ' +
+        N(riskPctOfPort.toFixed(2) + "%") + ' מהתיק</p>' +
+      '<p class="rec-why"><b class="ltag">למה</b>' + recWhy(s, nLayers) + '</p>' +
+    '</li>';
+  }
+
+  function renderRecs(){
+    var card = document.getElementById("recsCard");
+    var body = document.getElementById("recsBody");
+    var chip = document.getElementById("recsChip");
+    var foot = document.getElementById("recsFoot");
+    var hint = document.getElementById("recsHint");
+    if (!card || !body) return;
+
+    /* never a number before the real data lands — a wrong pick that
+       flashes for 300ms is worse than a loading line */
+    if (!DATA.loaded) {
+      card.className = "card recs loading";
+      if (chip) { chip.hidden = true; chip.textContent = "0"; }
+      if (hint) hint.textContent = "מחכה לנתוני השוק";
+      body.innerHTML = DATA.settled
+        ? '<p class="recs-empty">לא נטענו נתוני שוק — בלי מחירי סגירה אמיתיים אין בסיס להמלצה.' +
+          '</p><p class="recs-sub">אפשר לטעון מחירים חיים מכפתור ״נתוני שוק״, ואז לחזור לכאן.</p>'
+        : '<p class="recs-loading">טוען נתונים…</p>';
+      if (foot) { foot.hidden = true; foot.innerHTML = ""; }
+      return;
+    }
+
+    var R = recPicks();
+    var nLayers = activeLayerCount();
+    var count = R.picks.length;
+    var html = "";
+
+    if (count) {
+      html += '<ol class="rec-list">' +
+        R.picks.map(function(r, i){ return recRowHTML(r, i + 1, nLayers); }).join("") +
+        '</ol>';
+      if (R.blocked.length) {
+        var many = R.blocked.length > 1;
+        html += '<p class="rec-note">' +
+          (many ? 'השמות הבאים נפסלו מההמלצות כי הסטופ שלהן מעל המחיר: '
+                : 'השם הבא נפסל מההמלצות כי הסטופ שלו מעל המחיר: ') +
+          R.blocked.map(function(r){
+            return '<bdi>' + esc(r.s.ticker) + '</bdi> (' + N(fmtMoney(r.z.stop)) + ' מול ' + N(fmtMoney(r.s.price)) + ')';
+          }).join(", ") +
+          ' — אין עסקה בלי מרווח בין הכניסה לסטופ.</p>';
+      }
+    } else if (R.blocked.length) {
+      html += '<p class="recs-empty">המועמדות שנמצאו נפסלו כי הסטופ שלהן מעל המחיר.</p>' +
+        '<p class="recs-sub">הסטופ לפי העוגן שבחרת יושב מעל המחיר ב-' +
+        R.blocked.map(function(r){ return '<bdi>' + esc(r.s.ticker) + '</bdi> (' + N(fmtMoney(r.z.stop)) + ' מול ' + N(fmtMoney(r.s.price)) + ')'; }).join(", ") +
+        ' — במצב כזה אין מספר מניות שאפשר לחשב, ולכן אין המלצה.</p>' +
+        '<p class="recs-sub">אפשר לעבור ל״מינוס 6%״ כעוגן סטופ, או לבדוק שוב מחר.</p>';
+    } else {
+      var nm = nearMiss();
+      var layersTxt = (nLayers === 4 ? "ארבע השכבות" : N(String(nLayers)) + " השכבות הפעילות");
+      html += '<p class="recs-empty">אין המלצות היום — ' + N("0 מתוך " + R.total) +
+        ' עוברות את ' + layersTxt + '.';
+      if (nm) {
+        var act = layerFails(nm.s).filter(function(n){ return state.layers[String(n)]; });
+        html += ' הקרוב ביותר: <bdi>' + esc(nm.s.ticker) + '</bdi> שנכשלה ב-' +
+          '<bdi>' + (act.length ? "L" + act.join("/L") : "—") + '</bdi>.';
+      }
+      html += '</p>';
+      var cause = recCause();
+      if (cause) html += '<p class="recs-sub">' + esc(cause) + '</p>';
+    }
+
+    body.innerHTML = html;
+
+    if (chip) {
+      chip.hidden = false;
+      chip.textContent = String(count);
+    }
+    card.className = "card recs " + (count ? "has" : "none");
+    if (hint) hint.textContent = count
+      ? "מדורג לפי גודל פוזיציה, שוויון נשבר ב-RVOL · מתעדכן עם כל שינוי בהגדרות"
+      : "מוצג רק מה שעובר את כל השכבות הפעילות";
+
+    if (foot) {
+      foot.hidden = false;
+      foot.innerHTML = 'מבוסס על נתוני סגירת ' + N(esc(DATA.asOf || "—")) +
+        ' · חישוב לפי הכללים שלך (' + N(state.riskPct.toFixed(2) + "%") + ' סיכון, תקרה ' + N(String(state.maxCapPct) + "%") + ')' +
+        ' · לא ייעוץ השקעות';
+    }
+
+    Array.prototype.forEach.call(body.querySelectorAll("[data-rec]"), function(row){
+      var t = row.getAttribute("data-rec");
+      row.addEventListener("click", function(){ openDrawer(t); });
+      row.addEventListener("keydown", function(ev){
+        if (ev.key === "Enter" || ev.key === " ") { ev.preventDefault(); openDrawer(t); }
       });
     });
   }
@@ -2490,6 +2805,9 @@
     if (!statusEl) return;
     statusEl.textContent = msg || "";
     statusEl.className = "api-status" + (tone ? " " + tone : "");
+    /* the sheet is closed during a header refresh — mirror the loader's own
+       progress text next to the button so the run is visible */
+    if (refreshing) refreshNote(msg || "", tone === "err" ? "err" : "");
   }
   function apiSyncButtons(){
     ["apiSave","apiLoad","apiRemove"].forEach(function(id){
@@ -2587,10 +2905,20 @@
     try {
       var d = new Date(DATA.generatedAt);
       if (isNaN(d.getTime())) return nowNY();
+      return nyHM(d);
+    } catch(e){ return nowNY(); }
+  }
+  /* HH:MM in New York for any Date — used by the banner stamp */
+  function nyHM(d){
+    try {
       return new Intl.DateTimeFormat("en-GB", {
         timeZone:"America/New_York", hour12:false, hour:"2-digit", minute:"2-digit"
       }).format(d);
     } catch(e){ return nowNY(); }
+  }
+  /* after a manual refresh the banner shows when we last pulled, not when the file was built */
+  function bannerTimeNY(){
+    return DATA.refreshedAt ? nyHM(DATA.refreshedAt) : fileTimeNY();
   }
 
   /* One banner, three truths: calculated close, live overlay, or demo fallback. */
@@ -2608,13 +2936,13 @@
     el.className = "mockbar calc";
     var live = apiState.live;
     el.innerHTML = '<b class="tag">נתונים מחושבים</b><span>' +
-      'סגירת ' + N(DATA.asOf || "—") + ' · נאסד״ק · עודכן ' + N(fileTimeNY()) +
+      'סגירת ' + N(DATA.asOf || "—") + ' · נאסד״ק · עודכן ' + N(bannerTimeNY()) +
       (live ? ' · ' + N(apiState.updated.length + "/" + STOCKS.length) + ' מחירים חיים מ-' + esc(PROVIDER_NAME[apiState.provider]) : '') +
       '<small class="bsub">פונדמנטלס (P/E, ROE, EPS, בעלות מוסדית, בטא, שווי שוק) הם ערכי עזר סטטיים' +
         (live ? ' · המחיר והשינוי היומי הם ציטוט חי; כל השאר מחושב מהסגירה' : '') + '.</small></span>';
   }
 
-  function apiDoLoad(){
+  function apiDoLoad(onDone){
     if (apiBusy) return;
     var k = (keyIn.value || "").trim() || apiState.key;
     if (!k) {
@@ -2634,30 +2962,31 @@
     function finish(){
       apiBusy = false;
       apiSyncButtons();
+      var ok = false;
       if (fatal) {                                  /* nothing applied — rows stay exactly as they were */
         apiSetStatus(API_MSG[fatal], "err");
-        return;
-      }
-      if (!got.length) {
+      } else if (!got.length) {
         apiSetStatus(netSeen ? API_MSG.net : "לא התקבלו מחירים מהספק. נסה שוב או בחר ספק אחר.", "err");
-        return;
+      } else {
+        got.forEach(function(x){
+          if (!demoSnap[x.s.ticker]) demoSnap[x.s.ticker] = { price:x.s.price, dayChange:x.s.dayChange };
+          x.s.price = x.q.price;
+          x.s.dayChange = x.q.change;
+          x.s.live = true;
+        });
+        apiState.live = true;
+        apiState.updatedAt = new Date();
+        apiState.provider = p;
+        apiState.updated = got.map(function(x){ return x.s.ticker; });
+        renderAll();                                 /* sizing, radar averages, effective risk all recompute */
+        renderBanner();
+        apiSetStatus(got.length === STOCKS.length
+          ? "התקבלו 12 מחירים חיים מ-" + PROVIDER_NAME[p] + ". האינדיקטורים נשארו מחושבים מהסגירה."
+          : "התקבלו " + got.length + " מתוך 12 מחירים חיים; השאר נשארו במחירי הסגירה המחושבים.",
+          got.length === STOCKS.length ? "ok" : "warn");
+        ok = true;
       }
-      got.forEach(function(x){
-        if (!demoSnap[x.s.ticker]) demoSnap[x.s.ticker] = { price:x.s.price, dayChange:x.s.dayChange };
-        x.s.price = x.q.price;
-        x.s.dayChange = x.q.change;
-        x.s.live = true;
-      });
-      apiState.live = true;
-      apiState.updatedAt = new Date();
-      apiState.provider = p;
-      apiState.updated = got.map(function(x){ return x.s.ticker; });
-      renderAll();                                   /* sizing, radar averages, effective risk all recompute */
-      renderBanner();
-      apiSetStatus(got.length === STOCKS.length
-        ? "התקבלו 12 מחירים חיים מ-" + PROVIDER_NAME[p] + ". האינדיקטורים נשארו מחושבים מהסגירה."
-        : "התקבלו " + got.length + " מתוך 12 מחירים חיים; השאר נשארו במחירי הסגירה המחושבים.",
-        got.length === STOCKS.length ? "ok" : "warn");
+      if (typeof onDone === "function") onDone(ok);
     }
 
     function step(){
@@ -2686,9 +3015,90 @@
   }
 
   /* ============================================================
+     REFRESH — the header control.
+     indicators.json is written by a cron job, so a plain reload can
+     serve a stale copy; the pull is stamped with Date.now() and
+     cache:"no-store". The merge is the same applyIndicators() the
+     first paint uses, then the saved live-quote pass runs again and
+     every derived number is recomputed from one place. A failed pull
+     leaves the previous values exactly as they were.
+     ============================================================ */
+  var refreshing = false, refreshTimer = null;
+
+  function refreshNote(msg, tone){
+    var el = document.getElementById("refreshNote");
+    if (!el) return;
+    el.textContent = msg || "";
+    el.className = "refresh-note" + (tone ? " " + tone : "");
+  }
+  function refreshBusy(on){
+    refreshing = !!on;
+    var b = document.getElementById("refreshBtn");
+    if (!b) return;
+    b.disabled = !!on;
+    b.setAttribute("data-busy", on ? "1" : "0");
+    b.setAttribute("aria-busy", on ? "true" : "false");
+    var lab = b.querySelector(".rlabel");
+    if (lab) lab.textContent = on ? "מרענן…" : "רענון";
+  }
+  function refreshHold(msg, tone){
+    if (refreshTimer) clearTimeout(refreshTimer);
+    refreshTimer = setTimeout(function(){ if (!refreshing) refreshNote(""); }, 3000);
+    refreshNote(msg, tone);
+  }
+  function refreshIndicators(){
+    if (typeof fetch !== "function") return Promise.resolve(false);
+    var url;
+    try { url = new URL("indicators.json?t=" + Date.now(), document.baseURI).href; }
+    catch(e){ url = "indicators.json?t=" + Date.now(); }
+    return fetch(url, { cache:"no-store", credentials:"omit" })
+      .then(function(res){ return res.ok ? res.text() : null; })
+      .then(function(txt){
+        if (!txt) return false;
+        var js = null;
+        try { js = JSON.parse(txt); } catch(e){ return false; }
+        return applyIndicators(js);
+      })
+      .catch(function(){ return false; });
+  }
+
+  function refreshAll(){
+    if (refreshing) return Promise.resolve(false);
+    refreshBusy(true);
+    refreshNote("מרענן נתונים…");
+    return refreshIndicators().then(function(ok){
+      if (!ok) {
+        refreshBusy(false);
+        refreshHold("הרענון נכשל — נשארו הנתונים הקודמים", "err");
+        showToast("הרענון נכשל — נשארו הנתונים הקודמים");
+        return false;                        /* nothing was applied — old numbers stand */
+      }
+      DATA.refreshedAt = new Date();
+      renderAll();                           /* recommendations, radar, risk, sizing cells */
+      renderExample();
+      renderBanner();                        /* timestamp now shows the refresh HH:MM */
+
+      if (!apiState.key || apiBusy) {
+        refreshBusy(false);
+        refreshHold("עודכן", "ok");
+        return true;
+      }
+      return new Promise(function(resolve){
+        apiDoLoad(function(gotQuotes){
+          refreshBusy(false);
+          if (gotQuotes) refreshHold("עודכן", "ok");
+          else refreshHold(statusEl && statusEl.textContent ? statusEl.textContent : "הרענון נכשל — נשארו הנתונים הקודמים", "err");
+          resolve(true);
+        });
+      });
+    });
+  }
+
+  /* ============================================================
      WIRING
      ============================================================ */
   function renderAll(){
+    renderRecs();
     renderTiming(false);
     renderRisk();
     renderRadar();
@@ -2699,6 +3109,10 @@
 
   function wire(){
     popEl = document.getElementById("pop");
+
+    /* --- refresh: re-pull the file, re-run quotes, recompute everything --- */
+    var refreshBtn = document.getElementById("refreshBtn");
+    if (refreshBtn) refreshBtn.addEventListener("click", function(){ refreshAll(); });
 
     /* --- live data sheet --- */
     sheetEl  = document.getElementById("apiSheet");
@@ -2724,7 +3138,7 @@
       if (v !== null) {
         state.portfolio = clamp(v, 1000, 10000000);
         save();
-        renderRisk(); renderRadar(); renderTable(); renderTraps();
+        renderRisk(); renderRadar(); renderTable(); renderTraps(); renderRecs();
       }
     });
     pIn.addEventListener("change", function(){
@@ -2739,7 +3153,7 @@
     rIn.addEventListener("input", function(){
       state.riskPct = clamp(num(rIn.value, 1), 0.25, 2.5);
       save();
-      renderRisk(); renderRadar(); renderTable(); renderTraps();
+      renderRisk(); renderRadar(); renderTable(); renderTraps(); renderRecs();
     });
 
     var cIn = document.getElementById("capInput");
@@ -2748,7 +3162,7 @@
       if (v !== null) {
         state.maxCapPct = clamp(v, 1, 100);
         save();
-        renderRisk(); renderRadar(); renderTable(); renderTraps();
+        renderRisk(); renderRadar(); renderTable(); renderTraps(); renderRecs();
       }
     });
     cIn.addEventListener("change", function(){
@@ -2873,6 +3287,7 @@
     loadIndicators().then(function(ok){
       /* the calculated close is the baseline that "הסר מפתח" restores */
       STOCKS.forEach(function(s){ demoSnap[s.ticker] = { price:s.price, dayChange:s.dayChange }; });
+      DATA.settled = true;
       document.documentElement.setAttribute("data-source", ok ? "calculated" : "demo");
       renderBanner();
       renderAll();
@@ -2925,6 +3340,23 @@
     },
     rows: function(){ return sortedRows().map(function(s){ var z = sizing(s); return { ticker:s.ticker, shares:z.shares, cost:+z.cost.toFixed(2), risk:+z.cashRisk.toFixed(2), stop:+z.stop.toFixed(2), target:+z.target.toFixed(2), invalid:!!z.invalid }; }); },
     config: function(){ return { portfolio:state.portfolio, riskPct:state.riskPct, maxCapPct:state.maxCapPct, stopMode:state.stopMode }; },
+    /* the 'המלצות היום' card, as rendered */
+    recs: function(){
+      if (!DATA.loaded) return { ready:false, count:0, rows:[], blocked:[], total:STOCKS.length };
+      var R = recPicks();
+      return {
+        ready:true, count:R.picks.length, found:R.found, total:R.total,
+        blocked:R.blocked.map(function(r){ return r.s.ticker; }),
+        rows:R.picks.map(function(r){
+          return { ticker:r.s.ticker, shares:r.z.shares, stop:+r.z.stop.toFixed(2), target:+r.z.target.toFixed(2),
+                   cost:+r.z.cost.toFixed(2), risk:+r.z.cashRisk.toFixed(2), capped:!!r.z.capped,
+                   riskPct:+((r.z.cashRisk / state.portfolio) * 100).toFixed(2),
+                   capPct:+((r.z.cost / state.portfolio) * 100).toFixed(1) };
+        })
+      };
+    },
+    refresh: function(){ return refreshAll(); },
+    refreshing: function(){ return refreshing; },
     setLayers: function(obj){ Object.keys(obj).forEach(function(k){ state.layers[k] = !!obj[k]; }); renderAll(); renderExample(); },
     /* live-data snapshot — never exposes the key itself */
     price: function(t){ var s = STOCKS.filter(function(x){ return x.ticker === t; })[0]; return s ? +s.price.toFixed(2) : null; },

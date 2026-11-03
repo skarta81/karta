@@ -558,6 +558,67 @@
     *{transition:none!important;animation:none!important}
     .drawer{transition:none}
   }
+
+  /* ---------- live data (API) ---------- */
+  .brand{flex-wrap:wrap}
+  .api-open{
+    margin-inline-start:auto;flex:0 0 auto;display:inline-flex;align-items:center;gap:7px;
+    background:#fff;border:1px solid var(--line);border-radius:10px;padding:7px 12px;
+    font-size:12.5px;font-weight:600;color:var(--ink);box-shadow:var(--shadow);max-width:100%;
+  }
+  .api-open:hover{border-color:#cfc9ba;background:#fdfcf9}
+  .api-open svg{flex:0 0 auto}
+  .api-open .kdot{width:7px;height:7px;border-radius:50%;background:var(--green);box-shadow:0 0 0 3px var(--green-bg)}
+  .api-open .kdot[hidden]{display:none}
+
+  .sheet-bd{position:fixed;inset:0;background:rgba(23,23,15,.32);z-index:110}
+  .sheet{
+    position:fixed;z-index:120;top:50%;left:50%;transform:translate(-50%,-50%);
+    width:min(520px,calc(100vw - 24px));max-width:calc(100vw - 24px);
+    max-height:calc(100vh - 32px);overflow-y:auto;overscroll-behavior:contain;
+    background:var(--bg);border:1px solid var(--line);border-radius:16px;
+    box-shadow:0 24px 60px rgba(23,23,15,.22);
+  }
+  .sheet[hidden],.sheet-bd[hidden]{display:none}
+  body.sheet-open{overflow:hidden}
+  .sheet-head{
+    display:flex;justify-content:space-between;gap:12px;align-items:flex-start;
+    padding:14px 16px;background:#fff;border-bottom:1px solid var(--line);
+    border-radius:16px 16px 0 0;position:sticky;top:0;z-index:2;
+  }
+  .sheet-head h2{font-size:16px;line-height:1.4}
+  .sheet-sub{font-size:11.5px;color:var(--muted);line-height:1.55;margin-top:2px}
+  .sheet-body{padding:14px 16px 16px;display:grid;gap:14px;min-width:0}
+  .sheet-body #apiProvider{width:100%}
+  .key-wrap{display:flex;align-items:center;gap:6px;min-width:0}
+  .key-wrap input{
+    flex:1 1 auto;min-width:0;width:100%;font-family:var(--num);font-size:13.5px;color:var(--ink);
+    background:#fff;border:1px solid var(--line);border-radius:9px;padding:9px 11px;
+    direction:ltr;text-align:left;
+  }
+  .key-eye{flex:0 0 auto;font-size:11.5px;color:var(--muted);border:1px solid var(--line);background:#fff;border-radius:8px;padding:8px 10px}
+  .key-eye:hover{border-color:#cfc9ba;color:var(--ink)}
+  .sheet-actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:2px}
+  .sheet-actions button{flex:1 1 auto;min-width:0;white-space:nowrap;font-size:12.5px;padding:8px 10px}
+  .sheet-actions button[disabled]{opacity:.55;cursor:progress}
+  .api-status{
+    font-size:12.5px;line-height:1.6;border-radius:9px;padding:8px 11px;
+    border:1px solid var(--line-2);background:#fdfcf9;color:var(--muted);
+  }
+  .api-status:empty{display:none}
+  .api-status.err{background:var(--red-bg);border-color:#efd5d1;color:#8d2b20}
+  .api-status.ok{background:var(--green-bg);border-color:#cbe6da;color:#0c6b4a}
+  .api-status.warn{background:var(--amber-bg);border-color:#eee0c4;color:#6b4d15}
+  .api-disc{font-size:11px;line-height:1.6;color:var(--faint);margin:0}
+
+  .livechip{
+    display:inline-block;font-size:10px;font-weight:700;letter-spacing:.02em;color:#0c6b4a;
+    background:var(--green-bg);border:1px solid #cbe6da;border-radius:4px;
+    padding:0 5px;margin-inline-start:6px;line-height:1.7;vertical-align:1px;
+  }
+  .mockbar.live{background:var(--green-bg);border-color:#cbe6da;color:#0c6b4a}
+  .mockbar.live b.tag{background:#fff;border-color:#cbe6da;color:#0c6b4a}
+  .fchip .fc-price{font-size:10px;color:var(--green);font-weight:700}
 </style>
 </head>
 <body>
@@ -580,6 +641,13 @@
         <h1>סורק מגמות</h1>
         <div class="sub">מסנן מניות במגמה עולה, ומראה בדיוק כמה לקנות, איפה הסטופ ואיפה יעד 2R — בשפה של בני אדם.</div>
       </div>
+      <button class="api-open" type="button" id="apiOpen" aria-haspopup="dialog" aria-expanded="false" aria-controls="apiSheet">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#1f4e79" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+          <path d="M4 19V11"/><path d="M9.8 19V5"/><path d="M15.6 19v-6"/><path d="M21 19V8"/>
+        </svg>
+        <span>נתוני שוק</span>
+        <span class="kdot" id="apiDot" aria-hidden="true" hidden></span>
+      </button>
     </div>
 
     <div class="toprow">
@@ -819,6 +887,40 @@
   <div class="pop-t" id="popTitle"></div>
   <p class="pop-s" id="popShort"></p>
   <div class="pop-x"><b>דוגמה</b><span id="popEx"></span></div>
+</div>
+
+<div class="sheet-bd" id="apiBackdrop" hidden></div>
+<div class="sheet" id="apiSheet" role="dialog" aria-modal="true" aria-labelledby="apiTitle" aria-describedby="apiDisc" hidden>
+  <div class="sheet-head">
+    <div>
+      <h2 id="apiTitle">נתוני שוק</h2>
+      <div class="sheet-sub">מחבר את העמוד לספק מחירים: המחיר והשינוי היומי מתעדכנים, כל השאר נשאר מדגם.</div>
+    </div>
+    <button class="icon-btn" type="button" id="apiClose" aria-label="סגירת חלון נתוני שוק">✕</button>
+  </div>
+  <div class="sheet-body">
+    <div class="field">
+      <div class="flabel"><label for="apiProvider">ספק נתונים</label><b>API</b></div>
+      <select class="sel" id="apiProvider" aria-label="בחירת ספק נתוני שוק">
+        <option value="fmp">Financial Modeling Prep</option>
+        <option value="finnhub">Finnhub</option>
+      </select>
+    </div>
+    <div class="field">
+      <div class="flabel"><label for="apiKey">מפתח API</label><b id="apiKeyState">לא נשמר</b></div>
+      <div class="key-wrap">
+        <input id="apiKey" type="password" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="הדבק כאן את המפתח" aria-describedby="apiDisc">
+        <button class="key-eye" type="button" id="apiEye" aria-pressed="false" aria-label="הצגת המפתח">הצג</button>
+      </div>
+    </div>
+    <div class="sheet-actions">
+      <button class="btn-primary" type="button" id="apiLoad">טען מחירים חיים</button>
+      <button class="btn-ghost" type="button" id="apiSave">שמור מפתח</button>
+      <button class="btn-ghost" type="button" id="apiRemove">הסר מפתח</button>
+    </div>
+    <div class="api-status" id="apiStatus" role="status" aria-live="polite"></div>
+    <p class="api-disc" id="apiDisc">המפתח נשמר רק בדפדפן שלך (localStorage) וגלוי למי שיש לו גישה למכשיר.</p>
+  </div>
 </div>
 <script>
 (function(){
@@ -1460,7 +1562,8 @@
     var tgtPct = s.price ? ((z.target - s.price) / s.price) * 100 : 0;
     var closeW = clamp(s.closeStrength, 0, 100);
     return '<tr class="row" tabindex="0" data-ticker="' + esc(s.ticker) + '" aria-label="פתיחת הפרטים של ' + esc(s.ticker) + '">' +
-      '<td><div class="tk-cell"><div class="tk-line"><span class="tk">' + esc(s.ticker) + '</span></div>' +
+      '<td><div class="tk-cell"><div class="tk-line"><span class="tk">' + esc(s.ticker) + '</span>' +
+        (s.live ? '<span class="livechip" title="המחיר והשינוי היומי נטענו עכשיו מהספק">חי</span>' : '') + '</div>' +
         '<span class="tk-name">' + esc(s.nameHe) + '</span>' +
         '<span class="sbadge">' + esc(s.sector) + '</span></div></td>' +
       '<td><div class="cell-2"><span class="price">' + N(fmtMoney(s.price)) + '</span>' +
@@ -1495,6 +1598,7 @@
     var tgtPct = s.price ? ((z.target - s.price) / s.price) * 100 : 0;
     return '<button class="mcard" data-ticker="' + esc(s.ticker) + '" aria-label="פתיחת הפרטים של ' + esc(s.ticker) + '">' +
       '<div class="mc-top"><span class="tk">' + esc(s.ticker) + '</span>' +
+        (s.live ? '<span class="livechip">חי</span>' : '') +
         '<span class="mc-price"><span class="price">' + N(fmtMoney(s.price)) + '</span> <span class="chg">' + N(fmtPct(s.dayChange, 2)) + '</span></span>' +
         '<span class="sbadge">' + esc(s.sector) + '</span></div>' +
       '<div class="mc-name">' + esc(s.nameHe) + '</div>' +
@@ -1560,7 +1664,8 @@
       fo.innerHTML = '<span class="lbl">נפסלו</span>' + out.map(function(s){
         var e = evaluator(s);
         return '<button class="fchip" data-chip="' + esc(s.ticker) + '" title="פתיחת הפרטים של ' + esc(s.ticker) + '">' +
-          esc(s.ticker) + '<b>L' + e.active.join("/L") + '</b></button>';
+          esc(s.ticker) + (s.live ? '<span class="fc-price">' + N(fmtMoney(s.price)) + '</span>' : '') +
+          '<b>L' + e.active.join("/L") + '</b></button>';
       }).join("");
       fo.querySelectorAll("[data-chip]").forEach(function(b){
         b.addEventListener("click", function(){ openDrawer(b.getAttribute("data-chip")); });
@@ -1874,6 +1979,275 @@
   }
 
   /* ============================================================
+     LIVE DATA — user-supplied API key, browser-side only.
+     The key lives in localStorage ("scanner.api") and is sent to
+     nothing but the provider endpoint the user picked.
+     ============================================================ */
+  var API_STORE = "scanner.api";
+  var PROVIDER_NAME = { fmp:"Financial Modeling Prep", finnhub:"Finnhub" };
+  var API_MSG = {
+    auth: "המפתח לא תקין או שפג תוקפו",
+    rate: "חרגת ממכסת הבקשות של הספק — נסה שוב בעוד דקה",
+    net:  "לא הצלחתי להגיע לספק. בדוק חיבור או נסה ספק אחר"
+  };
+
+  var apiState = { provider:"fmp", key:"", live:false, updatedAt:null, updated:[] };
+  var demoSnap = {};              /* ticker -> demo price/dayChange, captured before the first live write */
+  var demoBannerHTML = "";        /* the mock banner markup, restored on "הסר מפתח" */
+  var apiBusy = false;
+  var sheetEl = null, bdEl = null, keyIn = null, provSel = null, statusEl = null;
+
+  function apiReadStore(){
+    try {
+      var raw = localStorage.getItem(API_STORE);
+      if (!raw) return;
+      var o = JSON.parse(raw);
+      if (!o || typeof o !== "object") return;
+      if (o.provider === "fmp" || o.provider === "finnhub") apiState.provider = o.provider;
+      if (typeof o.key === "string") apiState.key = o.key;
+    } catch(e){ /* storage blocked or corrupt — stay in demo mode */ }
+  }
+  function apiWriteStore(provider, key){
+    apiState.provider = provider;
+    apiState.key = key;
+    try {
+      localStorage.setItem(API_STORE, JSON.stringify({ provider:provider, key:key }));
+      return true;
+    } catch(e){ return false; }
+  }
+  function apiDropKey(){
+    apiState.key = "";
+    try { localStorage.removeItem(API_STORE); } catch(e){}
+  }
+
+  function apiEndpoint(provider, ticker, key){
+    if (provider === "finnhub") {
+      return "https://finnhub.io/api/v1/quote?symbol=" + encodeURIComponent(ticker) +
+             "&token=" + encodeURIComponent(key);
+    }
+    return "https://financialmodelingprep.com/stable/quote?symbol=" + encodeURIComponent(ticker) +
+           "&apikey=" + encodeURIComponent(key);
+  }
+
+  /* one request, 9s ceiling; failures carry a `kind` so the caller can classify them */
+  function apiFetchQuote(provider, ticker, key){
+    var ctrl = (typeof AbortController === "function") ? new AbortController() : null;
+    var timer = setTimeout(function(){ if (ctrl) ctrl.abort(); }, 9000);
+    var opts = { cache:"no-store", credentials:"omit", referrerPolicy:"no-referrer" };
+    if (ctrl) opts.signal = ctrl.signal;
+    return fetch(apiEndpoint(provider, ticker, key), opts).then(function(res){
+      if (res.status === 401 || res.status === 403) { var a = new Error("auth"); a.kind = "auth"; throw a; }
+      if (res.status === 429) { var r = new Error("rate"); r.kind = "rate"; throw r; }
+      if (!res.ok) { var h = new Error("http " + res.status); h.kind = "http"; throw h; }
+      return res.json();
+    }).then(function(data){
+      clearTimeout(timer);
+      return apiParseQuote(provider, data);
+    }, function(err){
+      clearTimeout(timer);
+      if (!err || !err.kind) { var n = new Error("net"); n.kind = "net"; throw n; }
+      throw err;
+    });
+  }
+
+  function apiParseQuote(provider, data){
+    if (provider === "finnhub") {
+      var c = data ? Number(data.c) : NaN;
+      var dp = data ? Number(data.dp) : NaN;
+      if (!isFinite(c) || c <= 0 || !isFinite(dp)) return null;
+      return { price:c, change:dp };
+    }
+    var row = (Object.prototype.toString.call(data) === "[object Array]") ? data[0] : data;
+    if (!row) return null;
+    var p = Number(row.price), ch = Number(row.changePercentage);
+    if (!isFinite(p) || p <= 0 || !isFinite(ch)) return null;
+    return { price:p, change:ch };
+  }
+
+  function apiSetStatus(msg, tone){
+    if (!statusEl) return;
+    statusEl.textContent = msg || "";
+    statusEl.className = "api-status" + (tone ? " " + tone : "");
+  }
+  function apiSyncButtons(){
+    ["apiSave","apiLoad","apiRemove"].forEach(function(id){
+      var b = document.getElementById(id);
+      if (b) b.disabled = apiBusy;
+    });
+    var l = document.getElementById("apiLoad");
+    if (l) l.textContent = apiBusy ? "טוען…" : "טען מחירים חיים";
+  }
+  function apiEye(show){
+    if (!keyIn) return;
+    var b = document.getElementById("apiEye");
+    keyIn.type = show ? "text" : "password";
+    if (b) {
+      b.textContent = show ? "הסתר" : "הצג";
+      b.setAttribute("aria-pressed", show ? "true" : "false");
+      b.setAttribute("aria-label", show ? "הסתרת המפתח" : "הצגת המפתח");
+    }
+  }
+  function apiRefreshKeyState(){
+    var lab = document.getElementById("apiKeyState");
+    if (lab) lab.textContent = apiState.key ? "נשמר בדפדפן" : "לא נשמר";
+    var dot = document.getElementById("apiDot");
+    if (dot) dot.hidden = !apiState.key;
+  }
+
+  function apiOpenSheet(){
+    if (!sheetEl) return;
+    provSel.value = apiState.provider;
+    keyIn.value = apiState.key;
+    apiEye(false);
+    bdEl.hidden = false;
+    sheetEl.hidden = false;
+    document.body.classList.add("sheet-open");
+    document.getElementById("apiOpen").setAttribute("aria-expanded", "true");
+    apiRefreshKeyState();
+    if (!statusEl.textContent) {
+      apiSetStatus(apiState.key ? "מפתח שמור בדפדפן הזה. אפשר לטעון מחירים חיים." : "", "");
+    }
+    try { keyIn.focus({ preventScroll:true }); } catch(e){ keyIn.focus(); }
+  }
+  function apiCloseSheet(){
+    if (!sheetEl || sheetEl.hidden) return;
+    sheetEl.hidden = true;
+    bdEl.hidden = true;
+    document.body.classList.remove("sheet-open");
+    apiEye(false);
+    document.getElementById("apiOpen").setAttribute("aria-expanded", "false");
+    var ob = document.getElementById("apiOpen");
+    if (ob) ob.focus();
+  }
+
+  function apiDoSave(){
+    var k = (keyIn.value || "").trim();
+    if (!k) { apiSetStatus("הזן מפתח API לפני השמירה.", "err"); keyIn.focus(); return; }
+    var p = (provSel.value === "finnhub") ? "finnhub" : "fmp";
+    var ok = apiWriteStore(p, k);
+    apiRefreshKeyState();
+    apiSetStatus(ok
+      ? "המפתח נשמר בדפדפן הזה (" + PROVIDER_NAME[p] + ")."
+      : "לא הצלחתי לשמור בדפדפן — המפתח ישמש לטעינה הזאת בלבד.",
+      ok ? "ok" : "warn");
+  }
+
+  function apiDoRemove(){
+    apiDropKey();
+    keyIn.value = "";
+    apiEye(false);
+    apiRefreshKeyState();
+    apiResetToDemo();
+    apiSetStatus("המפתח הוסר מהדפדפן. חזרת לנתוני הדגם.", "ok");
+  }
+
+  function apiResetToDemo(){
+    STOCKS.forEach(function(s){
+      var d = demoSnap[s.ticker];
+      if (d) { s.price = d.price; s.dayChange = d.dayChange; }
+      s.live = false;
+    });
+    apiState.live = false;
+    apiState.updatedAt = null;
+    apiState.updated = [];
+    renderAll();
+    renderBanner();
+  }
+
+  function renderBanner(){
+    var el = document.getElementById("mockbar");
+    if (!el) return;
+    if (!apiState.live) {
+      el.className = "mockbar";
+      if (demoBannerHTML) el.innerHTML = demoBannerHTML;
+      return;
+    }
+    var t = "--:--";
+    try {
+      var ny = tzParts("America/New_York");
+      t = ny.hour + ":" + ny.minute;
+    } catch(e){}
+    var partial = apiState.updated.length < STOCKS.length
+      ? " · " + apiState.updated.length + " מתוך " + STOCKS.length + " עודכנו"
+      : "";
+    el.className = "mockbar live";
+    el.innerHTML = '<b class="tag">עדכון חי</b><span>מחירים חיים מ-' +
+      esc(PROVIDER_NAME[apiState.provider]) + ' · עודכן ' + N(t) +
+      ' · האינדיקטורים (RSI, RVOL, ממוצעים, פונדמנטלס) עדיין מדגם' + esc(partial) + '</span>';
+  }
+
+  function apiDoLoad(){
+    if (apiBusy) return;
+    var k = (keyIn.value || "").trim() || apiState.key;
+    if (!k) {
+      apiSetStatus("הזן מפתח API, או שמור אותו קודם, ואז טען מחירים.", "err");
+      keyIn.focus();
+      return;
+    }
+    var p = (provSel.value === "finnhub") ? "finnhub" : "fmp";
+    if (k !== apiState.key || p !== apiState.provider) apiWriteStore(p, k);
+    apiRefreshKeyState();
+
+    apiBusy = true;
+    apiSyncButtons();
+
+    var i = 0, got = [], missed = [], fatal = null, netSeen = 0, netRun = 0;
+
+    function finish(){
+      apiBusy = false;
+      apiSyncButtons();
+      if (fatal) {                                  /* nothing applied — rows stay exactly as they were */
+        apiSetStatus(API_MSG[fatal], "err");
+        return;
+      }
+      if (!got.length) {
+        apiSetStatus(netSeen ? API_MSG.net : "לא התקבלו מחירים מהספק. נסה שוב או בחר ספק אחר.", "err");
+        return;
+      }
+      got.forEach(function(x){
+        if (!demoSnap[x.s.ticker]) demoSnap[x.s.ticker] = { price:x.s.price, dayChange:x.s.dayChange };
+        x.s.price = x.q.price;
+        x.s.dayChange = x.q.change;
+        x.s.live = true;
+      });
+      apiState.live = true;
+      apiState.updatedAt = new Date();
+      apiState.provider = p;
+      apiState.updated = got.map(function(x){ return x.s.ticker; });
+      renderAll();                                   /* sizing, radar averages, effective risk all recompute */
+      renderBanner();
+      apiSetStatus(got.length === STOCKS.length
+        ? "התקבלו 12 מחירים חיים מ-" + PROVIDER_NAME[p] + "."
+        : "התקבלו " + got.length + " מתוך 12, השאר נשארו בנתוני הדגם",
+        got.length === STOCKS.length ? "ok" : "warn");
+    }
+
+    function step(){
+      var s = STOCKS[i];
+      apiSetStatus("טוען " + (i + 1) + "/" + STOCKS.length, "");
+      apiFetchQuote(p, s.ticker, k).then(function(q){
+        if (q) { got.push({ s:s, q:q }); netRun = 0; }
+        else missed.push(s.ticker);
+      }).catch(function(err){
+        var kind = (err && err.kind) || "net";
+        if (kind === "auth" || kind === "rate") { fatal = kind; return; }
+        missed.push(s.ticker);
+        if (kind === "net") {
+          netSeen++;
+          netRun++;                          /* three dead requests in a row = provider unreachable */
+          if (netRun >= 3) fatal = "net";
+        }
+      }).then(function(){
+        i++;
+        if (fatal) { finish(); return; }
+        if (i >= STOCKS.length) { finish(); return; }
+        setTimeout(step, 150);
+      });
+    }
+    step();
+  }
+
+  /* ============================================================
      WIRING
      ============================================================ */
   function renderAll(){
@@ -1887,6 +2261,25 @@
 
   function wire(){
     popEl = document.getElementById("pop");
+
+    /* --- live data sheet --- */
+    sheetEl  = document.getElementById("apiSheet");
+    bdEl     = document.getElementById("apiBackdrop");
+    keyIn    = document.getElementById("apiKey");
+    provSel  = document.getElementById("apiProvider");
+    statusEl = document.getElementById("apiStatus");
+    demoBannerHTML = document.getElementById("mockbar").innerHTML;
+    apiReadStore();
+    apiRefreshKeyState();
+    document.getElementById("apiOpen").addEventListener("click", apiOpenSheet);
+    document.getElementById("apiClose").addEventListener("click", apiCloseSheet);
+    bdEl.addEventListener("click", apiCloseSheet);
+    document.getElementById("apiSave").addEventListener("click", apiDoSave);
+    document.getElementById("apiLoad").addEventListener("click", apiDoLoad);
+    document.getElementById("apiRemove").addEventListener("click", apiDoRemove);
+    document.getElementById("apiEye").addEventListener("click", function(){ apiEye(keyIn.type === "password"); });
+    keyIn.addEventListener("keydown", function(e){ if (e.key === "Enter") { e.preventDefault(); apiDoLoad(); } });
+    provSel.addEventListener("change", function(){ provSel.blur(); });
 
     var pIn = document.getElementById("portfolioInput");
     pIn.addEventListener("input", function(){
@@ -1973,6 +2366,7 @@
     document.getElementById("backdrop").addEventListener("click", closeDrawer);
     document.addEventListener("keydown", function(e){
       if (e.key !== "Escape") return;
+      if (sheetEl && !sheetEl.hidden) { apiCloseSheet(); return; }
       if (popEl && !popEl.hidden) { closeTerm(true); return; }
       if (state.drawer) closeDrawer();
     });
@@ -2025,7 +2419,11 @@
     terms: Object.keys(TERMS),
     term: function(k){ return TERMS[k]; },
     rows: function(){ return sortedRows().map(function(s){ var z = sizing(s); return { ticker:s.ticker, shares:z.shares, cost:+z.cost.toFixed(2), risk:+z.cashRisk.toFixed(2), stop:+z.stop.toFixed(2), target:+z.target.toFixed(2) }; }); },
-    config: function(){ return { portfolio:state.portfolio, riskPct:state.riskPct, maxCapPct:state.maxCapPct, stopMode:state.stopMode }; }
+    config: function(){ return { portfolio:state.portfolio, riskPct:state.riskPct, maxCapPct:state.maxCapPct, stopMode:state.stopMode }; },
+    /* live-data snapshot — never exposes the key itself */
+    price: function(t){ var s = STOCKS.filter(function(x){ return x.ticker === t; })[0]; return s ? +s.price.toFixed(2) : null; },
+    sizing: function(t){ var s = STOCKS.filter(function(x){ return x.ticker === t; })[0]; if (!s) return null; var z = sizing(s); return { shares:z.shares, cost:+z.cost.toFixed(2), stop:+z.stop.toFixed(2), capped:z.capped }; },
+    api: function(){ return { provider:apiState.provider, hasKey:!!apiState.key, live:!!apiState.live, updated:apiState.updated.slice(0), at:apiState.updatedAt ? apiState.updatedAt.getTime() : null }; }
   };
 })();
 </script>

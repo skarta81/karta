@@ -1,6 +1,7 @@
 {
- "generatedAt": "2026-11-03T17:13:01Z",
- "source": "Nasdaq historical daily (server-side)",
+ "generatedAt": "2026-11-03T18:24:06Z",
+ "source": "Nasdaq historical daily + Finnhub metric (server-side)",
+ "fundamentalsSource": "Finnhub /stock/metric (free tier)",
  "symbols": {
   "PANW": {
    "asOf": "11/02/2026",
@@ -17,7 +18,17 @@
    "pctFrom52wHigh": -16.2,
    "perf3m": -3.0,
    "perf6m": 91.2,
-   "bars": 290
+   "bars": 290,
+   "fundamentals": {
+    "beta": 1.0006499,
+    "mcap": 287978340000,
+    "pe": 938.0402,
+    "roe": 1.68,
+    "epsGrowth": -67.95,
+    "salesGrowth": 24.49,
+    "instOwn": null,
+    "high52Finnhub": 432.325
+   }
   },
   "CRWD": {
    "asOf": "11/02/2026",
@@ -34,7 +45,17 @@
    "pctFrom52wHigh": -13.3,
    "perf3m": 15.2,
    "perf6m": 103.0,
-   "bars": 290
+   "bars": 290,
+   "fundamentals": {
+    "beta": 1.1988053,
+    "mcap": 247623270000,
+    "pe": 4235.7727,
+    "roe": 1.29,
+    "epsGrowth": null,
+    "salesGrowth": 24.3,
+    "instOwn": null,
+    "high52Finnhub": 286.9899
+   }
   },
   "FTNT": {
    "asOf": "11/02/2026",
@@ -51,7 +72,17 @@
    "pctFrom52wHigh": -35.2,
    "perf3m": -23.1,
    "perf6m": 40.4,
-   "bars": 290
+   "bars": 290,
+   "fundamentals": {
+    "beta": 1.0374477,
+    "mcap": 99843750000,
+    "pe": 43.747,
+    "roe": 151.52,
+    "epsGrowth": 26.46,
+    "salesGrowth": 20.23,
+    "instOwn": null,
+    "high52Finnhub": 197.13
+   }
   },
   "ANET": {
    "asOf": "11/02/2026",
@@ -68,7 +99,17 @@
    "pctFrom52wHigh": -24.3,
    "perf3m": -16.8,
    "perf6m": -3.6,
-   "bars": 290
+   "bars": 290,
+   "fundamentals": {
+    "beta": 0.026487807,
+    "mcap": 207017400000,
+    "pe": 51.1837,
+    "roe": 30.78,
+    "epsGrowth": 24.69,
+    "salesGrowth": 32.57,
+    "instOwn": null,
+    "high52Finnhub": 217.4099
+   }
   },
   "PWR": {
    "asOf": "11/02/2026",
@@ -85,7 +126,17 @@
    "pctFrom52wHigh": -20.9,
    "perf3m": -9.0,
    "perf6m": -19.5,
-   "bars": 290
+   "bars": 290,
+   "fundamentals": {
+    "beta": 1.3126602,
+    "mcap": 93597625000,
+    "pe": 70.5398,
+    "roe": 14.74,
+    "epsGrowth": 35.37,
+    "salesGrowth": 26.3,
+    "instOwn": null,
+    "high52Finnhub": 788.75
+   }
   },
   "TT": {
    "asOf": "11/02/2026",
@@ -102,7 +153,17 @@
    "pctFrom52wHigh": -17.9,
    "perf3m": -14.5,
    "perf6m": -13.4,
-   "bars": 290
+   "bars": 290,
+   "fundamentals": {
+    "beta": 1.1911064,
+    "mcap": 90002650000,
+    "pe": 30.5197,
+    "roe": 34.57,
+    "epsGrowth": 4.73,
+    "salesGrowth": 7.04,
+    "instOwn": null,
+    "high52Finnhub": 505.87
+   }
   },
   "PH": {
    "asOf": "11/02/2026",
@@ -119,7 +180,17 @@
    "pctFrom52wHigh": -13.6,
    "perf3m": -6.9,
    "perf6m": 6.4,
-   "bars": 290
+   "bars": 290,
+   "fundamentals": {
+    "beta": 1.1522238,
+    "mcap": 118094190000,
+    "pe": 32.3723,
+    "roe": 25.11,
+    "epsGrowth": 5.03,
+    "salesGrowth": 8.31,
+    "instOwn": null,
+    "high52Finnhub": 1099.94
+   }
   },
   "ISRG": {
    "asOf": "11/02/2026",
@@ -136,7 +207,17 @@
    "pctFrom52wHigh": -26.3,
    "perf3m": 16.4,
    "perf6m": -3.2,
-   "bars": 290
+   "bars": 290,
+   "fundamentals": {
+    "beta": 1.4271188,
+    "mcap": 151438230000,
+    "pe": 51.21,
+    "roe": 17,
+    "epsGrowth": 9.4,
+    "salesGrowth": 20.45,
+    "instOwn": null,
+    "high52Finnhub": 603.88
+   }
   },
   "GEV": {
    "asOf": "11/02/2026",
@@ -153,7 +234,17 @@
    "pctFrom52wHigh": -26.6,
    "perf3m": -15.3,
    "perf6m": -21.3,
-   "bars": 290
+   "bars": 290,
+   "fundamentals": {
+    "beta": 1.0773196,
+    "mcap": 228217800000,
+    "pe": 22.0139,
+    "roe": 85.61,
+    "epsGrowth": 521.89,
+    "salesGrowth": 16.91,
+    "instOwn": null,
+    "high52Finnhub": 1195.94
+   }
   },
   "IDXX": {
    "asOf": "11/02/2026",
@@ -170,7 +261,17 @@
    "pctFrom52wHigh": -12.4,
    "perf3m": 14.9,
    "perf6m": 19.3,
-   "bars": 290
+   "bars": 290,
+   "fundamentals": {
+    "beta": 1.5115224,
+    "mcap": 50611355000,
+    "pe": 44.4093,
+    "roe": 71.96000000000001,
+    "epsGrowth": 18.43,
+    "salesGrowth": 12.77,
+    "instOwn": null,
+    "high52Finnhub": 769.98
+   }
   },
   "BSX": {
    "asOf": "11/02/2026",
@@ -187,7 +288,17 @@
    "pctFrom52wHigh": -57.8,
    "perf3m": -7.2,
    "perf6m": -20.8,
-   "bars": 290
+   "bars": 290,
+   "fundamentals": {
+    "beta": 0.561647,
+    "mcap": 62845836000,
+    "pe": 17.1009,
+    "roe": 14.940000000000001,
+    "epsGrowth": 46.78,
+    "salesGrowth": 13.53,
+    "instOwn": null,
+    "high52Finnhub": 105.65
+   }
   },
   "LLY": {
    "asOf": "11/02/2026",
@@ -204,7 +315,17 @@
    "pctFrom52wHigh": -0.5,
    "perf3m": 20.6,
    "perf6m": 42.7,
-   "bars": 290
+   "bars": 290,
+   "fundamentals": {
+    "beta": 0.37411246,
+    "mcap": 1327381800000,
+    "pe": 48.1289,
+    "roe": 83.65,
+    "epsGrowth": 50.65,
+    "salesGrowth": 45.51,
+    "instOwn": null,
+    "high52Finnhub": 1449.68
+   }
   }
  },
  "failed": []

@@ -689,7 +689,7 @@
   .mockbar.live b.tag{background:#fff;border-color:#cbe6da;color:#0c6b4a}
   .fchip .fc-price{font-size:10px;color:var(--green);font-weight:700}
 
-  /* ---------- provenance chips + legend ---------- */
+  /* ---- provenance chips + legend ---- */
   .srcchip{
     display:inline-block;font-size:10px;font-weight:700;letter-spacing:.02em;
     border-radius:4px;padding:0 5px;line-height:1.7;margin-inline-start:6px;vertical-align:1px;
@@ -697,6 +697,25 @@
   }
   .srcchip.calc{color:var(--blue);background:var(--blue-bg);border:1px solid #d8e3ee}
   .srcchip.ref{color:var(--faint);background:#f7f5f0;border:1px solid var(--line)}
+  /* inline 'עזר' inside a compact table cell — no margin, no wrap */
+  .sub > .srcchip.ref{margin-inline-start:3px;font-size:9px;padding:0 3px;line-height:1.5}
+  .fin-src{font-size:9.5px;line-height:1.4;letter-spacing:.06em;font-weight:700;color:#0f8a5f;font-family:var(--num);direction:ltr;text-align:right}
+
+  /* ---------- drawer fundamentals table ---------- */
+  .fund-t{
+    width:100%;table-layout:fixed;border-collapse:separate;border-spacing:0;
+    border:1px solid var(--line-2);border-radius:12px;overflow:hidden;
+    background:#fff;margin:0 0 8px;font-size:12px;
+  }
+  .fund-t th,.fund-t td{
+    padding:7px 10px;line-height:1.45;vertical-align:middle;text-align:start;
+    border-bottom:1px solid var(--line-2);overflow-wrap:anywhere;
+  }
+  .fund-t tr:last-child th,.fund-t tr:last-child td{border-bottom:0}
+  .fund-t th{width:58%;font-weight:600;color:var(--muted);background:#fbfaf7}
+  .fund-t td{width:42%;text-align:end;font-family:var(--num);font-weight:700;color:var(--ink)}
+  .fund-t tr.ref th{color:var(--ink)}
+  .fund-note{font-size:10.5px;line-height:1.6;color:var(--faint);margin:0 0 14px}
   .legend{
     display:flex;flex-wrap:wrap;gap:6px 16px;align-items:baseline;
     border:1px solid var(--line);border-radius:10px;background:#fbfaf7;
@@ -708,7 +727,36 @@
   .legend .dot{width:8px;height:8px;border-radius:50%;flex:0 0 8px;display:inline-block;transform:translateY(-1px)}
   .legend .dot.live{background:var(--green);box-shadow:0 0 0 2px var(--green-bg)}
   .legend .dot.calc{background:var(--blue);box-shadow:0 0 0 2px var(--blue-bg)}
+  .legend .dot.fin{background:#0f8a5f;box-shadow:0 0 0 2px #e2f1ea}
   .legend .dot.ref{background:var(--faint);box-shadow:0 0 0 2px #f0ede5}
+
+  /* ---------- universe search + paging ---------- */
+  .searchbar{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin:0 0 10px}
+  .search-field{
+    position:relative;display:flex;align-items:center;gap:6px;flex:1 1 260px;min-width:0;
+    border:1px solid var(--line);border-radius:10px;background:#fff;padding:0 10px;
+  }
+  .search-field:focus-within{border-color:#b9cfe2;box-shadow:0 0 0 3px var(--blue-bg)}
+  .search-field .s-ico{color:var(--faint);font-size:14px;line-height:1;flex:0 0 auto}
+  .search-field input{
+    flex:1 1 auto;min-width:0;border:0;background:none;outline:none;
+    font-family:inherit;font-size:13.5px;color:var(--ink);padding:9px 0;height:38px;
+  }
+  .search-field input::placeholder{color:var(--faint)}
+  .s-clear{border:0;background:none;color:var(--muted);font-size:12px;padding:2px 5px;cursor:pointer;border-radius:6px;flex:0 0 auto}
+  .s-clear:hover{background:#f4f2ec;color:var(--ink)}
+  .s-clear:focus-visible{outline:2px solid var(--blue);outline-offset:1px}
+  .search-count{font-size:11.5px;color:var(--muted);font-family:var(--num);white-space:nowrap}
+  .pager{
+    display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;
+    margin:12px 0 4px;padding-top:10px;border-top:1px solid var(--line-2);
+  }
+  .pager:empty{display:none}
+  .pager .p-note{font-size:12px;color:var(--muted)}
+  .pager .p-note bdi{font-weight:700;color:var(--ink)}
+  .pager .p-more{padding:6px 14px;font-size:12.5px}
+  .pager .p-done{font-size:11.5px;color:var(--faint)}
+  .filtered-out .lbl.more{font-size:11px;color:var(--faint);background:none;border:0}
 
   /* ---------- impossible stop: stop above the entry ---------- */
   .overstop{color:var(--red);font-weight:700}
@@ -721,6 +769,11 @@
   .alert-stop span{color:#8d2b20;opacity:.9}
   tr.norow .stop{color:var(--red)}
   .mcard.norow{border-color:#efd5d1}
+  .chart-empty{
+    display:flex;align-items:center;justify-content:center;text-align:center;
+    min-height:150px;padding:18px;border:1px dashed var(--line);border-radius:12px;
+    background:#fbfaf7;color:var(--muted);font-size:12.5px;line-height:1.7;
+  }
   .chart-note{
     font-size:10.5px;line-height:1.55;color:var(--faint);
     padding:6px 2px 0;border-top:1px solid var(--line-2);margin-top:6px;
@@ -996,7 +1049,7 @@
       <h2 id="layersTitle">שכבות סינון</h2>
       <span class="hint">מניה צריכה לעבור כל שכבה פעילה. כבו שכבה כדי לראות מה היא מפסידה.</span>
       <span class="spacer"></span>
-      <span class="count-chip" id="passChip">0 / 12</span>
+      <span class="count-chip" id="passChip">0 / 0</span>
     </div>
     <div class="card-body">
       <div class="layers-grid" id="layersGrid"></div>
@@ -1026,10 +1079,20 @@
       </div>
     </div>
     <div class="card-body">
+      <div class="searchbar">
+        <div class="search-field">
+          <span class="s-ico" aria-hidden="true">⌕</span>
+          <input id="searchInput" type="text" inputmode="search" autocomplete="off" spellcheck="false"
+                 placeholder="חיפוש טיקר, שם חברה או סקטור" aria-label="חיפוש מניות ביקום">
+          <button type="button" id="searchClear" class="s-clear" hidden aria-label="ניקוי החיפוש">✕</button>
+        </div>
+        <span class="search-count" id="searchCount" aria-live="polite"></span>
+      </div>
       <div class="legend" id="sourceLegend" aria-label="מקור הנתונים בכל עמודה">
-        <span class="lg"><i class="dot live" aria-hidden="true"></i><b>חי</b><span>ציטוט עכשיו מהספק (Finnhub / FMP) — רק מחיר ושינוי יומי</span></span>
+        <span class="lg"><i class="dot live" aria-hidden="true"></i><b>חי</b><span>ציטוט עכשיו מהספק (Finnhub / FMP) — מחיר ושינוי יומי</span></span>
         <span class="lg"><i class="dot calc" aria-hidden="true"></i><b>מחושב</b><span>מסגירת המסחר האחרונה בנאסד״ק — RSI, RVOL, ממוצעים, חוזק סגירה, תשואות</span></span>
-        <span class="lg"><i class="dot ref" aria-hidden="true"></i><b>עזר</b><span>פונדמנטלס סטטיים — P/E, ROE, EPS, מוסדיים, בטא, שווי שוק</span></span>
+        <span class="lg"><i class="dot fin" aria-hidden="true"></i><b>Finnhub</b><span>פונדמנטלס חיים — P/E, ROE, EPS, מכירות, בטא, שווי שוק</span></span>
+        <span class="lg"><i class="dot ref" aria-hidden="true"></i><b>עזר</b><span>ערך סטטי מהדאטה-סט, לא מהספק — כרגע רק אחזקת מוסדיים</span></span>
       </div>
       <div class="table-wrap">
         <table id="stockTable">
@@ -1049,6 +1112,7 @@
         </table>
       </div>
       <div class="cards" id="cardList"></div>
+      <div class="pager" id="pager"></div>
       <div id="emptyState"></div>
       <div class="filtered-out" id="filteredOut"></div>
       <div id="trapSlot"></div>
@@ -1134,9 +1198,12 @@
   "use strict";
 
   /* ============================================================
-     DATA — 12 core names + 4 trap rejects (mock, internally consistent)
+     SEED — the 12 original names. They are the offline demo data,
+     the Hebrew label map (nameHe / sector) and the fallback
+     fundamentals. On load the universe is rebuilt from
+     indicators.json; nothing here limits how many names exist.
      ============================================================ */
-  var STOCKS = [
+  var SEED = [
     { ticker:"PANW", name:"Palo Alto Networks", nameHe:"פאלו אלטו נטוורקס", exchange:"NASDAQ", sector:"סייבר",
       price:342.18, dayChange:2.41, rvol:1.62, closeStrength:78, rsi:58,
       sma20:331.50, sma50:318.40, sma200:295.70,
@@ -1222,6 +1289,38 @@
       pctFrom52wHigh:-1.2, months:[742.5,786.4,812.6,848.2,864.8,892.45] }
   ];
 
+  /* the 12 original names keep their Hebrew labels and reference values */
+  var SEED_BY_TICKER = {};
+  SEED.forEach(function(s){ SEED_BY_TICKER[s.ticker] = s; });
+
+  /* the live universe — replaced wholesale from indicators.json on load/refresh */
+  var STOCKS = SEED.slice();
+
+  /* a fresh object for a ticker that is not in SEED: the file is the only source */
+  function newStock(tk, r){
+    var nm = (typeof r.name === "string" && r.name) ? r.name : tk;
+    return {
+      ticker:tk, name:nm,
+      nameHe:(typeof r.nameHe === "string" && r.nameHe) ? r.nameHe : nm,
+      exchange:(typeof r.exchange === "string") ? r.exchange : "",
+      sector:(typeof r.sector === "string" && r.sector) ? r.sector : "אחר",
+      industry:(typeof r.industry === "string") ? r.industry : "",
+      price:NaN, dayChange:NaN, rvol:NaN, closeStrength:NaN, rsi:NaN,
+      sma20:NaN, sma50:NaN, sma200:NaN, avgVol:NaN, high52:NaN,
+      mcap:NaN, beta:NaN, pe:NaN, epsGrowth:NaN, salesGrowth:NaN, roe:NaN, instOwn:NaN,
+      perf3m:NaN, perf6m:NaN, pctFrom52wHigh:NaN,
+      months:[], live:false, fundLive:{}
+    };
+  }
+  function cloneStock(s){
+    var o = {}, k;
+    for (k in s) if (Object.prototype.hasOwnProperty.call(s, k)) o[k] = s[k];
+    o.months = (s.months || []).slice(0);
+    o.fundLive = {};
+    o.live = false;
+    return o;
+  }
+  /* illustrative only — never part of the universe or any calculation */
   var TRAPS = [
     { ticker:"SVRN", name:"סוברון רובוטיקס", flag:"מניה זולה / איחוד מניות",
       reason:"נפסלה · איחוד מניות 1:20 ב-12 באוקטובר. המחיר $3.42 (מתחת ל-$20), שווי שוק $0.18B (מתחת ל-$2B) ונפח ממוצע 320K (מתחת למיליון). הגרף נראה כמו מגמה, אבל הוא תוצאה של איחוד מניות — לא של קנייה מוסדית.",
@@ -1262,13 +1361,17 @@
   };
 
   /* ============================================================
-     MARKET DATA — indicators.json (Nasdaq daily, server-side)
-     The file is merged into STOCKS before the first render. Only
-     price / day change / technicals are touched; fundamentals
-     (mcap, beta, P/E, ROE, EPS, instOwn) stay static reference.
+     MARKET DATA — indicators.json (Nasdaq daily + Finnhub metric)
+     The file is merged into STOCKS before the first render. Price,
+     day change and technicals come from the Nasdaq close; beta,
+     market cap, P/E, ROE, EPS growth and sales growth come from
+     Finnhub /stock/metric. Institutional ownership is NOT in the
+     free tier (null for every symbol), so that one value keeps the
+     static dataset number and is always labelled עזר.
      ============================================================ */
   var DATA = { loaded:false, asOf:null, source:null, generatedAt:null, failed:[], updatedLabel:null, count:0,
-               settled:false, refreshedAt:null };
+               universe:0, fundCount:0, fundSource:null, settled:false, refreshedAt:null };
+  var RENDER_MS = 0;    /* last full table render, exposed for the perf check */
 
   var IND_FIELDS = [
     ["price", "price"], ["dayChange", "dayChangePct"],
@@ -1278,32 +1381,69 @@
     ["perf3m", "perf3m"], ["perf6m", "perf6m"]
   ];
 
+  /* Finnhub /stock/metric. instOwn is null on the free tier for every symbol,
+     so it is deliberately absent here and keeps the static dataset value. */
+  var FUND_FIELDS = ["beta", "mcap", "pe", "roe", "epsGrowth", "salesGrowth"];
+
   function applyIndicators(js){
     if (!js || typeof js !== "object" || !js.symbols || typeof js.symbols !== "object") return false;
-    var got = 0, asOf = null;
-    STOCKS.forEach(function(s){
-      var r = js.symbols[s.ticker];
-      if (!r || typeof r !== "object") return;
-      var touched = false;
+    var keys = Object.keys(js.symbols);
+    if (!keys.length) return false;
+
+    var out = [], asOf = null, fundGot = 0, skipped = 0;
+    keys.forEach(function(tk){
+      var r = js.symbols[tk];
+      if (!r || typeof r !== "object") { skipped++; return; }
+      /* the universe is whatever the file says it is — seed only supplies labels */
+      var s = SEED_BY_TICKER[tk] ? cloneStock(SEED_BY_TICKER[tk]) : newStock(tk, r);
+      if (typeof r.name === "string" && r.name) s.name = r.name;
+      if (typeof r.nameHe === "string" && r.nameHe) s.nameHe = r.nameHe;
+      if (typeof r.sector === "string" && r.sector) s.sector = r.sector;
+      if (typeof r.industry === "string" && r.industry) s.industry = r.industry;
+      if (typeof r.exchange === "string" && r.exchange) s.exchange = r.exchange;
+
       IND_FIELDS.forEach(function(pair){
         var raw = r[pair[1]];
         if (raw === null || raw === undefined || raw === "") return;
         var v = Number(raw);
-        if (isFinite(v)) { s[pair[0]] = v; touched = true; }
+        if (isFinite(v)) s[pair[0]] = v;
       });
-      if (!touched) return;
       if (r.bars !== undefined && isFinite(Number(r.bars))) s.bars = Number(r.bars);
       if (r.high52 !== undefined && isFinite(Number(r.high52))) s.high52 = Number(r.high52);
+
+      /* fundamentals — a null/blank live value never overwrites the seed number,
+         it only leaves that field marked as a reference value */
+      var f = r.fundamentals, fundTouched = false;
+      if (f && typeof f === "object") {
+        FUND_FIELDS.forEach(function(k){
+          var raw = f[k];
+          if (raw === null || raw === undefined || raw === "") return;
+          var v = Number(raw);
+          if (!isFinite(v)) return;
+          s[k] = v;
+          s.fundLive[k] = true;
+          fundTouched = true;
+        });
+        if (fundTouched) fundGot++;
+      }
       if (!asOf && typeof r.asOf === "string") asOf = r.asOf;
-      got++;
+      out.push(s);
     });
-    if (!got) return false;
+    if (!out.length) return false;
+
+    STOCKS = out;
     DATA.loaded = true;
-    DATA.count = got;
+    DATA.count = out.length;
     DATA.asOf = asOf || null;
     DATA.source = (typeof js.source === "string") ? js.source : null;
     DATA.generatedAt = (typeof js.generatedAt === "string") ? js.generatedAt : null;
     DATA.failed = Array.isArray(js.failed) ? js.failed.slice(0) : [];
+    DATA.fundCount = fundGot;
+    if (typeof js.universe === "number" && isFinite(js.universe)) DATA.universe = js.universe;
+    else DATA.universe = out.length;
+    if (typeof js.fundamentalsSource === "string") DATA.fundSource = js.fundamentalsSource;
+    pruneSearchState();
+    syncAPI();
     return true;
   }
 
@@ -1358,14 +1498,14 @@
     sma50:{ t:"ממוצע 50 יום (SMA-50)", s:"הממוצע של 50 הימים האחרונים. הרבה סוחרים שמים את הסטופ מתחתיו, כי ירידה מתחתיו מסמנת שהמגמה נשברה.", e:"ב-PANW הממוצע $318.40, כ-7% מתחת למחיר. סטופ שם מפסיד 7% במקום 6%." },
     sma200:{ t:"ממוצע 200 יום (SMA-200)", s:"הממוצע של 200 הימים האחרונים — קו המגמה הראשית. מחיר מעליו נחשב שוק עולה.", e:"LLY ב-$892.45 מול ממוצע של $742.10: 20% מעל הקו הארוך, מגמה ראשית חזקה." },
     closeStrength:{ t:"חוזק סגירה", s:"איפה נסגר המחיר בתוך טווח היום. 100% = סגירה בשיא היום, 50% = סגירה באמצע הטווח.", e:"חוזק 78% אומר שהמחיר נסגר בשלושת רבעי הטווח — הקונים החזיקו עד הסוף." },
-    beta:{ t:"בטא", s:"כמה המניה זזה ביחס לשוק הכללי. בטא 1.0 = כמו השוק, 1.3 = תנועות גדולות ב-30%.", e:"GEV עם בטא 1.34: אם השוק עולה 1%, המניה נוטה לעלות 1.34%. הסינון דורש 0.5–1.5." },
-    mcap:{ t:"שווי שוק", s:"מחיר המניה כפול מספר המניות — גודל החברה בבורסה.", e:"PANW בשווי $231 מיליארד. הסינון דורש מעל $2 מיליארד, אחרת המניה קטנה וקופצת מכל הזמנה." },
+    beta:{ t:"בטא", s:"כמה המניה זזה ביחס לשוק הכללי. בטא 1.0 = כמו השוק, 1.3 = תנועות גדולות ב-30%.", e:"GEV עם בטא 1.08: אם השוק עולה 1%, המניה נוטה לעלות 1.08%. הסינון דורש 0.5–1.5." },
+    mcap:{ t:"שווי שוק", s:"מחיר המניה כפול מספר המניות — גודל החברה בבורסה.", e:"PANW בשווי $288 מיליארד. הסינון דורש מעל $2 מיליארד, אחרת המניה קטנה וקופצת מכל הזמנה." },
     avgVol:{ t:"נפח מסחר ממוצע", s:"כמה מניות נסחרות ביום בממוצע. זה מה שקובע אם תוכל לקנות ולמכור בלי להזיז את המחיר.", e:"ANET נסחרת 7.9 מיליון מניות ביום — קל להיכנס ולצאת. מתחת למיליון המניה דקה והפער גדל." },
-    pe:{ t:"מכפיל רווח (P/E)", s:"מחיר המניה חלקי הרווח השנתי למניה. כמה המשקיעים משלמים על כל דולר של רווח.", e:"מכפיל 52 ב-PANW: משלמים $52 על כל $1 רווח שנתי. חברה מפסידה מקבלת מכפיל שלילי ונפסלת." },
-    epsGrowth:{ t:"צמיחת רווח למניה (EPS)", s:"בכמה אחוזים גדל הרווח למניה בשנה האחרונה. זה מה שנשאר לבעלי המניות מכל מכירה.", e:"הרווח למניה של CRWD גדל 26.4% בשנה. הסינון דורש מעל 10%." },
-    salesGrowth:{ t:"צמיחת מכירות", s:"בכמה אחוזים גדלו ההכנסות של החברה בשנה האחרונה.", e:"המכירות של GEV גדלו 16.4%. מתחת ל-10% החברה בקושי גדלה, והמגמה נשענת על רעש." },
-    roe:{ t:"תשואה על ההון (ROE)", s:"כמה רווח מייצרת החברה על כל דולר של הון עצמי. מדד ליעילות של העסק.", e:"ROE 22.4% ב-PANW: כל $100 הון מייצרים $22.4 רווח בשנה. הסינון דורש מעל 15%." },
-    instOwn:{ t:"אחזקת מוסדיים", s:"איזה אחוז מהמניות מוחזק בידי קרנות וגופים גדולים. כסף גדול נותן למגמה גב.", e:"87% מ-CRWD מוחזק בידי מוסדיים. מתחת ל-50% המניה נשענת רק על כסף קטן." },
+    pe:{ t:"מכפיל רווח (P/E)", s:"מחיר המניה חלקי הרווח השנתי למניה. כמה המשקיעים משלמים על כל דולר של רווח.", e:"מכפיל 48.1 ב-LLY: משלמים $48 על כל $1 רווח שנתי. חברה מפסידה מקבלת מכפיל שלילי ונפסלת." },
+    epsGrowth:{ t:"צמיחת רווח למניה (EPS)", s:"בכמה אחוזים גדל הרווח למניה בשנה האחרונה. זה מה שנשאר לבעלי המניות מכל מכירה.", e:"הרווח למניה של LLY גדל 50.7% בשנה. הסינון דורש מעל 10%." },
+    salesGrowth:{ t:"צמיחת מכירות", s:"בכמה אחוזים גדלו ההכנסות של החברה בשנה האחרונה.", e:"המכירות של GEV גדלו 16.9%. מתחת ל-10% החברה בקושי גדלה, והמגמה נשענת על רעש." },
+    roe:{ t:"תשואה על ההון (ROE)", s:"כמה רווח מייצרת החברה על כל דולר של הון עצמי. מדד ליעילות של העסק.", e:"ROE 83.7% ב-LLY: כל $100 הון עצמי מייצרים $83.7 רווח בשנה. הסינון דורש מעל 15%." },
+    instOwn:{ t:"אחזקת מוסדיים", s:"איזה אחוז מהמניות מוחזק בידי קרנות וגופים גדולים. הנתון הזה לא קיים בספק החינמי — הוא ערך עזר סטטי מהדאטה-סט, לא נתון חי.", e:"87% מ-CRWD מוחזק בידי מוסדיים (עזר סטטי). מתחת ל-50% המניה נשענת רק על כסף קטן." },
     high52:{ t:"מרחק משיא 52 שבועות", s:"כמה אחוז מתחת לשיא של השנה המניה נסחרת עכשיו. קרוב לשיא = המגמה חיה.", e:"LLY רק 1.2% מתחת לשיא. הסינון מרשה עד 10% מתחת; מעבר לזה המגמה כבר נשברה." },
     perf36:{ t:"תשואה 3 ו-6 חודשים", s:"כמה המניה עלתה בשלושת החודשים ובחצי השנה האחרונים. שני מספרים, כדי לראות שהמגמה לא רק זינוק חד-פעמי.", e:"GEV: 18.4%+ בשלושה חודשים ו-39.6%+ בחצי שנה — מגמה עקבית. הסינון דורש ששניהם חיוביים." }
   };
@@ -1373,12 +1513,14 @@
   /* ============================================================
      STATE + persistence (same keys as v1 — settings survive reload)
      ============================================================ */
+  var PAGE_SIZE = 60;                  /* rows/cards rendered per page, never a dataset assumption */
   var STORE_KEY = "safetrend.config.v1";
   var state = {
     portfolio:25000, riskPct:1.0, maxCapPct:15, stopMode:"conservative",
     layers:{1:true,2:true,3:true,4:true},
     showRejects:false, sector:null, sortKey:"rvol", sortDir:-1,
-    preview:"auto", drawer:null, checks:{}, liveWindow:null
+    preview:"auto", drawer:null, checks:{}, liveWindow:null,
+    q:"", limit:PAGE_SIZE
   };
 
   function num(v, fallback){
@@ -1452,8 +1594,13 @@
   function fmtPct(v, d){
     if (!isFinite(v)) return "—";
     d = (d === undefined) ? 1 : d;
-    return (v > 0 ? "+" : "") + v.toFixed(d) + "%";
+    /* half-up, so a provider value like 50.65 reads 50.7% and not 50.6% */
+    var p = Math.pow(10, d);
+    var r = Math.round((v + (v >= 0 ? 1e-9 : -1e-9)) * p) / p;
+    return (r > 0 ? "+" : "") + r.toFixed(d) + "%";
   }
+  /* toFixed that survives a missing provider value */
+  function nv(v, d){ return isFinite(v) ? v.toFixed(d) : "—"; }
   function fmtInt(v){
     if (!isFinite(v)) return "—";
     return Math.round(v).toLocaleString("en-US");
@@ -1464,6 +1611,12 @@
   function unesc(s){ var d = document.createElement("textarea"); d.innerHTML = s; return d.value; }
   /* every number rendered through N() stays LTR inside the Hebrew paragraph */
   function N(s){ return '<bdi class="num">' + s + '</bdi>'; }
+
+  /* 'עזר' marks any value that did not arrive live from the provider */
+  function srcTag(s, k){
+    if (s && s.fundLive && s.fundLive[k]) return "";
+    return '<span class="srcchip ref">עזר</span>';
+  }
 
   /* ============================================================
      EXPLAINER PATTERN — one button, one popover, one TERMS object
@@ -1612,6 +1765,63 @@
   }
 
   /* ============================================================
+     UNIVERSE — search, sector grouping, paging
+     Every helper here runs over the whole file (N names). The DOM
+     only ever holds one page of rows, the numbers never do.
+     ============================================================ */
+  var SECTOR_TOP = 8;              /* radar: top 8 sectors, the rest grouped as 'אחר' */
+  var sectorTop = [], sectorOther = {};
+
+  function norm(v){ return String(v === null || v === undefined ? "" : v).toLowerCase(); }
+
+  function matchesQuery(s, q){
+    if (!q) return true;
+    var hay = norm(s.ticker) + " " + norm(s.name) + " " + norm(s.nameHe) + " " +
+              norm(s.sector) + " " + norm(s.industry);
+    return q.split(/\s+/).filter(Boolean).every(function(w){ return hay.indexOf(w) !== -1; });
+  }
+
+  function computeSectors(){
+    var counts = {};
+    passing().forEach(function(s){ counts[s.sector] = (counts[s.sector] || 0) + 1; });
+    var keys = Object.keys(counts).sort(function(a, b){
+      return counts[b] - counts[a] || String(a).localeCompare(String(b));
+    });
+    sectorTop = keys.slice(0, SECTOR_TOP);
+    var rest = keys.slice(SECTOR_TOP);
+    sectorOther = {};
+    if (rest.length) STOCKS.forEach(function(s){ if (rest.indexOf(s.sector) !== -1) sectorOther[s.ticker] = true; });
+    return { counts:counts, keys:keys, top:sectorTop, rest:rest };
+  }
+
+  function inSectorGroup(s){
+    if (!state.sector) return true;
+    if (state.sector === "__other__") return !!sectorOther[s.ticker];
+    return s.sector === state.sector;
+  }
+
+  /* the search filter, applied to the full universe */
+  function searchRows(){
+    var q = norm(state.q).trim();
+    return STOCKS.filter(function(s){ return matchesQuery(s, q) && inSectorGroup(s); });
+  }
+
+  /* after a data reload: back to the first page, and drop a sector that vanished */
+  function pruneSearchState(){
+    state.limit = PAGE_SIZE;
+    if (state.sector && state.sector !== "__other__" &&
+        !STOCKS.some(function(s){ return s.sector === state.sector; })) state.sector = null;
+  }
+
+  function syncAPI(){
+    if (window.SafeTrend) {
+      window.SafeTrend.stocks = STOCKS.map(function(s){ return s.ticker; });
+      window.SafeTrend.universe = STOCKS.length;
+    }
+  }
+
+
+  /* ============================================================
      CLOSEST TO PASSING — the empty-table fallback
      On a red day nothing clears L4 (day change must be +1%..+5%),
      so the table is empty and a beginner has nothing to look at.
@@ -1630,15 +1840,15 @@
     /* L1 — safety */
     if (!(s.mcap > 2e9))                   add(1, "שווי שוק " + N(fmtCompact(s.mcap)) + " (נדרש מעל $2B)");
     if (!(s.price > 20))                   add(1, "מחיר " + N(fmtMoney(s.price)) + " (נדרש מעל $20)");
-    if (!(s.beta >= 0.5 && s.beta <= 1.5)) add(1, "בטא " + N(s.beta.toFixed(2)) + " (נדרש 0.5–1.5)");
+    if (!(s.beta >= 0.5 && s.beta <= 1.5)) add(1, "בטא " + N(nv(s.beta, 2)) + " (נדרש 0.5–1.5)");
     if (!(s.avgVol > 1e6))                 add(1, "נפח יומי " + N(fmtVol(s.avgVol)) + " (נדרש מעל מיליון)");
 
     /* L2 — business quality */
-    if (!(s.pe > 0))                       add(2, "מכפיל רווח " + N(s.pe > 0 ? s.pe.toFixed(1) : "שלילי") + " (נדרש חיובי)");
+    if (!(s.pe > 0))                       add(2, "מכפיל רווח " + N(s.pe > 0 ? nv(s.pe, 1) : "שלילי") + " (נדרש חיובי)");
     if (!(s.epsGrowth > 10))               add(2, "צמיחת רווח למניה " + N(fmtPct(s.epsGrowth, 1)) + " (נדרש מעל 10%)");
     if (!(s.salesGrowth > 10))             add(2, "צמיחת מכירות " + N(fmtPct(s.salesGrowth, 1)) + " (נדרש מעל 10%)");
-    if (!(s.roe > 15))                     add(2, "תשואה על ההון " + N(s.roe.toFixed(1) + "%") + " (נדרש מעל 15%)");
-    if (!(s.instOwn > 50))                 add(2, "מוחזקות מוסדיות " + N(s.instOwn + "%") + " (נדרש מעל 50%)");
+    if (!(s.roe > 15))                     add(2, "תשואה על ההון " + N(nv(s.roe, 1) + "%") + " (נדרש מעל 15%)");
+    if (!(s.instOwn > 50))                 add(2, "מוחזקות מוסדיות " + N(nv(s.instOwn, 0) + "%") + " (נדרש מעל 50%)" + '<span class="srcchip ref">עזר</span>');
 
     /* L3 — trend: report the link of the chain that actually broke */
     if (!(s.price > s.sma20 && s.sma20 > s.sma50 && s.sma50 > s.sma200)) {
@@ -1658,18 +1868,18 @@
     if (!(s.perf3m > 0 && s.perf6m > 0))   add(3, "תשואה " + N(fmtPct(s.perf3m, 1)) + " ב-3 חודשים ו-" + N(fmtPct(s.perf6m, 1)) + " ב-6 (נדרשות חיוביות)");
 
     /* L4 — anti-chase */
-    if (!(s.rsi >= 50 && s.rsi <= 65))     add(4, "RSI " + N(s.rsi.toFixed(1)) + " (נדרש 50–65)");
+    if (!(s.rsi >= 50 && s.rsi <= 65))     add(4, "RSI " + N(nv(s.rsi, 1)) + " (נדרש 50–65)");
     if (!(s.dayChange > 1 && s.dayChange < 5)) add(4, "שינוי יומי " + N(fmtPct(s.dayChange, 2)) + " (נדרש +1% עד +5%)");
-    if (!(s.rvol > 1.2))                   add(4, "נפח יחסי " + N(s.rvol.toFixed(2) + "x") + " (נדרש מעל 1.2x)");
-    if (!(s.closeStrength > 65))           add(4, "חוזק סגירה " + N(Math.round(s.closeStrength) + "%") + " (נדרש מעל 65%)");
+    if (!(s.rvol > 1.2))                   add(4, "נפח יחסי " + N(nv(s.rvol, 2) + "x") + " (נדרש מעל 1.2x)");
+    if (!(s.closeStrength > 65))           add(4, "חוזק סגירה " + N(nv(s.closeStrength, 0) + "%") + " (נדרש מעל 65%)");
 
     return out;
   }
 
   /* ranked: fewest failed layers first, then fewest failed checks */
-  function closestRows(n){
+  function closestRows(n, pool){
     var rows = [];
-    STOCKS.forEach(function(s){
+    (pool || STOCKS).forEach(function(s){
       var det = failDetails(s);
       var active = det.filter(function(d){ return !!state.layers[String(d.layer)]; });
       if (!active.length) return;                    /* passed — it is in the table */
@@ -1707,7 +1917,7 @@
           '<span class="cc-metrics">' +
             '<bdi class="cc-price">' + fmtMoney(s.price) + '</bdi>' +
             '<bdi class="chg' + (s.dayChange < 0 ? " neg" : "") + '">' + fmtPct(s.dayChange, 2) + '</bdi>' +
-            '<span class="rsi-chip' + (s.rsi > 65 ? " warm" : "") + '">RSI ' + N(s.rsi.toFixed(1)) + '</span>' +
+            '<span class="rsi-chip' + (s.rsi > 65 ? " warm" : "") + '">RSI ' + N(nv(s.rsi, 1)) + '</span>' +
             '<span class="cc-layers">' + (r.layers.length === 1 ? "שכבה אחת" : r.layers.length + " שכבות") +
               ' · ' + r.active.length + ' בדיקות</span>' +
           '</span>' +
@@ -1720,15 +1930,18 @@
   function renderClosest(){
     var slot = document.getElementById("emptyState");
     if (!slot) return;
-    /* only as the zero-results fallback, and never while the user filters a sector */
-    if (passing().length || state.sector) { slot.innerHTML = ""; return; }
-    var list = closestRows(5);
+    /* the fallback list is drawn from the same narrowed pool as the table */
+    var pool = searchRows();
+    var passingInPool = pool.filter(function(s){ return evaluator(s).pass; });
+    if (!pool.length || passingInPool.length) { slot.innerHTML = ""; return; }
+    var list = closestRows(5, pool);
     if (!list.length) { slot.innerHTML = ""; return; }
 
     slot.innerHTML = '<div class="closest" id="closestBox">' +
       '<div class="closest-head">' +
         '<h3>הכי קרובות לעמוד בכל השכבות</h3>' +
-        '<span class="note">' + list.length + ' מתוך ' + STOCKS.length + ' · לפי מספר השכבות שנכשלו, ואז מספר הבדיקות</span>' +
+        '<span class="note">' + list.length + ' מתוך ' + pool.length +
+          (state.q.trim() ? ' בתוצאות החיפוש' : '') + ' · לפי מספר השכבות שנכשלו, ואז מספר הבדיקות</span>' +
       '</div>' +
       '<p class="closest-intro">ביום ירידות כמעט ולא נמצאות מניות שמטפסות — זה מה שהמסנן נועד לעשות. אלה הקרובות ביותר, והשכבה שמנעה אותן מסומנת.</p>' +
       '<ol class="cc-list">' + list.map(closestRowHTML).join("") + '</ol>' +
@@ -1784,9 +1997,9 @@
     var bits = [];
     bits.push((s.price > s.sma20 && s.sma20 > s.sma50 && s.sma50 > s.sma200)
       ? "מגמה מעל 20/50/200" : "מבנה מעורב");
-    bits.push("RSI " + N(s.rsi.toFixed(0)));
+    bits.push("RSI " + N(nv(s.rsi, 0)));
     bits.push("שינוי יומי " + N(fmtPct(s.dayChange, 1)));
-    bits.push("RVOL " + N(s.rvol.toFixed(1) + "x"));
+    bits.push("RVOL " + N(nv(s.rvol, 1) + "x"));
     return "עוברת את " + (nLayers === 4 ? "4 השכבות" : nLayers + " השכבות הפעילות") + ": " + bits.join(", ");
   }
 
@@ -1842,8 +2055,8 @@
     var riskPctOfPort = state.portfolio ? (z.cashRisk / state.portfolio) * 100 : 0;
     var stopUnder = s.price ? Math.abs((z.stop - s.price) / s.price) * 100 : 0;
     return '<li class="rec-row" data-rec="' + esc(s.ticker) + '" tabindex="0" role="button" ' +
-        'data-shares="' + z.shares + '" data-stop="' + z.stop.toFixed(2) + '" data-target="' + z.target.toFixed(2) + '" ' +
-        'data-cost="' + z.cost.toFixed(2) + '" data-risk="' + z.cashRisk.toFixed(2) + '" ' +
+        'data-shares="' + z.shares + '" data-stop="' + nv(z.stop, 2) + '" data-target="' + nv(z.target, 2) + '" ' +
+        'data-cost="' + nv(z.cost, 2) + '" data-risk="' + nv(z.cashRisk, 2) + '" ' +
         'data-riskpct="' + riskPctOfPort.toFixed(2) + '" data-cappct="' + capPct.toFixed(1) + '" ' +
         'aria-label="פתיחת תוכנית הסיכון של ' + esc(s.ticker) + '">' +
       '<div class="rec-top">' +
@@ -2095,12 +2308,16 @@
      ============================================================ */
   function renderRadar(){
     var rows = passing();
+    var sec = computeSectors();          /* top 8 by count, everything else → 'אחר' */
     var groups = {};
     rows.forEach(function(s){
-      if (!groups[s.sector]) groups[s.sector] = { sector:s.sector, n:0, rvol:0, day:0 };
-      groups[s.sector].n++;
-      groups[s.sector].rvol += s.rvol;
-      groups[s.sector].day  += s.dayChange;
+      var k = sec.top.indexOf(s.sector) !== -1 ? s.sector
+            : (sec.rest.length ? "__other__" : s.sector);
+      if (!groups[k]) groups[k] = { key:k, n:0, rvol:0, day:0, rest:0 };
+      groups[k].n++;
+      groups[k].rvol += s.rvol;
+      groups[k].day  += s.dayChange;
+      if (k === "__other__" && s.sector !== "__other__") groups[k].sectors = (groups[k].sectors || 0) + 1;
     });
     var totalRvol = rows.length ? rows.reduce(function(a,s){ return a + s.rvol; }, 0) / rows.length : 0;
     var totalDay  = rows.length ? rows.reduce(function(a,s){ return a + s.dayChange; }, 0) / rows.length : 0;
@@ -2108,30 +2325,37 @@
     var html = '';
     html += '<button class="radar-card all" data-sector="" aria-pressed="' + (state.sector ? "false" : "true") + '">' +
               '<div class="rc-top"><span class="rc-name">כל הסקטורים</span><span class="rc-count">' + N(String(rows.length)) + '</span></div>' +
-              '<div class="rc-rvol">' + N(totalRvol.toFixed(2)) + '<span>x</span></div>' +
+              '<div class="rc-rvol">' + N(nv(totalRvol, 2)) + '<span>x</span></div>' +
               '<div class="rc-sub">נפח יחסי ממוצע</div>' +
               '<div class="rc-bar"><i style="width:' + Math.min(100, (totalRvol / 3) * 100).toFixed(1) + '%"></i></div>' +
               '<div class="rc-foot">' + N(fmtPct(totalDay)) + ' ממוצע יומי</div>' +
             '</button>';
 
-    Object.keys(groups).sort(function(a,b){ return groups[b].n - groups[a].n || a.localeCompare(b); }).forEach(function(k){
+    Object.keys(groups).sort(function(a,b){
+      if (a === "__other__") return 1;
+      if (b === "__other__") return -1;
+      return groups[b].n - groups[a].n || a.localeCompare(b);
+    }).forEach(function(k){
       var g = groups[k];
       var avg = g.rvol / g.n;
       var sel = (state.sector === k);
-      html += '<button class="radar-card" data-sector="' + esc(k) + '" aria-pressed="' + (sel ? "true" : "false") + '" aria-label="סינון הטבלה לסקטור ' + esc(k) + '">' +
-                '<div class="rc-top"><span class="rc-name">' + esc(k) + '</span><span class="rc-count">' + N(String(g.n)) + '</span></div>' +
-                '<div class="rc-rvol">' + N(avg.toFixed(2)) + '<span>x</span></div>' +
+      var label = (k === "__other__") ? "אחר" : k;
+      html += '<button class="radar-card" data-sector="' + esc(k) + '" aria-pressed="' + (sel ? "true" : "false") + '" aria-label="סינון הטבלה לסקטור ' + esc(label) + '">' +
+                '<div class="rc-top"><span class="rc-name">' + esc(label) + '</span><span class="rc-count">' + N(String(g.n)) + '</span></div>' +
+                '<div class="rc-rvol">' + N(nv(avg, 2)) + '<span>x</span></div>' +
                 '<div class="rc-sub">נפח יחסי ממוצע</div>' +
                 '<div class="rc-bar"><i style="width:' + Math.min(100, (avg / 3) * 100).toFixed(1) + '%"></i></div>' +
-                '<div class="rc-foot">' + N(fmtPct(g.day / g.n)) + ' · ' + (g.n === 1 ? "שם אחד" : g.n + " שמות") + '</div>' +
+                '<div class="rc-foot">' + N(fmtPct(g.day / g.n)) + ' · ' + (g.n === 1 ? "שם אחד" : g.n + " שמות") +
+                  (k === "__other__" ? ' · ' + (g.sectors || 0) + ' סקטורים' : '') + '</div>' +
               '</button>';
     });
     document.getElementById("radarGrid").innerHTML = html;
 
     document.querySelectorAll(".radar-card").forEach(function(card){
       card.addEventListener("click", function(){
-        var sec = card.getAttribute("data-sector") || "";
-        state.sector = sec ? (state.sector === sec ? null : sec) : null;
+        var s2 = card.getAttribute("data-sector") || "";
+        state.sector = s2 ? (state.sector === s2 ? null : s2) : null;
+        state.limit = PAGE_SIZE;
         renderAll();
       });
     });
@@ -2153,7 +2377,11 @@
             '<input type="checkbox" data-layer-toggle="' + L.n + '"' + (on ? " checked" : "") + ' aria-label="הפעלת שכבת ' + esc(L.title) + '">' +
             '<span></span></label>' +
         '</div>' +
-        '<ul class="lc-list">' + L.rules.map(function(r){ return '<li>' + esc(r) + '</li>'; }).join("") + '</ul>' +
+        '<ul class="lc-list">' + L.rules.map(function(r){
+          /* institutional ownership is the one static reference value in L2 */
+          var flag = /מוסדיים/.test(r) ? '<span class="srcchip ref">עזר</span>' : "";
+          return '<li>' + esc(r) + flag + '</li>';
+        }).join("") + '</ul>' +
         '<div class="lc-count"><b>' + N(passingLayer + " / " + total) + '</b> עוברות את השכבה' + (on ? "" : " · כבויה") + '</div>' +
       '</div>';
     }).join("");
@@ -2191,13 +2419,17 @@
     }
   }
   function sortedRows(){
-    var rows = passing();
-    if (state.sector) rows = rows.filter(function(s){ return s.sector === state.sector; });
+    computeSectors();                       /* sector top-8 affects the filter */
+    var pool = searchRows();                /* full universe: search + sector */
+    var rows = pool.filter(function(s){ return evaluator(s).pass; });
     rows.sort(function(a,b){
       var va = sortValue(a, state.sortKey), vb = sortValue(b, state.sortKey);
       if (typeof va === "string" || typeof vb === "string") {
         return String(va).localeCompare(String(vb)) * state.sortDir;
       }
+      if (!isFinite(va) && !isFinite(vb)) return 0;
+      if (!isFinite(va)) return 1;          /* missing numbers always sink */
+      if (!isFinite(vb)) return -1;
       return (va - vb) * state.sortDir;
     });
     return rows;
@@ -2209,7 +2441,7 @@
   }
   function rsiChip(s){
     var warm = s.rsi > 65;
-    return '<span class="rsi-chip' + (warm ? " warm" : "") + '">RSI ' + N(s.rsi.toFixed(0)) + '</span>';
+    return '<span class="rsi-chip' + (warm ? " warm" : "") + '">RSI ' + N(nv(s.rsi, 0)) + '</span>';
   }
 
   function rowHTML(s){
@@ -2249,13 +2481,14 @@
         '<span class="sbadge">' + esc(s.sector) + '</span></div></td>' +
       '<td><div class="cell-2"><span class="price">' + N(fmtMoney(s.price)) + '</span>' +
         '<span class="chg' + (s.dayChange < 0 ? " neg" : "") + '">' + N(fmtPct(s.dayChange, 2)) + '</span></div></td>' +
-      '<td><div class="cell-2"><span class="rvol hot">' + N(s.rvol.toFixed(2) + "x") + '</span>' +
-        '<span class="sub">סגירה ' + N(s.closeStrength + "%") + '</span>' +
-        '<div class="bar-mini' + (s.closeStrength < 70 ? " am" : "") + '"><i style="width:' + closeW.toFixed(0) + '%"></i></div></div></td>' +
+      '<td><div class="cell-2"><span class="rvol hot">' + N(nv(s.rvol, 2) + "x") + '</span>' +
+        '<span class="sub">סגירה ' + N(nv(s.closeStrength, 0) + "%") + '</span>' +
+        '<div class="bar-mini' + (s.closeStrength < 70 ? " am" : "") + '"><i style="width:' + nv(clamp(closeW, 0, 100), 0) + '%"></i></div></div></td>' +
       '<td><div class="cell-2">' + trendGlyph(s) + rsiChip(s) + '</div></td>' +
-      '<td><div class="cell-2"><span class="sub">רווח ' + N(fmtPct(s.epsGrowth)) + '</span>' +
-        '<span class="sub">הון ' + N(s.roe.toFixed(1) + "%") + '</span>' +
-        '<span class="sub">מכפיל ' + N(s.pe.toFixed(1)) + '</span></div></td>' +
+      '<td><div class="cell-2"><span class="sub">רווח ' + N(fmtPct(s.epsGrowth)) + srcTag(s, "epsGrowth") + '</span>' +
+        '<span class="sub">הון ' + N(nv(s.roe, 1) + "%") + srcTag(s, "roe") + '</span>' +
+        '<span class="sub">מכפיל ' + N(nv(s.pe, 1)) + srcTag(s, "pe") + '</span>' +
+        '<span class="fin-src">Finnhub</span></div></td>' +
       stopCell + sizeCell +
     '</tr>';
   }
@@ -2268,12 +2501,12 @@
     var stopDist = s.price ? ((z.stop - s.price) / s.price) * 100 : 0;
     var tgtPct = s.price ? ((z.target - s.price) / s.price) * 100 : 0;
     var gridCells = bad
-      ? '<div class="mc-cell"><div class="k">נפח יחסי / סגירה</div><div class="v">' + N(s.rvol.toFixed(2) + "x") + ' <span class="pct">· ' + N(s.closeStrength + "%") + '</span></div></div>' +
-        '<div class="mc-cell"><div class="k">RSI</div><div class="v">' + N(s.rsi.toFixed(0)) + ' <span class="pct">' + (s.price > s.sma20 ? 'מעל ממוצע 20' : 'מתחת לממוצע 20') + '</span></div></div>' +
+      ? '<div class="mc-cell"><div class="k">נפח יחסי / סגירה</div><div class="v">' + N(nv(s.rvol, 2) + "x") + ' <span class="pct">· ' + N(nv(s.closeStrength, 0) + "%") + '</span></div></div>' +
+        '<div class="mc-cell"><div class="k">RSI</div><div class="v">' + N(nv(s.rsi, 0)) + ' <span class="pct">' + (s.price > s.sma20 ? 'מעל ממוצע 20' : 'מתחת לממוצע 20') + '</span></div></div>' +
         '<div class="mc-cell"><div class="k">סטופ</div><div class="v">' + N(fmtMoney(z.stop)) + ' <span class="pct">' + N(fmtPct(stopDist, 1)) + '</span></div></div>' +
         '<div class="mc-cell wide"><div class="k">החלטה</div><div class="v overstop">סטופ מעל המחיר — לא לכניסה</div></div>'
-      : '<div class="mc-cell"><div class="k">נפח יחסי / סגירה</div><div class="v">' + N(s.rvol.toFixed(2) + "x") + ' <span class="pct">· ' + N(s.closeStrength + "%") + '</span></div></div>' +
-        '<div class="mc-cell"><div class="k">RSI</div><div class="v">' + N(s.rsi.toFixed(0)) + ' <span class="pct">' + (s.price > s.sma20 ? 'מעל ממוצע 20' : 'מתחת לממוצע 20') + '</span></div></div>' +
+      : '<div class="mc-cell"><div class="k">נפח יחסי / סגירה</div><div class="v">' + N(nv(s.rvol, 2) + "x") + ' <span class="pct">· ' + N(nv(s.closeStrength, 0) + "%") + '</span></div></div>' +
+        '<div class="mc-cell"><div class="k">RSI</div><div class="v">' + N(nv(s.rsi, 0)) + ' <span class="pct">' + (s.price > s.sma20 ? 'מעל ממוצע 20' : 'מתחת לממוצע 20') + '</span></div></div>' +
         '<div class="mc-cell"><div class="k">סטופ</div><div class="v">' + N(fmtMoney(z.stop)) + ' <span class="pct">' + N(fmtPct(stopDist, 1)) + '</span></div></div>' +
         '<div class="mc-cell"><div class="k">מניות</div><div class="v">' + N(fmtInt(z.shares)) + (z.capped ? ' <span class="capped">בתקרה</span>' : '') + '</div></div>' +
         '<div class="mc-cell"><div class="k">הקצאה</div><div class="v">' + N(fmtMoney(z.cost, 0)) + ' <span class="pct">' + N(capPct.toFixed(1) + "%") + '</span></div></div>' +
@@ -2291,8 +2524,11 @@
   }
 
   function renderTable(){
-    var rows = sortedRows();
-    document.getElementById("resultsChip").textContent = rows.length + (rows.length === 1 ? " שם" : " שמות");
+    var t0 = (window.performance && performance.now) ? performance.now() : Date.now();
+    var rows = sortedRows(), total = rows.length;
+    var shown = rows.slice(0, state.limit);
+
+    document.getElementById("resultsChip").textContent = total + (total === 1 ? " שם" : " שמות");
     var pc = document.getElementById("passChip");
     if (pc) pc.textContent = passing().length + " / " + STOCKS.length;
 
@@ -2312,57 +2548,98 @@
 
     var body = document.getElementById("stockBody");
     var cards = document.getElementById("cardList");
+    var pool = searchRows();
     if (!rows.length) {
-      var msg = "אין מניה שעוברת את כל השכבות בסקטור הזה. כבו שכבה או בטלו את הסינון.";
-      var nm = nearMiss();
-      if (nm && !state.sector) {
-        msg = "0 מתוך " + STOCKS.length + " עוברות את כל השכבות עם הנתונים של " +
-          (DATA.loaded && DATA.asOf ? "סגירת " + DATA.asOf : "הנתונים הנוכחיים") +
-          ". הקרוב ביותר: " + nm.s.ticker + " — נכשלת ב-L" + nm.fails.join("/L") +
-          ". כבו שכבה כדי לראות מה היא מפסידה.";
+      var msg;
+      if (state.q.trim() && !pool.length) {
+        msg = "לא נמצאה מניה בשם/טיקר הזה. היקום הוא " + STOCKS.length +
+          " המניות הנזילות מעל $2B — אם תרצה מניה אחרת, אפשר להוסיף אותה לריצה היומית.";
+      } else if (state.q.trim()) {
+        msg = "אין מניה שעוברת את כל השכבות בתוצאות החיפוש. נקה את החיפוש או כבה שכבה.";
+      } else if (state.sector) {
+        msg = "אין מניה שעוברת את כל השכבות בסקטור הזה. כבו שכבה או בטלו את הסינון.";
+      } else {
+        var nm = nearMiss();
+        msg = nm
+          ? "0 מתוך " + STOCKS.length + " עוברות את כל השכבות עם הנתונים של " +
+            (DATA.loaded && DATA.asOf ? "סגירת " + DATA.asOf : "הנתונים הנוכחיים") +
+            ". הקרוב ביותר: " + nm.s.ticker + " — נכשלת ב-L" + nm.fails.join("/L") +
+            ". כבו שכבה כדי לראות מה היא מפסידה."
+          : "אין מניה שעוברת את כל השכבות. כבו שכבה או בטלו את הסינון.";
       }
       body.innerHTML = '<tr><td colspan="7"><div class="no-rows">' + esc(msg) + '</div></td></tr>';
       cards.innerHTML = '<div class="no-rows">' + esc(msg) + '</div>';
     } else {
-      body.innerHTML = rows.map(rowHTML).join("");
-      cards.innerHTML = rows.map(cardHTML).join("");
+      body.innerHTML = shown.map(rowHTML).join("");
+      cards.innerHTML = shown.map(cardHTML).join("");
     }
 
-    document.querySelectorAll("[data-ticker]").forEach(function(el){
-      if (el.tagName === "TR" || el.classList.contains("mcard")) {
-        el.addEventListener("click", function(){ openDrawer(el.getAttribute("data-ticker")); });
-        el.addEventListener("keydown", function(ev){
-          if (ev.key === "Enter" || ev.key === " ") { ev.preventDefault(); openDrawer(el.getAttribute("data-ticker")); }
-        });
-      }
+    /* only the rendered page gets listeners — never the whole universe */
+    body.querySelectorAll("tr[data-ticker]").forEach(function(el){
+      el.addEventListener("click", function(){ openDrawer(el.getAttribute("data-ticker")); });
+      el.addEventListener("keydown", function(ev){
+        if (ev.key === "Enter" || ev.key === " ") { ev.preventDefault(); openDrawer(el.getAttribute("data-ticker")); }
+      });
+    });
+    cards.querySelectorAll(".mcard").forEach(function(el){
+      el.addEventListener("click", function(){ openDrawer(el.getAttribute("data-ticker")); });
     });
 
-    // filtered-out chips
+    /* filtered-out chips: capped, because the universe can be hundreds of names */
     var out = STOCKS.filter(function(s){ return !evaluator(s).pass; });
     var fo = document.getElementById("filteredOut");
+    var CHIPS = 24;
     if (!out.length) {
       fo.innerHTML = "";
     } else {
-      fo.innerHTML = '<span class="lbl">נפסלו</span>' + out.map(function(s){
+      fo.innerHTML = '<span class="lbl">נפסלו</span>' + out.slice(0, CHIPS).map(function(s){
         var e = evaluator(s);
         return '<button class="fchip" data-chip="' + esc(s.ticker) + '" title="פתיחת הפרטים של ' + esc(s.ticker) + '">' +
           esc(s.ticker) + (s.live ? '<span class="fc-price">' + N(fmtMoney(s.price)) + '</span>' : '') +
           '<b>L' + e.active.join("/L") + '</b></button>';
-      }).join("");
+      }).join("") + (out.length > CHIPS ? '<span class="lbl more">ועוד ' + (out.length - CHIPS) + '</span>' : "");
       fo.querySelectorAll("[data-chip]").forEach(function(b){
         b.addEventListener("click", function(){ openDrawer(b.getAttribute("data-chip")); });
       });
     }
 
+    /* paging: one page in the DOM, the counter always covers the full set */
+    var pager = document.getElementById("pager");
+    if (pager) {
+      if (!total) {
+        pager.innerHTML = "";
+      } else {
+        pager.innerHTML = '<span class="p-note">מציג ' + N(String(shown.length)) + ' מתוך ' + N(String(total)) + ' עוברות</span>' +
+          (total > shown.length
+            ? '<button type="button" class="btn-ghost p-more" id="moreBtn">הצג עוד ' + PAGE_SIZE + '</button>'
+            : '<span class="p-done">הכול מוצג</span>');
+        var more = document.getElementById("moreBtn");
+        if (more) more.addEventListener("click", function(){
+          state.limit += PAGE_SIZE;
+          renderTable();
+        });
+      }
+    }
+
+    /* the search counter mirrors the live pool, not the page */
+    var sc = document.getElementById("searchCount");
+    if (sc) {
+      sc.innerHTML = state.q.trim()
+        ? 'מציג ' + N(String(pool.length)) + ' מתוך ' + N(String(STOCKS.length))
+        : N(String(STOCKS.length)) + ' מניות ביקום';
+    }
+
     /* the zero-results fallback — ranked near-misses with the exact failing check */
     renderClosest();
+    RENDER_MS = ((window.performance && performance.now) ? performance.now() : Date.now()) - t0;
   }
 
   function renderTraps(){
     var slot = document.getElementById("trapSlot");
     if (!state.showRejects) { slot.innerHTML = ""; return; }
     slot.innerHTML = '<div class="traps">' +
-      '<div class="traps-head"><h3>מניות שנפסלו — ולמה</h3><span class="note">לא נכנסות למכ״ם ולא לחישוב, בכוונה</span></div>' +
+      '<div class="traps-head"><h3>דוגמאות שנפסלו — ולמה</h3>' +
+        '<span class="note">דוגמאות המחשה בלבד · לא חלק מהיקום ולא נכנסות לשום חישוב<span class="srcchip ref">המחשה</span></span></div>' +
       TRAPS.map(function(t){
         return '<div class="trap">' +
           '<div class="ttk">' + esc(t.ticker) + '<small>' + esc(t.flag) + '</small></div>' +
@@ -2413,8 +2690,13 @@
   function chartSVG(s, z){
     var W = 640, H = 300, L = 12, R = 66, T = 16, B = 26;
     var pw = W - L - R, ph = H - T - B;
-    var series = priceSeries(s) || s.months.slice();
+    var series = priceSeries(s) || (s.months || []).slice();
     var approximated = !!(DATA.loaded && priceSeries(s));
+    var usable = series.length >= 2 && series.every(function(v){ return isFinite(v); });
+    if (!usable) {
+      return '<div class="chart-empty">אין היסטוריית מחירים לתצוגה עבור ' + esc(s.ticker) +
+             ' — הקובץ סיפק מחיר אחרון בלבד, בלי סדרה שתורכב ממנה מגמה.</div>';
+    }
     var refs = [
       { v:s.sma200, c:"#9c978a", label:"SMA200", dash:"5 4" },
       { v:s.sma50,  c:"#0f8a5f", label:"SMA50",  dash:"5 4" },
@@ -2423,6 +2705,7 @@
     ];
     /* no target line when there is no valid stop — a 2R line at the entry price is noise */
     if (!z.invalid) refs.splice(3, 0, { v:z.target, c:"#1f4e79", label:"2R", dash:"6 3" });
+    refs = refs.filter(function(r){ return isFinite(r.v); });
     var vals = series.concat(refs.map(function(r){ return r.v; }));
     var min = Math.min.apply(null, vals), max = Math.max.apply(null, vals);
     var span = (max - min) || (max * 0.04) || 1;
@@ -2553,7 +2836,7 @@
           '<span class="delta">' + N(fmtPct(s.dayChange, 2)) + ' היום</span>' +
           (s.live ? '<span class="livechip">חי</span>' : '') +
           (DATA.loaded ? '<span class="srcchip calc">מחושב · סגירת ' + N(DATA.asOf || "—") + '</span>' : '') +
-          '<span class="meta"><span>RVOL ' + N(s.rvol.toFixed(2) + "x") + '</span><span>RSI ' + N(s.rsi.toFixed(0)) + '</span><span>' + N(fmtCompact(s.mcap)) + '</span></span>' +
+          '<span class="meta"><span>RVOL ' + N(nv(s.rvol, 2) + "x") + '</span><span>RSI ' + N(nv(s.rsi, 0)) + '</span><span>' + N(fmtCompact(s.mcap)) + '</span></span>' +
         '</div>' +
         (z.invalid
           ? '<div class="alert-stop"><b>סטופ מעל המחיר — לא לכניסה</b>' +
@@ -2584,18 +2867,14 @@
           metric("מרחק לסטופ", N(fmtPct(stopDist, 1)), "am", z.invalid ? "הסטופ מעל המחיר" : "מהמחיר הנוכחי") +
           metric("יחס סיכון־סיכוי", N("1 : 2.00"), "", "כלל יציאה קבוע") +
         '</div>' +
-        '<h4 class="dh-sub">נתוני רקע<span class="srcchip calc">מחושב</span><span class="srcchip ref">עזר</span></h4>' +
+        '<h4 class="dh-sub">פונדמנטלס<span class="srcchip calc">Finnhub</span></h4>' +
+        fundTableHTML(s) +
+        '<p class="fund-note">P/E, צמיחה, ROE, בטא ושווי שוק נטענו חיים מ-Finnhub. אחזקת מוסדיים — לא זמין מהספק החינמי, ולכן מוצג כערך עזר סטטי מהדאטה-סט.</p>' +
+        '<h4 class="dh-sub">נתוני רקע<span class="srcchip calc">מחושב</span></h4>' +
         '<div class="metric-grid">' +
-          metric("נפח יחסי (RVOL)", N(s.rvol.toFixed(2) + "x"), "", "מול 50 יום", "rvol") +
-          metric("חוזק סגירה", N(s.closeStrength + "%"), "", "מטווח היום", "closeStrength") +
-          metric("בטא", N(s.beta.toFixed(2)), "", "מול השוק", "beta") +
-          metric("שווי שוק", N(fmtCompact(s.mcap)), "", "גודל החברה", "mcap") +
+          metric("נפח יחסי (RVOL)", N(nv(s.rvol, 2) + "x"), "", "מול 50 יום", "rvol") +
+          metric("חוזק סגירה", N(nv(s.closeStrength, 0) + "%"), "", "מטווח היום", "closeStrength") +
           metric("נפח ממוצע", N(fmtVol(s.avgVol)), "", "מניות ביום", "avgVol") +
-          metric("מכפיל רווח", N(s.pe.toFixed(1)), "", "P/E", "pe") +
-          metric("צמיחת רווח", N(fmtPct(s.epsGrowth)), "", "EPS שנתי", "epsGrowth") +
-          metric("צמיחת מכירות", N(fmtPct(s.salesGrowth)), "", "שנה אחרונה", "salesGrowth") +
-          metric("תשואה על ההון", N(s.roe.toFixed(1) + "%"), "", "ROE", "roe") +
-          metric("מוסדיים", N(s.instOwn + "%"), "", "מהמניות", "instOwn") +
           metric("מתחת לשיא", N(fmtPct(s.pctFrom52wHigh)), "", "52 שבועות", "high52") +
           metric("3 / 6 חודשים", N(fmtPct(s.perf3m) + " / " + fmtPct(s.perf6m)), "", "תשואה", "perf36") +
         '</div>' +
@@ -2666,6 +2945,25 @@
     return '<div class="metric"><div class="k">' + esc(k) + (termKey ? q(termKey) : "") + '</div>' +
       '<div class="v ' + (tone || "") + '">' + v + '</div>' +
       (note ? '<div class="n">' + note + '</div>' : "") + '</div>';
+  }
+
+  /* the seven fundamentals, labelled by provenance: live Finnhub or עזר */
+  function fundTableHTML(s){
+    function tr(label, termKey, value, k){
+      return '<tr' + (k === "instOwn" ? ' class="ref"' : '') + '>' +
+        '<th scope="row">' + esc(label) + (termKey ? q(termKey) : "") + srcTag(s, k) + '</th>' +
+        '<td>' + value + '</td></tr>';
+    }
+    return '<table class="fund-t" id="fundTable" aria-label="פונדמנטלס: חיים מ-Finnhub, אחזקת מוסדיים בעזר">' +
+      '<tbody>' +
+        tr("מכפיל רווח (P/E)", "pe", s.pe > 0 ? N(nv(s.pe, 1)) : N("שלילי"), "pe") +
+        tr("צמיחת רווח למניה", "epsGrowth", N(fmtPct(s.epsGrowth)), "epsGrowth") +
+        tr("צמיחת מכירות", "salesGrowth", N(fmtPct(s.salesGrowth)), "salesGrowth") +
+        tr("תשואה על ההון (ROE)", "roe", N(nv(s.roe, 1) + "%"), "roe") +
+        tr("בטא", "beta", N(nv(s.beta, 2)), "beta") +
+        tr("שווי שוק", "mcap", N(fmtCompact(s.mcap)), "mcap") +
+        tr("אחזקת מוסדיים", "instOwn", N(nv(s.instOwn, 0) + "%"), "instOwn") +
+      '</tbody></table>';
   }
 
   function closeDrawer(){
@@ -2935,10 +3233,13 @@
     }
     el.className = "mockbar calc";
     var live = apiState.live;
-    el.innerHTML = '<b class="tag">נתונים מחושבים</b><span>' +
-      'סגירת ' + N(DATA.asOf || "—") + ' · נאסד״ק · עודכן ' + N(bannerTimeNY()) +
+    var fund = DATA.fundCount > 0;
+    el.innerHTML = '<b class="tag">נתונים מחושבים</b><span> · סגירת ' + N(DATA.asOf || "—") +
+      ' · נאסד״ק' + (fund ? ' + Finnhub' : '') + ' · עודכן ' + N(bannerTimeNY()) +
       (live ? ' · ' + N(apiState.updated.length + "/" + STOCKS.length) + ' מחירים חיים מ-' + esc(PROVIDER_NAME[apiState.provider]) : '') +
-      '<small class="bsub">פונדמנטלס (P/E, ROE, EPS, בעלות מוסדית, בטא, שווי שוק) הם ערכי עזר סטטיים' +
+      '<small class="bsub">' + (fund
+        ? 'פונדמנטלס חיים מ-Finnhub · החריג היחיד: בעלות מוסדית (עזר סטטי)'
+        : 'פונדמנטלס (P/E, ROE, EPS, בעלות מוסדית, בטא, שווי שוק) הם ערכי עזר סטטיים') +
         (live ? ' · המחיר והשינוי היומי הם ציטוט חי; כל השאר מחושב מהסגירה' : '') + '.</small></span>';
   }
 
@@ -2981,8 +3282,8 @@
         renderAll();                                 /* sizing, radar averages, effective risk all recompute */
         renderBanner();
         apiSetStatus(got.length === STOCKS.length
-          ? "התקבלו 12 מחירים חיים מ-" + PROVIDER_NAME[p] + ". האינדיקטורים נשארו מחושבים מהסגירה."
-          : "התקבלו " + got.length + " מתוך 12 מחירים חיים; השאר נשארו במחירי הסגירה המחושבים.",
+          ? "התקבלו " + got.length + " מחירים חיים מ-" + PROVIDER_NAME[p] + ". האינדיקטורים נשארו מחושבים מהסגירה."
+          : "התקבלו " + got.length + " מתוך " + STOCKS.length + " מחירים חיים; השאר נשארו במחירי הסגירה המחושבים.",
           got.length === STOCKS.length ? "ok" : "warn");
         ok = true;
       }
@@ -3113,6 +3414,43 @@
     /* --- refresh: re-pull the file, re-run quotes, recompute everything --- */
     var refreshBtn = document.getElementById("refreshBtn");
     if (refreshBtn) refreshBtn.addEventListener("click", function(){ refreshAll(); });
+
+    /* --- search: filters the whole universe, not the rendered page --- */
+    var searchIn = document.getElementById("searchInput");
+    var searchClear = document.getElementById("searchClear");
+    var searchTimer = null;
+    function applySearch(v){
+      state.q = String(v || "");
+      state.limit = PAGE_SIZE;
+      if (searchClear) searchClear.hidden = !state.q;
+      renderTable();
+    }
+    if (searchIn) {
+      searchIn.addEventListener("input", function(){
+        if (searchTimer) clearTimeout(searchTimer);
+        var v = searchIn.value;
+        searchTimer = setTimeout(function(){ applySearch(v); }, 120);
+      });
+      searchIn.addEventListener("keydown", function(ev){
+        if (ev.key === "Escape") {
+          ev.preventDefault();
+          if (searchTimer) clearTimeout(searchTimer);
+          searchIn.value = "";
+          applySearch("");
+          searchIn.blur();
+        } else if (ev.key === "Enter") {
+          ev.preventDefault();
+          if (searchTimer) clearTimeout(searchTimer);
+          applySearch(searchIn.value);
+        }
+      });
+    }
+    if (searchClear) searchClear.addEventListener("click", function(){
+      if (searchTimer) clearTimeout(searchTimer);
+      searchIn.value = "";
+      applySearch("");
+      searchIn.focus();
+    });
 
     /* --- live data sheet --- */
     sheetEl  = document.getElementById("apiSheet");
@@ -3304,21 +3642,54 @@
 
   // expose a tiny read-only snapshot for automated checks
   window.SafeTrend = {
-    version: "2.2",
+    version: "2.3",
     stocks: STOCKS.map(function(s){ return s.ticker; }),
+    universe: STOCKS.length,
+    /* rendered page vs full set — the perf and paging checks read these */
+    visible: function(){ return document.querySelectorAll("#stockBody tr[data-ticker]").length; },
+    renderMs: function(){ return RENDER_MS; },
+    query: function(q){
+      var el = document.getElementById("searchInput");
+      if (q === undefined) return state.q;
+      state.q = String(q || "");
+      state.limit = PAGE_SIZE;
+      if (el) el.value = state.q;
+      var cl = document.getElementById("searchClear");
+      if (cl) cl.hidden = !state.q;
+      renderTable();
+      return state.q;
+    },
     terms: Object.keys(TERMS),
     term: function(k){ return TERMS[k]; },
     data: function(){
       return { loaded:DATA.loaded, asOf:DATA.asOf, source:DATA.source,
                generatedAt:DATA.generatedAt, failed:DATA.failed.slice(0),
-               applied:DATA.count, bars:barsLabel() };
+               applied:DATA.count, bars:barsLabel(),
+               universe:DATA.universe, size:STOCKS.length, page:PAGE_SIZE, shown:state.limit,
+               fundApplied:DATA.fundCount, fundSource:DATA.fundSource };
+    },
+    /* live fundamentals as rendered — live flags show what came from Finnhub */
+    fundamentals: function(t){
+      if (t) {
+        var one = STOCKS.filter(function(x){ return x.ticker === t; })[0];
+        if (!one) return null;
+        return { ticker:one.ticker, pe:one.pe, roe:one.roe, epsGrowth:one.epsGrowth,
+                 salesGrowth:one.salesGrowth, beta:one.beta, mcap:one.mcap, instOwn:one.instOwn,
+                 live:Object.keys(one.fundLive || {}), instOwnLive:false };
+      }
+      return STOCKS.map(function(s){
+        return { ticker:s.ticker, pe:s.pe, roe:s.roe, epsGrowth:s.epsGrowth,
+                 salesGrowth:s.salesGrowth, beta:s.beta, mcap:s.mcap, instOwn:s.instOwn,
+                 live:Object.keys(s.fundLive || {}) };
+      });
     },
     passing: function(){ return passing().map(function(s){ return s.ticker; }); },
     layers: function(){ return JSON.parse(JSON.stringify(state.layers)); },
     /* the zero-results fallback, as rendered: rank, tickers, and every failing check */
     closest: function(){
-      if (passing().length || state.sector) return [];
-      return closestRows(5).map(function(r){
+      var pool = searchRows();
+      if (pool.some(function(s){ return evaluator(s).pass; })) return [];
+      return closestRows(5, pool).map(function(r){
         return {
           ticker: r.s.ticker,
           failedLayers: r.layers.map(function(n){ return "L" + n; }),

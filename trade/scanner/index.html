@@ -358,6 +358,14 @@
   .lc-list li::before{content:"";position:absolute;inset-inline-start:0;top:.62em;width:3px;height:3px;border-radius:50%;background:#cfc9ba}
   .lc-count{font-size:11px;color:var(--muted);margin-top:8px;border-top:1px solid var(--line-2);padding-top:7px}
   .lc-count b{font-family:var(--num);direction:ltr;unicode-bidi:isolate}
+  /* a check that could not run at all — never a red flag, always a note */
+  .lc-note{
+    font-size:10.5px;line-height:1.6;color:var(--faint);margin-top:6px;
+    border:1px dashed var(--line);border-radius:7px;padding:5px 7px;background:#fbfaf7;
+  }
+  .lc-note b{font-family:var(--num);direction:ltr;unicode-bidi:isolate;color:var(--muted)}
+  .lc-list li.skipped{color:var(--faint)}
+  .lc-list li.skipped b{font-weight:600;color:var(--muted)}
   .switch{flex:0 0 auto;margin-inline-start:auto;position:relative;display:inline-block;width:32px;height:18px;margin-top:2px}
   .switch input{position:absolute;opacity:0;width:100%;height:100%;margin:0;cursor:pointer;z-index:2}
   .switch span{position:absolute;inset:0;background:#e2ddcf;border-radius:99px;transition:background .15s}
@@ -396,6 +404,17 @@
   .tk{font-size:13.5px;font-weight:700;letter-spacing:.02em;direction:ltr;unicode-bidi:isolate;font-family:var(--num)}
   .tk-name{display:block;font-size:11.5px;color:var(--muted);line-height:1.45;margin-top:1px}
   .sbadge{display:inline-block;font-size:10.5px;color:var(--muted);background:#f7f5f0;border:1px solid var(--line);border-radius:4px;padding:0 5px;margin-top:4px;line-height:1.6}
+  /* search mode lists every match, so the ticker cell carries the verdict */
+  #stockTable.searching th:nth-child(1){width:25%}
+  #stockTable.searching th:nth-child(6){width:17.5%}
+  #stockTable.searching th:nth-child(7){width:16.5%}
+  .st-state{display:flex;align-items:center;gap:6px;flex-wrap:wrap;margin-top:5px;min-width:0}
+  .stchip{display:inline-block;font-size:10.5px;font-weight:700;line-height:1.8;border-radius:5px;padding:0 6px;border:1px solid;white-space:nowrap;direction:rtl;unicode-bidi:isolate}
+  .stchip.pass{color:var(--green);background:var(--green-bg);border-color:#cbe6da}
+  .stchip.fail{color:var(--red);background:var(--red-bg);border-color:#f0cdc7}
+  .st-why{font-size:10.5px;color:var(--muted);line-height:1.55;min-width:0;overflow-wrap:anywhere}
+  tbody tr.row.rej{background:#fffdfa}
+  tbody tr.row.rej:hover{background:#fbf7f0}
   .cell-2{display:grid;gap:1px;min-width:0}
   .price{font-family:var(--num);font-size:13.5px;font-weight:600;direction:ltr;unicode-bidi:isolate}
   .chg{font-family:var(--num);font-size:11.5px;color:var(--green);direction:ltr;unicode-bidi:isolate;text-align:right}
@@ -431,6 +450,8 @@
   .mc-top{display:flex;align-items:baseline;gap:8px;flex-wrap:wrap}
   .mc-price{margin-inline-start:auto;display:flex;gap:7px;align-items:baseline}
   .mc-name{font-size:12px;color:var(--muted);margin-top:2px}
+  .mc-state{display:flex;align-items:center;gap:6px;flex-wrap:wrap;margin-top:5px;min-width:0}
+  .mc-state .st-why{font-size:11px;line-height:1.5}
   .mc-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px 10px;margin-top:10px}
   .mc-cell{min-width:0}
   .mc-cell .k{font-size:10.5px;color:var(--faint)}
@@ -715,6 +736,20 @@
   .fund-t th{width:58%;font-weight:600;color:var(--muted);background:#fbfaf7}
   .fund-t td{width:42%;text-align:end;font-family:var(--num);font-weight:700;color:var(--ink)}
   .fund-t tr.ref th{color:var(--ink)}
+  /* a value the provider never sent — 'לא זמין', never a fake number */
+  .fund-t td.na{font-family:var(--body,inherit);font-weight:600;color:var(--faint);text-align:end}
+  .fund-na{display:inline-block;white-space:nowrap}
+  .fund-na-note{display:block;font-size:9.5px;font-weight:600;line-height:1.5;color:var(--faint);margin-top:1px}
+  .cc-skip{
+    display:inline-flex;align-items:center;gap:5px;max-width:100%;font-size:11px;line-height:1.65;
+    border:1px dashed var(--line);background:#fbfaf7;color:var(--faint);
+    border-radius:6px;padding:2px 7px;overflow-wrap:anywhere;
+  }
+  .cc-skip .ltag{
+    display:inline-block;font-family:var(--num);font-size:10px;font-weight:700;color:var(--muted);
+    border:1px solid var(--line);background:#fff;border-radius:4px;padding:0 4px;line-height:1.7;
+    direction:ltr;unicode-bidi:isolate;
+  }
   .fund-note{font-size:10.5px;line-height:1.6;color:var(--faint);margin:0 0 14px}
   .legend{
     display:flex;flex-wrap:wrap;gap:6px 16px;align-items:baseline;
@@ -747,6 +782,8 @@
   .s-clear:hover{background:#f4f2ec;color:var(--ink)}
   .s-clear:focus-visible{outline:2px solid var(--blue);outline-offset:1px}
   .search-count{font-size:11.5px;color:var(--muted);font-family:var(--num);white-space:nowrap}
+  .search-note{font-size:11.5px;color:var(--muted);line-height:1.55;margin:-2px 0 10px}
+  .search-note[hidden]{display:none}
   .pager{
     display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;
     margin:12px 0 4px;padding-top:10px;border-top:1px solid var(--line-2);
@@ -1088,11 +1125,12 @@
         </div>
         <span class="search-count" id="searchCount" aria-live="polite"></span>
       </div>
+      <p class="search-note" id="searchNote" hidden>במצב חיפוש מוצגות גם מניות שנפסלו — הצ׳יפ מציין באיזו שכבה</p>
       <div class="legend" id="sourceLegend" aria-label="מקור הנתונים בכל עמודה">
         <span class="lg"><i class="dot live" aria-hidden="true"></i><b>חי</b><span>ציטוט עכשיו מהספק (Finnhub / FMP) — מחיר ושינוי יומי</span></span>
         <span class="lg"><i class="dot calc" aria-hidden="true"></i><b>מחושב</b><span>מסגירת המסחר האחרונה בנאסד״ק — RSI, RVOL, ממוצעים, חוזק סגירה, תשואות</span></span>
         <span class="lg"><i class="dot fin" aria-hidden="true"></i><b>Finnhub</b><span>פונדמנטלס חיים — P/E, ROE, EPS, מכירות, בטא, שווי שוק</span></span>
-        <span class="lg"><i class="dot ref" aria-hidden="true"></i><b>עזר</b><span>ערך סטטי מהדאטה-סט, לא מהספק — כרגע רק אחזקת מוסדיים</span></span>
+        <span class="lg"><i class="dot ref" aria-hidden="true"></i><b>עזר</b><span>ערך סטטי מהדאטה-סט, לא מהספק — אחזקת מוסדיים, ואם אין לה ערך היא מוצגת כ״לא זמין״</span></span>
       </div>
       <div class="table-wrap">
         <table id="stockTable">
@@ -1505,7 +1543,7 @@
     epsGrowth:{ t:"צמיחת רווח למניה (EPS)", s:"בכמה אחוזים גדל הרווח למניה בשנה האחרונה. זה מה שנשאר לבעלי המניות מכל מכירה.", e:"הרווח למניה של LLY גדל 50.7% בשנה. הסינון דורש מעל 10%." },
     salesGrowth:{ t:"צמיחת מכירות", s:"בכמה אחוזים גדלו ההכנסות של החברה בשנה האחרונה.", e:"המכירות של GEV גדלו 16.9%. מתחת ל-10% החברה בקושי גדלה, והמגמה נשענת על רעש." },
     roe:{ t:"תשואה על ההון (ROE)", s:"כמה רווח מייצרת החברה על כל דולר של הון עצמי. מדד ליעילות של העסק.", e:"ROE 83.7% ב-LLY: כל $100 הון עצמי מייצרים $83.7 רווח בשנה. הסינון דורש מעל 15%." },
-    instOwn:{ t:"אחזקת מוסדיים", s:"איזה אחוז מהמניות מוחזק בידי קרנות וגופים גדולים. הנתון הזה לא קיים בספק החינמי — הוא ערך עזר סטטי מהדאטה-סט, לא נתון חי.", e:"87% מ-CRWD מוחזק בידי מוסדיים (עזר סטטי). מתחת ל-50% המניה נשענת רק על כסף קטן." },
+    instOwn:{ t:"אחזקת מוסדיים", s:"איזה אחוז מהמניות מוחזק בידי קרנות וגופים גדולים. הנתון הזה לא מגיע מהספק החינמי — כשהוא קיים הוא ערך עזר סטטי מהדאטה-סט, וכשאין ערך הוא מוצג כ״לא זמין״ והבדיקה שלו מדולגת. היעדר נתון לא נחשב כישלון.", e:"87% מ-CRWD מוחזק בידי מוסדיים (עזר סטטי) — מעל 50%, עוברת. במניה שאין לה נתון כתוב ״לא זמין״, והשכבה ממשיכה הלאה בלי לפסול אותה." },
     high52:{ t:"מרחק משיא 52 שבועות", s:"כמה אחוז מתחת לשיא של השנה המניה נסחרת עכשיו. קרוב לשיא = המגמה חיה.", e:"LLY רק 1.2% מתחת לשיא. הסינון מרשה עד 10% מתחת; מעבר לזה המגמה כבר נשברה." },
     perf36:{ t:"תשואה 3 ו-6 חודשים", s:"כמה המניה עלתה בשלושת החודשים ובחצי השנה האחרונים. שני מספרים, כדי לראות שהמגמה לא רק זינוק חד-פעמי.", e:"GEV: 18.4%+ בשלושה חודשים ו-39.6%+ בחצי שנה — מגמה עקבית. הסינון דורש ששניהם חיוביים." }
   };
@@ -1718,6 +1756,26 @@
     return out;
   }
 
+  /* Institutional ownership is the one L2 input the free Finnhub tier never
+     sends: indicators.json carries instOwn:null for every symbol, and only the
+     11 original names still in the universe keep a static dataset value. A
+     missing value must never be read as "under 50%" — that would fail all 297
+     names by construction. So the check is SKIPPED when the value is absent:
+     not passed, not failed, and never counted against the name. */
+  function instOwnKnown(s){
+    if (!s) return false;
+    var v = s.instOwn;
+    if (v === null || v === undefined || v === "") return false;
+    return isFinite(Number(v));
+  }
+
+  /* how many names in the current universe have no institutional value */
+  function instOwnMissing(){
+    var n = 0;
+    STOCKS.forEach(function(s){ if (!instOwnKnown(s)) n++; });
+    return n;
+  }
+
   function layerFails(s){
     var f = [];
     if (!(s.mcap > 2e9)) f.push(1);
@@ -1729,7 +1787,7 @@
     if (!(s.epsGrowth > 10)) f.push(2);
     if (!(s.salesGrowth > 10)) f.push(2);
     if (!(s.roe > 15)) f.push(2);
-    if (!(s.instOwn > 50)) f.push(2);
+    if (instOwnKnown(s) && !(s.instOwn > 50)) f.push(2);   /* no data → skipped */
 
     if (!(s.price > s.sma20 && s.sma20 > s.sma50 && s.sma50 > s.sma200)) f.push(3);
     if (!(s.pctFrom52wHigh >= -10)) f.push(3);
@@ -1743,10 +1801,18 @@
     return f.filter(function(v, i, a){ return a.indexOf(v) === i; });
   }
 
+  /* one layerFails() pass per name per render — the layer toggles cannot change
+     inside a render, and evaluate() is called from the table, the sector
+     grouping and the closest box on the same 297 names. */
+  var EV_CACHE = {};
+
   function evaluator(s){
+    var hit = EV_CACHE[s.ticker];
+    if (hit) return hit;
     var fails = layerFails(s);
     var active = fails.filter(function(n){ return state.layers[String(n)]; });
-    return { fails:fails, active:active, pass:active.length === 0 };
+    EV_CACHE[s.ticker] = { fails:fails, active:active, pass:active.length === 0 };
+    return EV_CACHE[s.ticker];
   }
 
   function passing(){
@@ -1801,6 +1867,15 @@
   }
 
   /* the search filter, applied to the full universe */
+  function searchActive(){ return !!norm(state.q).trim(); }
+
+  /* every symbol the query matches — sector filter and layer toggles do NOT
+     narrow this: a search for a ticker must always come back with that ticker */
+  function searchPool(){
+    var q = norm(state.q).trim();
+    return STOCKS.filter(function(s){ return matchesQuery(s, q); });
+  }
+
   function searchRows(){
     var q = norm(state.q).trim();
     return STOCKS.filter(function(s){ return matchesQuery(s, q) && inSectorGroup(s); });
@@ -1848,7 +1923,7 @@
     if (!(s.epsGrowth > 10))               add(2, "צמיחת רווח למניה " + N(fmtPct(s.epsGrowth, 1)) + " (נדרש מעל 10%)");
     if (!(s.salesGrowth > 10))             add(2, "צמיחת מכירות " + N(fmtPct(s.salesGrowth, 1)) + " (נדרש מעל 10%)");
     if (!(s.roe > 15))                     add(2, "תשואה על ההון " + N(nv(s.roe, 1) + "%") + " (נדרש מעל 15%)");
-    if (!(s.instOwn > 50))                 add(2, "מוחזקות מוסדיות " + N(nv(s.instOwn, 0) + "%") + " (נדרש מעל 50%)" + '<span class="srcchip ref">עזר</span>');
+    if (instOwnKnown(s) && !(s.instOwn > 50)) add(2, "מוחזקות מוסדיות " + N(nv(s.instOwn, 0) + "%") + " (נדרש מעל 50%)" + '<span class="srcchip ref">עזר</span>');
 
     /* L3 — trend: report the link of the chain that actually broke */
     if (!(s.price > s.sma20 && s.sma20 > s.sma50 && s.sma50 > s.sma200)) {
@@ -1880,12 +1955,13 @@
   function closestRows(n, pool){
     var rows = [];
     (pool || STOCKS).forEach(function(s){
-      var det = failDetails(s);
-      var active = det.filter(function(d){ return !!state.layers[String(d.layer)]; });
-      if (!active.length) return;                    /* passed — it is in the table */
+      var st = statusOf(s);                          /* cached: det is reused */
+      if (!st.fails.length) return;                  /* passed — it is in the table */
+      var active = st.det.filter(function(d){ return !!state.layers[String(d.layer)]; });
+      if (!active.length) return;                    /* passed under the toggles */
       var layers = [];
       active.forEach(function(d){ if (layers.indexOf(d.layer) === -1) layers.push(d.layer); });
-      rows.push({ s:s, detail:det, active:active, layers:layers });
+      rows.push({ s:s, detail:st.det, active:active, layers:layers });
     });
     rows.sort(function(a, b){
       if (a.layers.length !== b.layers.length) return a.layers.length - b.layers.length;
@@ -1922,7 +1998,12 @@
               ' · ' + r.active.length + ' בדיקות</span>' +
           '</span>' +
         '</div>' +
-        '<div class="cc-chips">' + r.active.map(closestChipHTML).join("") + '</div>' +
+        '<div class="cc-chips">' + r.active.map(closestChipHTML).join("") +
+          (state.layers["2"] && !instOwnKnown(s)
+            ? '<span class="cc-skip"><b class="ltag">L2</b> · אחזקת מוסדיים: <b>לא זמין</b> — הבדיקה דולגה' +
+              '<span class="srcchip ref">עזר</span></span>'
+            : '') +
+        '</div>' +
       '</div>' +
     '</li>';
   }
@@ -1930,6 +2011,9 @@
   function renderClosest(){
     var slot = document.getElementById("emptyState");
     if (!slot) return;
+    /* during a search every match is a row that carries its own verdict chip,
+       so the fallback list would only repeat the same names */
+    if (searchActive()) { slot.innerHTML = ""; return; }
     /* the fallback list is drawn from the same narrowed pool as the table */
     var pool = searchRows();
     var passingInPool = pool.filter(function(s){ return evaluator(s).pass; });
@@ -2378,11 +2462,18 @@
             '<span></span></label>' +
         '</div>' +
         '<ul class="lc-list">' + L.rules.map(function(r){
-          /* institutional ownership is the one static reference value in L2 */
-          var flag = /מוסדיים/.test(r) ? '<span class="srcchip ref">עזר</span>' : "";
-          return '<li>' + esc(r) + flag + '</li>';
+          /* institutional ownership is the one L2 rule that can be missing:
+             it is labelled with its provenance and, when the provider sends
+             nothing, says so instead of pretending the value is under 50% */
+          if (!/מוסדיים/.test(r)) return '<li>' + esc(r) + '</li>';
+          return '<li class="skipped">' + esc(r) + ' — <b>לא זמין</b> כשאין ערך, ולכן מדולג ' +
+            '<span class="srcchip ref">עזר</span></li>';
         }).join("") + '</ul>' +
         '<div class="lc-count"><b>' + N(passingLayer + " / " + total) + '</b> עוברות את השכבה' + (on ? "" : " · כבויה") + '</div>' +
+        (L.n === 2 && instOwnMissing()
+          ? '<div class="lc-note" id="instSkipNote">בדיקת מוסדיים לא הייתה זמינה ל-' +
+              N(String(instOwnMissing())) + ' מניות ולכן דולגה — היעדר נתון לא נחשב כישלון.</div>'
+          : '') +
       '</div>';
     }).join("");
     document.getElementById("layersGrid").innerHTML = html;
@@ -2418,8 +2509,68 @@
       default:       return s.rvol;
     }
   }
+  /* --- search verdicts -------------------------------------------------
+     layerFails() is the single source of truth. The chip reports the FULL
+     4-layer verdict (not the toggled view): 'עוברת 4/4' or the first layer
+     that failed. The reason is the same failDetails()[0] string the closest
+     box prints, so the number in the row always matches the file.
+     Cached per render pass — one row can be asked for its status twice
+     (sort key + cell) and 297 names x 16 checks is not worth doing twice. */
+  var ST_CACHE = {};
+
+  function resetCaches(){ ST_CACHE = {}; EV_CACHE = {}; }
+
+  function statusOf(s){
+    if (ST_CACHE[s.ticker]) return ST_CACHE[s.ticker];
+    var fails = layerFails(s);
+    var det = fails.length ? failDetails(s) : [];
+    ST_CACHE[s.ticker] = {
+      fails:fails,
+      det:det,                  /* kept so the closest box never rebuilds it */
+      nf:fails.length,          /* 1st sort key — 0 means it passes */
+      nd:det.length,            /* 2nd sort key — individual failed checks */
+      pass:!fails.length,
+      why:det.length ? det[0].text : ""
+    };
+    return ST_CACHE[s.ticker];
+  }
+
+  function statusChipHTML(st){
+    if (st.pass) return '<span class="stchip pass" data-st="pass">עוברת 4/4</span>';
+    return '<span class="stchip fail" data-st="fail" data-layer="' + st.fails[0] + '">' +
+      'נפסלה ב-L' + st.fails[0] + '</span>';
+  }
+
+  function statusHTML(st){
+    return '<div class="st-state">' + statusChipHTML(st) +
+      (st.pass ? '' : '<span class="st-why">' + st.why + '</span>') + '</div>';
+  }
+
+  /* search mode: everything matched is rendered — passing rows first, then by
+     failed layers, then by failed checks, then by the user's own sort key */
+  function searchSortedRows(){
+    var sv = state.sortKey, dir = state.sortDir;
+    var scored = searchPool().map(function(s){
+      return { s:s, st:statusOf(s), v:sortValue(s, sv) };
+    });
+    scored.sort(function(a, b){
+      if (a.st.nf !== b.st.nf) return a.st.nf - b.st.nf;
+      if (a.st.nd !== b.st.nd) return a.st.nd - b.st.nd;
+      var va = a.v, vb = b.v;
+      if (typeof va === "string" || typeof vb === "string") {
+        var c = String(va).localeCompare(String(vb)) * dir;
+        if (c) return c;
+      } else if (isFinite(va) && isFinite(vb) && va !== vb) {
+        return (va - vb) * dir;
+      }
+      return a.s.ticker.localeCompare(b.s.ticker);
+    });
+    return scored.map(function(r){ return r.s; });
+  }
+
   function sortedRows(){
     computeSectors();                       /* sector top-8 affects the filter */
+    if (searchActive()) return searchSortedRows();   /* toggles never hide a match */
     var pool = searchRows();                /* full universe: search + sector */
     var rows = pool.filter(function(s){ return evaluator(s).pass; });
     rows.sort(function(a,b){
@@ -2446,6 +2597,7 @@
 
   function rowHTML(s){
     var z = sizing(s);
+    var st = searchActive() ? statusOf(s) : null;   /* verdict chip only in search mode */
     var capPct = state.portfolio ? (z.cost / state.portfolio) * 100 : 0;
     var riskPctOfPort = state.portfolio ? (z.cashRisk / state.portfolio) * 100 : 0;
     var stopDist = s.price ? ((z.stop - s.price) / s.price) * 100 : 0;
@@ -2474,11 +2626,13 @@
         '<div class="size-line risk-line">הפסד מקס׳ <b>' + N(fmtMoney(z.cashRisk, 0)) + '</b><span class="pct">' + N(riskPctOfPort.toFixed(2) + "%") + '</span></div>' +
         '<div class="size-line tgt-line">יעד 2R <b>' + N(fmtMoney(z.target)) + '</b><span class="pct">' + N(fmtPct(tgtPct, 1)) + '</span></div>' +
       '</div></td>';
-    return '<tr class="row' + (bad ? " norow" : "") + '" tabindex="0" data-ticker="' + esc(s.ticker) + '" aria-label="פתיחת הפרטים של ' + esc(s.ticker) + '">' +
+    return '<tr class="row' + (bad ? " norow" : "") + (st && !st.pass ? " rej" : "") +
+        '" tabindex="0" data-ticker="' + esc(s.ticker) + '" aria-label="פתיחת הפרטים של ' + esc(s.ticker) + '">' +
       '<td><div class="tk-cell"><div class="tk-line"><span class="tk">' + esc(s.ticker) + '</span>' +
         (s.live ? '<span class="livechip" title="המחיר והשינוי היומי נטענו עכשיו מהספק">חי</span>' : '') + '</div>' +
         '<span class="tk-name">' + esc(s.nameHe) + '</span>' +
-        '<span class="sbadge">' + esc(s.sector) + '</span></div></td>' +
+        '<span class="sbadge">' + esc(s.sector) + '</span>' +
+        (st ? statusHTML(st) : '') + '</div></td>' +
       '<td><div class="cell-2"><span class="price">' + N(fmtMoney(s.price)) + '</span>' +
         '<span class="chg' + (s.dayChange < 0 ? " neg" : "") + '">' + N(fmtPct(s.dayChange, 2)) + '</span></div></td>' +
       '<td><div class="cell-2"><span class="rvol hot">' + N(nv(s.rvol, 2) + "x") + '</span>' +
@@ -2495,6 +2649,7 @@
 
   function cardHTML(s){
     var z = sizing(s);
+    var st = searchActive() ? statusOf(s) : null;   /* same verdict as the row */
     var bad = z.invalid;
     var capPct = state.portfolio ? (z.cost / state.portfolio) * 100 : 0;
     var riskPctOfPort = state.portfolio ? (z.cashRisk / state.portfolio) * 100 : 0;
@@ -2512,12 +2667,14 @@
         '<div class="mc-cell"><div class="k">הקצאה</div><div class="v">' + N(fmtMoney(z.cost, 0)) + ' <span class="pct">' + N(capPct.toFixed(1) + "%") + '</span></div></div>' +
         '<div class="mc-cell"><div class="k">הפסד מקסימלי</div><div class="v" style="color:var(--red)">' + N(fmtMoney(z.cashRisk, 0)) + ' <span class="pct">' + N(riskPctOfPort.toFixed(2) + "%") + '</span></div></div>' +
         '<div class="mc-cell wide"><div class="k">יעד 2R</div><div class="v" style="color:var(--green)">' + N(fmtMoney(z.target)) + ' <span class="pct">' + N(fmtPct(tgtPct, 1)) + '</span></div></div>';
-    return '<button class="mcard' + (bad ? " norow" : "") + '" data-ticker="' + esc(s.ticker) + '" aria-label="פתיחת הפרטים של ' + esc(s.ticker) + '">' +
+    return '<button class="mcard' + (bad ? " norow" : "") + (st && !st.pass ? " rej" : "") + '" data-ticker="' + esc(s.ticker) + '" aria-label="פתיחת הפרטים של ' + esc(s.ticker) + '">' +
       '<div class="mc-top"><span class="tk">' + esc(s.ticker) + '</span>' +
         (s.live ? '<span class="livechip">חי</span>' : '') +
         '<span class="mc-price"><span class="price">' + N(fmtMoney(s.price)) + '</span> <span class="chg">' + N(fmtPct(s.dayChange, 2)) + '</span></span>' +
         '<span class="sbadge">' + esc(s.sector) + '</span></div>' +
       '<div class="mc-name">' + esc(s.nameHe) + '</div>' +
+      (st ? '<div class="mc-state">' + statusChipHTML(st) +
+        (st.pass ? '' : '<span class="st-why">' + st.why + '</span>') + '</div>' : '') +
       '<div class="mc-grid">' + gridCells + '</div>' +
       '<div class="mc-foot">לחיצה לגרף, תוכנית סיכון וכרטיס הזמנה ←</div>' +
     '</button>';
@@ -2525,6 +2682,8 @@
 
   function renderTable(){
     var t0 = (window.performance && performance.now) ? performance.now() : Date.now();
+    ST_CACHE = {};                          /* verdicts are per data state */
+    EV_CACHE = {};                          /* layer verdicts are per toggle state */
     var rows = sortedRows(), total = rows.length;
     var shown = rows.slice(0, state.limit);
 
@@ -2548,7 +2707,15 @@
 
     var body = document.getElementById("stockBody");
     var cards = document.getElementById("cardList");
-    var pool = searchRows();
+    var searching = searchActive();
+    var pool = searching ? searchPool() : searchRows();
+
+    /* search mode changes what the table promises: every match, plus a chip */
+    var tableEl = document.getElementById("stockTable");
+    if (tableEl) tableEl.classList.toggle("searching", searching);
+    var noteEl = document.getElementById("searchNote");
+    if (noteEl) noteEl.hidden = !searching;
+
     if (!rows.length) {
       var msg;
       if (state.q.trim() && !pool.length) {
@@ -2609,7 +2776,8 @@
       if (!total) {
         pager.innerHTML = "";
       } else {
-        pager.innerHTML = '<span class="p-note">מציג ' + N(String(shown.length)) + ' מתוך ' + N(String(total)) + ' עוברות</span>' +
+        pager.innerHTML = '<span class="p-note">מציג ' + N(String(shown.length)) + ' מתוך ' + N(String(total)) +
+          (searching ? ' בתוצאות החיפוש' : ' עוברות') + '</span>' +
           (total > shown.length
             ? '<button type="button" class="btn-ghost p-more" id="moreBtn">הצג עוד ' + PAGE_SIZE + '</button>'
             : '<span class="p-done">הכול מוצג</span>');
@@ -2869,7 +3037,7 @@
         '</div>' +
         '<h4 class="dh-sub">פונדמנטלס<span class="srcchip calc">Finnhub</span></h4>' +
         fundTableHTML(s) +
-        '<p class="fund-note">P/E, צמיחה, ROE, בטא ושווי שוק נטענו חיים מ-Finnhub. אחזקת מוסדיים — לא זמין מהספק החינמי, ולכן מוצג כערך עזר סטטי מהדאטה-סט.</p>' +
+        '<p class="fund-note">P/E, צמיחה, ROE, בטא ושווי שוק נטענו חיים מ-Finnhub. אחזקת מוסדיים לא זמין מהספק החינמי — כשאין ערך היא מוצגת כ״לא זמין״ כערך עזר, והבדיקה שלה מדולגת; היעדר נתון לא נחשב כישלון.</p>' +
         '<h4 class="dh-sub">נתוני רקע<span class="srcchip calc">מחושב</span></h4>' +
         '<div class="metric-grid">' +
           metric("נפח יחסי (RVOL)", N(nv(s.rvol, 2) + "x"), "", "מול 50 יום", "rvol") +
@@ -2949,11 +3117,14 @@
 
   /* the seven fundamentals, labelled by provenance: live Finnhub or עזר */
   function fundTableHTML(s){
-    function tr(label, termKey, value, k){
+    function tr(label, termKey, value, k, na){
       return '<tr' + (k === "instOwn" ? ' class="ref"' : '') + '>' +
         '<th scope="row">' + esc(label) + (termKey ? q(termKey) : "") + srcTag(s, k) + '</th>' +
-        '<td>' + value + '</td></tr>';
+        '<td' + (na ? ' class="na"' : '') + '>' + value + '</td></tr>';
     }
+    /* no institutional value → 'לא זמין' + the fact that the check is skipped.
+       It never renders as a number, a dash or a verdict on the name. */
+    var instNa = !instOwnKnown(s);
     return '<table class="fund-t" id="fundTable" aria-label="פונדמנטלס: חיים מ-Finnhub, אחזקת מוסדיים בעזר">' +
       '<tbody>' +
         tr("מכפיל רווח (P/E)", "pe", s.pe > 0 ? N(nv(s.pe, 1)) : N("שלילי"), "pe") +
@@ -2962,7 +3133,10 @@
         tr("תשואה על ההון (ROE)", "roe", N(nv(s.roe, 1) + "%"), "roe") +
         tr("בטא", "beta", N(nv(s.beta, 2)), "beta") +
         tr("שווי שוק", "mcap", N(fmtCompact(s.mcap)), "mcap") +
-        tr("אחזקת מוסדיים", "instOwn", N(nv(s.instOwn, 0) + "%"), "instOwn") +
+        tr("אחזקת מוסדיים", "instOwn",
+           instNa ? '<span class="fund-na">לא זמין</span><span class="fund-na-note">הבדיקה מדולגת</span>'
+                  : N(nv(s.instOwn, 0) + "%"),
+           "instOwn", instNa) +
       '</tbody></table>';
   }
 
@@ -3399,6 +3573,7 @@
      WIRING
      ============================================================ */
   function renderAll(){
+    resetCaches();                 /* layer toggles may have changed under us */
     renderRecs();
     renderTiming(false);
     renderRisk();
@@ -3429,7 +3604,7 @@
       searchIn.addEventListener("input", function(){
         if (searchTimer) clearTimeout(searchTimer);
         var v = searchIn.value;
-        searchTimer = setTimeout(function(){ applySearch(v); }, 120);
+        searchTimer = setTimeout(function(){ applySearch(v); }, 60);
       });
       searchIn.addEventListener("keydown", function(ev){
         if (ev.key === "Escape") {
@@ -3684,6 +3859,13 @@
       });
     },
     passing: function(){ return passing().map(function(s){ return s.ticker; }); },
+    /* the verdict a searched row carries: full 4-layer result, not the toggles */
+    status: function(t){
+      var one = STOCKS.filter(function(x){ return x.ticker === t; })[0];
+      if (!one) return null;
+      var st = statusOf(one);
+      return { ticker:t, pass:st.pass, fails:st.fails.slice(0), checks:st.nd, why:st.why };
+    },
     layers: function(){ return JSON.parse(JSON.stringify(state.layers)); },
     /* the zero-results fallback, as rendered: rank, tickers, and every failing check */
     closest: function(){

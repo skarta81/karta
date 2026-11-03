@@ -4,6 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="color-scheme" content="light">
+<link rel="icon" href="data:,">
 <meta name="description" content="סורק מניות במגמה עם מנוע סיכון: כמה לקנות, איפה הסטופ, יעד 2R — הסבר בעברית לכל מונח.">
 <title>סורק מגמות · מנוע סיכון בגובה העיניים</title>
 <style>
@@ -158,6 +159,16 @@
   }
   .mockbar b.tag{flex:0 0 auto;font-size:12px;letter-spacing:.02em;background:#fff;border:1px solid #eadfc6;border-radius:999px;padding:2px 9px;color:#8a6215}
   .mockbar span{flex:1 1 240px;min-width:0}
+  .mockbar .bsub{display:block;font-size:11.5px;line-height:1.6;color:var(--faint);margin-top:2px}
+  /* calculated close — neutral, not a warning */
+  .mockbar.calc{background:#fbfaf7;border-color:var(--line);color:var(--muted)}
+  .mockbar.calc b.tag{background:var(--blue-bg);border-color:#d8e3ee;color:var(--blue)}
+  .mockbar.calc .bsub{color:var(--faint)}
+  /* fallback — the old amber warning tone */
+  .mockbar.demo{background:var(--amber-bg);border-color:#eee0c4;color:#6b4d15}
+  .mockbar.demo b.tag{background:#fff;border-color:#eadfc6;color:#8a6215}
+  .mockbar.loading{background:#fbfaf7;border-color:var(--line);color:var(--faint)}
+  .mockbar.loading b.tag{background:#fff;border-color:var(--line);color:var(--faint)}
 
   /* ---------- header ---------- */
   header.top{display:block;margin-bottom:18px}
@@ -619,15 +630,55 @@
   .mockbar.live{background:var(--green-bg);border-color:#cbe6da;color:#0c6b4a}
   .mockbar.live b.tag{background:#fff;border-color:#cbe6da;color:#0c6b4a}
   .fchip .fc-price{font-size:10px;color:var(--green);font-weight:700}
+
+  /* ---------- provenance chips + legend ---------- */
+  .srcchip{
+    display:inline-block;font-size:10px;font-weight:700;letter-spacing:.02em;
+    border-radius:4px;padding:0 5px;line-height:1.7;margin-inline-start:6px;vertical-align:1px;
+    white-space:nowrap;
+  }
+  .srcchip.calc{color:var(--blue);background:var(--blue-bg);border:1px solid #d8e3ee}
+  .srcchip.ref{color:var(--faint);background:#f7f5f0;border:1px solid var(--line)}
+  .legend{
+    display:flex;flex-wrap:wrap;gap:6px 16px;align-items:baseline;
+    border:1px solid var(--line);border-radius:10px;background:#fbfaf7;
+    padding:8px 12px;margin:0 0 12px;font-size:11.5px;line-height:1.6;color:var(--muted);
+  }
+  .legend .lg{display:flex;gap:6px;align-items:baseline;min-width:0;flex:1 1 240px}
+  .legend .lg b{font-size:11px;letter-spacing:.02em;color:var(--ink)}
+  .legend .lg > span{color:var(--faint)}
+  .legend .dot{width:8px;height:8px;border-radius:50%;flex:0 0 8px;display:inline-block;transform:translateY(-1px)}
+  .legend .dot.live{background:var(--green);box-shadow:0 0 0 2px var(--green-bg)}
+  .legend .dot.calc{background:var(--blue);box-shadow:0 0 0 2px var(--blue-bg)}
+  .legend .dot.ref{background:var(--faint);box-shadow:0 0 0 2px #f0ede5}
+
+  /* ---------- impossible stop: stop above the entry ---------- */
+  .overstop{color:var(--red);font-weight:700}
+  .alert-stop{
+    display:flex;flex-direction:column;gap:2px;margin:0 0 14px;
+    background:var(--red-bg);border:1px solid #efd5d1;border-radius:10px;
+    padding:9px 12px;font-size:12.5px;line-height:1.6;color:#8d2b20;
+  }
+  .alert-stop b{font-size:13px}
+  .alert-stop span{color:#8d2b20;opacity:.9}
+  tr.norow .stop{color:var(--red)}
+  .mcard.norow{border-color:#efd5d1}
+  .chart-note{
+    font-size:10.5px;line-height:1.55;color:var(--faint);
+    padding:6px 2px 0;border-top:1px solid var(--line-2);margin-top:6px;
+  }
+  @media (max-width:560px){
+    .legend{font-size:11px;gap:4px 10px;padding:7px 10px}
+  }
 </style>
 </head>
 <body>
 <a class="sr-only" href="#resultsTitle">דלג לתוצאות</a>
 <div class="wrap">
 
-  <div class="mockbar" id="mockbar">
-    <b class="tag">נתוני דמו</b>
-    <span>זה לא מחיר אמת ולא ציטוט חי. כל המספרים כאן הם דוגמה קבועה שמראה איך החישוב עובד — כדי שתלמד את השיטה בלי לסכן כסף. אין כאן ייעוץ השקעות.</span>
+  <div class="mockbar loading" id="mockbar" role="status" aria-live="polite">
+    <b class="tag">טוען</b>
+    <span>טוען נתוני שוק…</span>
   </div>
 
   <header class="top">
@@ -765,14 +816,14 @@
         <p>התקרה מגבילה כמה כסף נכנס למניה אחת, גם כשהחישוב מרשה יותר. זה מה שמונע מעסקה אחת להפיל תיק שלם.</p>
       </div>
       <div>
-        <div class="keylist" aria-label="דוגמה לשורה בטבלה">
+        <div class="keylist" aria-label="דוגמה לשורה בטבלה" id="exampleList">
           <div class="keyline"><span>כמה לקנות</span><b><bdi class="num">12</bdi> מניות</b></div>
           <div class="keyline"><span>כמה זה עולה</span><b><bdi class="num">$4,106</bdi></b></div>
           <div class="keyline"><span>איפה הסטופ</span><b><bdi class="num">$321.65</bdi></b></div>
           <div class="keyline"><span>הפסד מקסימלי</span><b><bdi class="num">$205</bdi></b></div>
           <div class="keyline"><span>יעד 2R</span><b><bdi class="num">$383.24</bdi></b></div>
         </div>
-        <div class="keyline" style="border:0;background:none;padding:6px 2px 0;color:var(--faint);font-size:11.5px">דוגמה: PANW בתיק של $25,000 ובסיכון של 1%.</div>
+        <div class="keyline" style="border:0;background:none;padding:6px 2px 0;color:var(--faint);font-size:11.5px" id="exampleCaption">דוגמה: PANW בתיק של $25,000 ובסיכון של 1%.</div>
       </div>
     </div>
   </section>
@@ -824,6 +875,11 @@
       </div>
     </div>
     <div class="card-body">
+      <div class="legend" id="sourceLegend" aria-label="מקור הנתונים בכל עמודה">
+        <span class="lg"><i class="dot live" aria-hidden="true"></i><b>חי</b><span>ציטוט עכשיו מהספק (Finnhub / FMP) — רק מחיר ושינוי יומי</span></span>
+        <span class="lg"><i class="dot calc" aria-hidden="true"></i><b>מחושב</b><span>מסגירת המסחר האחרונה בנאסד״ק — RSI, RVOL, ממוצעים, חוזק סגירה, תשואות</span></span>
+        <span class="lg"><i class="dot ref" aria-hidden="true"></i><b>עזר</b><span>פונדמנטלס סטטיים — P/E, ROE, EPS, מוסדיים, בטא, שווי שוק</span></span>
+      </div>
       <div class="table-wrap">
         <table id="stockTable">
           <caption>לחיצה על שורה פותחת גרף, תוכנית סיכון וכרטיס הזמנה. לחיצה על כותרת ממיינת.</caption>
@@ -860,7 +916,7 @@
   </section>
 
   <footer class="foot">
-    <span><b>הדגמה בלבד.</b> הנתונים הם סט לדוגמה לבדיקת החישוב — לא מחירי אמת, לא ייעוץ השקעות ולא המלצה לקנייה או מכירה.</span>
+    <span><b>מקורות.</b> מחיר, שינוי יומי, RSI, RVOL, ממוצעים, חוזק סגירה ותשואות מחושבים מסגירת נאסד״ק. פונדמנטלס (P/E, ROE, EPS, אחזקת מוסדיים, בטא, שווי שוק) הם ערכי עזר סטטיים. אין כאן ייעוץ השקעות ולא המלצה לקנייה או מכירה.</span>
     <span class="formula">shares = min( floor(risk$ / riskPerShare) , floor(cap$ / price) ) · target = entry + 2 × riskPerShare</span>
     <span>החישוב: סכום הסיכון חלקי המרחק מהכניסה לסטופ, ובמקביל לא יותר מתקרת הפוזיציה. המספר הקטן מביניהם הוא מספר המניות.</span>
   </footer>
@@ -894,7 +950,7 @@
   <div class="sheet-head">
     <div>
       <h2 id="apiTitle">נתוני שוק</h2>
-      <div class="sheet-sub">מחבר את העמוד לספק מחירים: המחיר והשינוי היומי מתעדכנים, כל השאר נשאר מדגם.</div>
+      <div class="sheet-sub">מחבר את העמוד לספק מחירים: המחיר והשינוי היומי מתעדכנים בלבד — האינדיקטורים נשארים מחושבים מהסגירה.</div>
     </div>
     <button class="icon-btn" type="button" id="apiClose" aria-label="סגירת חלון נתוני שוק">✕</button>
   </div>
@@ -1053,6 +1109,86 @@
     w3:{ label:"חלון 3 · סוף יום", en:"EOD", action:"סריקה לסווינג", tone:"blue", range:"15:30–09:30 ET",
       note:"אחרי הסגירה: בונים עסקה שתיפתח במסחר של היום הבא." }
   };
+
+  /* ============================================================
+     MARKET DATA — indicators.json (Nasdaq daily, server-side)
+     The file is merged into STOCKS before the first render. Only
+     price / day change / technicals are touched; fundamentals
+     (mcap, beta, P/E, ROE, EPS, instOwn) stay static reference.
+     ============================================================ */
+  var DATA = { loaded:false, asOf:null, source:null, generatedAt:null, failed:[], updatedLabel:null, count:0 };
+
+  var IND_FIELDS = [
+    ["price", "price"], ["dayChange", "dayChangePct"],
+    ["sma20", "sma20"], ["sma50", "sma50"], ["sma200", "sma200"],
+    ["rsi", "rsi14"], ["rvol", "rvol"], ["closeStrength", "closeStrength"],
+    ["avgVol", "avgVol"], ["high52", "high52"], ["pctFrom52wHigh", "pctFrom52wHigh"],
+    ["perf3m", "perf3m"], ["perf6m", "perf6m"]
+  ];
+
+  function applyIndicators(js){
+    if (!js || typeof js !== "object" || !js.symbols || typeof js.symbols !== "object") return false;
+    var got = 0, asOf = null;
+    STOCKS.forEach(function(s){
+      var r = js.symbols[s.ticker];
+      if (!r || typeof r !== "object") return;
+      var touched = false;
+      IND_FIELDS.forEach(function(pair){
+        var raw = r[pair[1]];
+        if (raw === null || raw === undefined || raw === "") return;
+        var v = Number(raw);
+        if (isFinite(v)) { s[pair[0]] = v; touched = true; }
+      });
+      if (!touched) return;
+      if (r.bars !== undefined && isFinite(Number(r.bars))) s.bars = Number(r.bars);
+      if (r.high52 !== undefined && isFinite(Number(r.high52))) s.high52 = Number(r.high52);
+      if (!asOf && typeof r.asOf === "string") asOf = r.asOf;
+      got++;
+    });
+    if (!got) return false;
+    DATA.loaded = true;
+    DATA.count = got;
+    DATA.asOf = asOf || null;
+    DATA.source = (typeof js.source === "string") ? js.source : null;
+    DATA.generatedAt = (typeof js.generatedAt === "string") ? js.generatedAt : null;
+    DATA.failed = Array.isArray(js.failed) ? js.failed.slice(0) : [];
+    return true;
+  }
+
+  /* absolute URL so a <base> tag or a nested path can never send us elsewhere */
+  function indicatorsURL(){
+    try { return new URL("indicators.json", document.baseURI).href; }
+    catch(e){ return "indicators.json"; }
+  }
+
+  function loadIndicators(){
+    if (typeof fetch !== "function") return Promise.resolve(false);
+    var done = false;
+    var timeout = new Promise(function(resolve){ setTimeout(function(){ resolve(false); }, 6000); });
+    var req = fetch(indicatorsURL(), { cache:"no-store", credentials:"omit" })
+      .then(function(res){
+        if (!res.ok) return null;
+        return res.text();
+      })
+      .then(function(txt){
+        if (!txt) return false;
+        var js = null;
+        try { js = JSON.parse(txt); } catch(e){ return false; }
+        return applyIndicators(js);
+      })
+      .catch(function(){ return false; })
+      .then(function(ok){ done = true; return ok; });
+    return Promise.race([req, timeout]).then(function(ok){
+      return done ? ok : false;
+    });
+  }
+
+  /* number of trading days behind the calculated technicals */
+  function barsLabel(){
+    var bars = 0;
+    STOCKS.forEach(function(s){ if (s.bars && s.bars > bars) bars = s.bars; });
+    return bars;
+  }
 
   /* ============================================================
      TERMS — single source for popovers + glossary
@@ -1245,13 +1381,22 @@
     var riskPerShare = p - stop;
     var out = { stop:stop, riskPerShare:riskPerShare, shares:0, cost:0, cashRisk:0,
                 target:0, rawShares:0, maxCapShares:0, capped:false, invalid:false,
+                overStop:(isFinite(stop) && isFinite(p) && stop >= p),
                 smaStop:s.sma50, fixedStop:fixedStop,
                 winner:(s.sma50 > fixedStop ? "sma50" : "fixed"),
                 smaDistPct:((p - s.sma50) / p) * 100,
                 fixedDistPct:6, wide:((p - stop) / p) * 100 > 12 };
 
+    /* A stop at or above the entry is not a trade — no shares, no risk, no target.
+       This is not an edge case any more: on a pullback the SMA-50 anchor sits
+       above the last close, and printing negative share counts there is a lie. */
     if (!(p > 0) || !(riskPerShare > 0)) {
       out.invalid = true;
+      out.shares = 0;
+      out.cost = 0;
+      out.cashRisk = 0;
+      out.rawShares = 0;
+      out.maxCapShares = 0;
       out.target = p;
       return out;
     }
@@ -1301,6 +1446,17 @@
 
   function passing(){
     return STOCKS.filter(function(s){ return evaluator(s).pass; });
+  }
+
+  /* the name that came closest to passing — used when the table is empty */
+  function nearMiss(){
+    var best = null, bestN = 99;
+    STOCKS.forEach(function(s){
+      var e = evaluator(s);
+      var n = e.active.length || e.fails.length;
+      if (n < bestN) { bestN = n; best = s; }
+    });
+    return best ? { s:best, n:bestN, fails:layerFails(best) } : null;
   }
 
   /* ============================================================
@@ -1401,17 +1557,23 @@
     var capDollars = state.portfolio * state.maxCapPct / 100;
 
     /* what the risk engine actually ends up risking, after the cap is applied */
-    var zRows = passing().map(function(s){ return sizing(s); }).filter(function(z){ return !z.invalid; });
+    var allZ = passing().map(function(s){ return sizing(s); });
+    var zRows = allZ.filter(function(z){ return !z.invalid; });
+    var blockedN = allZ.length - zRows.length;
     var cappedN = zRows.filter(function(z){ return z.capped; }).length;
     var effRisk = zRows.length ? zRows.reduce(function(a, z){
       return a + (z.cashRisk / state.portfolio) * 100; }, 0) / zRows.length : 0;
     var wallWide = zRows.filter(function(z){ return z.wide; }).length;
     var effTone = (zRows.length && effRisk < state.riskPct * 0.9) ? "am" : "em";
+    var effNote = zRows.length
+      ? cappedN + " מתוך " + zRows.length + " מוגבלות בתקרה של " + state.maxCapPct + "%"
+      : "אין שורה זכאית לחישוב כרגע";
+    if (blockedN) effNote += " · " + blockedN + " עם סטופ מעל המחיר";
 
     document.getElementById("riskSummary").innerHTML = [
       stat("סיכון לעסקה", N(fmtMoney(riskDollars, 0)), "em", "1R · " + state.riskPct.toFixed(2) + "% מהתיק", "riskPerTrade"),
       stat("סיכון אפקטיבי", N(effRisk.toFixed(2) + "%"), effTone,
-           cappedN + " מתוך " + zRows.length + " מוגבלות בתקרה של " + state.maxCapPct + "%", "effectiveRisk", "effRisk"),
+           effNote, "effectiveRisk", "effRisk"),
       stat("פוזיציה מקסימלית", N(fmtMoney(capDollars, 0)), "am", state.maxCapPct + "% מהתיק למניה" + (wallWide ? " · " + wallWide + " עם סטופ רחב" : ""), "positionCap"),
       stat("עוגן הסטופ", modeLabel, "txt", state.stopMode === "fixed" ? "מחיר × 0.94" : (state.stopMode === "sma50" ? "ממוצע 50 יום" : "הגבוה מבין ממוצע 50 למינוס 6%"), "stopLoss"),
       stat("מניות שעוברות", N(passing().length + " / " + STOCKS.length), "", "לפי השכבות הפעילות", null)
@@ -1561,7 +1723,30 @@
     var stopDist = s.price ? ((z.stop - s.price) / s.price) * 100 : 0;
     var tgtPct = s.price ? ((z.target - s.price) / s.price) * 100 : 0;
     var closeW = clamp(s.closeStrength, 0, 100);
-    return '<tr class="row" tabindex="0" data-ticker="' + esc(s.ticker) + '" aria-label="פתיחת הפרטים של ' + esc(s.ticker) + '">' +
+    var bad = z.invalid;
+    var stopCell = bad
+      ? '<td class="stop-cell"><div class="cell-2">' +
+          '<span class="stop">' + N(fmtMoney(z.stop)) + '</span>' +
+          '<span class="overstop">סטופ מעל המחיר — לא לכניסה</span>' +
+          '<span class="anchor">ממוצע 50 <b>' + N(fmtPct(z.smaDistPct, 1)) + '</b> מהמחיר</span>' +
+        '</div></td>'
+      : '<td class="stop-cell"><div class="cell-2"><span class="stop">' + N(fmtMoney(z.stop)) + '</span>' +
+        '<span class="dist">' + N(fmtPct(stopDist, 1)) + ' מהכניסה' +
+          (z.wide ? ' <span class="wide">רחב</span>' : '') + '</span>' +
+        '<span class="anchor' + (z.winner === "sma50" ? " win" : "") + '">ממוצע 50 <b>' +
+          N(fmtPct(z.smaDistPct, 1)) + '</b> · ' + (z.winner === "sma50" ? "המבנה קובע" : "הקבוע קובע") + '</span>' +
+        '</div></td>';
+    var sizeCell = bad
+      ? '<td><div class="size-cell"><div class="size-line"><b class="overstop">—</b> אין עסקה · הסטופ לא מתחת לכניסה</div>' +
+        '<div class="size-line risk-line">הפסד מקס׳ <b>' + N(fmtMoney(0, 0)) + '</b><span class="pct">' + N("0.00%") + '</span></div>' +
+        '<div class="size-line tgt-line">יעד 2R <b>—</b><span class="pct">אין</span></div></div></td>'
+      : '<td><div class="size-cell">' +
+        '<div class="size-line"><b>' + N(fmtInt(z.shares)) + '</b> מניות · <b>' + N(fmtMoney(z.cost, 0)) + '</b>' +
+          '<span class="pct">' + N(capPct.toFixed(1) + "%") + '</span>' + (z.capped ? '<span class="capped">בתקרה</span>' : "") + '</div>' +
+        '<div class="size-line risk-line">הפסד מקס׳ <b>' + N(fmtMoney(z.cashRisk, 0)) + '</b><span class="pct">' + N(riskPctOfPort.toFixed(2) + "%") + '</span></div>' +
+        '<div class="size-line tgt-line">יעד 2R <b>' + N(fmtMoney(z.target)) + '</b><span class="pct">' + N(fmtPct(tgtPct, 1)) + '</span></div>' +
+      '</div></td>';
+    return '<tr class="row' + (bad ? " norow" : "") + '" tabindex="0" data-ticker="' + esc(s.ticker) + '" aria-label="פתיחת הפרטים של ' + esc(s.ticker) + '">' +
       '<td><div class="tk-cell"><div class="tk-line"><span class="tk">' + esc(s.ticker) + '</span>' +
         (s.live ? '<span class="livechip" title="המחיר והשינוי היומי נטענו עכשיו מהספק">חי</span>' : '') + '</div>' +
         '<span class="tk-name">' + esc(s.nameHe) + '</span>' +
@@ -1575,42 +1760,36 @@
       '<td><div class="cell-2"><span class="sub">רווח ' + N(fmtPct(s.epsGrowth)) + '</span>' +
         '<span class="sub">הון ' + N(s.roe.toFixed(1) + "%") + '</span>' +
         '<span class="sub">מכפיל ' + N(s.pe.toFixed(1)) + '</span></div></td>' +
-      '<td class="stop-cell"><div class="cell-2"><span class="stop">' + N(fmtMoney(z.stop)) + '</span>' +
-        '<span class="dist">' + N(fmtPct(stopDist, 1)) + ' מהכניסה' +
-          (z.wide ? ' <span class="wide">רחב</span>' : '') + '</span>' +
-        '<span class="anchor' + (z.winner === "sma50" ? " win" : "") + '">ממוצע 50 <b>' +
-          N(fmtPct(z.smaDistPct, 1)) + '</b> · ' + (z.winner === "sma50" ? "המבנה קובע" : "הקבוע קובע") + '</span>' +
-        '</div></td>' +
-      '<td><div class="size-cell">' +
-        '<div class="size-line"><b>' + N(fmtInt(z.shares)) + '</b> מניות · <b>' + N(fmtMoney(z.cost, 0)) + '</b>' +
-          '<span class="pct">' + N(capPct.toFixed(1) + "%") + '</span>' + (z.capped ? '<span class="capped">בתקרה</span>' : "") + '</div>' +
-        '<div class="size-line risk-line">הפסד מקס׳ <b>' + N(fmtMoney(z.cashRisk, 0)) + '</b><span class="pct">' + N(riskPctOfPort.toFixed(2) + "%") + '</span></div>' +
-        '<div class="size-line tgt-line">יעד 2R <b>' + N(fmtMoney(z.target)) + '</b><span class="pct">' + N(fmtPct(tgtPct, 1)) + '</span></div>' +
-      '</div></td>' +
+      stopCell + sizeCell +
     '</tr>';
   }
 
   function cardHTML(s){
     var z = sizing(s);
+    var bad = z.invalid;
     var capPct = state.portfolio ? (z.cost / state.portfolio) * 100 : 0;
     var riskPctOfPort = state.portfolio ? (z.cashRisk / state.portfolio) * 100 : 0;
     var stopDist = s.price ? ((z.stop - s.price) / s.price) * 100 : 0;
     var tgtPct = s.price ? ((z.target - s.price) / s.price) * 100 : 0;
-    return '<button class="mcard" data-ticker="' + esc(s.ticker) + '" aria-label="פתיחת הפרטים של ' + esc(s.ticker) + '">' +
-      '<div class="mc-top"><span class="tk">' + esc(s.ticker) + '</span>' +
-        (s.live ? '<span class="livechip">חי</span>' : '') +
-        '<span class="mc-price"><span class="price">' + N(fmtMoney(s.price)) + '</span> <span class="chg">' + N(fmtPct(s.dayChange, 2)) + '</span></span>' +
-        '<span class="sbadge">' + esc(s.sector) + '</span></div>' +
-      '<div class="mc-name">' + esc(s.nameHe) + '</div>' +
-      '<div class="mc-grid">' +
-        '<div class="mc-cell"><div class="k">נפח יחסי / סגירה</div><div class="v">' + N(s.rvol.toFixed(2) + "x") + ' <span class="pct">· ' + N(s.closeStrength + "%") + '</span></div></div>' +
+    var gridCells = bad
+      ? '<div class="mc-cell"><div class="k">נפח יחסי / סגירה</div><div class="v">' + N(s.rvol.toFixed(2) + "x") + ' <span class="pct">· ' + N(s.closeStrength + "%") + '</span></div></div>' +
+        '<div class="mc-cell"><div class="k">RSI</div><div class="v">' + N(s.rsi.toFixed(0)) + ' <span class="pct">' + (s.price > s.sma20 ? 'מעל ממוצע 20' : 'מתחת לממוצע 20') + '</span></div></div>' +
+        '<div class="mc-cell"><div class="k">סטופ</div><div class="v">' + N(fmtMoney(z.stop)) + ' <span class="pct">' + N(fmtPct(stopDist, 1)) + '</span></div></div>' +
+        '<div class="mc-cell wide"><div class="k">החלטה</div><div class="v overstop">סטופ מעל המחיר — לא לכניסה</div></div>'
+      : '<div class="mc-cell"><div class="k">נפח יחסי / סגירה</div><div class="v">' + N(s.rvol.toFixed(2) + "x") + ' <span class="pct">· ' + N(s.closeStrength + "%") + '</span></div></div>' +
         '<div class="mc-cell"><div class="k">RSI</div><div class="v">' + N(s.rsi.toFixed(0)) + ' <span class="pct">' + (s.price > s.sma20 ? 'מעל ממוצע 20' : 'מתחת לממוצע 20') + '</span></div></div>' +
         '<div class="mc-cell"><div class="k">סטופ</div><div class="v">' + N(fmtMoney(z.stop)) + ' <span class="pct">' + N(fmtPct(stopDist, 1)) + '</span></div></div>' +
         '<div class="mc-cell"><div class="k">מניות</div><div class="v">' + N(fmtInt(z.shares)) + (z.capped ? ' <span class="capped">בתקרה</span>' : '') + '</div></div>' +
         '<div class="mc-cell"><div class="k">הקצאה</div><div class="v">' + N(fmtMoney(z.cost, 0)) + ' <span class="pct">' + N(capPct.toFixed(1) + "%") + '</span></div></div>' +
         '<div class="mc-cell"><div class="k">הפסד מקסימלי</div><div class="v" style="color:var(--red)">' + N(fmtMoney(z.cashRisk, 0)) + ' <span class="pct">' + N(riskPctOfPort.toFixed(2) + "%") + '</span></div></div>' +
-        '<div class="mc-cell wide"><div class="k">יעד 2R</div><div class="v" style="color:var(--green)">' + N(fmtMoney(z.target)) + ' <span class="pct">' + N(fmtPct(tgtPct, 1)) + '</span></div></div>' +
-      '</div>' +
+        '<div class="mc-cell wide"><div class="k">יעד 2R</div><div class="v" style="color:var(--green)">' + N(fmtMoney(z.target)) + ' <span class="pct">' + N(fmtPct(tgtPct, 1)) + '</span></div></div>';
+    return '<button class="mcard' + (bad ? " norow" : "") + '" data-ticker="' + esc(s.ticker) + '" aria-label="פתיחת הפרטים של ' + esc(s.ticker) + '">' +
+      '<div class="mc-top"><span class="tk">' + esc(s.ticker) + '</span>' +
+        (s.live ? '<span class="livechip">חי</span>' : '') +
+        '<span class="mc-price"><span class="price">' + N(fmtMoney(s.price)) + '</span> <span class="chg">' + N(fmtPct(s.dayChange, 2)) + '</span></span>' +
+        '<span class="sbadge">' + esc(s.sector) + '</span></div>' +
+      '<div class="mc-name">' + esc(s.nameHe) + '</div>' +
+      '<div class="mc-grid">' + gridCells + '</div>' +
       '<div class="mc-foot">לחיצה לגרף, תוכנית סיכון וכרטיס הזמנה ←</div>' +
     '</button>';
   }
@@ -1639,6 +1818,13 @@
     var cards = document.getElementById("cardList");
     if (!rows.length) {
       var msg = "אין מניה שעוברת את כל השכבות בסקטור הזה. כבו שכבה או בטלו את הסינון.";
+      var nm = nearMiss();
+      if (nm && !state.sector) {
+        msg = "0 מתוך " + STOCKS.length + " עוברות את כל השכבות עם הנתונים של " +
+          (DATA.loaded && DATA.asOf ? "סגירת " + DATA.asOf : "הנתונים הנוכחיים") +
+          ". הקרוב ביותר: " + nm.s.ticker + " — נכשלת ב-L" + nm.fails.join("/L") +
+          ". כבו שכבה כדי לראות מה היא מפסידה.";
+      }
       body.innerHTML = '<tr><td colspan="7"><div class="no-rows">' + esc(msg) + '</div></td></tr>';
       cards.innerHTML = '<div class="no-rows">' + esc(msg) + '</div>';
     } else {
@@ -1703,17 +1889,41 @@
     return out;
   }
 
+  /* The file carries no OHLC history — only the last close plus the 3m/6m
+     returns. So the price line is anchored on three real points (6 months
+     ago, 3 months ago, the close) and interpolated between them. It is an
+     approximation and the chart says so; the SMA lines are the real values. */
+  function priceSeries(s){
+    var p = s.price;
+    var r6 = isFinite(s.perf6m) ? s.perf6m : null;
+    var r3 = isFinite(s.perf3m) ? s.perf3m : null;
+    if (!(p > 0) || r6 === null || r3 === null) return null;
+    if (r6 <= -100 || r3 <= -100) return null;
+    var v6 = p / (1 + r6 / 100), v3 = p / (1 + r3 / 100);
+    if (!isFinite(v6) || !isFinite(v3) || v6 <= 0 || v3 <= 0) return null;
+    var out = [], N = 7;
+    for (var i = 0; i < N; i++) {
+      var t = -6 + i;                                   /* months from now */
+      out.push(t <= -3 ? v6 + (v3 - v6) * ((t + 6) / 3)
+                       : v3 + (p - v3) * ((t + 3) / 3));
+    }
+    out[N - 1] = p;
+    return out;
+  }
+
   function chartSVG(s, z){
     var W = 640, H = 300, L = 12, R = 66, T = 16, B = 26;
     var pw = W - L - R, ph = H - T - B;
-    var series = s.months.slice();
+    var series = priceSeries(s) || s.months.slice();
+    var approximated = !!(DATA.loaded && priceSeries(s));
     var refs = [
       { v:s.sma200, c:"#9c978a", label:"SMA200", dash:"5 4" },
       { v:s.sma50,  c:"#0f8a5f", label:"SMA50",  dash:"5 4" },
       { v:s.sma20,  c:"#b7791f", label:"SMA20",  dash:"5 4" },
-      { v:z.target, c:"#1f4e79", label:"2R", dash:"6 3" },
       { v:z.stop,   c:"#c0392b", label:"Stop", dash:"6 3" }
     ];
+    /* no target line when there is no valid stop — a 2R line at the entry price is noise */
+    if (!z.invalid) refs.splice(3, 0, { v:z.target, c:"#1f4e79", label:"2R", dash:"6 3" });
     var vals = series.concat(refs.map(function(r){ return r.v; }));
     var min = Math.min.apply(null, vals), max = Math.max.apply(null, vals);
     var span = (max - min) || (max * 0.04) || 1;
@@ -1760,7 +1970,7 @@
       return '<text x="' + X(i).toFixed(1) + '" y="' + (H - 8) + '" text-anchor="middle" fill="#9c978a" font-size="9.5" font-family="Assistant,sans-serif" opacity="' + (i % 2 === 0 || i === labels.length - 1 ? 1 : 0) + '">' + m + '</text>';
     }).join("");
 
-    return '<svg viewBox="0 0 ' + W + ' ' + H + '" preserveAspectRatio="xMidYMid meet" role="img" aria-label="גרף מחיר לחצי שנה של ' + esc(s.ticker) + ' עם ממוצעים 20, 50 ו-200, קו סטופ ויעד 2R">' +
+    return '<svg viewBox="0 0 ' + W + ' ' + H + '" preserveAspectRatio="xMidYMid meet" role="img" aria-label="גרף מחיר לחצי שנה של ' + esc(s.ticker) + ' עם ממוצעים 20, 50 ו-200, קו סטופ ויעד 2R' + (approximated ? ', קו מחיר מקורב בין תשואות 3 ו-6 חודשים' : '') + '">' +
       g +
       '<path d="' + area + '" fill="rgba(31,78,121,.06)"/>' +
       refMarkup +
@@ -1774,23 +1984,38 @@
     var riskPctOfPort = state.portfolio ? (z.cashRisk / state.portfolio) * 100 : 0;
     var stopDist = s.price ? ((z.stop - s.price) / s.price) * 100 : 0;
     var tgtPct = s.price ? ((z.target - s.price) / s.price) * 100 : 0;
-    return [
-      "כרטיס הזמנה · הדגמה",
+    var rows = [
+      "כרטיס הזמנה · סורק מגמות",
       "———————————————",
       "סימול: " + s.ticker + " (" + s.nameHe + ")",
       "סקטור: " + s.sector + " · " + s.exchange,
       "כיוון: קנייה (סווינג)",
-      "כניסה: " + fmtMoney(s.price),
-      "מניות: " + fmtInt(z.shares),
-      "סטופ: " + fmtMoney(z.stop) + " (" + fmtPct(stopDist, 1) + ")",
-      "יעד 2R: " + fmtMoney(z.target) + " (" + fmtPct(tgtPct, 1) + ")",
-      "הון: " + fmtMoney(z.cost, 2) + " (" + capPct.toFixed(1) + "% מהתיק)",
-      "הפסד מקסימלי: " + fmtMoney(z.cashRisk, 2) + " (" + riskPctOfPort.toFixed(2) + "% מהתיק)",
-      "עוגן סטופ: " + (state.stopMode === "sma50" ? "ממוצע 50 יום" : state.stopMode === "fixed" ? "מינוס 6% קבוע" : "הצמוד מבין ממוצע 50 למינוס 6%"),
-      "יחס סיכוי/סיכון: 1:2.00 · סיכון למניה " + fmtMoney(z.riskPerShare, 2),
-      "———————————————",
-      "הופק " + new Date().toLocaleString("he-IL", { hour12:false }) + " · הדגמה בלבד"
-    ].join("\n");
+      "כניסה: " + fmtMoney(s.price) + (s.live ? "  [מחיר חי]" : "")
+    ];
+    if (z.invalid) {
+      rows.push("סטופ: " + fmtMoney(z.stop) + "  [מעל המחיר — לא לכניסה]");
+      rows.push("מניות: 0 · אין עסקה כשהסטופ לא מתחת לכניסה");
+    } else {
+      rows.push("מניות: " + fmtInt(z.shares));
+      rows.push("סטופ: " + fmtMoney(z.stop) + " (" + fmtPct(stopDist, 1) + ")");
+      rows.push("יעד 2R: " + fmtMoney(z.target) + " (" + fmtPct(tgtPct, 1) + ")");
+      rows.push("הון: " + fmtMoney(z.cost, 2) + " (" + capPct.toFixed(1) + "% מהתיק)");
+      rows.push("הפסד מקסימלי: " + fmtMoney(z.cashRisk, 2) + " (" + riskPctOfPort.toFixed(2) + "% מהתיק)");
+      rows.push("יחס סיכוי/סיכון: 1:2.00 · סיכון למניה " + fmtMoney(z.riskPerShare, 2));
+    }
+    rows.push("עוגן סטופ: " + (state.stopMode === "sma50" ? "ממוצע 50 יום" : state.stopMode === "fixed" ? "מינוס 6% קבוע" : "הגבוה מבין ממוצע 50 למינוס 6%"));
+    rows.push("מקור: " + (DATA.loaded
+      ? "נאסד״ק · סגירת " + (DATA.asOf || "—") + (s.live ? " · מחיר חי מהספק" : "")
+      : "נתוני דגם (לא נטענו נתוני שוק)"));
+    rows.push("———————————————");
+    rows.push("הופק " + new Date().toLocaleString("he-IL", { hour12:false }) + " · לא ייעוץ השקעות");
+    return rows.join("\n");
+  }
+
+  function activeLayerCount(){
+    var n = 0;
+    ["1","2","3","4"].forEach(function(k){ if (state.layers[k]) n++; });
+    return n;
   }
 
   function openDrawer(ticker){
@@ -1818,7 +2043,7 @@
           '<div class="dh-tk" id="drawerTitle">' + esc(s.ticker) + '</div>' +
           '<div class="dh-name">' + esc(s.nameHe) + ' · ' + esc(s.name) + ' · ' + esc(s.exchange) + '</div>' +
           '<div class="dh-badges"><span class="sbadge">' + esc(s.sector) + '</span>' +
-            (ev.pass ? '<span class="sbadge" style="background:var(--green-bg);color:var(--green);border-color:#cbe6da">עוברת 4 מתוך 4</span>'
+            (ev.pass ? '<span class="sbadge" style="background:var(--green-bg);color:var(--green);border-color:#cbe6da">עוברת את ' + N(activeLayerCount()) + ' השכבות הפעילות</span>'
                      : '<span class="sbadge" style="background:var(--red-bg);color:var(--red);border-color:#f0cdc7">נכשלת בשכבות L' + ev.active.join("/L") + '</span>') +
           '</div>' +
         '</div>' +
@@ -1827,8 +2052,16 @@
       '<div class="drawer-body">' +
         '<div class="price-block"><span class="big">' + N(fmtMoney(s.price)) + '</span>' +
           '<span class="delta">' + N(fmtPct(s.dayChange, 2)) + ' היום</span>' +
+          (s.live ? '<span class="livechip">חי</span>' : '') +
+          (DATA.loaded ? '<span class="srcchip calc">מחושב · סגירת ' + N(DATA.asOf || "—") + '</span>' : '') +
           '<span class="meta"><span>RVOL ' + N(s.rvol.toFixed(2) + "x") + '</span><span>RSI ' + N(s.rsi.toFixed(0)) + '</span><span>' + N(fmtCompact(s.mcap)) + '</span></span>' +
         '</div>' +
+        (z.invalid
+          ? '<div class="alert-stop"><b>סטופ מעל המחיר — לא לכניסה</b>' +
+            '<span>הסטופ לפי ' + esc(state.stopMode === "sma50" ? "ממוצע 50 יום" : state.stopMode === "fixed" ? "מינוס 6% קבוע" : "העוגן הצמוד") +
+            ' יושב על ' + N(fmtMoney(z.stop)) + ', מעל המחיר ' + N(fmtMoney(s.price)) +
+            '. אין עסקה בלי מרווח בין הכניסה לסטופ — מספר המניות לא מחושב כאן בכוונה.</span></div>'
+          : '') +
         '<div class="chart-card">' + chartSVG(s, z) +
           '<div class="chart-legend">' +
             '<span><i style="background:#1f4e79"></i>סגירה</span>' +
@@ -1836,22 +2069,23 @@
             '<span><i style="background:#0f8a5f"></i>ממוצע 50 ' + N(fmtMoney(s.sma50)) + q("sma50") + '</span>' +
             '<span><i style="background:#9c978a"></i>ממוצע 200 ' + N(fmtMoney(s.sma200)) + q("sma200") + '</span>' +
             '<span><i style="background:#c0392b"></i>סטופ ' + q("stopLoss") + '</span>' +
-            '<span><i style="background:#1f4e79"></i>יעד 2R ' + q("target2r") + '</span>' +
+            (z.invalid ? '' : '<span><i style="background:#1f4e79"></i>יעד 2R ' + q("target2r") + '</span>') +
           '</div>' +
+          (DATA.loaded ? '<div class="chart-note">קו הסגירה מקורב: שלוש נקודות אמת — תשואה 6 חודשים, תשואה 3 חודשים והמחיר האחרון — וביניהן אינטרפולציה. קווי הממוצעים הם הערכים המחושבים מהסגירה.</div>' : '') +
         '</div>' +
         '<h4 class="dh-sub">תוכנית סיכון · ' + (state.stopMode === "sma50" ? "סטופ על ממוצע 50" : state.stopMode === "fixed" ? "סטופ מינוס 6% קבוע" : "הצמוד מבין ממוצע 50 למינוס 6%") + '</h4>' +
         '<div class="metric-grid">' +
           metric("כניסה", N(fmtMoney(s.price))) +
           metric("סטופ", N(fmtMoney(z.stop)), "ro", "", "stopLoss") +
-          metric("סיכון למניה", N(fmtMoney(z.riskPerShare))) +
-          metric("מניות", N(fmtInt(z.shares)), "", "", "positionSize") +
-          metric("הקצאה", N(fmtMoney(z.cost, 0)), "", N(capPct.toFixed(1) + "% מתוך " + fmtMoney(state.portfolio, 0)), "positionCap") +
-          metric("הפסד מקסימלי", N(fmtMoney(z.cashRisk, 0)), "ro", N(riskPctOfPort.toFixed(2) + "% מהתיק"), "effectiveRisk") +
-          metric("יעד 2R", N(fmtMoney(z.target)), "em", N(fmtPct(tgtPct, 1) + " מהכניסה"), "target2r") +
-          metric("מרחק לסטופ", N(fmtPct(stopDist, 1)), "am", "מהמחיר הנוכחי") +
+          metric("סיכון למניה", z.invalid ? "—" : N(fmtMoney(z.riskPerShare))) +
+          metric("מניות", z.invalid ? '<span class="overstop">לא לכניסה</span>' : N(fmtInt(z.shares)), "", "", "positionSize") +
+          metric("הקצאה", z.invalid ? "—" : N(fmtMoney(z.cost, 0)), "", z.invalid ? "אין עסקה" : N(capPct.toFixed(1) + "% מתוך " + fmtMoney(state.portfolio, 0)), "positionCap") +
+          metric("הפסד מקסימלי", z.invalid ? "—" : N(fmtMoney(z.cashRisk, 0)), "ro", z.invalid ? "אין עסקה" : N(riskPctOfPort.toFixed(2) + "% מהתיק"), "effectiveRisk") +
+          metric("יעד 2R", z.invalid ? "—" : N(fmtMoney(z.target)), "em", z.invalid ? "אין יעד בלי סטופ תקף" : N(fmtPct(tgtPct, 1) + " מהכניסה"), "target2r") +
+          metric("מרחק לסטופ", N(fmtPct(stopDist, 1)), "am", z.invalid ? "הסטופ מעל המחיר" : "מהמחיר הנוכחי") +
           metric("יחס סיכון־סיכוי", N("1 : 2.00"), "", "כלל יציאה קבוע") +
         '</div>' +
-        '<h4 class="dh-sub">נתוני רקע<button class="q" type="button" data-term="mcap" aria-label="הסבר: שווי שוק" aria-haspopup="dialog">?</button></h4>' +
+        '<h4 class="dh-sub">נתוני רקע<span class="srcchip calc">מחושב</span><span class="srcchip ref">עזר</span></h4>' +
         '<div class="metric-grid">' +
           metric("נפח יחסי (RVOL)", N(s.rvol.toFixed(2) + "x"), "", "מול 50 יום", "rvol") +
           metric("חוזק סגירה", N(s.closeStrength + "%"), "", "מטווח היום", "closeStrength") +
@@ -1906,10 +2140,15 @@
 
     document.getElementById("drawerClose").addEventListener("click", closeDrawer);
     document.getElementById("copyBtn").addEventListener("click", function(){
-      copyText(ticketText(s, z), "הכרטיס הועתק — " + fmtInt(z.shares) + " מניות " + s.ticker);
+      copyText(ticketText(s, z), z.invalid
+        ? "הכרטיס הועתק — " + s.ticker + " מסומנת ״לא לכניסה״"
+        : "הכרטיס הועתק — " + fmtInt(z.shares) + " מניות " + s.ticker);
     });
     document.getElementById("copyEntryBtn").addEventListener("click", function(){
-      copyText("BUY " + s.ticker + " @ " + fmtMoney(s.price) + " | stop " + fmtMoney(z.stop) + " | 2R " + fmtMoney(z.target) + " | " + fmtInt(z.shares) + " sh", "שורת הכניסה הועתקה");
+      copyText(z.invalid
+        ? s.ticker + " — NO TRADE: stop " + fmtMoney(z.stop) + " is above entry " + fmtMoney(s.price)
+        : "BUY " + s.ticker + " @ " + fmtMoney(s.price) + " | stop " + fmtMoney(z.stop) + " | 2R " + fmtMoney(z.target) + " | " + fmtInt(z.shares) + " sh",
+        "שורת הכניסה הועתקה");
     });
     document.querySelectorAll("[data-chk]").forEach(function(cb){
       cb.addEventListener("change", function(){
@@ -1992,8 +2231,7 @@
   };
 
   var apiState = { provider:"fmp", key:"", live:false, updatedAt:null, updated:[] };
-  var demoSnap = {};              /* ticker -> demo price/dayChange, captured before the first live write */
-  var demoBannerHTML = "";        /* the mock banner markup, restored on "הסר מפתח" */
+  var demoSnap = {};              /* ticker -> price/dayChange before the first live write */
   var apiBusy = false;
   var sheetEl = null, bdEl = null, keyIn = null, provSel = null, statusEl = null;
 
@@ -2138,7 +2376,9 @@
     apiEye(false);
     apiRefreshKeyState();
     apiResetToDemo();
-    apiSetStatus("המפתח הוסר מהדפדפן. חזרת לנתוני הדגם.", "ok");
+    apiSetStatus(DATA.loaded
+      ? "המפתח הוסר מהדפדפן. חזרת למחירי הסגירה המחושבים (" + (DATA.asOf || "—") + ")."
+      : "המפתח הוסר מהדפדפן. חזרת לנתוני הדגם.", "ok");
   }
 
   function apiResetToDemo(){
@@ -2154,26 +2394,40 @@
     renderBanner();
   }
 
+  function nowNY(){
+    try { var ny = tzParts("America/New_York"); return ny.hour + ":" + ny.minute; }
+    catch(e){ return "--:--"; }
+  }
+  function fileTimeNY(){
+    if (!DATA.generatedAt) return nowNY();
+    try {
+      var d = new Date(DATA.generatedAt);
+      if (isNaN(d.getTime())) return nowNY();
+      return new Intl.DateTimeFormat("en-GB", {
+        timeZone:"America/New_York", hour12:false, hour:"2-digit", minute:"2-digit"
+      }).format(d);
+    } catch(e){ return nowNY(); }
+  }
+
+  /* One banner, three truths: calculated close, live overlay, or demo fallback. */
   function renderBanner(){
     var el = document.getElementById("mockbar");
     if (!el) return;
-    if (!apiState.live) {
-      el.className = "mockbar";
-      if (demoBannerHTML) el.innerHTML = demoBannerHTML;
+    if (!DATA.loaded) {
+      el.className = "mockbar demo";
+      el.innerHTML = '<b class="tag">נתוני דגם</b><span>לא נטענו נתוני שוק — מוצגים נתוני דגם. ' +
+        'קובץ <bdi class="num">indicators.json</bdi> לא נגיש (למשל בפתיחה מ-file://). ' +
+        'המספרים כאן הם דוגמה קבועה, לא מחירי אמת.' +
+        '<small class="bsub">אפשר לטעון מחירים חיים ידנית מכפתור ״נתוני שוק״ — המפתח נשמר בדפדפן בלבד.</small></span>';
       return;
     }
-    var t = "--:--";
-    try {
-      var ny = tzParts("America/New_York");
-      t = ny.hour + ":" + ny.minute;
-    } catch(e){}
-    var partial = apiState.updated.length < STOCKS.length
-      ? " · " + apiState.updated.length + " מתוך " + STOCKS.length + " עודכנו"
-      : "";
-    el.className = "mockbar live";
-    el.innerHTML = '<b class="tag">עדכון חי</b><span>מחירים חיים מ-' +
-      esc(PROVIDER_NAME[apiState.provider]) + ' · עודכן ' + N(t) +
-      ' · האינדיקטורים (RSI, RVOL, ממוצעים, פונדמנטלס) עדיין מדגם' + esc(partial) + '</span>';
+    el.className = "mockbar calc";
+    var live = apiState.live;
+    el.innerHTML = '<b class="tag">נתונים מחושבים</b><span>' +
+      'סגירת ' + N(DATA.asOf || "—") + ' · נאסד״ק · עודכן ' + N(fileTimeNY()) +
+      (live ? ' · ' + N(apiState.updated.length + "/" + STOCKS.length) + ' מחירים חיים מ-' + esc(PROVIDER_NAME[apiState.provider]) : '') +
+      '<small class="bsub">פונדמנטלס (P/E, ROE, EPS, בעלות מוסדית, בטא, שווי שוק) הם ערכי עזר סטטיים' +
+        (live ? ' · המחיר והשינוי היומי הם ציטוט חי; כל השאר מחושב מהסגירה' : '') + '.</small></span>';
   }
 
   function apiDoLoad(){
@@ -2217,8 +2471,8 @@
       renderAll();                                   /* sizing, radar averages, effective risk all recompute */
       renderBanner();
       apiSetStatus(got.length === STOCKS.length
-        ? "התקבלו 12 מחירים חיים מ-" + PROVIDER_NAME[p] + "."
-        : "התקבלו " + got.length + " מתוך 12, השאר נשארו בנתוני הדגם",
+        ? "התקבלו 12 מחירים חיים מ-" + PROVIDER_NAME[p] + ". האינדיקטורים נשארו מחושבים מהסגירה."
+        : "התקבלו " + got.length + " מתוך 12 מחירים חיים; השאר נשארו במחירי הסגירה המחושבים.",
         got.length === STOCKS.length ? "ok" : "warn");
     }
 
@@ -2268,7 +2522,6 @@
     keyIn    = document.getElementById("apiKey");
     provSel  = document.getElementById("apiProvider");
     statusEl = document.getElementById("apiStatus");
-    demoBannerHTML = document.getElementById("mockbar").innerHTML;
     apiReadStore();
     apiRefreshKeyState();
     document.getElementById("apiOpen").addEventListener("click", apiOpenSheet);
@@ -2398,31 +2651,87 @@
   }
 
   /* ============================================================
+     EXAMPLE CARD — kept in sync with the live dataset, never a
+     hard-coded PANW trade that the real numbers contradict.
+     ============================================================ */
+  function renderExample(){
+    var list = document.getElementById("exampleList");
+    var cap = document.getElementById("exampleCaption");
+    if (!list) return;
+    var s = passing()[0];
+    if (!s) {
+      s = STOCKS.filter(function(x){ return !sizing(x).invalid; })[0] || STOCKS[0];
+    }
+    var z = sizing(s);
+    if (z.invalid) {
+      list.innerHTML = '<div class="keyline"><span>החלטה</span><b class="overstop">סטופ מעל המחיר — לא לכניסה</b></div>' +
+        '<div class="keyline"><span>מחיר</span><b>' + N(fmtMoney(s.price)) + '</b></div>' +
+        '<div class="keyline"><span>סטופ</span><b>' + N(fmtMoney(z.stop)) + '</b></div>' +
+        '<div class="keyline"><span>מניות</span><b>0</b></div>';
+    } else {
+      list.innerHTML = '<div class="keyline"><span>כמה לקנות</span><b>' + N(fmtInt(z.shares)) + ' מניות</b></div>' +
+        '<div class="keyline"><span>כמה זה עולה</span><b>' + N(fmtMoney(z.cost, 0)) + '</b></div>' +
+        '<div class="keyline"><span>איפה הסטופ</span><b>' + N(fmtMoney(z.stop)) + '</b></div>' +
+        '<div class="keyline"><span>הפסד מקסימלי</span><b>' + N(fmtMoney(z.cashRisk, 0)) + '</b></div>' +
+        '<div class="keyline"><span>יעד 2R</span><b>' + N(fmtMoney(z.target)) + '</b></div>';
+    }
+    if (cap) {
+      cap.textContent = "דוגמה: " + s.ticker + " בתיק של " + fmtMoney(state.portfolio, 0) +
+        " ובסיכון של " + state.riskPct.toFixed(2) + "%" +
+        (DATA.loaded ? " · סגירת " + DATA.asOf : "");
+    }
+  }
+
+  /* ============================================================
      BOOT
      ============================================================ */
+  function bootData(){
+    loadIndicators().then(function(ok){
+      /* the calculated close is the baseline that "הסר מפתח" restores */
+      STOCKS.forEach(function(s){ demoSnap[s.ticker] = { price:s.price, dayChange:s.dayChange }; });
+      document.documentElement.setAttribute("data-source", ok ? "calculated" : "demo");
+      renderBanner();
+      renderAll();
+      renderExample();
+    });
+  }
+
   load();
   wire();
   renderGlossary();
-  renderRisk();
-  renderRadar();
-  renderLayers();
-  renderTable();
-  renderTraps();
   tickClocks();
-  renderTiming(false);
   setInterval(tickClocks, 1000);
+  bootData();
 
   // expose a tiny read-only snapshot for automated checks
   window.SafeTrend = {
-    version: "2.0",
+    version: "2.1",
     stocks: STOCKS.map(function(s){ return s.ticker; }),
     terms: Object.keys(TERMS),
     term: function(k){ return TERMS[k]; },
-    rows: function(){ return sortedRows().map(function(s){ var z = sizing(s); return { ticker:s.ticker, shares:z.shares, cost:+z.cost.toFixed(2), risk:+z.cashRisk.toFixed(2), stop:+z.stop.toFixed(2), target:+z.target.toFixed(2) }; }); },
+    data: function(){
+      return { loaded:DATA.loaded, asOf:DATA.asOf, source:DATA.source,
+               generatedAt:DATA.generatedAt, failed:DATA.failed.slice(0),
+               applied:DATA.count, bars:barsLabel() };
+    },
+    passing: function(){ return passing().map(function(s){ return s.ticker; }); },
+    layers: function(){ return JSON.parse(JSON.stringify(state.layers)); },
+    all: function(){
+      return STOCKS.map(function(s){
+        var z = sizing(s);
+        return { ticker:s.ticker, price:+s.price.toFixed(2), dayChange:+s.dayChange.toFixed(2),
+                 sma20:+s.sma20.toFixed(2), sma50:+s.sma50.toFixed(2), sma200:+s.sma200.toFixed(2),
+                 rsi:+s.rsi.toFixed(1), rvol:+s.rvol.toFixed(2), closeStrength:+s.closeStrength.toFixed(1),
+                 live:!!s.live, invalid:!!z.invalid, stop:+z.stop.toFixed(2),
+                 shares:z.shares, fails:layerFails(s) };
+      });
+    },
+    rows: function(){ return sortedRows().map(function(s){ var z = sizing(s); return { ticker:s.ticker, shares:z.shares, cost:+z.cost.toFixed(2), risk:+z.cashRisk.toFixed(2), stop:+z.stop.toFixed(2), target:+z.target.toFixed(2), invalid:!!z.invalid }; }); },
     config: function(){ return { portfolio:state.portfolio, riskPct:state.riskPct, maxCapPct:state.maxCapPct, stopMode:state.stopMode }; },
+    setLayers: function(obj){ Object.keys(obj).forEach(function(k){ state.layers[k] = !!obj[k]; }); renderAll(); renderExample(); },
     /* live-data snapshot — never exposes the key itself */
     price: function(t){ var s = STOCKS.filter(function(x){ return x.ticker === t; })[0]; return s ? +s.price.toFixed(2) : null; },
-    sizing: function(t){ var s = STOCKS.filter(function(x){ return x.ticker === t; })[0]; if (!s) return null; var z = sizing(s); return { shares:z.shares, cost:+z.cost.toFixed(2), stop:+z.stop.toFixed(2), capped:z.capped }; },
+    sizing: function(t){ var s = STOCKS.filter(function(x){ return x.ticker === t; })[0]; if (!s) return null; var z = sizing(s); return { shares:z.shares, cost:+z.cost.toFixed(2), stop:+z.stop.toFixed(2), capped:z.capped, invalid:!!z.invalid }; },
     api: function(){ return { provider:apiState.provider, hasKey:!!apiState.key, live:!!apiState.live, updated:apiState.updated.slice(0), at:apiState.updatedAt ? apiState.updatedAt.getTime() : null }; }
   };
 })();

@@ -529,6 +529,35 @@
   }
   .toast.show{opacity:1;transform:translateY(0)}
 
+  /* ---------- closest-to-passing (shown only when 0 names pass) ---------- */
+  .closest{margin-top:14px;border:1px solid var(--line);border-radius:13px;background:#fdfcf9;overflow:hidden}
+  .closest-head{display:flex;gap:10px;align-items:baseline;justify-content:space-between;padding:11px 14px;border-bottom:1px solid var(--line-2);flex-wrap:wrap}
+  .closest-head h3{font-size:14px;font-weight:700;line-height:1.4}
+  .closest-head .note{font-size:11.5px;color:var(--faint);line-height:1.5}
+  .closest-intro{margin:0;padding:10px 14px;font-size:12.5px;line-height:1.75;color:#4a463b;background:#fbfaf6;border-bottom:1px solid var(--line-2)}
+  .cc-list{list-style:none;margin:0;padding:0}
+  .cc-row{display:grid;grid-template-columns:22px 1fr;gap:10px;padding:11px 14px;border-bottom:1px solid var(--line-2);cursor:pointer;transition:background .12s}
+  .cc-row:last-child{border-bottom:0}
+  .cc-row:hover{background:#fff}
+  .cc-rank{font-family:var(--num);font-size:11px;color:var(--faint);border:1px solid var(--line);background:#fff;border-radius:5px;width:20px;height:20px;display:grid;place-items:center;line-height:1}
+  .cc-main{min-width:0}
+  .cc-top{display:flex;gap:8px;align-items:baseline;flex-wrap:wrap}
+  .cc-name{font-size:11.5px;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:100%}
+  .cc-metrics{margin-inline-start:auto;display:flex;gap:8px;align-items:baseline;flex-wrap:wrap;font-size:12px;color:var(--muted)}
+  .cc-metrics .cc-price{font-family:var(--num);font-size:13px;font-weight:600;color:var(--ink);direction:ltr;unicode-bidi:isolate}
+  .cc-metrics .chg{font-family:var(--num);font-size:11.5px;color:var(--green);direction:ltr;unicode-bidi:isolate}
+  .cc-metrics .chg.neg{color:var(--red)}
+  .cc-metrics .rsi-chip{margin-top:0}
+  .cc-metrics .cc-layers{font-size:10.5px;color:var(--faint);white-space:nowrap}
+  .cc-chips{display:flex;flex-wrap:wrap;gap:5px;margin-top:7px}
+  .cc-chip{display:inline-flex;align-items:center;gap:6px;flex-wrap:wrap;max-width:100%;font-size:11px;line-height:1.65;border:1px solid #f0cdc7;background:var(--red-bg);color:#7d2a1f;border-radius:6px;padding:2px 4px 2px 7px}
+  .cc-chip .cc-why{display:inline;min-width:0;overflow-wrap:anywhere}
+  .cc-chip .ltag{display:inline-block;font-family:var(--num);font-size:10px;font-weight:700;color:#8d3226;border:1px solid #e3b6ad;background:#fff;border-radius:4px;padding:0 4px;line-height:1.7;direction:ltr;unicode-bidi:isolate;vertical-align:1px}
+  .cc-chip .cc-txt{min-width:0;overflow-wrap:anywhere}
+  .cc-off{font-family:var(--sans);font-size:10.5px;line-height:1.6;border:1px solid #e3b6ad;background:#fff;color:#8d3226;border-radius:5px;padding:1px 7px;white-space:nowrap;cursor:pointer;flex:0 0 auto}
+  .cc-off:hover{background:#8d3226;color:#fff;border-color:#8d3226}
+  .cc-foot{font-size:11px;color:var(--faint);padding:9px 14px;background:#fbfaf6;border-top:1px solid var(--line-2);line-height:1.6}
+
   /* ---------- responsive ---------- */
   @media (max-width:1000px){
     .risk-grid{grid-template-columns:repeat(2,1fr)}
@@ -556,6 +585,11 @@
     .risk-grid{grid-template-columns:1fr}
     .risk-summary{grid-template-columns:repeat(2,1fr)}
     .layers-grid{grid-template-columns:1fr}
+    .closest-head,.closest-intro,.cc-foot{padding-inline:12px}
+    .cc-row{padding:10px 12px;grid-template-columns:20px 1fr;gap:8px}
+    .cc-metrics{margin-inline-start:0;width:100%;gap:6px}
+    .cc-chip{font-size:10.5px;padding:2px 3px 2px 6px}
+    .cc-off{font-size:10px;padding:1px 6px}
     .card-head{padding:14px 14px 0}
     .card-body{padding:12px 14px 16px}
     .radar-grid{grid-template-columns:1fr 1fr}
@@ -1460,6 +1494,153 @@
   }
 
   /* ============================================================
+     CLOSEST TO PASSING — the empty-table fallback
+     On a red day nothing clears L4 (day change must be +1%..+5%),
+     so the table is empty and a beginner has nothing to look at.
+     Instead of an empty box we rank the names by how little they
+     miss, and name the exact check with its real value.
+
+     failDetails() mirrors layerFails() comparison for comparison:
+     same thresholds, same order. If one changes, change both —
+     window.SafeTrend.closest() is asserted against SafeTrend.all()
+     .fails in verify_closest.py so a drift fails the build.
+     ============================================================ */
+  function failDetails(s){
+    var out = [];
+    function add(layer, html){ out.push({ layer:layer, text:html }); }
+
+    /* L1 — safety */
+    if (!(s.mcap > 2e9))                   add(1, "שווי שוק " + N(fmtCompact(s.mcap)) + " (נדרש מעל $2B)");
+    if (!(s.price > 20))                   add(1, "מחיר " + N(fmtMoney(s.price)) + " (נדרש מעל $20)");
+    if (!(s.beta >= 0.5 && s.beta <= 1.5)) add(1, "בטא " + N(s.beta.toFixed(2)) + " (נדרש 0.5–1.5)");
+    if (!(s.avgVol > 1e6))                 add(1, "נפח יומי " + N(fmtVol(s.avgVol)) + " (נדרש מעל מיליון)");
+
+    /* L2 — business quality */
+    if (!(s.pe > 0))                       add(2, "מכפיל רווח " + N(s.pe > 0 ? s.pe.toFixed(1) : "שלילי") + " (נדרש חיובי)");
+    if (!(s.epsGrowth > 10))               add(2, "צמיחת רווח למניה " + N(fmtPct(s.epsGrowth, 1)) + " (נדרש מעל 10%)");
+    if (!(s.salesGrowth > 10))             add(2, "צמיחת מכירות " + N(fmtPct(s.salesGrowth, 1)) + " (נדרש מעל 10%)");
+    if (!(s.roe > 15))                     add(2, "תשואה על ההון " + N(s.roe.toFixed(1) + "%") + " (נדרש מעל 15%)");
+    if (!(s.instOwn > 50))                 add(2, "מוחזקות מוסדיות " + N(s.instOwn + "%") + " (נדרש מעל 50%)");
+
+    /* L3 — trend: report the link of the chain that actually broke */
+    if (!(s.price > s.sma20 && s.sma20 > s.sma50 && s.sma50 > s.sma200)) {
+      var t;
+      if (!(s.price > s.sma20)) {
+        t = (s.price < s.sma50)
+          ? "מחיר " + N(fmtMoney(s.price)) + " מתחת ל-SMA50 " + N(fmtMoney(s.sma50))
+          : "מחיר " + N(fmtMoney(s.price)) + " מתחת ל-SMA20 " + N(fmtMoney(s.sma20));
+      } else if (!(s.sma20 > s.sma50)) {
+        t = "SMA20 " + N(fmtMoney(s.sma20)) + " מתחת ל-SMA50 " + N(fmtMoney(s.sma50));
+      } else {
+        t = "SMA50 " + N(fmtMoney(s.sma50)) + " מתחת ל-SMA200 " + N(fmtMoney(s.sma200));
+      }
+      add(3, t);
+    }
+    if (!(s.pctFrom52wHigh >= -10))        add(3, "מרחק משיא 52 שבועות " + N(fmtPct(s.pctFrom52wHigh, 1)) + " (נדרש עד 10%- מתחת)");
+    if (!(s.perf3m > 0 && s.perf6m > 0))   add(3, "תשואה " + N(fmtPct(s.perf3m, 1)) + " ב-3 חודשים ו-" + N(fmtPct(s.perf6m, 1)) + " ב-6 (נדרשות חיוביות)");
+
+    /* L4 — anti-chase */
+    if (!(s.rsi >= 50 && s.rsi <= 65))     add(4, "RSI " + N(s.rsi.toFixed(1)) + " (נדרש 50–65)");
+    if (!(s.dayChange > 1 && s.dayChange < 5)) add(4, "שינוי יומי " + N(fmtPct(s.dayChange, 2)) + " (נדרש +1% עד +5%)");
+    if (!(s.rvol > 1.2))                   add(4, "נפח יחסי " + N(s.rvol.toFixed(2) + "x") + " (נדרש מעל 1.2x)");
+    if (!(s.closeStrength > 65))           add(4, "חוזק סגירה " + N(Math.round(s.closeStrength) + "%") + " (נדרש מעל 65%)");
+
+    return out;
+  }
+
+  /* ranked: fewest failed layers first, then fewest failed checks */
+  function closestRows(n){
+    var rows = [];
+    STOCKS.forEach(function(s){
+      var det = failDetails(s);
+      var active = det.filter(function(d){ return !!state.layers[String(d.layer)]; });
+      if (!active.length) return;                    /* passed — it is in the table */
+      var layers = [];
+      active.forEach(function(d){ if (layers.indexOf(d.layer) === -1) layers.push(d.layer); });
+      rows.push({ s:s, detail:det, active:active, layers:layers });
+    });
+    rows.sort(function(a, b){
+      if (a.layers.length !== b.layers.length) return a.layers.length - b.layers.length;
+      if (a.active.length !== b.active.length) return a.active.length - b.active.length;
+      return a.s.ticker.localeCompare(b.s.ticker);
+    });
+    return rows.slice(0, n || 5);
+  }
+
+  function closestChipHTML(d){
+    var on = !!state.layers[String(d.layer)];
+    return '<span class="cc-chip">' +
+      '<span class="cc-why"><b class="ltag">L' + d.layer + '</b> · ' +
+      '<span class="cc-txt">' + d.text + '</span></span>' +
+      (on ? '<button type="button" class="cc-off" data-off-layer="' + d.layer + '" ' +
+        'title="כיבוי שכבת L' + d.layer + ' והצגת מה היא מפסידה">כבה L' + d.layer + '</button>' : '') +
+    '</span>';
+  }
+
+  function closestRowHTML(r, i){
+    var s = r.s;
+    return '<li class="cc-row" data-closest="' + esc(s.ticker) + '" tabindex="0" ' +
+        'aria-label="פתיחת הפרטים של ' + esc(s.ticker) + '">' +
+      '<span class="cc-rank">' + (i + 1) + '</span>' +
+      '<div class="cc-main">' +
+        '<div class="cc-top">' +
+          '<span class="tk">' + esc(s.ticker) + '</span>' +
+          '<span class="cc-name">' + esc(s.nameHe) + '</span>' +
+          '<span class="cc-metrics">' +
+            '<bdi class="cc-price">' + fmtMoney(s.price) + '</bdi>' +
+            '<bdi class="chg' + (s.dayChange < 0 ? " neg" : "") + '">' + fmtPct(s.dayChange, 2) + '</bdi>' +
+            '<span class="rsi-chip' + (s.rsi > 65 ? " warm" : "") + '">RSI ' + N(s.rsi.toFixed(1)) + '</span>' +
+            '<span class="cc-layers">' + (r.layers.length === 1 ? "שכבה אחת" : r.layers.length + " שכבות") +
+              ' · ' + r.active.length + ' בדיקות</span>' +
+          '</span>' +
+        '</div>' +
+        '<div class="cc-chips">' + r.active.map(closestChipHTML).join("") + '</div>' +
+      '</div>' +
+    '</li>';
+  }
+
+  function renderClosest(){
+    var slot = document.getElementById("emptyState");
+    if (!slot) return;
+    /* only as the zero-results fallback, and never while the user filters a sector */
+    if (passing().length || state.sector) { slot.innerHTML = ""; return; }
+    var list = closestRows(5);
+    if (!list.length) { slot.innerHTML = ""; return; }
+
+    slot.innerHTML = '<div class="closest" id="closestBox">' +
+      '<div class="closest-head">' +
+        '<h3>הכי קרובות לעמוד בכל השכבות</h3>' +
+        '<span class="note">' + list.length + ' מתוך ' + STOCKS.length + ' · לפי מספר השכבות שנכשלו, ואז מספר הבדיקות</span>' +
+      '</div>' +
+      '<p class="closest-intro">ביום ירידות כמעט ולא נמצאות מניות שמטפסות — זה מה שהמסנן נועד לעשות. אלה הקרובות ביותר, והשכבה שמנעה אותן מסומנת.</p>' +
+      '<ol class="cc-list">' + list.map(closestRowHTML).join("") + '</ol>' +
+      '<div class="cc-foot">לחיצה על שורה פותחת גרף ותוכנית סיכון. כפתור ״כבה״ בתוך הסיבה מכבה את השכבה הזאת ומראה מיד מה היא מפסידה — אפשר להדליק אותה בחזרה למעלה.</div>' +
+    '</div>';
+
+    document.querySelectorAll("#closestBox [data-off-layer]").forEach(function(btn){
+      btn.addEventListener("click", function(ev){
+        ev.stopPropagation();
+        var n = btn.getAttribute("data-off-layer");
+        state.layers[n] = false;
+        save();
+        renderAll();
+        renderExample();
+        showToast("שכבה L" + n + " כבויה — הטבלה מציגה עכשיו מה היא מפסידה");
+      });
+    });
+    document.querySelectorAll("#closestBox [data-closest]").forEach(function(row){
+      var open = function(){ openDrawer(row.getAttribute("data-closest")); };
+      row.addEventListener("click", function(ev){
+        if (ev.target.closest("[data-off-layer]")) return;
+        open();
+      });
+      row.addEventListener("keydown", function(ev){
+        if (ev.key === "Enter" || ev.key === " ") { ev.preventDefault(); open(); }
+      });
+    });
+  }
+
+  /* ============================================================
      CLOCKS + TIMING (America/New_York via Intl — unchanged logic)
      ============================================================ */
   function tzParts(tz){
@@ -1857,6 +2038,9 @@
         b.addEventListener("click", function(){ openDrawer(b.getAttribute("data-chip")); });
       });
     }
+
+    /* the zero-results fallback — ranked near-misses with the exact failing check */
+    renderClosest();
   }
 
   function renderTraps(){
@@ -2705,7 +2889,7 @@
 
   // expose a tiny read-only snapshot for automated checks
   window.SafeTrend = {
-    version: "2.1",
+    version: "2.2",
     stocks: STOCKS.map(function(s){ return s.ticker; }),
     terms: Object.keys(TERMS),
     term: function(k){ return TERMS[k]; },
@@ -2716,6 +2900,19 @@
     },
     passing: function(){ return passing().map(function(s){ return s.ticker; }); },
     layers: function(){ return JSON.parse(JSON.stringify(state.layers)); },
+    /* the zero-results fallback, as rendered: rank, tickers, and every failing check */
+    closest: function(){
+      if (passing().length || state.sector) return [];
+      return closestRows(5).map(function(r){
+        return {
+          ticker: r.s.ticker,
+          failedLayers: r.layers.map(function(n){ return "L" + n; }),
+          checks: r.active.map(function(d){
+            return { layer:d.layer, text: d.text.replace(/<[^>]+>/g, "") };
+          })
+        };
+      });
+    },
     all: function(){
       return STOCKS.map(function(s){
         var z = sizing(s);

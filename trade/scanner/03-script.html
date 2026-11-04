@@ -1,0 +1,2954 @@
+<script>
+(function(){
+  "use strict";
+
+  /* ============================================================
+     SEED — the 12 original names. They are the offline demo data,
+     the Hebrew label map (nameHe / sector) and the fallback
+     fundamentals. On load the universe is rebuilt from
+     indicators.json; nothing here limits how many names exist.
+     ============================================================ */
+  var SEED = [
+    { ticker:"PANW", name:"Palo Alto Networks", nameHe:"פאלו אלטו נטוורקס", exchange:"NASDAQ", sector:"סייבר",
+      price:342.18, dayChange:2.41, rvol:1.62, closeStrength:78, rsi:58,
+      sma20:331.50, sma50:318.40, sma200:295.70,
+      mcap:2.31e11, beta:1.08, avgVol:5.2e6, pe:52.4, epsGrowth:18.6,
+      salesGrowth:14.2, roe:22.4, instOwn:84, perf3m:8.4, perf6m:16.2,
+      pctFrom52wHigh:-3.1, months:[285.4,296.2,303.8,312.6,329.1,342.18] },
+
+    { ticker:"CRWD", name:"CrowdStrike Holdings", nameHe:"קראודסטרייק", exchange:"NASDAQ", sector:"סייבר",
+      price:428.75, dayChange:3.12, rvol:2.05, closeStrength:84, rsi:61,
+      sma20:411.20, sma50:394.80, sma200:372.30,
+      mcap:1.05e11, beta:1.12, avgVol:4.8e6, pe:118.0, epsGrowth:26.4,
+      salesGrowth:28.9, roe:19.8, instOwn:87, perf3m:12.6, perf6m:21.4,
+      pctFrom52wHigh:-2.4, months:[352.8,371.4,389.6,402.2,415.4,428.75] },
+
+    { ticker:"FTNT", name:"Fortinet Inc.", nameHe:"פורטינט", exchange:"NASDAQ", sector:"סייבר",
+      price:98.42, dayChange:1.63, rvol:1.48, closeStrength:71, rsi:55,
+      sma20:95.80, sma50:92.10, sma200:86.40,
+      mcap:7.42e10, beta:0.94, avgVol:6.1e6, pe:41.2, epsGrowth:13.8,
+      salesGrowth:12.7, roe:68.0, instOwn:82, perf3m:6.2, perf6m:11.8,
+      pctFrom52wHigh:-4.2, months:[84.2,87.6,90.4,93.1,96.8,98.42] },
+
+    { ticker:"ANET", name:"Arista Networks", nameHe:"אריסטה נטוורקס", exchange:"NYSE", sector:"רשתות",
+      price:118.36, dayChange:2.84, rvol:1.71, closeStrength:76, rsi:59,
+      sma20:112.40, sma50:106.90, sma200:98.20,
+      mcap:1.49e11, beta:1.21, avgVol:7.9e6, pe:48.6, epsGrowth:24.1,
+      salesGrowth:19.3, roe:31.5, instOwn:78, perf3m:9.8, perf6m:18.7,
+      pctFrom52wHigh:-3.8, months:[96.4,101.2,105.8,108.4,114.2,118.36] },
+
+    { ticker:"PWR", name:"Quanta Services", nameHe:"קוואנטה סרביסס", exchange:"NYSE", sector:"תעשייה",
+      price:372.64, dayChange:1.94, rvol:1.38, closeStrength:72, rsi:57,
+      sma20:361.50, sma50:348.20, sma200:312.90,
+      mcap:5.53e10, beta:1.05, avgVol:1.4e6, pe:58.3, epsGrowth:21.2,
+      salesGrowth:15.4, roe:17.8, instOwn:89, perf3m:7.4, perf6m:19.2,
+      pctFrom52wHigh:-5.1, months:[318.6,332.4,341.8,352.6,364.2,372.64] },
+
+    { ticker:"TT", name:"Trane Technologies", nameHe:"טריין טכנולוגיות", exchange:"NYSE", sector:"תעשייה",
+      price:412.85, dayChange:1.42, rvol:1.29, closeStrength:69, rsi:54,
+      sma20:402.10, sma50:391.40, sma200:368.20,
+      mcap:9.21e10, beta:1.02, avgVol:1.3e6, pe:34.7, epsGrowth:16.8,
+      salesGrowth:11.6, roe:33.4, instOwn:86, perf3m:5.6, perf6m:12.9,
+      pctFrom52wHigh:-4.6, months:[362.4,374.8,385.2,396.4,405.8,412.85] },
+
+    { ticker:"PH", name:"Parker-Hannifin", nameHe:"פרקר־הניפין", exchange:"NYSE", sector:"תעשייה",
+      price:704.52, dayChange:1.21, rvol:1.26, closeStrength:67, rsi:52,
+      sma20:692.40, sma50:676.80, sma200:634.10,
+      mcap:9.08e10, beta:1.06, avgVol:1.12e6, pe:28.4, epsGrowth:12.9,
+      salesGrowth:10.8, roe:26.7, instOwn:83, perf3m:4.8, perf6m:10.6,
+      pctFrom52wHigh:-5.8, months:[624.5,648.2,662.4,681.6,692.8,704.52] },
+
+    { ticker:"ISRG", name:"Intuitive Surgical", nameHe:"אינטואיטיב סרג׳יקל", exchange:"NASDAQ", sector:"מד־טק",
+      price:528.94, dayChange:2.07, rvol:1.44, closeStrength:74, rsi:56,
+      sma20:512.60, sma50:496.30, sma200:468.90,
+      mcap:1.88e11, beta:0.98, avgVol:1.9e6, pe:76.2, epsGrowth:22.6,
+      salesGrowth:17.2, roe:16.9, instOwn:88, perf3m:6.8, perf6m:14.4,
+      pctFrom52wHigh:-4.9, months:[462.8,478.4,492.6,505.2,516.4,528.94] },
+
+    { ticker:"GEV", name:"GE Vernova", nameHe:"ג׳י־אי ורנובה", exchange:"NYSE", sector:"אנרגיה",
+      price:641.28, dayChange:4.31, rvol:2.24, closeStrength:81, rsi:63,
+      sma20:598.40, sma50:552.70, sma200:468.30,
+      mcap:1.76e11, beta:1.34, avgVol:3.1e6, pe:68.9, epsGrowth:42.8,
+      salesGrowth:16.4, roe:21.7, instOwn:81, perf3m:18.4, perf6m:39.6,
+      pctFrom52wHigh:-2.1, months:[468.2,502.4,536.8,574.2,608.6,641.28] },
+
+    { ticker:"IDXX", name:"IDEXX Laboratories", nameHe:"איידי־אקס מעבדות", exchange:"NASDAQ", sector:"מד־טק",
+      price:486.32, dayChange:0.62, rvol:0.92, closeStrength:58, rsi:49,
+      sma20:492.40, sma50:488.90, sma200:471.60,
+      mcap:3.98e10, beta:0.87, avgVol:5.4e5, pe:44.1, epsGrowth:11.4,
+      salesGrowth:10.6, roe:52.3, instOwn:91, perf3m:1.2, perf6m:4.8,
+      pctFrom52wHigh:-6.4, months:[498.6,492.4,478.8,481.2,484.6,486.32] },
+
+    { ticker:"BSX", name:"Boston Scientific", nameHe:"בוסטון סיינטיפיק", exchange:"NYSE", sector:"מד־טק",
+      price:104.28, dayChange:1.34, rvol:1.18, closeStrength:66, rsi:51,
+      sma20:101.90, sma50:99.40, sma200:94.80,
+      mcap:1.54e11, beta:0.71, avgVol:8.6e6, pe:62.8, epsGrowth:9.2,
+      salesGrowth:14.1, roe:11.4, instOwn:90, perf3m:3.1, perf6m:8.4,
+      pctFrom52wHigh:-5.2, months:[96.4,98.2,99.8,101.4,102.8,104.28] },
+
+    { ticker:"LLY", name:"Eli Lilly & Co.", nameHe:"אלי לילי", exchange:"NYSE", sector:"פארמה",
+      price:892.45, dayChange:3.62, rvol:2.41, closeStrength:88, rsi:74,
+      sma20:848.20, sma50:806.40, sma200:742.10,
+      mcap:8.48e11, beta:0.62, avgVol:3.4e6, pe:84.6, epsGrowth:34.8,
+      salesGrowth:26.4, roe:74.2, instOwn:82, perf3m:16.8, perf6m:28.4,
+      pctFrom52wHigh:-1.2, months:[742.5,786.4,812.6,848.2,864.8,892.45] }
+  ];
+
+  /* the 12 original names keep their Hebrew labels and reference values */
+  var SEED_BY_TICKER = {};
+  SEED.forEach(function(s){ SEED_BY_TICKER[s.ticker] = s; });
+
+  /* the live universe — replaced wholesale from indicators.json on load/refresh */
+  var STOCKS = SEED.slice();
+
+  /* a fresh object for a ticker that is not in SEED: the file is the only source */
+  function newStock(tk, r){
+    var nm = (typeof r.name === "string" && r.name) ? r.name : tk;
+    return {
+      ticker:tk, name:nm,
+      nameHe:(typeof r.nameHe === "string" && r.nameHe) ? r.nameHe : nm,
+      exchange:(typeof r.exchange === "string") ? r.exchange : "",
+      sector:(typeof r.sector === "string" && r.sector) ? r.sector : "אחר",
+      industry:(typeof r.industry === "string") ? r.industry : "",
+      price:NaN, dayChange:NaN, rvol:NaN, closeStrength:NaN, rsi:NaN,
+      sma20:NaN, sma50:NaN, sma200:NaN, avgVol:NaN, high52:NaN,
+      mcap:NaN, beta:NaN, pe:NaN, epsGrowth:NaN, salesGrowth:NaN, roe:NaN, instOwn:NaN,
+      perf3m:NaN, perf6m:NaN, pctFrom52wHigh:NaN,
+      months:[], live:false, fundLive:{}
+    };
+  }
+  function cloneStock(s){
+    var o = {}, k;
+    for (k in s) if (Object.prototype.hasOwnProperty.call(s, k)) o[k] = s[k];
+    o.months = (s.months || []).slice(0);
+    o.fundLive = {};
+    o.live = false;
+    return o;
+  }
+  /* illustrative only — never part of the universe or any calculation */
+  var TRAPS = [
+    { ticker:"SVRN", name:"סוברון רובוטיקס", flag:"מניה זולה / איחוד מניות",
+      reason:"נפסלה · איחוד מניות 1:20 ב-12 באוקטובר. המחיר $3.42 (מתחת ל-$20), שווי שוק $0.18B (מתחת ל-$2B) ונפח ממוצע 320K (מתחת למיליון). הגרף נראה כמו מגמה, אבל הוא תוצאה של איחוד מניות — לא של קנייה מוסדית.",
+      metrics:["מחיר $3.42","שווי $0.18B","נפח 320K","בטא 2.80","RVOL 3.1","RSI 68.2"] },
+    { ticker:"ARDN", name:"ארדנט גריד סיסטמס", flag:"רכישה שמונעת עלייה",
+      reason:"נפסלה · יש הצעת רכש במזומן ב-$61.50 למניה שמחכה לאישור. המחיר $61.18 תקוע בפער של 0.5% — יעד 2R של $71.40 לא יגיע, כי העסקה תוקעת את המניה ב-$61.50.",
+      metrics:["מחיר $61.18","מחיר עסקה $61.50","פער +0.52%","יעד 2R $71.40","עלייה חסומה"] },
+    { ticker:"HLIX", name:"הליקס ביוטרפיוטיקס", flag:"חברה מפסידה",
+      reason:"נפסלה · החברה מפסידה: רווח למניה שלילי, מינוס $2.84, מכפיל רווח לא קיים, תשואה על ההון מינוס 38.4% ותזרים תפעולי שלילי שישה רבעונים ברצף. היא נופלת כבר בשכבת האיכות העסקית.",
+      metrics:["מחיר $27.90","רווח למניה מינוס $2.84","מכפיל —","ROE מינוס 38.4%","צמיחת מכירות 62%"] },
+    { ticker:"VOLT", name:"וולטרה סמיקונדקטור", flag:"רצה מהר מדי",
+      reason:"נפסלה · המניה בשיא של התלהבות: RSI 78.4 (מעל 65), עלייה של 9.2% היום (התקרה שלנו 5%), 38% מעל ממוצע 50 יום וחוזק סגירה 96%. המגמה אמיתית, אבל הכניסה כאן מסוכנת פי 3–4 מעסקה רגילה.",
+      metrics:["מחיר $184.60","RSI 78.4","יום +9.2%","38%+ מעל ממוצע 50","RVOL 4.6"] }
+  ];
+
+  /* rule text is derived from the active profile config (never a literal), so
+     a relaxed scan cannot keep showing the strict threshold on its card */
+  var LAYERS = [
+    { n:1, title:"בטיחות", sub:"נזילות ותנודתיות",
+      rules:function(C){ return layerRules(1, C); } },
+    { n:2, title:"איכות עסקית", sub:"החברה מרוויחה וגדלה",
+      rules:function(C){ return layerRules(2, C); } },
+    { n:3, title:"מגמה", sub:"המבנה לא נשבר",
+      rules:function(C){ return layerRules(3, C); } },
+    { n:4, title:"נגד רדיפה", sub:"לא קונים בשיא ההתלהבות",
+      rules:function(C){ return layerRules(4, C); } }
+  ];
+
+  var WINDOWS = {
+    chaos:{ label:"אזור כאוס", en:"CHAOS ZONE", action:"לא לסרוק", tone:"red", range:"09:30–10:00 ET",
+      note:"שעת הפתיחה: פערים רחבים והסטופים נפגעים על רעש." },
+    w1:{ label:"חלון 1", en:"WINDOW 1", action:"סריקה פעילה", tone:"green", range:"10:00–10:30 ET",
+      note:"הטווח הנקי הראשון — תנועת הפתיחה כבר נרגעה." },
+    chop:{ label:"דשדוש צהריים", en:"MID-DAY CHOP", action:"מעקב בלבד", tone:"amber", range:"10:30–14:45 ET",
+      note:"שעות שקטות, מעט קונים. מתאים לעדכן רשימה, לא לפתוח עסקה." },
+    w2:{ label:"חלון 2 · שעת כוח", en:"POWER HOUR", action:"סריקה פעילה", tone:"green", range:"14:45–15:30 ET",
+      note:"ביקוש מוסדי לקראת סגירה — הזמן הטוב להמשך מגמה." },
+    w3:{ label:"חלון 3 · סוף יום", en:"EOD", action:"סריקה לסווינג", tone:"blue", range:"15:30–09:30 ET",
+      note:"אחרי הסגירה: בונים עסקה שתיפתח במסחר של היום הבא." }
+  };
+
+  /* ============================================================
+     MARKET DATA — indicators.json (Nasdaq daily + Finnhub metric)
+     The file is merged into STOCKS before the first render. Price,
+     day change and technicals come from the Nasdaq close; beta,
+     market cap, P/E, ROE, EPS growth and sales growth come from
+     Finnhub /stock/metric. Institutional ownership is NOT in the
+     free tier (null for every symbol), so that one value keeps the
+     static dataset number and is always labelled עזר.
+     ============================================================ */
+  var DATA = { loaded:false, asOf:null, source:null, generatedAt:null, failed:[], updatedLabel:null, count:0,
+               universe:0, fundCount:0, fundSource:null, settled:false, refreshedAt:null };
+  var RENDER_MS = 0;    /* last full table render, exposed for the perf check */
+
+  var IND_FIELDS = [
+    ["price", "price"], ["dayChange", "dayChangePct"],
+    ["sma20", "sma20"], ["sma50", "sma50"], ["sma200", "sma200"],
+    ["rsi", "rsi14"], ["rvol", "rvol"], ["closeStrength", "closeStrength"],
+    ["avgVol", "avgVol"], ["high52", "high52"], ["pctFrom52wHigh", "pctFrom52wHigh"],
+    ["perf3m", "perf3m"], ["perf6m", "perf6m"]
+  ];
+
+  /* Finnhub /stock/metric. instOwn is null on the free tier for every symbol,
+     so it is deliberately absent here and keeps the static dataset value. */
+  var FUND_FIELDS = ["beta", "mcap", "pe", "roe", "epsGrowth", "salesGrowth"];
+
+  function applyIndicators(js){
+    if (!js || typeof js !== "object" || !js.symbols || typeof js.symbols !== "object") return false;
+    var keys = Object.keys(js.symbols);
+    if (!keys.length) return false;
+
+    var out = [], asOf = null, fundGot = 0, skipped = 0;
+    keys.forEach(function(tk){
+      var r = js.symbols[tk];
+      if (!r || typeof r !== "object") { skipped++; return; }
+      /* the universe is whatever the file says it is — seed only supplies labels */
+      var s = SEED_BY_TICKER[tk] ? cloneStock(SEED_BY_TICKER[tk]) : newStock(tk, r);
+      if (typeof r.name === "string" && r.name) s.name = r.name;
+      if (typeof r.nameHe === "string" && r.nameHe) s.nameHe = r.nameHe;
+      if (typeof r.sector === "string" && r.sector) s.sector = r.sector;
+      if (typeof r.industry === "string" && r.industry) s.industry = r.industry;
+      if (typeof r.exchange === "string" && r.exchange) s.exchange = r.exchange;
+
+      IND_FIELDS.forEach(function(pair){
+        var raw = r[pair[1]];
+        if (raw === null || raw === undefined || raw === "") return;
+        var v = Number(raw);
+        if (isFinite(v)) s[pair[0]] = v;
+      });
+      if (r.bars !== undefined && isFinite(Number(r.bars))) s.bars = Number(r.bars);
+      if (r.high52 !== undefined && isFinite(Number(r.high52))) s.high52 = Number(r.high52);
+
+      /* fundamentals — a null/blank live value never overwrites the seed number,
+         it only leaves that field marked as a reference value */
+      var f = r.fundamentals, fundTouched = false;
+      if (f && typeof f === "object") {
+        FUND_FIELDS.forEach(function(k){
+          var raw = f[k];
+          if (raw === null || raw === undefined || raw === "") return;
+          var v = Number(raw);
+          if (!isFinite(v)) return;
+          s[k] = v;
+          s.fundLive[k] = true;
+          fundTouched = true;
+        });
+        if (fundTouched) fundGot++;
+      }
+      if (!asOf && typeof r.asOf === "string") asOf = r.asOf;
+      out.push(s);
+    });
+    if (!out.length) return false;
+
+    STOCKS = out;
+    DATA.loaded = true;
+    DATA.count = out.length;
+    DATA.asOf = asOf || null;
+    DATA.source = (typeof js.source === "string") ? js.source : null;
+    DATA.generatedAt = (typeof js.generatedAt === "string") ? js.generatedAt : null;
+    DATA.failed = Array.isArray(js.failed) ? js.failed.slice(0) : [];
+    DATA.fundCount = fundGot;
+    if (typeof js.universe === "number" && isFinite(js.universe)) DATA.universe = js.universe;
+    else DATA.universe = out.length;
+    if (typeof js.fundamentalsSource === "string") DATA.fundSource = js.fundamentalsSource;
+    pruneSearchState();
+    syncAPI();
+    return true;
+  }
+
+  /* absolute URL so a <base> tag or a nested path can never send us elsewhere */
+  function indicatorsURL(){
+    try { return new URL("indicators.json", document.baseURI).href; }
+    catch(e){ return "indicators.json"; }
+  }
+
+  function loadIndicators(){
+    if (typeof fetch !== "function") return Promise.resolve(false);
+    var done = false;
+    var timeout = new Promise(function(resolve){ setTimeout(function(){ resolve(false); }, 6000); });
+    var req = fetch(indicatorsURL(), { cache:"no-store", credentials:"omit" })
+      .then(function(res){
+        if (!res.ok) return null;
+        return res.text();
+      })
+      .then(function(txt){
+        if (!txt) return false;
+        var js = null;
+        try { js = JSON.parse(txt); } catch(e){ return false; }
+        return applyIndicators(js);
+      })
+      .catch(function(){ return false; })
+      .then(function(ok){ done = true; return ok; });
+    return Promise.race([req, timeout]).then(function(ok){
+      return done ? ok : false;
+    });
+  }
+
+  /* number of trading days behind the calculated technicals */
+  function barsLabel(){
+    var bars = 0;
+    STOCKS.forEach(function(s){ if (s.bars && s.bars > bars) bars = s.bars; });
+    return bars;
+  }
+
+  /* ============================================================
+     TERMS — single source for popovers + glossary
+     ============================================================ */
+  var TERMS = {
+    riskPerTrade:{ t:"סיכון לעסקה", s:"האחוז מהתיק שאתה מוכן להפסיד בעסקה אחת, אם הסטופ ייפגע. זה המספר שקובע הכול — לא גודל הפוזיציה.", e:"1% על תיק של $25,000 = הפסד מקסימלי של $250 בעסקה." },
+    positionCap:{ t:"תקרת פוזיציה", s:"הסכום המקסימלי שמותר לשים במניה אחת, באחוזים מהתיק. היא מונעת ממניה אחת להיות כל התיק.", e:"תקרה של 15% על תיק של $25,000 = $3,750 למניה, גם אם החישוב מרשה יותר." },
+    effectiveRisk:{ t:"סיכון אפקטיבי", s:"הסיכון הממוצע בפועל אחרי שהתקרה נכנסת לפעולה. כשהתקרה חוסמת, הסיכון יורד מהמתוכנן.", e:"בתקרה של 15% הסיכון הממוצע יורד לכ-0.7% במקום 1%; בתקרה של 40% הוא מתקרב ל-1%." },
+    positionSize:{ t:"גודל פוזיציה", s:"מספר המניות שקונים. מחלקים את סכום הסיכון במרחק לסטופ, ואז בודקים שזה לא עובר את התקרה.", e:"$250 סיכון ÷ $20.53 למניה = 12 מניות; תקרת 15% מרשה 10, אז קונים 10." },
+    stopLoss:{ t:"סטופ (Stop Loss)", s:"מחיר יציאה שנקבע לפני הכניסה. אם המחיר מגיע אליו, מוכרים בלי להתווכח — שם ההפסד נעצר.", e:"כניסה ב-$342.18 עם סטופ ב-$321.65: ירידה של 6% סוגרת את העסקה בהפסד של $205." },
+    target2r:{ t:"יעד 2R", s:"יעד רווח שנקבע לפי הסיכון: כפול המרחק בין הכניסה לסטופ. ביחס הזה רווח אחד מכסה שני הפסדים.", e:"סיכון של $20.53 למניה → יעד במרחק $41.06: $342.18 + $41.06 = $383.24." },
+    rvol:{ t:"נפח מסחר יחסי (RVOL)", s:"כמה מניות נסחרות היום לעומת הנפח הרגיל של אותה מניה. 1.0x זה יום רגיל, 2.0x זה פי שניים מהרגיל.", e:function(C){ return "RVOL 1.62x ב-PANW: נסחרו 62% יותר מניות מהרגיל. מתחת ל-" + oneDec(C.l4.rvol) + "x אין מי שקונה איתך."; } },
+    rsi:{ t:"מדד כוח יחסי (RSI)", s:"מספר בין 0 ל-100 שמראה כמה חזקה הייתה העלייה ב-14 הימים האחרונים. מעל 70 המניה קנויה מדי, מתחת ל-30 נמכרה מדי.", e:"RSI 58 נחשב טווח בריא למניה במגמה. RSI 78 בוולטרה אומר שהמחיר כבר רץ — כניסה שם מסוכנת." },
+    sma20:{ t:"ממוצע 20 יום (SMA-20)", s:"המחיר הממוצע של 20 ימי המסחר האחרונים. הוא מראה את הכיוון בטווח הקצר: מחיר מעליו אומר שהקונים שולטים.", e:"ב-CRWD הממוצע $411.20 והמחיר $428.75 — המניה נסחרת 4.3% מעל הממוצע הקצר." },
+    sma50:{ t:"ממוצע 50 יום (SMA-50)", s:"הממוצע של 50 הימים האחרונים. הרבה סוחרים שמים את הסטופ מתחתיו, כי ירידה מתחתיו מסמנת שהמגמה נשברה.", e:"ב-PANW הממוצע $318.40, כ-7% מתחת למחיר. סטופ שם מפסיד 7% במקום 6%." },
+    sma200:{ t:"ממוצע 200 יום (SMA-200)", s:"הממוצע של 200 הימים האחרונים — קו המגמה הראשית. מחיר מעליו נחשב שוק עולה.", e:"LLY ב-$892.45 מול ממוצע של $742.10: 20% מעל הקו הארוך, מגמה ראשית חזקה." },
+    closeStrength:{ t:"חוזק סגירה", s:"איפה נסגר המחיר בתוך טווח היום. 100% = סגירה בשיא היום, 50% = סגירה באמצע הטווח.", e:"חוזק 78% אומר שהמחיר נסגר בשלושת רבעי הטווח — הקונים החזיקו עד הסוף." },
+    beta:{ t:"בטא", s:"כמה המניה זזה ביחס לשוק הכללי. בטא 1.0 = כמו השוק, 1.3 = תנועות גדולות ב-30%.", e:function(C){ return "GEV עם בטא 1.08: אם השוק עולה 1%, המניה נוטה לעלות 1.08%. הסינון דורש " + trimNum(C.l1.betaMin) + "–" + trimNum(C.l1.betaMax) + "."; } },
+    mcap:{ t:"שווי שוק", s:"מחיר המניה כפול מספר המניות — גודל החברה בבורסה.", e:function(C){ return "PANW בשווי $288 מיליארד. הסינון דורש מעל " + mcapText(C.l1.mcap) + ", אחרת המניה קטנה וקופצת מכל הזמנה."; } },
+    avgVol:{ t:"נפח מסחר ממוצע", s:"כמה מניות נסחרות ביום בממוצע. זה מה שקובע אם תוכל לקנות ולמכור בלי להזיז את המחיר.", e:function(C){ return "ANET נסחרת 7.9 מיליון מניות ביום — קל להיכנס ולצאת. מתחת ל-" + volText(C.l1.avgVol) + " המניה דקה והפער גדל."; } },
+    pe:{ t:"מכפיל רווח (P/E)", s:"מחיר המניה חלקי הרווח השנתי למניה. כמה המשקיעים משלמים על כל דולר של רווח.", e:"מכפיל 48.1 ב-LLY: משלמים $48 על כל $1 רווח שנתי. חברה מפסידה מקבלת מכפיל שלילי ונפסלת." },
+    epsGrowth:{ t:"צמיחת רווח למניה (EPS)", s:"בכמה אחוזים גדל הרווח למניה בשנה האחרונה. זה מה שנשאר לבעלי המניות מכל מכירה.", e:function(C){ return "הרווח למניה של LLY גדל 50.7% בשנה. הסינון דורש מעל " + trimNum(C.l2.epsGrowth) + "%."; } },
+    salesGrowth:{ t:"צמיחת מכירות", s:"בכמה אחוזים גדלו ההכנסות של החברה בשנה האחרונה.", e:function(C){ return "המכירות של GEV גדלו 16.9%. מתחת ל-" + trimNum(C.l2.salesGrowth) + "% החברה בקושי גדלה, והמגמה נשענת על רעש."; } },
+    roe:{ t:"תשואה על ההון (ROE)", s:"כמה רווח מייצרת החברה על כל דולר של הון עצמי. מדד ליעילות של העסק.", e:function(C){ return "ROE 83.7% ב-LLY: כל $100 הון עצמי מייצרים $83.7 רווח בשנה. הסינון דורש מעל " + trimNum(C.l2.roe) + "%."; } },
+    instOwn:{ t:"אחזקת מוסדיים", s:"איזה אחוז מהמניות מוחזק בידי קרנות וגופים גדולים. הנתון הזה לא מגיע מהספק החינמי — כשהוא קיים הוא ערך עזר סטטי מהדאטה-סט, וכשאין ערך הוא מוצג כ״לא זמין״ והבדיקה שלו מדולגת. היעדר נתון לא נחשב כישלון.", e:function(C){ return "87% מ-CRWD מוחזק בידי מוסדיים (עזר סטטי) — מעל " + trimNum(C.l2.instOwn) + "%, עוברת. במניה שאין לה נתון כתוב ״לא זמין״, והשכבה ממשיכה הלאה בלי לפסול אותה."; } },
+    high52:{ t:"מרחק משיא 52 שבועות", s:"כמה אחוז מתחת לשיא של השנה המניה נסחרת עכשיו. קרוב לשיא = המגמה חיה.", e:function(C){ return "LLY רק 1.2% מתחת לשיא. הסינון מרשה עד " + trimNum(Math.abs(C.l3.pctFrom52wHigh)) + "% מתחת; מעבר לזה המגמה כבר נשברה."; } },
+    perf36:{ t:"תשואה 3 ו-6 חודשים", s:"כמה המניה עלתה בשלושת החודשים ובחצי השנה האחרונים. שני מספרים, כדי לראות שהמגמה לא רק זינוק חד-פעמי.", e:function(C){ return "GEV: 18.4%+ בשלושה חודשים ו-39.6%+ בחצי שנה — מגמה עקבית. " + (C.l3.requirePerf ? "הסינון דורש ששניהם חיוביים." : "בפרופיל הפעיל הדרישה הזאת כבויה."); } }
+  };
+
+  /* help copy may be a function of the active scan config — resolve it at render
+     time so a popover never quotes a threshold the profile no longer uses */
+  function termField(t, f){
+    var v = t ? t[f] : "";
+    return (typeof v === "function") ? v(scanCfg()) : v;
+  }
+
+  /* ============================================================
+     STATE + persistence (same keys as v1 — settings survive reload)
+     ============================================================ */
+  var PAGE_SIZE = 60;                  /* rows/cards rendered per page, never a dataset assumption */
+  var STORE_KEY = "safetrend.config.v1";
+  var PROFILE_KEY = "scanner.profile";  /* scan profile lives on its own key */
+  var PROFILE_DEFAULT = "שמרני";
+  var state = {
+    portfolio:25000, riskPct:1.0, maxCapPct:15, stopMode:"conservative",
+    layers:{1:true,2:true,3:true,4:true},
+    profile:PROFILE_DEFAULT,
+    showRejects:false, sector:null, sortKey:"rvol", sortDir:-1,
+    preview:"auto", drawer:null, checks:{}, liveWindow:null,
+    q:"", limit:PAGE_SIZE
+  };
+
+  function num(v, fallback){
+    var n = parseFloat(v);
+    return isFinite(n) ? n : fallback;
+  }
+  function clamp(v, lo, hi){ return Math.min(hi, Math.max(lo, v)); }
+
+  function load(){
+    var raw = null;
+    try { raw = localStorage.getItem(STORE_KEY); } catch(e){ raw = null; }
+    if (raw) {
+      try {
+        var o = JSON.parse(raw);
+        if (o && typeof o === "object") {
+          state.portfolio = clamp(num(o.portfolio, state.portfolio), 1000, 10000000);
+          state.riskPct    = clamp(num(o.riskPct, state.riskPct), 0.25, 2.5);
+          state.maxCapPct  = clamp(num(o.maxCapPct, state.maxCapPct), 1, 100);
+          if (o.stopMode === "sma50" || o.stopMode === "fixed" || o.stopMode === "conservative") state.stopMode = o.stopMode;
+          if (o.layers && typeof o.layers === "object") {
+            ["1","2","3","4"].forEach(function(k){
+              if (typeof o.layers[k] === "boolean") state.layers[k] = o.layers[k];
+            });
+          }
+          if (typeof o.showRejects === "boolean") state.showRejects = o.showRejects;
+        }
+      } catch(e){ /* corrupted storage — keep defaults */ }
+    }
+    // tolerate flat legacy keys (portfolio / riskPct / maxCapPct)
+    try {
+      var p = localStorage.getItem("portfolio");
+      if (p !== null && num(p, 0) > 0) state.portfolio = clamp(num(p, state.portfolio), 1000, 10000000);
+      var r = localStorage.getItem("riskPct");
+      if (r !== null && num(r, 0) > 0) state.riskPct = clamp(num(r, state.riskPct), 0.25, 2.5);
+      var c = localStorage.getItem("maxCapPct");
+      if (c !== null && num(c, 0) > 0) state.maxCapPct = clamp(num(c, state.maxCapPct), 1, 100);
+    } catch(e){}
+    /* the scan profile has its own key; an unknown/legacy value falls back to the default */
+    try {
+      var pr = localStorage.getItem(PROFILE_KEY);
+      if (pr && PROFILES[pr]) state.profile = pr;
+    } catch(e){}
+  }
+  function save(){
+    try {
+      localStorage.setItem(STORE_KEY, JSON.stringify({
+        portfolio:state.portfolio, riskPct:state.riskPct, maxCapPct:state.maxCapPct,
+        stopMode:state.stopMode, layers:state.layers, showRejects:state.showRejects
+      }));
+      localStorage.setItem(PROFILE_KEY, state.profile);
+    } catch(e){ /* storage full / blocked — UI still works */ }
+  }
+
+  /* ============================================================
+     FORMATTERS
+     ============================================================ */
+  function fmtMoney(v, d){
+    if (!isFinite(v)) return "—";
+    d = (d === undefined) ? 2 : d;
+    return "$" + v.toLocaleString("en-US", { minimumFractionDigits:d, maximumFractionDigits:d });
+  }
+  function fmtCompact(v){
+    if (!isFinite(v)) return "—";
+    var a = Math.abs(v);
+    if (a >= 1e12) return "$" + (v/1e12).toFixed(2) + "T";
+    if (a >= 1e9)  return "$" + (v/1e9).toFixed(1) + "B";
+    if (a >= 1e6)  return "$" + (v/1e6).toFixed(1) + "M";
+    if (a >= 1e3)  return "$" + (v/1e3).toFixed(0) + "K";
+    return "$" + v.toFixed(0);
+  }
+  function fmtVol(v){
+    if (!isFinite(v)) return "—";
+    if (v >= 1e6) return (v/1e6).toFixed(1) + "M";
+    if (v >= 1e3) return Math.round(v/1e3) + "K";
+    return String(Math.round(v));
+  }
+  function fmtPct(v, d){
+    if (!isFinite(v)) return "—";
+    d = (d === undefined) ? 1 : d;
+    /* half-up, so a provider value like 50.65 reads 50.7% and not 50.6% */
+    var p = Math.pow(10, d);
+    var r = Math.round((v + (v >= 0 ? 1e-9 : -1e-9)) * p) / p;
+    return (r > 0 ? "+" : "") + r.toFixed(d) + "%";
+  }
+  /* toFixed that survives a missing provider value */
+  function nv(v, d){ return isFinite(v) ? v.toFixed(d) : "—"; }
+  function fmtInt(v){
+    if (!isFinite(v)) return "—";
+    return Math.round(v).toLocaleString("en-US");
+  }
+  function esc(s){
+    return String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
+  }
+  function unesc(s){ var d = document.createElement("textarea"); d.innerHTML = s; return d.value; }
+  /* every number rendered through N() stays LTR inside the Hebrew paragraph */
+  function N(s){ return '<bdi class="num">' + s + '</bdi>'; }
+
+  /* 'עזר' marks any value that did not arrive live from the provider */
+  function srcTag(s, k){
+    if (s && s.fundLive && s.fundLive[k]) return "";
+    return '<span class="srcchip ref">עזר</span>';
+  }
+
+  /* ============================================================
+     EXPLAINER PATTERN — one button, one popover, one TERMS object
+     ============================================================ */
+  function q(key){
+    var t = TERMS[key];
+    if (!t) return "";
+    return '<button class="q" type="button" data-term="' + key + '" aria-label="הסבר: ' + esc(t.t) + '" aria-haspopup="dialog" aria-expanded="false">?</button>';
+  }
+
+  var popEl = null, popBtn = null;
+  function closeTerm(restoreFocus){
+    if (!popEl || popEl.hidden) return;
+    popEl.hidden = true;
+    if (popBtn) popBtn.setAttribute("aria-expanded", "false");
+    if (restoreFocus && popBtn && document.contains(popBtn)) popBtn.focus();
+    popBtn = null;
+  }
+  function openTerm(key, btn){
+    var t = TERMS[key];
+    if (!t || !popEl) return;
+    if (popBtn && popBtn !== btn) popBtn.setAttribute("aria-expanded", "false");
+    popBtn = btn;
+    document.getElementById("popTitle").textContent = t.t;
+    document.getElementById("popShort").textContent = termField(t, "s");
+    document.getElementById("popEx").textContent = termField(t, "e");
+    popEl.hidden = false;
+    btn.setAttribute("aria-expanded", "true");
+
+    var r = btn.getBoundingClientRect();
+    var pw = popEl.offsetWidth, ph = popEl.offsetHeight;
+    var vw = document.documentElement.clientWidth;
+    var vh = window.innerHeight;
+    var left = r.left + r.width / 2 - pw / 2;
+    left = Math.max(8, Math.min(left, vw - pw - 8));
+    var top = r.bottom + 8;
+    if (top + ph > vh - 8) top = Math.max(8, r.top - ph - 8);
+    popEl.style.left = left + "px";
+    popEl.style.top = top + "px";
+  }
+
+  function renderGlossary(){
+    var keys = Object.keys(TERMS);
+    var half = Math.ceil(keys.length / 2);
+    var item = function(k){
+      var t = TERMS[k];
+      return '<div class="gloss"><h3>' + esc(t.t) + '</h3>' +
+        '<div class="s">' + esc(termField(t, "s")) + '</div>' +
+        '<div class="e"><b>דוגמה</b>' + esc(termField(t, "e")) + '</div></div>';
+    };
+    document.getElementById("glossGrid").innerHTML =
+      '<div>' + keys.slice(0, half).map(item).join("") + '</div>' +
+      '<div>' + keys.slice(half).map(item).join("") + '</div>';
+  }
+
+  /* ============================================================
+     RISK ENGINE — exact spec math (unchanged)
+     ============================================================ */
+  function sizing(s){
+    var p = s.price;
+    var fixedStop = p * 0.94;
+    var stop;
+    if (state.stopMode === "sma50") stop = s.sma50;
+    else if (state.stopMode === "fixed") stop = fixedStop;
+    else stop = Math.max(s.sma50, fixedStop);   // tighter of the two = closer to price
+
+    var riskPerShare = p - stop;
+    var out = { stop:stop, riskPerShare:riskPerShare, shares:0, cost:0, cashRisk:0,
+                target:0, rawShares:0, maxCapShares:0, capped:false, invalid:false,
+                overStop:(isFinite(stop) && isFinite(p) && stop >= p),
+                smaStop:s.sma50, fixedStop:fixedStop,
+                winner:(s.sma50 > fixedStop ? "sma50" : "fixed"),
+                smaDistPct:((p - s.sma50) / p) * 100,
+                fixedDistPct:6, wide:((p - stop) / p) * 100 > 12 };
+
+    /* A stop at or above the entry is not a trade — no shares, no risk, no target.
+       This is not an edge case any more: on a pullback the SMA-50 anchor sits
+       above the last close, and printing negative share counts there is a lie. */
+    if (!(p > 0) || !(riskPerShare > 0)) {
+      out.invalid = true;
+      out.shares = 0;
+      out.cost = 0;
+      out.cashRisk = 0;
+      out.rawShares = 0;
+      out.maxCapShares = 0;
+      out.target = p;
+      return out;
+    }
+    var riskDollars = state.portfolio * state.riskPct / 100;
+    var capDollars  = state.portfolio * state.maxCapPct / 100;
+
+    out.rawShares    = Math.floor(riskDollars / riskPerShare);
+    out.maxCapShares = Math.floor(capDollars / p);
+    out.shares       = Math.min(out.rawShares, out.maxCapShares);
+    out.capped       = out.maxCapShares < out.rawShares;
+    out.cost         = out.shares * p;
+    out.cashRisk     = out.shares * riskPerShare;
+    out.target       = p + 2 * riskPerShare;
+    return out;
+  }
+
+  /* Institutional ownership is the one L2 input the free Finnhub tier never
+     sends: indicators.json carries instOwn:null for every symbol, and only the
+     11 original names still in the universe keep a static dataset value. A
+     missing value must never be read as "under 50%" — that would fail all 297
+     names by construction. So the check is SKIPPED when the value is absent:
+     not passed, not failed, and never counted against the name. */
+  function instOwnKnown(s){
+    if (!s) return false;
+    var v = s.instOwn;
+    if (v === null || v === undefined || v === "") return false;
+    return isFinite(Number(v));
+  }
+
+  /* how many names in the current universe have no institutional value */
+  function instOwnMissing(){
+    var n = 0;
+    STOCKS.forEach(function(s){ if (!instOwnKnown(s)) n++; });
+    return n;
+  }
+
+  /* ============================================================
+     SCAN PROFILE — one config object, three presets
+     Every threshold the scanner applies lives in SCAN_DEFAULTS.
+     A preset is a sparse overlay on top of it, so the strict
+     defaults stay readable in one place and a relaxed profile can
+     only move the values it names. layerFails(), failDetails(),
+     the layer cards, the closest box, REC_CHECKS and every count
+     read scanCfg() — no threshold literal is repeated anywhere.
+     ============================================================ */
+  var SCAN_DEFAULTS = {
+    l1:{ mcap:2e9, price:20, betaMin:0.5, betaMax:1.5, avgVol:1e6 },
+    l2:{ peMin:0, epsGrowth:10, salesGrowth:10, roe:15, instOwn:50 },
+    l3:{ pctFrom52wHigh:-10, requirePerf:true },
+    l4:{ rsiMin:50, rsiMax:65, dayMin:1, dayMax:5, rvol:1.2, closeStrength:65 }
+  };
+
+  /* relax = the values that move away from SCAN_DEFAULTS. Only the three
+     presets below exist; 'רגוע' restates 'רגיל' relaxations explicitly so
+     each preset can be read on its own. L1 is never relaxed. */
+  var PROFILES = {
+    "שמרני": {
+      label:"שמרני",
+      hint:"ברירת המחדל — כל הספים המקוריים, הסריקה הקפדנית ביותר.",
+      relax:null
+    },
+    "רגיל": {
+      label:"רגיל",
+      hint:"מרפה רק את שכבת נגד-רדיפה — טווח יומי, RSI ונפח יחסי.",
+      relax:{ l4:{ dayMin:0, rvol:1.0, rsiMin:45, rsiMax:70 } }
+    },
+    "רגוע": {
+      label:"רגוע",
+      hint:"מרפה גם את איכות העסק והמגמה, ומרחיב עוד את שכבת נגד-רדיפה.",
+      relax:{
+        l2:{ epsGrowth:5, salesGrowth:5, roe:10 },
+        l3:{ pctFrom52wHigh:-20, requirePerf:false },
+        l4:{ dayMin:0, rvol:0.8, rsiMin:45, rsiMax:70, closeStrength:55 }
+      }
+    }
+  };
+
+  function trimNum(v){
+    if (!isFinite(Number(v))) return "—";
+    return String(Math.round(Number(v) * 100) / 100);
+  }
+  function oneDec(v){
+    if (!isFinite(Number(v))) return "—";
+    return Number(v).toFixed(1);
+  }
+  function mcapText(v){
+    if (!isFinite(v)) return "—";
+    if (v >= 1e9) return "$" + trimNum(v / 1e9) + " מיליארד";
+    if (v >= 1e6) return "$" + trimNum(v / 1e6) + " מיליון";
+    return fmtCompact(v);
+  }
+  function volText(v){
+    if (!isFinite(v)) return "—";
+    var m = v / 1e6;
+    return (m === 1 ? "מיליון" : trimNum(m) + " מיליון");
+  }
+
+  function buildConfig(name){
+    var relax = (PROFILES[name] || PROFILES[PROFILE_DEFAULT]).relax || {};
+    var c = { l1:{}, l2:{}, l3:{}, l4:{} };
+    ["l1","l2","l3","l4"].forEach(function(l){
+      Object.keys(SCAN_DEFAULTS[l]).forEach(function(k){
+        var ov = relax[l] ? relax[l][k] : undefined;
+        c[l][k] = (ov === undefined) ? SCAN_DEFAULTS[l][k] : ov;
+      });
+    });
+    return c;
+  }
+
+  var CFG_CACHE = null, CFG_CACHE_FOR = null;
+  function scanCfg(){
+    if (!CFG_CACHE || CFG_CACHE_FOR !== state.profile){
+      CFG_CACHE = buildConfig(state.profile);
+      CFG_CACHE_FOR = state.profile;
+    }
+    return CFG_CACHE;
+  }
+
+  /* every configurable field with its reader-facing label — the label IS the
+     "מותאם" chip text, so the card can never claim a value it does not use */
+  var CFG_FIELDS = [
+    { layer:1, keys:[["l1","mcap"]],                      label:function(C){ return "שווי שוק " + mcapText(C.l1.mcap); } },
+    { layer:1, keys:[["l1","price"]],                     label:function(C){ return "מחיר $" + trimNum(C.l1.price); } },
+    { layer:1, keys:[["l1","betaMin"],["l1","betaMax"]],  label:function(C){ return "בטא " + trimNum(C.l1.betaMin) + "–" + trimNum(C.l1.betaMax); } },
+    { layer:1, keys:[["l1","avgVol"]],                    label:function(C){ return "נפח " + volText(C.l1.avgVol); } },
+    { layer:2, keys:[["l2","peMin"]],                     label:function(C){ return "מכפיל רווח מעל " + trimNum(C.l2.peMin); } },
+    { layer:2, keys:[["l2","epsGrowth"]],                 label:function(C){ return "צמיחת רווח " + trimNum(C.l2.epsGrowth) + "%"; } },
+    { layer:2, keys:[["l2","salesGrowth"]],               label:function(C){ return "צמיחת מכירות " + trimNum(C.l2.salesGrowth) + "%"; } },
+    { layer:2, keys:[["l2","roe"]],                       label:function(C){ return "תשואה על ההון " + trimNum(C.l2.roe) + "%"; } },
+    { layer:2, keys:[["l2","instOwn"]],                   label:function(C){ return "מוסדיים " + trimNum(C.l2.instOwn) + "%"; } },
+    { layer:3, keys:[["l3","pctFrom52wHigh"]],            label:function(C){ return "מרחק מהשיא " + trimNum(C.l3.pctFrom52wHigh) + "%"; } },
+    { layer:3, keys:[["l3","requirePerf"]],               label:function(C){ return C.l3.requirePerf ? "תשואה 3/6 נדרשת" : "תשואה 3/6 לא נדרשת"; } },
+    { layer:4, keys:[["l4","rsiMin"],["l4","rsiMax"]],    label:function(C){ return "RSI " + trimNum(C.l4.rsiMin) + "–" + trimNum(C.l4.rsiMax); } },
+    { layer:4, keys:[["l4","dayMin"],["l4","dayMax"]],    label:function(C){ return "יום " + trimNum(C.l4.dayMin) + "–" + trimNum(C.l4.dayMax) + "%"; } },
+    { layer:4, keys:[["l4","rvol"]],                      label:function(C){ return "נפח יחסי " + oneDec(C.l4.rvol) + "x"; } },
+    { layer:4, keys:[["l4","closeStrength"]],             label:function(C){ return "חוזק סגירה " + trimNum(C.l4.closeStrength) + "%"; } }
+  ];
+
+  /* per-layer list of thresholds that differ from the strict default */
+  function cfgDiffs(){
+    var C = scanCfg(), out = { 1:[], 2:[], 3:[], 4:[] };
+    CFG_FIELDS.forEach(function(f){
+      var moved = f.keys.some(function(k){
+        return C[k[0]][k[1]] !== SCAN_DEFAULTS[k[0]][k[1]];
+      });
+      if (moved) out[f.layer].push(f.label(C));
+    });
+    return out;
+  }
+  function cfgDiffCount(){
+    var d = cfgDiffs();
+    return d[1].length + d[2].length + d[3].length + d[4].length;
+  }
+
+  /* the bullet list on each layer card — built from the same config */
+  function layerRules(n, C){
+    if (n === 1) return [
+      "שווי שוק מעל " + mcapText(C.l1.mcap),
+      "מחיר מעל $" + trimNum(C.l1.price),
+      "בטא בין " + trimNum(C.l1.betaMin) + " ל-" + trimNum(C.l1.betaMax),
+      "נפח מסחר יומי מעל " + volText(C.l1.avgVol)
+    ];
+    if (n === 2) return [
+      C.l2.peMin > 0 ? "מכפיל רווח מעל " + trimNum(C.l2.peMin) : "מכפיל רווח חיובי",
+      "צמיחת רווח למניה מעל " + trimNum(C.l2.epsGrowth) + "%",
+      "צמיחת מכירות מעל " + trimNum(C.l2.salesGrowth) + "%",
+      "תשואה על ההון מעל " + trimNum(C.l2.roe) + "%",
+      "מוסדיים מחזיקים מעל " + trimNum(C.l2.instOwn) + "%"
+    ];
+    if (n === 3) {
+      var r = [
+        "מחיר מעל ממוצע 20 מעל 50 מעל 200",
+        "עד " + Math.abs(C.l3.pctFrom52wHigh) + "% מתחת לשיא 52 שבועות"
+      ];
+      if (C.l3.requirePerf) r.push("תשואה חיובית ב-3 וב-6 חודשים");
+      return r;
+    }
+    if (n === 4) return [
+      "RSI בין " + trimNum(C.l4.rsiMin) + " ל-" + trimNum(C.l4.rsiMax),
+      "עליית יום בין " + trimNum(C.l4.dayMin) + "% ל-" + trimNum(C.l4.dayMax) + "%",
+      "נפח יחסי מעל " + oneDec(C.l4.rvol),
+      "חוזק סגירה מעל " + trimNum(C.l4.closeStrength) + "%"
+    ];
+    return [];
+  }
+
+  function layerFails(s){
+    var C = scanCfg(), f = [];
+    if (!(s.mcap > C.l1.mcap)) f.push(1);
+    if (!(s.price > C.l1.price)) f.push(1);
+    if (!(s.beta >= C.l1.betaMin && s.beta <= C.l1.betaMax)) f.push(1);
+    if (!(s.avgVol > C.l1.avgVol)) f.push(1);
+
+    if (!(s.pe > C.l2.peMin)) f.push(2);
+    if (!(s.epsGrowth > C.l2.epsGrowth)) f.push(2);
+    if (!(s.salesGrowth > C.l2.salesGrowth)) f.push(2);
+    if (!(s.roe > C.l2.roe)) f.push(2);
+    if (instOwnKnown(s) && !(s.instOwn > C.l2.instOwn)) f.push(2);   /* no data → skipped */
+
+    if (!(s.price > s.sma20 && s.sma20 > s.sma50 && s.sma50 > s.sma200)) f.push(3);
+    if (!(s.pctFrom52wHigh >= C.l3.pctFrom52wHigh)) f.push(3);
+    if (C.l3.requirePerf && !(s.perf3m > 0 && s.perf6m > 0)) f.push(3);
+
+    if (!(s.rsi >= C.l4.rsiMin && s.rsi <= C.l4.rsiMax)) f.push(4);
+    if (!(s.dayChange > C.l4.dayMin && s.dayChange < C.l4.dayMax)) f.push(4);
+    if (!(s.rvol > C.l4.rvol)) f.push(4);
+    if (!(s.closeStrength > C.l4.closeStrength)) f.push(4);
+
+    return f.filter(function(v, i, a){ return a.indexOf(v) === i; });
+  }
+
+  /* one layerFails() pass per name per render — the layer toggles cannot change
+     inside a render, and evaluate() is called from the table, the sector
+     grouping and the closest box on the same 297 names. */
+  var EV_CACHE = {};
+
+  function evaluator(s){
+    var hit = EV_CACHE[s.ticker];
+    if (hit) return hit;
+    var fails = layerFails(s);
+    var active = fails.filter(function(n){ return state.layers[String(n)]; });
+    EV_CACHE[s.ticker] = { fails:fails, active:active, pass:active.length === 0 };
+    return EV_CACHE[s.ticker];
+  }
+
+  function passing(){
+    return STOCKS.filter(function(s){ return evaluator(s).pass; });
+  }
+
+  /* the name that came closest to passing — used when the table is empty */
+  function nearMiss(){
+    var best = null, bestN = 99;
+    STOCKS.forEach(function(s){
+      var e = evaluator(s);
+      var n = e.active.length || e.fails.length;
+      if (n < bestN) { bestN = n; best = s; }
+    });
+    return best ? { s:best, n:bestN, fails:layerFails(best) } : null;
+  }
+
+  /* ============================================================
+     UNIVERSE — search, sector grouping, paging
+     Every helper here runs over the whole file (N names). The DOM
+     only ever holds one page of rows, the numbers never do.
+     ============================================================ */
+  var SECTOR_TOP = 8;              /* radar: top 8 sectors, the rest grouped as 'אחר' */
+  var sectorTop = [], sectorOther = {};
+
+  function norm(v){ return String(v === null || v === undefined ? "" : v).toLowerCase(); }
+
+  function matchesQuery(s, q){
+    if (!q) return true;
+    var hay = norm(s.ticker) + " " + norm(s.name) + " " + norm(s.nameHe) + " " +
+              norm(s.sector) + " " + norm(s.industry);
+    return q.split(/\s+/).filter(Boolean).every(function(w){ return hay.indexOf(w) !== -1; });
+  }
+
+  function computeSectors(){
+    var counts = {};
+    passing().forEach(function(s){ counts[s.sector] = (counts[s.sector] || 0) + 1; });
+    var keys = Object.keys(counts).sort(function(a, b){
+      return counts[b] - counts[a] || String(a).localeCompare(String(b));
+    });
+    sectorTop = keys.slice(0, SECTOR_TOP);
+    var rest = keys.slice(SECTOR_TOP);
+    sectorOther = {};
+    if (rest.length) STOCKS.forEach(function(s){ if (rest.indexOf(s.sector) !== -1) sectorOther[s.ticker] = true; });
+    return { counts:counts, keys:keys, top:sectorTop, rest:rest };
+  }
+
+  function inSectorGroup(s){
+    if (!state.sector) return true;
+    if (state.sector === "__other__") return !!sectorOther[s.ticker];
+    return s.sector === state.sector;
+  }
+
+  /* the search filter, applied to the full universe */
+  function searchActive(){ return !!norm(state.q).trim(); }
+
+  /* every symbol the query matches — sector filter and layer toggles do NOT
+     narrow this: a search for a ticker must always come back with that ticker */
+  function searchPool(){
+    var q = norm(state.q).trim();
+    return STOCKS.filter(function(s){ return matchesQuery(s, q); });
+  }
+
+  function searchRows(){
+    var q = norm(state.q).trim();
+    return STOCKS.filter(function(s){ return matchesQuery(s, q) && inSectorGroup(s); });
+  }
+
+  /* after a data reload: back to the first page, and drop a sector that vanished */
+  function pruneSearchState(){
+    state.limit = PAGE_SIZE;
+    if (state.sector && state.sector !== "__other__" &&
+        !STOCKS.some(function(s){ return s.sector === state.sector; })) state.sector = null;
+  }
+
+  function syncAPI(){
+    if (window.SafeTrend) {
+      window.SafeTrend.stocks = STOCKS.map(function(s){ return s.ticker; });
+      window.SafeTrend.universe = STOCKS.length;
+    }
+  }
+
+
+  /* ============================================================
+     CLOSEST TO PASSING — the empty-table fallback
+     On a red day nothing clears L4 (day change must be +1%..+5%),
+     so the table is empty and a beginner has nothing to look at.
+     Instead of an empty box we rank the names by how little they
+     miss, and name the exact check with its real value.
+
+     failDetails() mirrors layerFails() comparison for comparison:
+     same thresholds, same order. If one changes, change both —
+     window.SafeTrend.closest() is asserted against SafeTrend.all()
+     .fails in verify_closest.py so a drift fails the build.
+     ============================================================ */
+  function failDetails(s){
+    var out = [];
+    var C = scanCfg();
+    function add(layer, html){ out.push({ layer:layer, text:html }); }
+
+    /* L1 — safety */
+    if (!(s.mcap > C.l1.mcap))             add(1, "שווי שוק " + N(fmtCompact(s.mcap)) + " (נדרש מעל " + N(mcapText(C.l1.mcap)) + ")");
+    if (!(s.price > C.l1.price))           add(1, "מחיר " + N(fmtMoney(s.price)) + " (נדרש מעל $" + N(trimNum(C.l1.price)) + ")");
+    if (!(s.beta >= C.l1.betaMin && s.beta <= C.l1.betaMax)) add(1, "בטא " + N(nv(s.beta, 2)) + " (נדרש " + N(trimNum(C.l1.betaMin) + "–" + trimNum(C.l1.betaMax)) + ")");
+    if (!(s.avgVol > C.l1.avgVol))         add(1, "נפח יומי " + N(fmtVol(s.avgVol)) + " (נדרש מעל " + N(volText(C.l1.avgVol)) + ")");
+
+    /* L2 — business quality */
+    if (!(s.pe > C.l2.peMin))              add(2, "מכפיל רווח " + N(s.pe > 0 ? nv(s.pe, 1) : "שלילי") + " (נדרש " + N(C.l2.peMin > 0 ? "מעל " + trimNum(C.l2.peMin) : "חיובי") + ")");
+    if (!(s.epsGrowth > C.l2.epsGrowth))   add(2, "צמיחת רווח למניה " + N(fmtPct(s.epsGrowth, 1)) + " (נדרש מעל " + N(trimNum(C.l2.epsGrowth) + "%") + ")");
+    if (!(s.salesGrowth > C.l2.salesGrowth)) add(2, "צמיחת מכירות " + N(fmtPct(s.salesGrowth, 1)) + " (נדרש מעל " + N(trimNum(C.l2.salesGrowth) + "%") + ")");
+    if (!(s.roe > C.l2.roe))               add(2, "תשואה על ההון " + N(nv(s.roe, 1) + "%") + " (נדרש מעל " + N(trimNum(C.l2.roe) + "%") + ")");
+    if (instOwnKnown(s) && !(s.instOwn > C.l2.instOwn)) add(2, "מוחזקות מוסדיות " + N(nv(s.instOwn, 0) + "%") + " (נדרש מעל " + N(trimNum(C.l2.instOwn) + "%") + ")" + '<span class="srcchip ref">עזר</span>');
+
+    /* L3 — trend: report the link of the chain that actually broke */
+    if (!(s.price > s.sma20 && s.sma20 > s.sma50 && s.sma50 > s.sma200)) {
+      var t;
+      if (!(s.price > s.sma20)) {
+        t = (s.price < s.sma50)
+          ? "מחיר " + N(fmtMoney(s.price)) + " מתחת ל-SMA50 " + N(fmtMoney(s.sma50))
+          : "מחיר " + N(fmtMoney(s.price)) + " מתחת ל-SMA20 " + N(fmtMoney(s.sma20));
+      } else if (!(s.sma20 > s.sma50)) {
+        t = "SMA20 " + N(fmtMoney(s.sma20)) + " מתחת ל-SMA50 " + N(fmtMoney(s.sma50));
+      } else {
+        t = "SMA50 " + N(fmtMoney(s.sma50)) + " מתחת ל-SMA200 " + N(fmtMoney(s.sma200));
+      }
+      add(3, t);
+    }
+    if (!(s.pctFrom52wHigh >= C.l3.pctFrom52wHigh)) add(3, "מרחק משיא 52 שבועות " + N(fmtPct(s.pctFrom52wHigh, 1)) + " (נדרש עד " + N(trimNum(Math.abs(C.l3.pctFrom52wHigh)) + "%- מתחת") + ")");
+    if (C.l3.requirePerf && !(s.perf3m > 0 && s.perf6m > 0)) add(3, "תשואה " + N(fmtPct(s.perf3m, 1)) + " ב-3 חודשים ו-" + N(fmtPct(s.perf6m, 1)) + " ב-6 (נדרשות חיוביות)");
+
+    /* L4 — anti-chase */
+    if (!(s.rsi >= C.l4.rsiMin && s.rsi <= C.l4.rsiMax)) add(4, "RSI " + N(nv(s.rsi, 1)) + " (נדרש " + N(trimNum(C.l4.rsiMin) + "–" + trimNum(C.l4.rsiMax)) + ")");
+    if (!(s.dayChange > C.l4.dayMin && s.dayChange < C.l4.dayMax)) add(4, "שינוי יומי " + N(fmtPct(s.dayChange, 2)) + " (נדרש +" + N(trimNum(C.l4.dayMin)) + "% עד +" + N(trimNum(C.l4.dayMax)) + "%)");
+    if (!(s.rvol > C.l4.rvol))             add(4, "נפח יחסי " + N(nv(s.rvol, 2) + "x") + " (נדרש מעל " + N(oneDec(C.l4.rvol) + "x") + ")");
+    if (!(s.closeStrength > C.l4.closeStrength)) add(4, "חוזק סגירה " + N(nv(s.closeStrength, 0) + "%") + " (נדרש מעל " + N(trimNum(C.l4.closeStrength) + "%") + ")");
+
+    return out;
+  }
+
+  /* ranked: fewest failed layers first, then fewest failed checks */
+  function closestRows(n, pool){
+    var rows = [];
+    (pool || STOCKS).forEach(function(s){
+      var st = statusOf(s);                          /* cached: det is reused */
+      if (!st.fails.length) return;                  /* passed — it is in the table */
+      var active = st.det.filter(function(d){ return !!state.layers[String(d.layer)]; });
+      if (!active.length) return;                    /* passed under the toggles */
+      var layers = [];
+      active.forEach(function(d){ if (layers.indexOf(d.layer) === -1) layers.push(d.layer); });
+      rows.push({ s:s, detail:st.det, active:active, layers:layers });
+    });
+    rows.sort(function(a, b){
+      if (a.layers.length !== b.layers.length) return a.layers.length - b.layers.length;
+      if (a.active.length !== b.active.length) return a.active.length - b.active.length;
+      return a.s.ticker.localeCompare(b.s.ticker);
+    });
+    return rows.slice(0, n || 5);
+  }
+
+  function closestChipHTML(d){
+    var on = !!state.layers[String(d.layer)];
+    return '<span class="cc-chip">' +
+      '<span class="cc-why"><b class="ltag">L' + d.layer + '</b> · ' +
+      '<span class="cc-txt">' + d.text + '</span></span>' +
+      (on ? '<button type="button" class="cc-off" data-off-layer="' + d.layer + '" ' +
+        'title="כיבוי שכבת L' + d.layer + ' והצגת מה היא מפסידה">כבה L' + d.layer + '</button>' : '') +
+    '</span>';
+  }
+
+  function closestRowHTML(r, i){
+    var s = r.s;
+    return '<li class="cc-row" data-closest="' + esc(s.ticker) + '" tabindex="0" ' +
+        'aria-label="פתיחת הפרטים של ' + esc(s.ticker) + '">' +
+      '<span class="cc-rank">' + (i + 1) + '</span>' +
+      '<div class="cc-main">' +
+        '<div class="cc-top">' +
+          '<span class="tk">' + esc(s.ticker) + '</span>' +
+          '<span class="cc-name">' + esc(s.nameHe) + '</span>' +
+          '<span class="cc-metrics">' +
+            '<bdi class="cc-price">' + fmtMoney(s.price) + '</bdi>' +
+            '<bdi class="chg' + (s.dayChange < 0 ? " neg" : "") + '">' + fmtPct(s.dayChange, 2) + '</bdi>' +
+            '<span class="rsi-chip' + (s.rsi > 65 ? " warm" : "") + '">RSI ' + N(nv(s.rsi, 1)) + '</span>' +
+            '<span class="cc-layers">' + (r.layers.length === 1 ? "שכבה אחת" : r.layers.length + " שכבות") +
+              ' · ' + r.active.length + ' בדיקות</span>' +
+          '</span>' +
+        '</div>' +
+        '<div class="cc-chips">' + r.active.map(closestChipHTML).join("") +
+          (state.layers["2"] && !instOwnKnown(s)
+            ? '<span class="cc-skip"><b class="ltag">L2</b> · אחזקת מוסדיים: <b>לא זמין</b> — הבדיקה דולגה' +
+              '<span class="srcchip ref">עזר</span></span>'
+            : '') +
+        '</div>' +
+      '</div>' +
+    '</li>';
+  }
+
+  function renderClosest(){
+    var slot = document.getElementById("emptyState");
+    if (!slot) return;
+    /* during a search every match is a row that carries its own verdict chip,
+       so the fallback list would only repeat the same names */
+    if (searchActive()) { slot.innerHTML = ""; return; }
+    /* the fallback list is drawn from the same narrowed pool as the table */
+    var pool = searchRows();
+    var passingInPool = pool.filter(function(s){ return evaluator(s).pass; });
+    if (!pool.length || passingInPool.length) { slot.innerHTML = ""; return; }
+    var list = closestRows(5, pool);
+    if (!list.length) { slot.innerHTML = ""; return; }
+
+    slot.innerHTML = '<div class="closest" id="closestBox">' +
+      '<div class="closest-head">' +
+        '<h3>הכי קרובות לעמוד בכל השכבות</h3>' +
+        '<span class="note">' + list.length + ' מתוך ' + pool.length +
+          (state.q.trim() ? ' בתוצאות החיפוש' : '') + ' · לפי מספר השכבות שנכשלו, ואז מספר הבדיקות</span>' +
+      '</div>' +
+      '<p class="closest-intro">ביום ירידות כמעט ולא נמצאות מניות שמטפסות — זה מה שהמסנן נועד לעשות. אלה הקרובות ביותר, והשכבה שמנעה אותן מסומנת.</p>' +
+      '<ol class="cc-list">' + list.map(closestRowHTML).join("") + '</ol>' +
+      '<div class="cc-foot">לחיצה על שורה פותחת גרף ותוכנית סיכון. כפתור ״כבה״ בתוך הסיבה מכבה את השכבה הזאת ומראה מיד מה היא מפסידה — אפשר להדליק אותה בחזרה למעלה.</div>' +
+    '</div>';
+
+    document.querySelectorAll("#closestBox [data-off-layer]").forEach(function(btn){
+      btn.addEventListener("click", function(ev){
+        ev.stopPropagation();
+        var n = btn.getAttribute("data-off-layer");
+        state.layers[n] = false;
+        save();
+        renderAll();
+        renderExample();
+        showToast("שכבה L" + n + " כבויה — הטבלה מציגה עכשיו מה היא מפסידה");
+      });
+    });
+    document.querySelectorAll("#closestBox [data-closest]").forEach(function(row){
+      var open = function(){ openDrawer(row.getAttribute("data-closest")); };
+      row.addEventListener("click", function(ev){
+        if (ev.target.closest("[data-off-layer]")) return;
+        open();
+      });
+      row.addEventListener("keydown", function(ev){
+        if (ev.key === "Enter" || ev.key === " ") { ev.preventDefault(); open(); }
+      });
+    });
+  }
+
+  /* ============================================================
+     DAILY PICKS — the 'המלצות היום' card at the top of the page
+     It is derived, never curated: the names that clear every active
+     layer, sized with the user's own portfolio / risk / cap, ranked
+     by position size (RVOL breaks the tie). A stop at or above the
+     entry is not a trade, so that name is dropped — same rule the
+     table uses. Nothing passes → the card says so and names the
+     closest miss instead of inventing a pick.
+     ============================================================ */
+  var REC_MAX = 3;
+
+  function recPicks(){
+    var rows = passing().map(function(s){ return { s:s, z:sizing(s) }; });
+    var ok = rows.filter(function(r){ return !r.z.invalid && r.z.shares > 0; });
+    var blocked = rows.filter(function(r){ return r.z.invalid || !(r.z.shares > 0); });
+    ok.sort(function(a, b){
+      if (b.z.shares !== a.z.shares) return b.z.shares - a.z.shares;
+      return b.s.rvol - a.s.rvol;
+    });
+    return { picks: ok.slice(0, REC_MAX), found: rows.length, blocked: blocked, total: STOCKS.length };
+  }
+
+  function recWhy(s, nLayers){
+    var bits = [];
+    bits.push((s.price > s.sma20 && s.sma20 > s.sma50 && s.sma50 > s.sma200)
+      ? "מגמה מעל 20/50/200" : "מבנה מעורב");
+    bits.push("RSI " + N(nv(s.rsi, 0)));
+    bits.push("שינוי יומי " + N(fmtPct(s.dayChange, 1)));
+    bits.push("RVOL " + N(nv(s.rvol, 1) + "x"));
+    return "עוברת את " + (nLayers === 4 ? "4 השכבות" : nLayers + " השכבות הפעילות") + ": " + bits.join(", ");
+  }
+
+  /* Which active check turned away the most names today. Only used for
+     the plain-Hebrew "why nothing passed" line — never for pass/fail,
+     which stays with layerFails(). Thresholds and labels come from the
+     active profile config, so a relaxed scan explains itself in its own
+     numbers. */
+  var REC_CHECKS = [
+    { on:function(s){ var C=scanCfg(); return !!state.layers["1"] && !(s.mcap > C.l1.mcap); },
+      id:"mcap",  label:function(C){ return "שווי השוק מתחת ל-" + mcapText(C.l1.mcap); } },
+    { on:function(s){ var C=scanCfg(); return !!state.layers["1"] && !(s.avgVol > C.l1.avgVol); },
+      id:"vol",   label:function(C){ return "נפח המסחר היומי מתחת ל-" + volText(C.l1.avgVol); } },
+    { on:function(s){ var C=scanCfg(); return !!state.layers["2"] && !(s.epsGrowth > C.l2.epsGrowth); },
+      id:"fund",  label:function(){ return "הצמיחה העסקית לא עוברת את רף L2"; } },
+    { on:function(s){ return !!state.layers["3"] && !(s.price > s.sma20); },
+      id:"trend", label:function(){ return "המחיר מתחת לממוצע 20 יום"; } },
+    { on:function(s){ return !!state.layers["3"] && !(s.sma20 > s.sma50 && s.sma50 > s.sma200); },
+      id:"stack", label:function(){ return "הממוצעים לא מסודרים 20>50>200"; } },
+    { on:function(s){ var C=scanCfg(); return C.l3.requirePerf && !!state.layers["3"] && !(s.perf3m > 0 && s.perf6m > 0); },
+      id:"perf",  label:function(){ return "התשואה ב-3 או ב-6 חודשים שלילית"; } },
+    { on:function(s){ var C=scanCfg(); return !!state.layers["4"] && !(s.rsi >= C.l4.rsiMin && s.rsi <= C.l4.rsiMax) && s.rsi < C.l4.rsiMin; },
+      id:"rsiLow",  label:function(C){ return "RSI מתחת ל-" + trimNum(C.l4.rsiMin) + " (אין כוח קנייה)"; } },
+    { on:function(s){ var C=scanCfg(); return !!state.layers["4"] && !(s.rsi >= C.l4.rsiMin && s.rsi <= C.l4.rsiMax) && s.rsi > C.l4.rsiMax; },
+      id:"rsiHigh", label:function(C){ return "RSI מעל " + trimNum(C.l4.rsiMax) + " (המניה כבר רצה)"; } },
+    { on:function(s){ var C=scanCfg(); return !!state.layers["4"] && !(s.dayChange > C.l4.dayMin && s.dayChange < C.l4.dayMax) && s.dayChange <= C.l4.dayMin; },
+      id:"dayLow",  label:function(C){ return "השינוי היומי מתחת ל-+" + trimNum(C.l4.dayMin) + "%"; } },
+    { on:function(s){ var C=scanCfg(); return !!state.layers["4"] && !(s.dayChange > C.l4.dayMin && s.dayChange < C.l4.dayMax) && s.dayChange >= C.l4.dayMax; },
+      id:"dayHigh", label:function(C){ return "השינוי היומי מעל +" + trimNum(C.l4.dayMax) + "% (זינוק חד)"; } },
+    { on:function(s){ var C=scanCfg(); return !!state.layers["4"] && !(s.rvol > C.l4.rvol); },
+      id:"rvol",  label:function(C){ return "נפח יחסי מתחת ל-" + oneDec(C.l4.rvol) + "x"; } },
+    { on:function(s){ var C=scanCfg(); return !!state.layers["4"] && !(s.closeStrength > C.l4.closeStrength); },
+      id:"close", label:function(C){ return "חוזק סגירה מתחת ל-" + trimNum(C.l4.closeStrength) + "%"; } }
+  ];
+
+  var REC_CAUSE = {
+    trend: "רוב השמות נסחרים מתחת לממוצע הקצר, ולכן מסנן המגמה לא מוצא מועמדות — זה בדיוק מה שהוא נועד לעשות ביום ירידות.",
+    stack: "הממוצעים עוד לא התהפכו לסדר עולה, וזה מה שמסמן מגמה אמיתית ולא תיקון זמני.",
+    dayLow:  "ביום שבו רוב המדגם לא עולה, אין מה לרדוף אחרי — וזה תקין.",
+    dayHigh: "השמות שזינקו כבר עברו את הטווח שהשכבה מרשה, וכניסה אחרי זינוק היא רדיפה.",
+    rsiLow:  "כשהמחירים יורדים, ה-RSI של רוב המדגם נשבר מתחת ל-50 — סימן שאין קונים, ולכן אין כניסה.",
+    rsiHigh: "השמות שכן במגמה כבר רצו חזק מדי, והשכבה הזאת קיימת כדי לא לקנות בקצה העלייה.",
+    rvol:  "אין נפח חריג מאחורי התנועה — בלעדיו אין מי שיחזיק את המחיר.",
+    close: "המניות נסגרו חלש בתוך טווח היום, ולכן אין להן את הדחיפה שנדרשת לכניסה.",
+    perf:  "התשואה ב-3 או ב-6 חודשים שלילית — זאת לא מגמה עולה, גם אם היום היה ירוק.",
+    fund:  "הנתונים העסקיים (רווח, מכירות, תשואה על ההון) לא עומדים ברף של L2.",
+    mcap:  "אין במדגם שם קטן מדי — הבעיה כאן היא לא גודל החברה.",
+    vol:   "נפח המסחר היומי דק מדי, ולכן אי אפשר להיכנס ולצאת בלי להזיז את המחיר."
+  };
+
+  function recCause(){
+    var best = null, bestN = 0;
+    REC_CHECKS.forEach(function(c){
+      var n = 0;
+      STOCKS.forEach(function(s){ if (c.on(s)) n++; });
+      if (n > bestN) { bestN = n; best = c; }
+    });
+    if (!best) return "";
+    var head = "הבדיקה שפסלה הכי הרבה שמות היום: " + best.label(scanCfg()) +
+      " (" + bestN + " מתוך " + STOCKS.length + "). ";
+    return head + (REC_CAUSE[best.id] || "המסנן עובד כמו שהוא אמור — עדיף בלי עסקה מאשר עם אחת חלשה.");
+  }
+
+  function recRowHTML(r, rank, nLayers){
+    var s = r.s, z = r.z;
+    var capPct = state.portfolio ? (z.cost / state.portfolio) * 100 : 0;
+    var riskPctOfPort = state.portfolio ? (z.cashRisk / state.portfolio) * 100 : 0;
+    var stopUnder = s.price ? Math.abs((z.stop - s.price) / s.price) * 100 : 0;
+    return '<li class="rec-row" data-rec="' + esc(s.ticker) + '" tabindex="0" role="button" ' +
+        'data-shares="' + z.shares + '" data-stop="' + nv(z.stop, 2) + '" data-target="' + nv(z.target, 2) + '" ' +
+        'data-cost="' + nv(z.cost, 2) + '" data-risk="' + nv(z.cashRisk, 2) + '" ' +
+        'data-riskpct="' + riskPctOfPort.toFixed(2) + '" data-cappct="' + capPct.toFixed(1) + '" ' +
+        'aria-label="פתיחת תוכנית הסיכון של ' + esc(s.ticker) + '">' +
+      '<div class="rec-top">' +
+        '<span class="rec-rank">' + rank + '</span>' +
+        '<span class="tk">' + esc(s.ticker) + '</span>' +
+        '<span class="rec-name">' + esc(s.nameHe) + '</span>' +
+        (z.capped ? '<span class="capped">בתקרה</span>' : '') +
+        '<span class="rec-price">' + N(fmtMoney(s.price)) + ' · ' + N(fmtPct(s.dayChange, 2)) + '</span>' +
+      '</div>' +
+      '<p class="rec-act">' + [
+        '<span class="seg">כניסה ' + N(fmtMoney(s.price)) + '</span>',
+        '<span class="seg"><span class="sep">·</span> סטופ ' + N(fmtMoney(z.stop)) + ' (' + N(stopUnder.toFixed(1) + "%") + ' מתחת)</span>',
+        '<span class="seg"><span class="sep">·</span> ' + N(fmtInt(z.shares)) + ' מניות</span>',
+        '<span class="seg"><span class="sep">·</span> סה״כ ' + N(fmtMoney(z.cost, 0)) + ' (' + N(capPct.toFixed(1) + "%") + ' מהתיק)</span>',
+        '<span class="seg"><span class="sep">·</span> יעד 2R ' + N(fmtMoney(z.target)) + '</span>'
+      ].join(" ") + '</p>' +
+      '<p class="rec-loss">הפסד מקסימלי אם הסטופ נפגע: <b>' + N(fmtMoney(z.cashRisk, 0)) + '</b> · ' +
+        N(riskPctOfPort.toFixed(2) + "%") + ' מהתיק</p>' +
+      '<p class="rec-why"><b class="ltag">למה</b>' + recWhy(s, nLayers) + '</p>' +
+    '</li>';
+  }
+
+  function renderRecs(){
+    var card = document.getElementById("recsCard");
+    var body = document.getElementById("recsBody");
+    var chip = document.getElementById("recsChip");
+    var foot = document.getElementById("recsFoot");
+    var hint = document.getElementById("recsHint");
+    if (!card || !body) return;
+
+    /* never a number before the real data lands — a wrong pick that
+       flashes for 300ms is worse than a loading line */
+    if (!DATA.loaded) {
+      card.className = "card recs loading";
+      if (chip) { chip.hidden = true; chip.textContent = "0"; }
+      if (hint) hint.textContent = "מחכה לנתוני השוק";
+      body.innerHTML = DATA.settled
+        ? '<p class="recs-empty">לא נטענו נתוני שוק — בלי מחירי סגירה אמיתיים אין בסיס להמלצה.' +
+          '</p><p class="recs-sub">אפשר לטעון מחירים חיים מכפתור ״נתוני שוק״, ואז לחזור לכאן.</p>'
+        : '<p class="recs-loading">טוען נתונים…</p>';
+      if (foot) { foot.hidden = true; foot.innerHTML = ""; }
+      return;
+    }
+
+    var R = recPicks();
+    var nLayers = activeLayerCount();
+    var count = R.picks.length;
+    var html = "";
+
+    if (count) {
+      html += '<ol class="rec-list">' +
+        R.picks.map(function(r, i){ return recRowHTML(r, i + 1, nLayers); }).join("") +
+        '</ol>';
+      if (R.blocked.length) {
+        var many = R.blocked.length > 1;
+        html += '<p class="rec-note">' +
+          (many ? 'השמות הבאים נפסלו מההמלצות כי הסטופ שלהן מעל המחיר: '
+                : 'השם הבא נפסל מההמלצות כי הסטופ שלו מעל המחיר: ') +
+          R.blocked.map(function(r){
+            return '<bdi>' + esc(r.s.ticker) + '</bdi> (' + N(fmtMoney(r.z.stop)) + ' מול ' + N(fmtMoney(r.s.price)) + ')';
+          }).join(", ") +
+          ' — אין עסקה בלי מרווח בין הכניסה לסטופ.</p>';
+      }
+    } else if (R.blocked.length) {
+      html += '<p class="recs-empty">המועמדות שנמצאו נפסלו כי הסטופ שלהן מעל המחיר.</p>' +
+        '<p class="recs-sub">הסטופ לפי העוגן שבחרת יושב מעל המחיר ב-' +
+        R.blocked.map(function(r){ return '<bdi>' + esc(r.s.ticker) + '</bdi> (' + N(fmtMoney(r.z.stop)) + ' מול ' + N(fmtMoney(r.s.price)) + ')'; }).join(", ") +
+        ' — במצב כזה אין מספר מניות שאפשר לחשב, ולכן אין המלצה.</p>' +
+        '<p class="recs-sub">אפשר לעבור ל״מינוס 6%״ כעוגן סטופ, או לבדוק שוב מחר.</p>';
+    } else {
+      var nm = nearMiss();
+      var layersTxt = (nLayers === 4 ? "ארבע השכבות" : N(String(nLayers)) + " השכבות הפעילות");
+      html += '<p class="recs-empty">אין המלצות היום — ' + N("0 מתוך " + R.total) +
+        ' עוברות את ' + layersTxt + '.';
+      if (nm) {
+        var act = layerFails(nm.s).filter(function(n){ return state.layers[String(n)]; });
+        html += ' הקרוב ביותר: <bdi>' + esc(nm.s.ticker) + '</bdi> שנכשלה ב-' +
+          '<bdi>' + (act.length ? "L" + act.join("/L") : "—") + '</bdi>.';
+      }
+      html += '</p>';
+      var cause = recCause();
+      if (cause) html += '<p class="recs-sub">' + esc(cause) + '</p>';
+    }
+
+    body.innerHTML = html;
+
+    if (chip) {
+      chip.hidden = false;
+      chip.textContent = String(count);
+    }
+    card.className = "card recs " + (count ? "has" : "none");
+    if (hint) hint.textContent = count
+      ? "מדורג לפי גודל פוזיציה, שוויון נשבר ב-RVOL · מתעדכן עם כל שינוי בהגדרות"
+      : "מוצג רק מה שעובר את כל השכבות הפעילות";
+
+    if (foot) {
+      foot.hidden = false;
+      foot.innerHTML = 'מבוסס על נתוני סגירת ' + N(esc(DATA.asOf || "—")) +
+        ' · חישוב לפי הכללים שלך (' + N(state.riskPct.toFixed(2) + "%") + ' סיכון, תקרה ' + N(String(state.maxCapPct) + "%") + ')' +
+        ' · לא ייעוץ השקעות';
+    }
+
+    Array.prototype.forEach.call(body.querySelectorAll("[data-rec]"), function(row){
+      var t = row.getAttribute("data-rec");
+      row.addEventListener("click", function(){ openDrawer(t); });
+      row.addEventListener("keydown", function(ev){
+        if (ev.key === "Enter" || ev.key === " ") { ev.preventDefault(); openDrawer(t); }
+      });
+    });
+  }
+
+  /* ============================================================
+     CLOCKS + TIMING (America/New_York via Intl — unchanged logic)
+     ============================================================ */
+  function tzParts(tz){
+    var fmt = new Intl.DateTimeFormat("en-US", {
+      timeZone:tz, hour12:false, weekday:"short",
+      hour:"2-digit", minute:"2-digit", second:"2-digit",
+      year:"numeric", month:"short", day:"2-digit"
+    });
+    var parts = fmt.formatToParts(new Date());
+    var o = {};
+    parts.forEach(function(p){ if (p.type !== "literal") o[p.type] = p.value; });
+    if (o.hour === "24") o.hour = "00";
+    return o;
+  }
+  var MONTH_HE = {Jan:"ינו׳",Feb:"פבר׳",Mar:"מרץ",Apr:"אפר׳",May:"מאי",Jun:"יוני",Jul:"יולי",Aug:"אוג׳",Sep:"ספט׳",Oct:"אוק׳",Nov:"נוב׳",Dec:"דצמ׳"};
+  var DAY_HE = {Sun:"א׳",Mon:"ב׳",Tue:"ג׳",Wed:"ד׳",Thu:"ה׳",Fri:"ו׳",Sat:"ש׳"};
+
+  function tickClocks(){
+    try {
+      var ny = tzParts("America/New_York");
+      var il = tzParts("Asia/Jerusalem");
+      var nyMinutes = parseInt(ny.hour,10)*60 + parseInt(ny.minute,10);
+
+      setText("clockNY", ny.hour + ":" + ny.minute + ":" + ny.second);
+      document.getElementById("dateNY").textContent = (DAY_HE[ny.weekday] || "") + " · " + ny.day + " ב" + (MONTH_HE[ny.month] || ny.month) + " " + ny.year;
+      setText("clockIL", il.hour + ":" + il.minute + ":" + il.second);
+      document.getElementById("dateIL").textContent = (DAY_HE[il.weekday] || "") + " · " + il.day + " ב" + (MONTH_HE[il.month] || il.month) + " " + il.year;
+
+      var weekend = (ny.weekday === "Sat" || ny.weekday === "Sun");
+      var dayKey = windowKeyFor(nyMinutes);
+      state.liveWindow = dayKey;
+      document.getElementById("sessionState").textContent = weekend ? "סגור (סוף שבוע)" : (nyMinutes >= 570 && nyMinutes < 960 ? "פתוח" : "סגור");
+      renderTiming(weekend);
+    } catch(e){
+      // Intl timezone data unavailable — keep static labels, never throw
+    }
+  }
+  function setText(id, val, small){
+    var el = document.getElementById(id);
+    if (!el) return;
+    el.textContent = val;
+    if (small) {
+      var s = document.createElement("small");
+      s.textContent = small;
+      el.appendChild(s);
+    }
+  }
+  function windowKeyFor(m){
+    if (m >= 570 && m < 600) return "chaos";
+    if (m >= 600 && m < 630) return "w1";
+    if (m >= 630 && m < 885) return "chop";
+    if (m >= 885 && m < 930) return "w2";
+    return "w3";
+  }
+  function renderTiming(weekend){
+    var key = (state.preview === "auto") ? (state.liveWindow || "w3") : state.preview;
+    var w = WINDOWS[key];
+    var badge = document.getElementById("timingBadge");
+    badge.className = "badge tone-" + w.tone;
+    document.getElementById("timingLabel").textContent = w.label;
+    document.getElementById("timingAction").textContent = w.action;
+    document.getElementById("timingRange").textContent = w.range;
+    var pill = document.getElementById("previewPill");
+    pill.hidden = (state.preview === "auto");
+    var sched = [["chaos","כאוס","09:30"],["w1","חלון 1","10:00"],["chop","דשדוש","10:30"],["w2","חלון 2","14:45"],["w3","חלון 3","15:30"]];
+    document.getElementById("timingSched").innerHTML = sched.map(function(it){
+      return '<span class="sched' + (it[0] === key ? " on" : "") + '">' + it[1] + '<span class="tm">' + it[2] + '</span></span>';
+    }).join("");
+    var rh = document.getElementById("radarHint");
+    if (rh) rh.textContent = (state.sector ? "מסונן לסקטור " + state.sector + " · לחיצה נוספת מבטלת" : "שמות שעברו, לפי סקטור · לחיצה מסננת את הטבלה");
+    var meta = document.querySelector(".timing-meta");
+    if (meta) meta.title = w.note;
+    var cap = document.getElementById("timingCap");
+    if (cap) cap.textContent = weekend ? "השוק סגור · חלון " + w.label : "חלון סריקה עכשיו";
+  }
+
+  /* ============================================================
+     RISK BAR RENDER
+     ============================================================ */
+  function renderRisk(){
+    var pIn = document.getElementById("portfolioInput");
+    if (document.activeElement !== pIn) pIn.value = String(state.portfolio);
+    var rIn = document.getElementById("riskSlider");
+    rIn.value = String(state.riskPct);
+    document.getElementById("riskValue").textContent = state.riskPct.toFixed(2) + "%";
+    var cIn = document.getElementById("capInput");
+    if (document.activeElement !== cIn) cIn.value = String(state.maxCapPct);
+    document.querySelectorAll('input[name="stopMode"]').forEach(function(el){
+      el.checked = (el.value === state.stopMode);
+    });
+    var modeLabel = state.stopMode === "sma50" ? "ממוצע 50" : (state.stopMode === "fixed" ? "מינוס 6%" : "הצמוד מביניהם");
+    document.getElementById("stopModeHint").textContent = modeLabel;
+
+    var riskDollars = state.portfolio * state.riskPct / 100;
+    var capDollars = state.portfolio * state.maxCapPct / 100;
+
+    /* what the risk engine actually ends up risking, after the cap is applied */
+    var allZ = passing().map(function(s){ return sizing(s); });
+    var zRows = allZ.filter(function(z){ return !z.invalid; });
+    var blockedN = allZ.length - zRows.length;
+    var cappedN = zRows.filter(function(z){ return z.capped; }).length;
+    var effRisk = zRows.length ? zRows.reduce(function(a, z){
+      return a + (z.cashRisk / state.portfolio) * 100; }, 0) / zRows.length : 0;
+    var wallWide = zRows.filter(function(z){ return z.wide; }).length;
+    var effTone = (zRows.length && effRisk < state.riskPct * 0.9) ? "am" : "em";
+    var effNote = zRows.length
+      ? cappedN + " מתוך " + zRows.length + " מוגבלות בתקרה של " + state.maxCapPct + "%"
+      : "אין שורה זכאית לחישוב כרגע";
+    if (blockedN) effNote += " · " + blockedN + " עם סטופ מעל המחיר";
+
+    document.getElementById("riskSummary").innerHTML = [
+      stat("סיכון לעסקה", N(fmtMoney(riskDollars, 0)), "em", "1R · " + state.riskPct.toFixed(2) + "% מהתיק", "riskPerTrade"),
+      stat("סיכון אפקטיבי", N(effRisk.toFixed(2) + "%"), effTone,
+           effNote, "effectiveRisk", "effRisk"),
+      stat("פוזיציה מקסימלית", N(fmtMoney(capDollars, 0)), "am", state.maxCapPct + "% מהתיק למניה" + (wallWide ? " · " + wallWide + " עם סטופ רחב" : ""), "positionCap"),
+      stat("עוגן הסטופ", modeLabel, "txt", state.stopMode === "fixed" ? "מחיר × 0.94" : (state.stopMode === "sma50" ? "ממוצע 50 יום" : "הגבוה מבין ממוצע 50 למינוס 6%"), "stopLoss"),
+      stat("מניות שעוברות", N(passing().length + " / " + STOCKS.length), "", "לפי השכבות הפעילות", null)
+    ].join("");
+
+    var sbR = document.getElementById("sbRisk");
+    if (sbR) sbR.textContent = fmtMoney(riskDollars, 0);
+    var sbE = document.getElementById("sbEff");
+    if (sbE) sbE.textContent = effRisk.toFixed(2) + "%";
+    var sbC = document.getElementById("sbCap");
+    if (sbC) sbC.textContent = fmtMoney(capDollars, 0);
+    var sbP = document.getElementById("sbPass");
+    if (sbP) sbP.textContent = passing().length + "/" + STOCKS.length;
+  }
+  function stat(k, v, tone, note, termKey, valId){
+    return '<div class="stat"><div class="k">' + esc(k) + (termKey ? q(termKey) : "") + '</div>' +
+      '<div class="v ' + (tone || "") + '"' + (valId ? ' id="' + valId + '"' : '') + '>' + v + '</div>' +
+      '<div class="n">' + esc(note) + '</div></div>';
+  }
+
+  /* ============================================================
+     RADAR RENDER
+     ============================================================ */
+  function renderRadar(){
+    var rows = passing();
+    var sec = computeSectors();          /* top 8 by count, everything else → 'אחר' */
+    var groups = {};
+    rows.forEach(function(s){
+      var k = sec.top.indexOf(s.sector) !== -1 ? s.sector
+            : (sec.rest.length ? "__other__" : s.sector);
+      if (!groups[k]) groups[k] = { key:k, n:0, rvol:0, day:0, rest:0 };
+      groups[k].n++;
+      groups[k].rvol += s.rvol;
+      groups[k].day  += s.dayChange;
+      if (k === "__other__" && s.sector !== "__other__") groups[k].sectors = (groups[k].sectors || 0) + 1;
+    });
+    var totalRvol = rows.length ? rows.reduce(function(a,s){ return a + s.rvol; }, 0) / rows.length : 0;
+    var totalDay  = rows.length ? rows.reduce(function(a,s){ return a + s.dayChange; }, 0) / rows.length : 0;
+
+    var html = '';
+    html += '<button class="radar-card all" data-sector="" aria-pressed="' + (state.sector ? "false" : "true") + '">' +
+              '<div class="rc-top"><span class="rc-name">כל הסקטורים</span><span class="rc-count">' + N(String(rows.length)) + '</span></div>' +
+              '<div class="rc-rvol">' + N(nv(totalRvol, 2)) + '<span>x</span></div>' +
+              '<div class="rc-sub">נפח יחסי ממוצע</div>' +
+              '<div class="rc-bar"><i style="width:' + Math.min(100, (totalRvol / 3) * 100).toFixed(1) + '%"></i></div>' +
+              '<div class="rc-foot">' + N(fmtPct(totalDay)) + ' ממוצע יומי</div>' +
+            '</button>';
+
+    Object.keys(groups).sort(function(a,b){
+      if (a === "__other__") return 1;
+      if (b === "__other__") return -1;
+      return groups[b].n - groups[a].n || a.localeCompare(b);
+    }).forEach(function(k){
+      var g = groups[k];
+      var avg = g.rvol / g.n;
+      var sel = (state.sector === k);
+      var label = (k === "__other__") ? "אחר" : k;
+      html += '<button class="radar-card" data-sector="' + esc(k) + '" aria-pressed="' + (sel ? "true" : "false") + '" aria-label="סינון הטבלה לסקטור ' + esc(label) + '">' +
+                '<div class="rc-top"><span class="rc-name">' + esc(label) + '</span><span class="rc-count">' + N(String(g.n)) + '</span></div>' +
+                '<div class="rc-rvol">' + N(nv(avg, 2)) + '<span>x</span></div>' +
+                '<div class="rc-sub">נפח יחסי ממוצע</div>' +
+                '<div class="rc-bar"><i style="width:' + Math.min(100, (avg / 3) * 100).toFixed(1) + '%"></i></div>' +
+                '<div class="rc-foot">' + N(fmtPct(g.day / g.n)) + ' · ' + (g.n === 1 ? "שם אחד" : g.n + " שמות") +
+                  (k === "__other__" ? ' · ' + (g.sectors || 0) + ' סקטורים' : '') + '</div>' +
+              '</button>';
+    });
+    document.getElementById("radarGrid").innerHTML = html;
+
+    document.querySelectorAll(".radar-card").forEach(function(card){
+      card.addEventListener("click", function(){
+        var s2 = card.getAttribute("data-sector") || "";
+        state.sector = s2 ? (state.sector === s2 ? null : s2) : null;
+        state.limit = PAGE_SIZE;
+        renderAll();
+      });
+    });
+  }
+
+  /* ============================================================
+     LAYERS RENDER
+     ============================================================ */
+  /* ============================================================
+     SCAN PROFILE RENDER — selector, banner, active label
+     ============================================================ */
+  var PROFILE_MS = 0;
+
+  function profileNames(){ return Object.keys(PROFILES); }
+
+  function buildProfileSeg(){
+    var seg = document.getElementById("profileSeg");
+    if (!seg) return;
+    seg.innerHTML = profileNames().map(function(name){
+      return '<button type="button" class="profile-btn" role="radio" aria-checked="false" data-profile="' + esc(name) + '">' +
+        '<b>' + esc(name) + '</b><small>' + esc(PROFILES[name].hint) + '</small></button>';
+    }).join("");
+    Array.prototype.forEach.call(seg.querySelectorAll("[data-profile]"), function(btn){
+      btn.addEventListener("click", function(){ setProfile(btn.getAttribute("data-profile")); });
+      btn.addEventListener("keydown", function(ev){
+        if (ev.key === "ArrowRight" || ev.key === "ArrowLeft" || ev.key === "ArrowDown" || ev.key === "ArrowUp"){
+          ev.preventDefault();
+          var names = profileNames();
+          var i = names.indexOf(state.profile);
+          var step = (ev.key === "ArrowRight" || ev.key === "ArrowDown") ? 1 : -1;
+          setProfile(names[(i + step + names.length) % names.length]);
+          var next = seg.querySelector('[data-profile="' + state.profile + '"]');
+          if (next) next.focus();
+        }
+      });
+    });
+    renderProfile();
+  }
+
+  function setProfile(name){
+    if (!PROFILES[name] || state.profile === name) return false;
+    state.profile = name;
+    save();
+    var t0 = (window.performance && performance.now) ? performance.now() : Date.now();
+    renderAll();
+    PROFILE_MS = ((window.performance && performance.now) ? performance.now() : Date.now()) - t0;
+    return true;
+  }
+
+  function renderProfile(){
+    var name = state.profile;
+    var P = PROFILES[name] || PROFILES[PROFILE_DEFAULT];
+    Array.prototype.forEach.call(document.querySelectorAll("[data-profile]"), function(b){
+      var sel = b.getAttribute("data-profile") === name;
+      b.setAttribute("aria-checked", sel ? "true" : "false");
+      b.setAttribute("tabindex", sel ? "0" : "-1");
+    });
+    var active = document.getElementById("profileActive");
+    if (active) active.textContent = P.label;
+    var banner = document.getElementById("profileBanner");
+    if (banner){
+      var strict = (name === PROFILE_DEFAULT);
+      banner.hidden = strict;
+      banner.textContent = strict ? "" :
+        "פרופיל " + P.label + " פעיל — הספים מרוככים מהברירת-מחדל" +
+        (cfgDiffCount() ? " (" + cfgDiffCount() + " ספים מותאמים)" : "");
+    }
+  }
+
+  function renderLayers(){
+    var total = STOCKS.length;
+    var C = scanCfg();
+    var diffs = cfgDiffs();
+    var html = LAYERS.map(function(L){
+      var on = !!state.layers[String(L.n)];
+      var passingLayer = STOCKS.filter(function(s){ return layerFails(s).indexOf(L.n) === -1; }).length;
+      var chips = (diffs[L.n] || []).map(function(t){
+        return '<span class="adj-chip" data-adj="' + L.n + '">מותאם: ' + esc(t) + '</span>';
+      }).join("");
+      return '<div class="layer-card' + (on ? "" : " off") + '" data-layer="' + L.n + '">' +
+        '<div class="lc-head">' +
+          '<span class="lc-num">L' + L.n + '</span>' +
+          '<div><div class="lc-title">' + esc(L.title) + '</div><div class="lc-sub">' + esc(L.sub) + '</div></div>' +
+          '<label class="switch" title="הפעלה או כיבוי של שכבה ' + L.n + '">' +
+            '<input type="checkbox" data-layer-toggle="' + L.n + '"' + (on ? " checked" : "") + ' aria-label="הפעלת שכבת ' + esc(L.title) + '">' +
+            '<span></span></label>' +
+        '</div>' +
+        (chips ? '<div class="adj-row" aria-label="ספים מותאמים בשכבה ' + L.n + '">' + chips + '</div>' : '') +
+        '<ul class="lc-list">' + L.rules(C).map(function(r){
+          /* institutional ownership is the one L2 rule that can be missing:
+             it is labelled with its provenance and, when the provider sends
+             nothing, says so instead of pretending the value is under 50% */
+          if (!/מוסדיים/.test(r)) return '<li>' + esc(r) + '</li>';
+          return '<li class="skipped">' + esc(r) + ' — <b>לא זמין</b> כשאין ערך, ולכן מדולג ' +
+            '<span class="srcchip ref">עזר</span></li>';
+        }).join("") + '</ul>' +
+        '<div class="lc-count"><b>' + N(passingLayer + " / " + total) + '</b> עוברות את השכבה' + (on ? "" : " · כבויה") + '</div>' +
+        (L.n === 2 && instOwnMissing()
+          ? '<div class="lc-note" id="instSkipNote">בדיקת מוסדיים לא הייתה זמינה ל-' +
+              N(String(instOwnMissing())) + ' מניות ולכן דולגה — היעדר נתון לא נחשב כישלון.</div>'
+          : '') +
+      '</div>';
+    }).join("");
+    document.getElementById("layersGrid").innerHTML = html;
+
+    document.querySelectorAll("[data-layer-toggle]").forEach(function(cb){
+      cb.addEventListener("change", function(){
+        var n = cb.getAttribute("data-layer-toggle");
+        state.layers[n] = cb.checked;
+        save();
+        renderAll();
+      });
+    });
+  }
+
+  /* ============================================================
+     TABLE RENDER
+     ============================================================ */
+  function sortValue(s, key){
+    var z = sizing(s);
+    switch(key){
+      case "ticker": return s.ticker;
+      case "sector": return s.sector;
+      case "price":  return s.price;
+      case "day":    return s.dayChange;
+      case "rvol":   return s.rvol;
+      case "rsi":    return s.rsi;
+      case "eps":    return s.epsGrowth;
+      case "stop":   return z.stop;
+      case "shares": return z.shares;
+      case "cost":   return z.cost;
+      case "risk":   return z.cashRisk;
+      case "target": return z.target;
+      default:       return s.rvol;
+    }
+  }
+  /* --- search verdicts -------------------------------------------------
+     layerFails() is the single source of truth. The chip reports the FULL
+     4-layer verdict (not the toggled view): 'עוברת 4/4' or the first layer
+     that failed. The reason is the same failDetails()[0] string the closest
+     box prints, so the number in the row always matches the file.
+     Cached per render pass — one row can be asked for its status twice
+     (sort key + cell) and 297 names x 16 checks is not worth doing twice. */
+  var ST_CACHE = {};
+
+  function resetCaches(){ ST_CACHE = {}; EV_CACHE = {}; }
+
+  function statusOf(s){
+    if (ST_CACHE[s.ticker]) return ST_CACHE[s.ticker];
+    var fails = layerFails(s);
+    var det = fails.length ? failDetails(s) : [];
+    ST_CACHE[s.ticker] = {
+      fails:fails,
+      det:det,                  /* kept so the closest box never rebuilds it */
+      nf:fails.length,          /* 1st sort key — 0 means it passes */
+      nd:det.length,            /* 2nd sort key — individual failed checks */
+      pass:!fails.length,
+      why:det.length ? det[0].text : ""
+    };
+    return ST_CACHE[s.ticker];
+  }
+
+  function statusChipHTML(st){
+    if (st.pass) return '<span class="stchip pass" data-st="pass">עוברת 4/4</span>';
+    return '<span class="stchip fail" data-st="fail" data-layer="' + st.fails[0] + '">' +
+      'נפסלה ב-L' + st.fails[0] + '</span>';
+  }
+
+  function statusHTML(st){
+    return '<div class="st-state">' + statusChipHTML(st) +
+      (st.pass ? '' : '<span class="st-why">' + st.why + '</span>') + '</div>';
+  }
+
+  /* search mode: everything matched is rendered — passing rows first, then by
+     failed layers, then by failed checks, then by the user's own sort key */
+  function searchSortedRows(){
+    var sv = state.sortKey, dir = state.sortDir;
+    var scored = searchPool().map(function(s){
+      return { s:s, st:statusOf(s), v:sortValue(s, sv) };
+    });
+    scored.sort(function(a, b){
+      if (a.st.nf !== b.st.nf) return a.st.nf - b.st.nf;
+      if (a.st.nd !== b.st.nd) return a.st.nd - b.st.nd;
+      var va = a.v, vb = b.v;
+      if (typeof va === "string" || typeof vb === "string") {
+        var c = String(va).localeCompare(String(vb)) * dir;
+        if (c) return c;
+      } else if (isFinite(va) && isFinite(vb) && va !== vb) {
+        return (va - vb) * dir;
+      }
+      return a.s.ticker.localeCompare(b.s.ticker);
+    });
+    return scored.map(function(r){ return r.s; });
+  }
+
+  function sortedRows(){
+    computeSectors();                       /* sector top-8 affects the filter */
+    if (searchActive()) return searchSortedRows();   /* toggles never hide a match */
+    var pool = searchRows();                /* full universe: search + sector */
+    var rows = pool.filter(function(s){ return evaluator(s).pass; });
+    rows.sort(function(a,b){
+      var va = sortValue(a, state.sortKey), vb = sortValue(b, state.sortKey);
+      if (typeof va === "string" || typeof vb === "string") {
+        return String(va).localeCompare(String(vb)) * state.sortDir;
+      }
+      if (!isFinite(va) && !isFinite(vb)) return 0;
+      if (!isFinite(va)) return 1;          /* missing numbers always sink */
+      if (!isFinite(vb)) return -1;
+      return (va - vb) * state.sortDir;
+    });
+    return rows;
+  }
+
+  function trendGlyph(s){
+    var ok = (s.price > s.sma20 && s.sma20 > s.sma50 && s.sma50 > s.sma200);
+    return '<span class="trend">' + (ok ? '▲▲▲ ' + N("20&gt;50&gt;200") : '<span class="mixed">▲ מבנה מעורב</span>') + '</span>';
+  }
+  function rsiChip(s){
+    var warm = s.rsi > 65;
+    return '<span class="rsi-chip' + (warm ? " warm" : "") + '">RSI ' + N(nv(s.rsi, 0)) + '</span>';
+  }
+
+  function rowHTML(s){
+    var z = sizing(s);
+    var st = searchActive() ? statusOf(s) : null;   /* verdict chip only in search mode */
+    var capPct = state.portfolio ? (z.cost / state.portfolio) * 100 : 0;
+    var riskPctOfPort = state.portfolio ? (z.cashRisk / state.portfolio) * 100 : 0;
+    var stopDist = s.price ? ((z.stop - s.price) / s.price) * 100 : 0;
+    var tgtPct = s.price ? ((z.target - s.price) / s.price) * 100 : 0;
+    var closeW = clamp(s.closeStrength, 0, 100);
+    var bad = z.invalid;
+    var stopCell = bad
+      ? '<td class="stop-cell"><div class="cell-2">' +
+          '<span class="stop">' + N(fmtMoney(z.stop)) + '</span>' +
+          '<span class="overstop">סטופ מעל המחיר — לא לכניסה</span>' +
+          '<span class="anchor">ממוצע 50 <b>' + N(fmtPct(z.smaDistPct, 1)) + '</b> מהמחיר</span>' +
+        '</div></td>'
+      : '<td class="stop-cell"><div class="cell-2"><span class="stop">' + N(fmtMoney(z.stop)) + '</span>' +
+        '<span class="dist">' + N(fmtPct(stopDist, 1)) + ' מהכניסה' +
+          (z.wide ? ' <span class="wide">רחב</span>' : '') + '</span>' +
+        '<span class="anchor' + (z.winner === "sma50" ? " win" : "") + '">ממוצע 50 <b>' +
+          N(fmtPct(z.smaDistPct, 1)) + '</b> · ' + (z.winner === "sma50" ? "המבנה קובע" : "הקבוע קובע") + '</span>' +
+        '</div></td>';
+    var sizeCell = bad
+      ? '<td><div class="size-cell"><div class="size-line"><b class="overstop">—</b> אין עסקה · הסטופ לא מתחת לכניסה</div>' +
+        '<div class="size-line risk-line">הפסד מקס׳ <b>' + N(fmtMoney(0, 0)) + '</b><span class="pct">' + N("0.00%") + '</span></div>' +
+        '<div class="size-line tgt-line">יעד 2R <b>—</b><span class="pct">אין</span></div></div></td>'
+      : '<td><div class="size-cell">' +
+        '<div class="size-line"><b>' + N(fmtInt(z.shares)) + '</b> מניות · <b>' + N(fmtMoney(z.cost, 0)) + '</b>' +
+          '<span class="pct">' + N(capPct.toFixed(1) + "%") + '</span>' + (z.capped ? '<span class="capped">בתקרה</span>' : "") + '</div>' +
+        '<div class="size-line risk-line">הפסד מקס׳ <b>' + N(fmtMoney(z.cashRisk, 0)) + '</b><span class="pct">' + N(riskPctOfPort.toFixed(2) + "%") + '</span></div>' +
+        '<div class="size-line tgt-line">יעד 2R <b>' + N(fmtMoney(z.target)) + '</b><span class="pct">' + N(fmtPct(tgtPct, 1)) + '</span></div>' +
+      '</div></td>';
+    return '<tr class="row' + (bad ? " norow" : "") + (st && !st.pass ? " rej" : "") +
+        '" tabindex="0" data-ticker="' + esc(s.ticker) + '" aria-label="פתיחת הפרטים של ' + esc(s.ticker) + '">' +
+      '<td><div class="tk-cell"><div class="tk-line"><span class="tk">' + esc(s.ticker) + '</span>' +
+        (s.live ? '<span class="livechip" title="המחיר והשינוי היומי נטענו עכשיו מהספק">חי</span>' : '') + '</div>' +
+        '<span class="tk-name">' + esc(s.nameHe) + '</span>' +
+        '<span class="sbadge">' + esc(s.sector) + '</span>' +
+        (st ? statusHTML(st) : '') + '</div></td>' +
+      '<td><div class="cell-2"><span class="price">' + N(fmtMoney(s.price)) + '</span>' +
+        '<span class="chg' + (s.dayChange < 0 ? " neg" : "") + '">' + N(fmtPct(s.dayChange, 2)) + '</span></div></td>' +
+      '<td><div class="cell-2"><span class="rvol hot">' + N(nv(s.rvol, 2) + "x") + '</span>' +
+        '<span class="sub">סגירה ' + N(nv(s.closeStrength, 0) + "%") + '</span>' +
+        '<div class="bar-mini' + (s.closeStrength < 70 ? " am" : "") + '"><i style="width:' + nv(clamp(closeW, 0, 100), 0) + '%"></i></div></div></td>' +
+      '<td><div class="cell-2">' + trendGlyph(s) + rsiChip(s) + '</div></td>' +
+      '<td><div class="cell-2"><span class="sub">רווח ' + N(fmtPct(s.epsGrowth)) + srcTag(s, "epsGrowth") + '</span>' +
+        '<span class="sub">הון ' + N(nv(s.roe, 1) + "%") + srcTag(s, "roe") + '</span>' +
+        '<span class="sub">מכפיל ' + N(nv(s.pe, 1)) + srcTag(s, "pe") + '</span>' +
+        '<span class="fin-src">Finnhub</span></div></td>' +
+      stopCell + sizeCell +
+    '</tr>';
+  }
+
+  function cardHTML(s){
+    var z = sizing(s);
+    var st = searchActive() ? statusOf(s) : null;   /* same verdict as the row */
+    var bad = z.invalid;
+    var capPct = state.portfolio ? (z.cost / state.portfolio) * 100 : 0;
+    var riskPctOfPort = state.portfolio ? (z.cashRisk / state.portfolio) * 100 : 0;
+    var stopDist = s.price ? ((z.stop - s.price) / s.price) * 100 : 0;
+    var tgtPct = s.price ? ((z.target - s.price) / s.price) * 100 : 0;
+    var gridCells = bad
+      ? '<div class="mc-cell"><div class="k">נפח יחסי / סגירה</div><div class="v">' + N(nv(s.rvol, 2) + "x") + ' <span class="pct">· ' + N(nv(s.closeStrength, 0) + "%") + '</span></div></div>' +
+        '<div class="mc-cell"><div class="k">RSI</div><div class="v">' + N(nv(s.rsi, 0)) + ' <span class="pct">' + (s.price > s.sma20 ? 'מעל ממוצע 20' : 'מתחת לממוצע 20') + '</span></div></div>' +
+        '<div class="mc-cell"><div class="k">סטופ</div><div class="v">' + N(fmtMoney(z.stop)) + ' <span class="pct">' + N(fmtPct(stopDist, 1)) + '</span></div></div>' +
+        '<div class="mc-cell wide"><div class="k">החלטה</div><div class="v overstop">סטופ מעל המחיר — לא לכניסה</div></div>'
+      : '<div class="mc-cell"><div class="k">נפח יחסי / סגירה</div><div class="v">' + N(nv(s.rvol, 2) + "x") + ' <span class="pct">· ' + N(nv(s.closeStrength, 0) + "%") + '</span></div></div>' +
+        '<div class="mc-cell"><div class="k">RSI</div><div class="v">' + N(nv(s.rsi, 0)) + ' <span class="pct">' + (s.price > s.sma20 ? 'מעל ממוצע 20' : 'מתחת לממוצע 20') + '</span></div></div>' +
+        '<div class="mc-cell"><div class="k">סטופ</div><div class="v">' + N(fmtMoney(z.stop)) + ' <span class="pct">' + N(fmtPct(stopDist, 1)) + '</span></div></div>' +
+        '<div class="mc-cell"><div class="k">מניות</div><div class="v">' + N(fmtInt(z.shares)) + (z.capped ? ' <span class="capped">בתקרה</span>' : '') + '</div></div>' +
+        '<div class="mc-cell"><div class="k">הקצאה</div><div class="v">' + N(fmtMoney(z.cost, 0)) + ' <span class="pct">' + N(capPct.toFixed(1) + "%") + '</span></div></div>' +
+        '<div class="mc-cell"><div class="k">הפסד מקסימלי</div><div class="v" style="color:var(--red)">' + N(fmtMoney(z.cashRisk, 0)) + ' <span class="pct">' + N(riskPctOfPort.toFixed(2) + "%") + '</span></div></div>' +
+        '<div class="mc-cell wide"><div class="k">יעד 2R</div><div class="v" style="color:var(--green)">' + N(fmtMoney(z.target)) + ' <span class="pct">' + N(fmtPct(tgtPct, 1)) + '</span></div></div>';
+    return '<button class="mcard' + (bad ? " norow" : "") + (st && !st.pass ? " rej" : "") + '" data-ticker="' + esc(s.ticker) + '" aria-label="פתיחת הפרטים של ' + esc(s.ticker) + '">' +
+      '<div class="mc-top"><span class="tk">' + esc(s.ticker) + '</span>' +
+        (s.live ? '<span class="livechip">חי</span>' : '') +
+        '<span class="mc-price"><span class="price">' + N(fmtMoney(s.price)) + '</span> <span class="chg">' + N(fmtPct(s.dayChange, 2)) + '</span></span>' +
+        '<span class="sbadge">' + esc(s.sector) + '</span></div>' +
+      '<div class="mc-name">' + esc(s.nameHe) + '</div>' +
+      (st ? '<div class="mc-state">' + statusChipHTML(st) +
+        (st.pass ? '' : '<span class="st-why">' + st.why + '</span>') + '</div>' : '') +
+      '<div class="mc-grid">' + gridCells + '</div>' +
+      '<div class="mc-foot">לחיצה לגרף, תוכנית סיכון וכרטיס הזמנה ←</div>' +
+    '</button>';
+  }
+
+  function renderTable(){
+    var t0 = (window.performance && performance.now) ? performance.now() : Date.now();
+    ST_CACHE = {};                          /* verdicts are per data state */
+    EV_CACHE = {};                          /* layer verdicts are per toggle state */
+    var rows = sortedRows(), total = rows.length;
+    var shown = rows.slice(0, state.limit);
+
+    document.getElementById("resultsChip").textContent = total + (total === 1 ? " שם" : " שמות");
+    var pc = document.getElementById("passChip");
+    if (pc) pc.textContent = passing().length + " / " + STOCKS.length;
+
+    var thead = document.querySelectorAll("#stockTable thead th");
+    thead.forEach(function(th){
+      var k = th.getAttribute("data-sort");
+      th.classList.toggle("sorted", k === state.sortKey);
+      var old = th.querySelector(".arw");
+      if (old) old.remove();
+      if (k === state.sortKey) {
+        var a = document.createElement("span");
+        a.className = "arw";
+        a.textContent = state.sortDir > 0 ? "▲" : "▼";
+        th.appendChild(a);
+      }
+    });
+
+    var body = document.getElementById("stockBody");
+    var cards = document.getElementById("cardList");
+    var searching = searchActive();
+    var pool = searching ? searchPool() : searchRows();
+
+    /* search mode changes what the table promises: every match, plus a chip */
+    var tableEl = document.getElementById("stockTable");
+    if (tableEl) tableEl.classList.toggle("searching", searching);
+    var noteEl = document.getElementById("searchNote");
+    if (noteEl) noteEl.hidden = !searching;
+
+    if (!rows.length) {
+      var msg;
+      if (state.q.trim() && !pool.length) {
+        msg = "לא נמצאה מניה בשם/טיקר הזה. היקום הוא " + STOCKS.length +
+          " המניות הנזילות מעל $2B — אם תרצה מניה אחרת, אפשר להוסיף אותה לריצה היומית.";
+      } else if (state.q.trim()) {
+        msg = "אין מניה שעוברת את כל השכבות בתוצאות החיפוש. נקה את החיפוש או כבה שכבה.";
+      } else if (state.sector) {
+        msg = "אין מניה שעוברת את כל השכבות בסקטור הזה. כבו שכבה או בטלו את הסינון.";
+      } else {
+        var nm = nearMiss();
+        msg = nm
+          ? "0 מתוך " + STOCKS.length + " עוברות את כל השכבות עם הנתונים של " +
+            (DATA.loaded && DATA.asOf ? "סגירת " + DATA.asOf : "הנתונים הנוכחיים") +
+            ". הקרוב ביותר: " + nm.s.ticker + " — נכשלת ב-L" + nm.fails.join("/L") +
+            ". כבו שכבה כדי לראות מה היא מפסידה."
+          : "אין מניה שעוברת את כל השכבות. כבו שכבה או בטלו את הסינון.";
+      }
+      body.innerHTML = '<tr><td colspan="7"><div class="no-rows">' + esc(msg) + '</div></td></tr>';
+      cards.innerHTML = '<div class="no-rows">' + esc(msg) + '</div>';
+    } else {
+      body.innerHTML = shown.map(rowHTML).join("");
+      cards.innerHTML = shown.map(cardHTML).join("");
+    }
+
+    /* only the rendered page gets listeners — never the whole universe */
+    body.querySelectorAll("tr[data-ticker]").forEach(function(el){
+      el.addEventListener("click", function(){ openDrawer(el.getAttribute("data-ticker")); });
+      el.addEventListener("keydown", function(ev){
+        if (ev.key === "Enter" || ev.key === " ") { ev.preventDefault(); openDrawer(el.getAttribute("data-ticker")); }
+      });
+    });
+    cards.querySelectorAll(".mcard").forEach(function(el){
+      el.addEventListener("click", function(){ openDrawer(el.getAttribute("data-ticker")); });
+    });
+
+    /* filtered-out chips: capped, because the universe can be hundreds of names */
+    var out = STOCKS.filter(function(s){ return !evaluator(s).pass; });
+    var fo = document.getElementById("filteredOut");
+    var CHIPS = 24;
+    if (!out.length) {
+      fo.innerHTML = "";
+    } else {
+      fo.innerHTML = '<span class="lbl">נפסלו</span>' + out.slice(0, CHIPS).map(function(s){
+        var e = evaluator(s);
+        return '<button class="fchip" data-chip="' + esc(s.ticker) + '" title="פתיחת הפרטים של ' + esc(s.ticker) + '">' +
+          esc(s.ticker) + (s.live ? '<span class="fc-price">' + N(fmtMoney(s.price)) + '</span>' : '') +
+          '<b>L' + e.active.join("/L") + '</b></button>';
+      }).join("") + (out.length > CHIPS ? '<span class="lbl more">ועוד ' + (out.length - CHIPS) + '</span>' : "");
+      fo.querySelectorAll("[data-chip]").forEach(function(b){
+        b.addEventListener("click", function(){ openDrawer(b.getAttribute("data-chip")); });
+      });
+    }
+
+    /* paging: one page in the DOM, the counter always covers the full set */
+    var pager = document.getElementById("pager");
+    if (pager) {
+      if (!total) {
+        pager.innerHTML = "";
+      } else {
+        pager.innerHTML = '<span class="p-note">מציג ' + N(String(shown.length)) + ' מתוך ' + N(String(total)) +
+          (searching ? ' בתוצאות החיפוש' : ' עוברות') + '</span>' +
+          (total > shown.length
+            ? '<button type="button" class="btn-ghost p-more" id="moreBtn">הצג עוד ' + PAGE_SIZE + '</button>'
+            : '<span class="p-done">הכול מוצג</span>');
+        var more = document.getElementById("moreBtn");
+        if (more) more.addEventListener("click", function(){
+          state.limit += PAGE_SIZE;
+          renderTable();
+        });
+      }
+    }
+
+    /* the search counter mirrors the live pool, not the page */
+    var sc = document.getElementById("searchCount");
+    if (sc) {
+      sc.innerHTML = state.q.trim()
+        ? 'מציג ' + N(String(pool.length)) + ' מתוך ' + N(String(STOCKS.length))
+        : N(String(STOCKS.length)) + ' מניות ביקום';
+    }
+
+    /* the zero-results fallback — ranked near-misses with the exact failing check */
+    renderClosest();
+    RENDER_MS = ((window.performance && performance.now) ? performance.now() : Date.now()) - t0;
+  }
+
+  function renderTraps(){
+    var slot = document.getElementById("trapSlot");
+    if (!state.showRejects) { slot.innerHTML = ""; return; }
+    slot.innerHTML = '<div class="traps">' +
+      '<div class="traps-head"><h3>דוגמאות שנפסלו — ולמה</h3>' +
+        '<span class="note">דוגמאות המחשה בלבד · לא חלק מהיקום ולא נכנסות לשום חישוב<span class="srcchip ref">המחשה</span></span></div>' +
+      TRAPS.map(function(t){
+        return '<div class="trap">' +
+          '<div class="ttk">' + esc(t.ticker) + '<small>' + esc(t.flag) + '</small></div>' +
+          '<div><div class="tname">' + esc(t.name) + '</div>' +
+            '<div class="treason">' + esc(t.reason) + '</div>' +
+            '<div class="tmetric">' + t.metrics.map(function(m){ return '<span>' + esc(m) + '</span>'; }).join("") + '</div>' +
+          '</div>' +
+          '<span class="flag">נפסלה</span>' +
+        '</div>';
+      }).join("") +
+      '</div>';
+  }
+
+  /* ============================================================
+     DRAWER — chart, ticket, checklist, links
+     ============================================================ */
+  function monthLabels(n){
+    var out = [], now = new Date();
+    for (var i = n - 1; i >= 0; i--) {
+      var d = new Date(now.getFullYear(), now.getMonth() - i, 1);
+      out.push(d.toLocaleString("he-IL", { month:"short" }));
+    }
+    return out;
+  }
+
+  /* The file carries no OHLC history — only the last close plus the 3m/6m
+     returns. So the price line is anchored on three real points (6 months
+     ago, 3 months ago, the close) and interpolated between them. It is an
+     approximation and the chart says so; the SMA lines are the real values. */
+  function priceSeries(s){
+    var p = s.price;
+    var r6 = isFinite(s.perf6m) ? s.perf6m : null;
+    var r3 = isFinite(s.perf3m) ? s.perf3m : null;
+    if (!(p > 0) || r6 === null || r3 === null) return null;
+    if (r6 <= -100 || r3 <= -100) return null;
+    var v6 = p / (1 + r6 / 100), v3 = p / (1 + r3 / 100);
+    if (!isFinite(v6) || !isFinite(v3) || v6 <= 0 || v3 <= 0) return null;
+    var out = [], N = 7;
+    for (var i = 0; i < N; i++) {
+      var t = -6 + i;                                   /* months from now */
+      out.push(t <= -3 ? v6 + (v3 - v6) * ((t + 6) / 3)
+                       : v3 + (p - v3) * ((t + 3) / 3));
+    }
+    out[N - 1] = p;
+    return out;
+  }
+
+  function chartSVG(s, z){
+    var W = 640, H = 300, L = 12, R = 66, T = 16, B = 26;
+    var pw = W - L - R, ph = H - T - B;
+    var series = priceSeries(s) || (s.months || []).slice();
+    var approximated = !!(DATA.loaded && priceSeries(s));
+    var usable = series.length >= 2 && series.every(function(v){ return isFinite(v); });
+    if (!usable) {
+      return '<div class="chart-empty">אין היסטוריית מחירים לתצוגה עבור ' + esc(s.ticker) +
+             ' — הקובץ סיפק מחיר אחרון בלבד, בלי סדרה שתורכב ממנה מגמה.</div>';
+    }
+    var refs = [
+      { v:s.sma200, c:"#9c978a", label:"SMA200", dash:"5 4" },
+      { v:s.sma50,  c:"#0f8a5f", label:"SMA50",  dash:"5 4" },
+      { v:s.sma20,  c:"#b7791f", label:"SMA20",  dash:"5 4" },
+      { v:z.stop,   c:"#c0392b", label:"Stop", dash:"6 3" }
+    ];
+    /* no target line when there is no valid stop — a 2R line at the entry price is noise */
+    if (!z.invalid) refs.splice(3, 0, { v:z.target, c:"#1f4e79", label:"2R", dash:"6 3" });
+    refs = refs.filter(function(r){ return isFinite(r.v); });
+    var vals = series.concat(refs.map(function(r){ return r.v; }));
+    var min = Math.min.apply(null, vals), max = Math.max.apply(null, vals);
+    var span = (max - min) || (max * 0.04) || 1;
+    min -= span * 0.12; max += span * 0.12;
+    if (z.target > max) max = z.target;
+    if (z.stop < min) min = z.stop;
+
+    function X(i){ return L + (series.length > 1 ? (i / (series.length - 1)) * pw : pw / 2); }
+    function Y(v){ return T + ph - ((v - min) / (max - min)) * ph; }
+
+    var g = "";
+    for (var i = 0; i <= 4; i++) {
+      var v = min + (max - min) * i / 4, y = Y(v);
+      g += '<line x1="' + L + '" y1="' + y.toFixed(1) + '" x2="' + (L + pw) + '" y2="' + y.toFixed(1) + '" stroke="#ece8de" stroke-width="1"/>';
+      g += '<text x="' + (L + pw + 8) + '" y="' + (y + 3.5).toFixed(1) + '" fill="#9c978a" font-size="10" font-family="Heebo,ui-monospace,monospace">' + v.toFixed(2) + '</text>';
+    }
+
+    var pts = series.map(function(v, i){ return [X(i), Y(v)]; });
+    var path = pts.map(function(p, i){ return (i ? "L" : "M") + p[0].toFixed(1) + " " + p[1].toFixed(1); }).join(" ");
+    var area = path + " L " + pts[pts.length-1][0].toFixed(1) + " " + (T + ph) + " L " + pts[0][0].toFixed(1) + " " + (T + ph) + " Z";
+
+    var refMarkup = refs.map(function(r){
+      var y = Y(r.v).toFixed(1);
+      var isRef = (r.label === "Stop" || r.label === "2R");
+      var labelW = r.label.length * 6.4 + 44;
+      var mk = '<path d="M' + L + ' ' + y + ' L' + (L + pw) + ' ' + y + '" fill="none" stroke="' + r.c + '" stroke-width="' + (isRef ? 1.5 : 1.1) + '" stroke-dasharray="' + r.dash + '" opacity="' + (isRef ? .9 : .65) + '"/>';
+      if (isRef) {
+        mk += '<rect x="' + (L + pw - labelW - 2) + '" y="' + (Number(y) - 14) + '" width="' + labelW + '" height="13.5" rx="3" fill="#ffffff" opacity=".95" stroke="#e7e4dc" stroke-width=".7"/>' +
+              '<text x="' + (L + pw - 6) + '" y="' + (Number(y) - 4) + '" text-anchor="end" fill="' + r.c + '" font-size="9.5" font-family="Heebo,ui-monospace,monospace">' + r.label + ' ' + r.v.toFixed(2) + '</text>';
+      }
+      return mk;
+    }).join("");
+
+    var dots = pts.map(function(p, i){
+      if (i === pts.length - 1) {
+        return '<circle cx="' + p[0].toFixed(1) + '" cy="' + p[1].toFixed(1) + '" r="4" fill="#1f4e79"/>' +
+               '<circle cx="' + p[0].toFixed(1) + '" cy="' + p[1].toFixed(1) + '" r="1.6" fill="#ffffff"/>';
+      }
+      return '<circle cx="' + p[0].toFixed(1) + '" cy="' + p[1].toFixed(1) + '" r="2.4" fill="#ffffff" stroke="#1f4e79" stroke-width="1.3"/>';
+    }).join("");
+
+    var labels = monthLabels(series.length);
+    var xlabels = labels.map(function(m, i){
+      return '<text x="' + X(i).toFixed(1) + '" y="' + (H - 8) + '" text-anchor="middle" fill="#9c978a" font-size="9.5" font-family="Assistant,sans-serif" opacity="' + (i % 2 === 0 || i === labels.length - 1 ? 1 : 0) + '">' + m + '</text>';
+    }).join("");
+
+    return '<svg viewBox="0 0 ' + W + ' ' + H + '" preserveAspectRatio="xMidYMid meet" role="img" aria-label="גרף מחיר לחצי שנה של ' + esc(s.ticker) + ' עם ממוצעים 20, 50 ו-200, קו סטופ ויעד 2R' + (approximated ? ', קו מחיר מקורב בין תשואות 3 ו-6 חודשים' : '') + '">' +
+      g +
+      '<path d="' + area + '" fill="rgba(31,78,121,.06)"/>' +
+      refMarkup +
+      '<path d="' + path + '" fill="none" stroke="#1f4e79" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/>' +
+      dots + xlabels +
+      '</svg>';
+  }
+
+  function ticketText(s, z){
+    var capPct = state.portfolio ? (z.cost / state.portfolio) * 100 : 0;
+    var riskPctOfPort = state.portfolio ? (z.cashRisk / state.portfolio) * 100 : 0;
+    var stopDist = s.price ? ((z.stop - s.price) / s.price) * 100 : 0;
+    var tgtPct = s.price ? ((z.target - s.price) / s.price) * 100 : 0;
+    var rows = [
+      "כרטיס הזמנה · סורק מגמות",
+      "———————————————",
+      "סימול: " + s.ticker + " (" + s.nameHe + ")",
+      "סקטור: " + s.sector + " · " + s.exchange,
+      "כיוון: קנייה (סווינג)",
+      "כניסה: " + fmtMoney(s.price) + (s.live ? "  [מחיר חי]" : "")
+    ];
+    if (z.invalid) {
+      rows.push("סטופ: " + fmtMoney(z.stop) + "  [מעל המחיר — לא לכניסה]");
+      rows.push("מניות: 0 · אין עסקה כשהסטופ לא מתחת לכניסה");
+    } else {
+      rows.push("מניות: " + fmtInt(z.shares));
+      rows.push("סטופ: " + fmtMoney(z.stop) + " (" + fmtPct(stopDist, 1) + ")");
+      rows.push("יעד 2R: " + fmtMoney(z.target) + " (" + fmtPct(tgtPct, 1) + ")");
+      rows.push("הון: " + fmtMoney(z.cost, 2) + " (" + capPct.toFixed(1) + "% מהתיק)");
+      rows.push("הפסד מקסימלי: " + fmtMoney(z.cashRisk, 2) + " (" + riskPctOfPort.toFixed(2) + "% מהתיק)");
+      rows.push("יחס סיכוי/סיכון: 1:2.00 · סיכון למניה " + fmtMoney(z.riskPerShare, 2));
+    }
+    rows.push("עוגן סטופ: " + (state.stopMode === "sma50" ? "ממוצע 50 יום" : state.stopMode === "fixed" ? "מינוס 6% קבוע" : "הגבוה מבין ממוצע 50 למינוס 6%"));
+    rows.push("מקור: " + (DATA.loaded
+      ? "נאסד״ק · סגירת " + (DATA.asOf || "—") + (s.live ? " · מחיר חי מהספק" : "")
+      : "נתוני דגם (לא נטענו נתוני שוק)"));
+    rows.push("———————————————");
+    rows.push("הופק " + new Date().toLocaleString("he-IL", { hour12:false }) + " · לא ייעוץ השקעות");
+    return rows.join("\n");
+  }
+
+  function activeLayerCount(){
+    var n = 0;
+    ["1","2","3","4"].forEach(function(k){ if (state.layers[k]) n++; });
+    return n;
+  }
+
+  function openDrawer(ticker){
+    var s = STOCKS.filter(function(x){ return x.ticker === ticker; })[0];
+    if (!s) return;
+    closeTerm(false);
+    state.drawer = ticker;
+    var z = sizing(s);
+    var ev = evaluator(s);
+    var capPct = state.portfolio ? (z.cost / state.portfolio) * 100 : 0;
+    var riskPctOfPort = state.portfolio ? (z.cashRisk / state.portfolio) * 100 : 0;
+    var stopDist = s.price ? ((z.stop - s.price) / s.price) * 100 : 0;
+    var tgtPct = s.price ? ((z.target - s.price) / s.price) * 100 : 0;
+    var checks = state.checks[ticker] || [false, false, false];
+    var checkItems = [
+      "המבנה שלם: המחיר מעל ממוצע 20 ומעל ממוצע 50, ואין שבירה של שיאים יורדים.",
+      "הסטופ יושב על העוגן, ומספר המניות מתאים לתקציב הסיכון — 1R בדיוק.",
+      "אין דוח רווחים או אירוע חדשותי בתוך 5 ימי המסחר הקרובים."
+    ];
+
+    var tvSym = s.exchange + ":" + s.ticker;
+    var html = '' +
+      '<div class="drawer-head">' +
+        '<div>' +
+          '<div class="dh-tk" id="drawerTitle">' + esc(s.ticker) + '</div>' +
+          '<div class="dh-name">' + esc(s.nameHe) + ' · ' + esc(s.name) + ' · ' + esc(s.exchange) + '</div>' +
+          '<div class="dh-badges"><span class="sbadge">' + esc(s.sector) + '</span>' +
+            (ev.pass ? '<span class="sbadge" style="background:var(--green-bg);color:var(--green);border-color:#cbe6da">עוברת את ' + N(activeLayerCount()) + ' השכבות הפעילות</span>'
+                     : '<span class="sbadge" style="background:var(--red-bg);color:var(--red);border-color:#f0cdc7">נכשלת בשכבות L' + ev.active.join("/L") + '</span>') +
+          '</div>' +
+        '</div>' +
+        '<button class="icon-btn" id="drawerClose" aria-label="סגירת חלון הפרטים">✕</button>' +
+      '</div>' +
+      '<div class="drawer-body">' +
+        '<div class="price-block"><span class="big">' + N(fmtMoney(s.price)) + '</span>' +
+          '<span class="delta">' + N(fmtPct(s.dayChange, 2)) + ' היום</span>' +
+          (s.live ? '<span class="livechip">חי</span>' : '') +
+          (DATA.loaded ? '<span class="srcchip calc">מחושב · סגירת ' + N(DATA.asOf || "—") + '</span>' : '') +
+          '<span class="meta"><span>RVOL ' + N(nv(s.rvol, 2) + "x") + '</span><span>RSI ' + N(nv(s.rsi, 0)) + '</span><span>' + N(fmtCompact(s.mcap)) + '</span></span>' +
+        '</div>' +
+        (z.invalid
+          ? '<div class="alert-stop"><b>סטופ מעל המחיר — לא לכניסה</b>' +
+            '<span>הסטופ לפי ' + esc(state.stopMode === "sma50" ? "ממוצע 50 יום" : state.stopMode === "fixed" ? "מינוס 6% קבוע" : "העוגן הצמוד") +
+            ' יושב על ' + N(fmtMoney(z.stop)) + ', מעל המחיר ' + N(fmtMoney(s.price)) +
+            '. אין עסקה בלי מרווח בין הכניסה לסטופ — מספר המניות לא מחושב כאן בכוונה.</span></div>'
+          : '') +
+        '<div class="chart-card">' + chartSVG(s, z) +
+          '<div class="chart-legend">' +
+            '<span><i style="background:#1f4e79"></i>סגירה</span>' +
+            '<span><i style="background:#b7791f"></i>ממוצע 20 ' + N(fmtMoney(s.sma20)) + q("sma20") + '</span>' +
+            '<span><i style="background:#0f8a5f"></i>ממוצע 50 ' + N(fmtMoney(s.sma50)) + q("sma50") + '</span>' +
+            '<span><i style="background:#9c978a"></i>ממוצע 200 ' + N(fmtMoney(s.sma200)) + q("sma200") + '</span>' +
+            '<span><i style="background:#c0392b"></i>סטופ ' + q("stopLoss") + '</span>' +
+            (z.invalid ? '' : '<span><i style="background:#1f4e79"></i>יעד 2R ' + q("target2r") + '</span>') +
+          '</div>' +
+          (DATA.loaded ? '<div class="chart-note">קו הסגירה מקורב: שלוש נקודות אמת — תשואה 6 חודשים, תשואה 3 חודשים והמחיר האחרון — וביניהן אינטרפולציה. קווי הממוצעים הם הערכים המחושבים מהסגירה.</div>' : '') +
+        '</div>' +
+        '<h4 class="dh-sub">תוכנית סיכון · ' + (state.stopMode === "sma50" ? "סטופ על ממוצע 50" : state.stopMode === "fixed" ? "סטופ מינוס 6% קבוע" : "הצמוד מבין ממוצע 50 למינוס 6%") + '</h4>' +
+        '<div class="metric-grid">' +
+          metric("כניסה", N(fmtMoney(s.price))) +
+          metric("סטופ", N(fmtMoney(z.stop)), "ro", "", "stopLoss") +
+          metric("סיכון למניה", z.invalid ? "—" : N(fmtMoney(z.riskPerShare))) +
+          metric("מניות", z.invalid ? '<span class="overstop">לא לכניסה</span>' : N(fmtInt(z.shares)), "", "", "positionSize") +
+          metric("הקצאה", z.invalid ? "—" : N(fmtMoney(z.cost, 0)), "", z.invalid ? "אין עסקה" : N(capPct.toFixed(1) + "% מתוך " + fmtMoney(state.portfolio, 0)), "positionCap") +
+          metric("הפסד מקסימלי", z.invalid ? "—" : N(fmtMoney(z.cashRisk, 0)), "ro", z.invalid ? "אין עסקה" : N(riskPctOfPort.toFixed(2) + "% מהתיק"), "effectiveRisk") +
+          metric("יעד 2R", z.invalid ? "—" : N(fmtMoney(z.target)), "em", z.invalid ? "אין יעד בלי סטופ תקף" : N(fmtPct(tgtPct, 1) + " מהכניסה"), "target2r") +
+          metric("מרחק לסטופ", N(fmtPct(stopDist, 1)), "am", z.invalid ? "הסטופ מעל המחיר" : "מהמחיר הנוכחי") +
+          metric("יחס סיכון־סיכוי", N("1 : 2.00"), "", "כלל יציאה קבוע") +
+        '</div>' +
+        '<h4 class="dh-sub">פונדמנטלס<span class="srcchip calc">Finnhub</span></h4>' +
+        fundTableHTML(s) +
+        '<p class="fund-note">P/E, צמיחה, ROE, בטא ושווי שוק נטענו חיים מ-Finnhub. אחזקת מוסדיים לא זמין מהספק החינמי — כשאין ערך היא מוצגת כ״לא זמין״ כערך עזר, והבדיקה שלה מדולגת; היעדר נתון לא נחשב כישלון.</p>' +
+        '<h4 class="dh-sub">נתוני רקע<span class="srcchip calc">מחושב</span></h4>' +
+        '<div class="metric-grid">' +
+          metric("נפח יחסי (RVOL)", N(nv(s.rvol, 2) + "x"), "", "מול 50 יום", "rvol") +
+          metric("חוזק סגירה", N(nv(s.closeStrength, 0) + "%"), "", "מטווח היום", "closeStrength") +
+          metric("נפח ממוצע", N(fmtVol(s.avgVol)), "", "מניות ביום", "avgVol") +
+          metric("מתחת לשיא", N(fmtPct(s.pctFrom52wHigh)), "", "52 שבועות", "high52") +
+          metric("3 / 6 חודשים", N(fmtPct(s.perf3m) + " / " + fmtPct(s.perf6m)), "", "תשואה", "perf36") +
+        '</div>' +
+        '<h4 class="dh-sub">כרטיס הזמנה</h4>' +
+        '<div class="ticket"><pre id="ticketPre">' + esc(ticketText(s, z)) + '</pre>' +
+          '<div class="ticket-actions">' +
+            '<button class="btn-primary" id="copyBtn">העתקת הכרטיס</button>' +
+            '<button class="btn-ghost" id="copyEntryBtn">העתקת שורת כניסה</button>' +
+          '</div>' +
+        '</div>' +
+        '<h4 class="dh-sub">לפני הקנייה <span class="chk-status' + (checks.every(Boolean) ? " ready" : "") + '" id="chkStatus">' + checks.filter(Boolean).length + '/3</span></h4>' +
+        '<div class="checklist" id="checklist">' +
+          checkItems.map(function(txt, i){
+            return '<label class="chk"><input type="checkbox" data-chk="' + i + '"' + (checks[i] ? " checked" : "") + '><span>' + esc(txt) + '</span></label>';
+          }).join("") +
+        '</div>' +
+        '<h4 class="dh-sub">בדיקה במקור</h4>' +
+        '<div class="ext-links">' +
+          '<a class="ext" href="https://www.tradingview.com/chart/?symbol=' + encodeURIComponent(tvSym) + '" target="_blank" rel="noopener noreferrer">טריידינגוויו ↗</a>' +
+          '<a class="ext" href="https://finviz.com/quote.ashx?t=' + encodeURIComponent(s.ticker) + '" target="_blank" rel="noopener noreferrer">פינוויז ↗</a>' +
+          '<a class="ext" href="https://finance.yahoo.com/quote/' + encodeURIComponent(s.ticker) + '" target="_blank" rel="noopener noreferrer">יאהו פיננס ↗</a>' +
+        '</div>' +
+        '<div class="risk-note">החישוב יוצא מההגדרות השמורות שלך: תיק של ' + N(fmtMoney(state.portfolio, 0)) + ' · ' +
+          state.riskPct.toFixed(2) + '% סיכון = ' + N(fmtMoney(state.portfolio * state.riskPct / 100, 0)) + ' ל-1R · ' +
+          state.maxCapPct + '% תקרה = ' + N(fmtMoney(state.portfolio * state.maxCapPct / 100, 0)) + ' מקסימום למניה.' +
+          (z.capped ? ' <b>התקרה היא שמגבילה כאן — הסיכון בפועל הוא ' +
+             N(((z.cashRisk / state.portfolio) * 100).toFixed(2) + "%") + ' מהתיק, מתחת לתקציב של ' +
+             state.riskPct.toFixed(2) + '%.</b>' : "") +
+          ' <span class="anchor">עוגנים — ממוצע 50 במרחק ' + N(fmtPct(z.smaDistPct, 1)) +
+          ' מול מינוס 6% קבוע · ' + (z.winner === "sma50" ? "המבנה צמוד יותר" : "הקבוע צמוד יותר") + '</span></div>' +
+      '</div>';
+
+    var drawer = document.getElementById("drawer");
+    document.getElementById("drawerContent").innerHTML = html;
+    drawer.classList.add("open");
+    drawer.setAttribute("aria-hidden", "false");
+    var bd = document.getElementById("backdrop");
+    bd.hidden = false;
+    bd.classList.add("open");
+    document.body.style.overflow = "hidden";
+
+    document.getElementById("drawerClose").addEventListener("click", closeDrawer);
+    document.getElementById("copyBtn").addEventListener("click", function(){
+      copyText(ticketText(s, z), z.invalid
+        ? "הכרטיס הועתק — " + s.ticker + " מסומנת ״לא לכניסה״"
+        : "הכרטיס הועתק — " + fmtInt(z.shares) + " מניות " + s.ticker);
+    });
+    document.getElementById("copyEntryBtn").addEventListener("click", function(){
+      copyText(z.invalid
+        ? s.ticker + " — NO TRADE: stop " + fmtMoney(z.stop) + " is above entry " + fmtMoney(s.price)
+        : "BUY " + s.ticker + " @ " + fmtMoney(s.price) + " | stop " + fmtMoney(z.stop) + " | 2R " + fmtMoney(z.target) + " | " + fmtInt(z.shares) + " sh",
+        "שורת הכניסה הועתקה");
+    });
+    document.querySelectorAll("[data-chk]").forEach(function(cb){
+      cb.addEventListener("change", function(){
+        var idx = parseInt(cb.getAttribute("data-chk"), 10);
+        if (!state.checks[ticker]) state.checks[ticker] = [false, false, false];
+        state.checks[ticker][idx] = cb.checked;
+        var st = document.getElementById("chkStatus");
+        var done = state.checks[ticker].filter(Boolean).length;
+        st.textContent = done + "/3";
+        st.classList.toggle("ready", done === 3);
+      });
+    });
+  }
+
+  function metric(k, v, tone, note, termKey){
+    return '<div class="metric"><div class="k">' + esc(k) + (termKey ? q(termKey) : "") + '</div>' +
+      '<div class="v ' + (tone || "") + '">' + v + '</div>' +
+      (note ? '<div class="n">' + note + '</div>' : "") + '</div>';
+  }
+
+  /* the seven fundamentals, labelled by provenance: live Finnhub or עזר */
+  function fundTableHTML(s){
+    function tr(label, termKey, value, k, na){
+      return '<tr' + (k === "instOwn" ? ' class="ref"' : '') + '>' +
+        '<th scope="row">' + esc(label) + (termKey ? q(termKey) : "") + srcTag(s, k) + '</th>' +
+        '<td' + (na ? ' class="na"' : '') + '>' + value + '</td></tr>';
+    }
+    /* no institutional value → 'לא זמין' + the fact that the check is skipped.
+       It never renders as a number, a dash or a verdict on the name. */
+    var instNa = !instOwnKnown(s);
+    return '<table class="fund-t" id="fundTable" aria-label="פונדמנטלס: חיים מ-Finnhub, אחזקת מוסדיים בעזר">' +
+      '<tbody>' +
+        tr("מכפיל רווח (P/E)", "pe", s.pe > 0 ? N(nv(s.pe, 1)) : N("שלילי"), "pe") +
+        tr("צמיחת רווח למניה", "epsGrowth", N(fmtPct(s.epsGrowth)), "epsGrowth") +
+        tr("צמיחת מכירות", "salesGrowth", N(fmtPct(s.salesGrowth)), "salesGrowth") +
+        tr("תשואה על ההון (ROE)", "roe", N(nv(s.roe, 1) + "%"), "roe") +
+        tr("בטא", "beta", N(nv(s.beta, 2)), "beta") +
+        tr("שווי שוק", "mcap", N(fmtCompact(s.mcap)), "mcap") +
+        tr("אחזקת מוסדיים", "instOwn",
+           instNa ? '<span class="fund-na">לא זמין</span><span class="fund-na-note">הבדיקה מדולגת</span>'
+                  : N(nv(s.instOwn, 0) + "%"),
+           "instOwn", instNa) +
+      '</tbody></table>';
+  }
+
+  function closeDrawer(){
+    state.drawer = null;
+    var drawer = document.getElementById("drawer");
+    drawer.classList.remove("open");
+    drawer.setAttribute("aria-hidden", "true");
+    var bd = document.getElementById("backdrop");
+    bd.classList.remove("open");
+    bd.hidden = true;
+    document.body.style.overflow = "";
+  }
+
+  function copyText(text, okMsg){
+    var done = function(ok){
+      showToast(ok ? okMsg : "הדפדפן חסם העתקה — אפשר לסמן את הכרטיס ידנית");
+    };
+    if (navigator.clipboard && window.isSecureContext) {
+      navigator.clipboard.writeText(text).then(function(){ done(true); }, function(){
+        done(fallbackCopy(text));
+      });
+    } else {
+      done(fallbackCopy(text));
+    }
+  }
+  function fallbackCopy(text){
+    var ta = document.createElement("textarea");
+    ta.value = text;
+    ta.setAttribute("readonly", "");
+    ta.style.position = "fixed";
+    ta.style.top = "-1000px";
+    ta.style.opacity = "0";
+    document.body.appendChild(ta);
+    var ok = false;
+    try {
+      ta.select();
+      ok = document.execCommand("copy");
+    } catch(e){ ok = false; }
+    document.body.removeChild(ta);
+    return ok;
+  }
+  var toastTimer = null;
+  function showToast(msg){
+    var t = document.getElementById("toast");
+    t.textContent = msg;
+    t.classList.add("show");
+    if (toastTimer) clearTimeout(toastTimer);
+    toastTimer = setTimeout(function(){ t.classList.remove("show"); }, 2200);
+  }
+
+  /* ============================================================
+     LIVE DATA — user-supplied API key, browser-side only.
+     The key lives in localStorage ("scanner.api") and is sent to
+     nothing but the provider endpoint the user picked.
+     ============================================================ */
+  var API_STORE = "scanner.api";
+  var PROVIDER_NAME = { fmp:"Financial Modeling Prep", finnhub:"Finnhub" };
+  var API_MSG = {
+    auth: "המפתח לא תקין או שפג תוקפו",
+    rate: "חרגת ממכסת הבקשות של הספק — נסה שוב בעוד דקה",
+    net:  "לא הצלחתי להגיע לספק. בדוק חיבור או נסה ספק אחר"
+  };
+
+  var apiState = { provider:"fmp", key:"", live:false, updatedAt:null, updated:[] };
+  var demoSnap = {};              /* ticker -> price/dayChange before the first live write */
+  var apiBusy = false;
+  var sheetEl = null, bdEl = null, keyIn = null, provSel = null, statusEl = null;
+
+  function apiReadStore(){
+    try {
+      var raw = localStorage.getItem(API_STORE);
+      if (!raw) return;
+      var o = JSON.parse(raw);
+      if (!o || typeof o !== "object") return;
+      if (o.provider === "fmp" || o.provider === "finnhub") apiState.provider = o.provider;
+      if (typeof o.key === "string") apiState.key = o.key;
+    } catch(e){ /* storage blocked or corrupt — stay in demo mode */ }
+  }
+  function apiWriteStore(provider, key){
+    apiState.provider = provider;
+    apiState.key = key;
+    try {
+      localStorage.setItem(API_STORE, JSON.stringify({ provider:provider, key:key }));
+      return true;
+    } catch(e){ return false; }
+  }
+  function apiDropKey(){
+    apiState.key = "";
+    try { localStorage.removeItem(API_STORE); } catch(e){}
+  }
+
+  function apiEndpoint(provider, ticker, key){
+    if (provider === "finnhub") {
+      return "https://finnhub.io/api/v1/quote?symbol=" + encodeURIComponent(ticker) +
+             "&token=" + encodeURIComponent(key);
+    }
+    return "https://financialmodelingprep.com/stable/quote?symbol=" + encodeURIComponent(ticker) +
+           "&apikey=" + encodeURIComponent(key);
+  }
+
+  /* one request, 9s ceiling; failures carry a `kind` so the caller can classify them */
+  function apiFetchQuote(provider, ticker, key){
+    var ctrl = (typeof AbortController === "function") ? new AbortController() : null;
+    var timer = setTimeout(function(){ if (ctrl) ctrl.abort(); }, 9000);
+    var opts = { cache:"no-store", credentials:"omit", referrerPolicy:"no-referrer" };
+    if (ctrl) opts.signal = ctrl.signal;
+    return fetch(apiEndpoint(provider, ticker, key), opts).then(function(res){
+      if (res.status === 401 || res.status === 403) { var a = new Error("auth"); a.kind = "auth"; throw a; }
+      if (res.status === 429) { var r = new Error("rate"); r.kind = "rate"; throw r; }
+      if (!res.ok) { var h = new Error("http " + res.status); h.kind = "http"; throw h; }
+      return res.json();
+    }).then(function(data){
+      clearTimeout(timer);
+      return apiParseQuote(provider, data);
+    }, function(err){
+      clearTimeout(timer);
+      if (!err || !err.kind) { var n = new Error("net"); n.kind = "net"; throw n; }
+      throw err;
+    });
+  }
+
+  function apiParseQuote(provider, data){
+    if (provider === "finnhub") {
+      var c = data ? Number(data.c) : NaN;
+      var dp = data ? Number(data.dp) : NaN;
+      if (!isFinite(c) || c <= 0 || !isFinite(dp)) return null;
+      return { price:c, change:dp };
+    }
+    var row = (Object.prototype.toString.call(data) === "[object Array]") ? data[0] : data;
+    if (!row) return null;
+    var p = Number(row.price), ch = Number(row.changePercentage);
+    if (!isFinite(p) || p <= 0 || !isFinite(ch)) return null;
+    return { price:p, change:ch };
+  }
+
+  function apiSetStatus(msg, tone){
+    if (!statusEl) return;
+    statusEl.textContent = msg || "";
+    statusEl.className = "api-status" + (tone ? " " + tone : "");
+    /* the sheet is closed during a header refresh — mirror the loader's own
+       progress text next to the button so the run is visible */
+    if (refreshing) refreshNote(msg || "", tone === "err" ? "err" : "");
+  }
+  function apiSyncButtons(){
+    ["apiSave","apiLoad","apiRemove"].forEach(function(id){
+      var b = document.getElementById(id);
+      if (b) b.disabled = apiBusy;
+    });
+    var l = document.getElementById("apiLoad");
+    if (l) l.textContent = apiBusy ? "טוען…" : "טען מחירים חיים";
+  }
+  function apiEye(show){
+    if (!keyIn) return;
+    var b = document.getElementById("apiEye");
+    keyIn.type = show ? "text" : "password";
+    if (b) {
+      b.textContent = show ? "הסתר" : "הצג";
+      b.setAttribute("aria-pressed", show ? "true" : "false");
+      b.setAttribute("aria-label", show ? "הסתרת המפתח" : "הצגת המפתח");
+    }
+  }
+  function apiRefreshKeyState(){
+    var lab = document.getElementById("apiKeyState");
+    if (lab) lab.textContent = apiState.key ? "נשמר בדפדפן" : "לא נשמר";
+    var dot = document.getElementById("apiDot");
+    if (dot) dot.hidden = !apiState.key;
+  }
+
+  function apiOpenSheet(){
+    if (!sheetEl) return;
+    provSel.value = apiState.provider;
+    keyIn.value = apiState.key;
+    apiEye(false);
+    bdEl.hidden = false;
+    sheetEl.hidden = false;
+    document.body.classList.add("sheet-open");
+    document.getElementById("apiOpen").setAttribute("aria-expanded", "true");
+    apiRefreshKeyState();
+    if (!statusEl.textContent) {
+      apiSetStatus(apiState.key ? "מפתח שמור בדפדפן הזה. אפשר לטעון מחירים חיים." : "", "");
+    }
+    try { keyIn.focus({ preventScroll:true }); } catch(e){ keyIn.focus(); }
+  }
+  function apiCloseSheet(){
+    if (!sheetEl || sheetEl.hidden) return;
+    sheetEl.hidden = true;
+    bdEl.hidden = true;
+    document.body.classList.remove("sheet-open");
+    apiEye(false);
+    document.getElementById("apiOpen").setAttribute("aria-expanded", "false");
+    var ob = document.getElementById("apiOpen");
+    if (ob) ob.focus();
+  }
+
+  function apiDoSave(){
+    var k = (keyIn.value || "").trim();
+    if (!k) { apiSetStatus("הזן מפתח API לפני השמירה.", "err"); keyIn.focus(); return; }
+    var p = (provSel.value === "finnhub") ? "finnhub" : "fmp";
+    var ok = apiWriteStore(p, k);
+    apiRefreshKeyState();
+    apiSetStatus(ok
+      ? "המפתח נשמר בדפדפן הזה (" + PROVIDER_NAME[p] + ")."
+      : "לא הצלחתי לשמור בדפדפן — המפתח ישמש לטעינה הזאת בלבד.",
+      ok ? "ok" : "warn");
+  }
+
+  function apiDoRemove(){
+    apiDropKey();
+    keyIn.value = "";
+    apiEye(false);
+    apiRefreshKeyState();
+    apiResetToDemo();
+    apiSetStatus(DATA.loaded
+      ? "המפתח הוסר מהדפדפן. חזרת למחירי הסגירה המחושבים (" + (DATA.asOf || "—") + ")."
+      : "המפתח הוסר מהדפדפן. חזרת לנתוני הדגם.", "ok");
+  }
+
+  function apiResetToDemo(){
+    STOCKS.forEach(function(s){
+      var d = demoSnap[s.ticker];
+      if (d) { s.price = d.price; s.dayChange = d.dayChange; }
+      s.live = false;
+    });
+    apiState.live = false;
+    apiState.updatedAt = null;
+    apiState.updated = [];
+    renderAll();
+    renderBanner();
+  }
+
+  function nowNY(){
+    try { var ny = tzParts("America/New_York"); return ny.hour + ":" + ny.minute; }
+    catch(e){ return "--:--"; }
+  }
+  function fileTimeNY(){
+    if (!DATA.generatedAt) return nowNY();
+    try {
+      var d = new Date(DATA.generatedAt);
+      if (isNaN(d.getTime())) return nowNY();
+      return nyHM(d);
+    } catch(e){ return nowNY(); }
+  }
+  /* HH:MM in New York for any Date — used by the banner stamp */
+  function nyHM(d){
+    try {
+      return new Intl.DateTimeFormat("en-GB", {
+        timeZone:"America/New_York", hour12:false, hour:"2-digit", minute:"2-digit"
+      }).format(d);
+    } catch(e){ return nowNY(); }
+  }
+  /* after a manual refresh the banner shows when we last pulled, not when the file was built */
+  function bannerTimeNY(){
+    return DATA.refreshedAt ? nyHM(DATA.refreshedAt) : fileTimeNY();
+  }
+
+  /* One banner, three truths: calculated close, live overlay, or demo fallback. */
+  function renderBanner(){
+    var el = document.getElementById("mockbar");
+    if (!el) return;
+    if (!DATA.loaded) {
+      el.className = "mockbar demo";
+      el.innerHTML = '<b class="tag">נתוני דגם</b><span>לא נטענו נתוני שוק — מוצגים נתוני דגם. ' +
+        'קובץ <bdi class="num">indicators.json</bdi> לא נגיש (למשל בפתיחה מ-file://). ' +
+        'המספרים כאן הם דוגמה קבועה, לא מחירי אמת.' +
+        '<small class="bsub">אפשר לטעון מחירים חיים ידנית מכפתור ״נתוני שוק״ — המפתח נשמר בדפדפן בלבד.</small></span>';
+      return;
+    }
+    el.className = "mockbar calc";
+    var live = apiState.live;
+    var fund = DATA.fundCount > 0;
+    el.innerHTML = '<b class="tag">נתונים מחושבים</b><span> · סגירת ' + N(DATA.asOf || "—") +
+      ' · נאסד״ק' + (fund ? ' + Finnhub' : '') + ' · עודכן ' + N(bannerTimeNY()) +
+      (live ? ' · ' + N(apiState.updated.length + "/" + STOCKS.length) + ' מחירים חיים מ-' + esc(PROVIDER_NAME[apiState.provider]) : '') +
+      '<small class="bsub">' + (fund
+        ? 'פונדמנטלס חיים מ-Finnhub · החריג היחיד: בעלות מוסדית (עזר סטטי)'
+        : 'פונדמנטלס (P/E, ROE, EPS, בעלות מוסדית, בטא, שווי שוק) הם ערכי עזר סטטיים') +
+        (live ? ' · המחיר והשינוי היומי הם ציטוט חי; כל השאר מחושב מהסגירה' : '') + '.</small></span>';
+  }
+
+  function apiDoLoad(onDone){
+    if (apiBusy) return;
+    var k = (keyIn.value || "").trim() || apiState.key;
+    if (!k) {
+      apiSetStatus("הזן מפתח API, או שמור אותו קודם, ואז טען מחירים.", "err");
+      keyIn.focus();
+      return;
+    }
+    var p = (provSel.value === "finnhub") ? "finnhub" : "fmp";
+    if (k !== apiState.key || p !== apiState.provider) apiWriteStore(p, k);
+    apiRefreshKeyState();
+
+    apiBusy = true;
+    apiSyncButtons();
+
+    var i = 0, got = [], missed = [], fatal = null, netSeen = 0, netRun = 0;
+
+    function finish(){
+      apiBusy = false;
+      apiSyncButtons();
+      var ok = false;
+      if (fatal) {                                  /* nothing applied — rows stay exactly as they were */
+        apiSetStatus(API_MSG[fatal], "err");
+      } else if (!got.length) {
+        apiSetStatus(netSeen ? API_MSG.net : "לא התקבלו מחירים מהספק. נסה שוב או בחר ספק אחר.", "err");
+      } else {
+        got.forEach(function(x){
+          if (!demoSnap[x.s.ticker]) demoSnap[x.s.ticker] = { price:x.s.price, dayChange:x.s.dayChange };
+          x.s.price = x.q.price;
+          x.s.dayChange = x.q.change;
+          x.s.live = true;
+        });
+        apiState.live = true;
+        apiState.updatedAt = new Date();
+        apiState.provider = p;
+        apiState.updated = got.map(function(x){ return x.s.ticker; });
+        renderAll();                                 /* sizing, radar averages, effective risk all recompute */
+        renderBanner();
+        apiSetStatus(got.length === STOCKS.length
+          ? "התקבלו " + got.length + " מחירים חיים מ-" + PROVIDER_NAME[p] + ". האינדיקטורים נשארו מחושבים מהסגירה."
+          : "התקבלו " + got.length + " מתוך " + STOCKS.length + " מחירים חיים; השאר נשארו במחירי הסגירה המחושבים.",
+          got.length === STOCKS.length ? "ok" : "warn");
+        ok = true;
+      }
+      if (typeof onDone === "function") onDone(ok);
+    }
+
+    function step(){
+      var s = STOCKS[i];
+      apiSetStatus("טוען " + (i + 1) + "/" + STOCKS.length, "");
+      apiFetchQuote(p, s.ticker, k).then(function(q){
+        if (q) { got.push({ s:s, q:q }); netRun = 0; }
+        else missed.push(s.ticker);
+      }).catch(function(err){
+        var kind = (err && err.kind) || "net";
+        if (kind === "auth" || kind === "rate") { fatal = kind; return; }
+        missed.push(s.ticker);
+        if (kind === "net") {
+          netSeen++;
+          netRun++;                          /* three dead requests in a row = provider unreachable */
+          if (netRun >= 3) fatal = "net";
+        }
+      }).then(function(){
+        i++;
+        if (fatal) { finish(); return; }
+        if (i >= STOCKS.length) { finish(); return; }
+        setTimeout(step, 150);
+      });
+    }
+    step();
+  }
+
+  /* ============================================================
+     REFRESH — the header control.
+     indicators.json is written by a cron job, so a plain reload can
+     serve a stale copy; the pull is stamped with Date.now() and
+     cache:"no-store". The merge is the same applyIndicators() the
+     first paint uses, then the saved live-quote pass runs again and
+     every derived number is recomputed from one place. A failed pull
+     leaves the previous values exactly as they were.
+     ============================================================ */
+  var refreshing = false, refreshTimer = null;
+
+  function refreshNote(msg, tone){
+    var el = document.getElementById("refreshNote");
+    if (!el) return;
+    el.textContent = msg || "";
+    el.className = "refresh-note" + (tone ? " " + tone : "");
+  }
+  function refreshBusy(on){
+    refreshing = !!on;
+    var b = document.getElementById("refreshBtn");
+    if (!b) return;
+    b.disabled = !!on;
+    b.setAttribute("data-busy", on ? "1" : "0");
+    b.setAttribute("aria-busy", on ? "true" : "false");
+    var lab = b.querySelector(".rlabel");
+    if (lab) lab.textContent = on ? "מרענן…" : "רענון";
+  }
+  function refreshHold(msg, tone){
+    if (refreshTimer) clearTimeout(refreshTimer);
+    refreshTimer = setTimeout(function(){ if (!refreshing) refreshNote(""); }, 3000);
+    refreshNote(msg, tone);
+  }
+  function refreshIndicators(){
+    if (typeof fetch !== "function") return Promise.resolve(false);
+    var url;
+    try { url = new URL("indicators.json?t=" + Date.now(), document.baseURI).href; }
+    catch(e){ url = "indicators.json?t=" + Date.now(); }
+    return fetch(url, { cache:"no-store", credentials:"omit" })
+      .then(function(res){ return res.ok ? res.text() : null; })
+      .then(function(txt){
+        if (!txt) return false;
+        var js = null;
+        try { js = JSON.parse(txt); } catch(e){ return false; }
+        return applyIndicators(js);
+      })
+      .catch(function(){ return false; });
+  }
+
+  function refreshAll(){
+    if (refreshing) return Promise.resolve(false);
+    refreshBusy(true);
+    refreshNote("מרענן נתונים…");
+    return refreshIndicators().then(function(ok){
+      if (!ok) {
+        refreshBusy(false);
+        refreshHold("הרענון נכשל — נשארו הנתונים הקודמים", "err");
+        showToast("הרענון נכשל — נשארו הנתונים הקודמים");
+        return false;                        /* nothing was applied — old numbers stand */
+      }
+      DATA.refreshedAt = new Date();
+      renderAll();                           /* recommendations, radar, risk, sizing cells */
+      renderExample();
+      renderBanner();                        /* timestamp now shows the refresh HH:MM */
+
+      if (!apiState.key || apiBusy) {
+        refreshBusy(false);
+        refreshHold("עודכן", "ok");
+        return true;
+      }
+      return new Promise(function(resolve){
+        apiDoLoad(function(gotQuotes){
+          refreshBusy(false);
+          if (gotQuotes) refreshHold("עודכן", "ok");
+          else refreshHold(statusEl && statusEl.textContent ? statusEl.textContent : "הרענון נכשל — נשארו הנתונים הקודמים", "err");
+          resolve(true);
+        });
+      });
+    });
+  }
+
+  /* ============================================================
+     WIRING
+     ============================================================ */
+  function renderAll(){
+    resetCaches();                 /* layer toggles may have changed under us */
+    renderProfile();
+    renderGlossary();              /* help text quotes the active thresholds */
+    renderRecs();
+    renderTiming(false);
+    renderRisk();
+    renderRadar();
+    renderLayers();
+    renderTable();
+    renderTraps();
+  }
+
+  function wire(){
+    popEl = document.getElementById("pop");
+    buildProfileSeg();              /* three presets, built from PROFILES once */
+
+    /* --- refresh: re-pull the file, re-run quotes, recompute everything --- */
+    var refreshBtn = document.getElementById("refreshBtn");
+    if (refreshBtn) refreshBtn.addEventListener("click", function(){ refreshAll(); });
+
+    /* --- search: filters the whole universe, not the rendered page --- */
+    var searchIn = document.getElementById("searchInput");
+    var searchClear = document.getElementById("searchClear");
+    var searchTimer = null;
+    function applySearch(v){
+      state.q = String(v || "");
+      state.limit = PAGE_SIZE;
+      if (searchClear) searchClear.hidden = !state.q;
+      renderTable();
+    }
+    if (searchIn) {
+      searchIn.addEventListener("input", function(){
+        if (searchTimer) clearTimeout(searchTimer);
+        var v = searchIn.value;
+        searchTimer = setTimeout(function(){ applySearch(v); }, 60);
+      });
+      searchIn.addEventListener("keydown", function(ev){
+        if (ev.key === "Escape") {
+          ev.preventDefault();
+          if (searchTimer) clearTimeout(searchTimer);
+          searchIn.value = "";
+          applySearch("");
+          searchIn.blur();
+        } else if (ev.key === "Enter") {
+          ev.preventDefault();
+          if (searchTimer) clearTimeout(searchTimer);
+          applySearch(searchIn.value);
+        }
+      });
+    }
+    if (searchClear) searchClear.addEventListener("click", function(){
+      if (searchTimer) clearTimeout(searchTimer);
+      searchIn.value = "";
+      applySearch("");
+      searchIn.focus();
+    });
+
+    /* --- live data sheet --- */
+    sheetEl  = document.getElementById("apiSheet");
+    bdEl     = document.getElementById("apiBackdrop");
+    keyIn    = document.getElementById("apiKey");
+    provSel  = document.getElementById("apiProvider");
+    statusEl = document.getElementById("apiStatus");
+    apiReadStore();
+    apiRefreshKeyState();
+    document.getElementById("apiOpen").addEventListener("click", apiOpenSheet);
+    document.getElementById("apiClose").addEventListener("click", apiCloseSheet);
+    bdEl.addEventListener("click", apiCloseSheet);
+    document.getElementById("apiSave").addEventListener("click", apiDoSave);
+    document.getElementById("apiLoad").addEventListener("click", apiDoLoad);
+    document.getElementById("apiRemove").addEventListener("click", apiDoRemove);
+    document.getElementById("apiEye").addEventListener("click", function(){ apiEye(keyIn.type === "password"); });
+    keyIn.addEventListener("keydown", function(e){ if (e.key === "Enter") { e.preventDefault(); apiDoLoad(); } });
+    provSel.addEventListener("change", function(){ provSel.blur(); });
+
+    var pIn = document.getElementById("portfolioInput");
+    pIn.addEventListener("input", function(){
+      var v = num(pIn.value, null);
+      if (v !== null) {
+        state.portfolio = clamp(v, 1000, 10000000);
+        save();
+        renderRisk(); renderRadar(); renderTable(); renderTraps(); renderRecs();
+      }
+    });
+    pIn.addEventListener("change", function(){
+      state.portfolio = clamp(num(pIn.value, 25000), 1000, 10000000);
+      pIn.value = String(state.portfolio);
+      save();
+      renderAll();
+    });
+    pIn.addEventListener("blur", function(){ pIn.value = String(state.portfolio); });
+
+    var rIn = document.getElementById("riskSlider");
+    rIn.addEventListener("input", function(){
+      state.riskPct = clamp(num(rIn.value, 1), 0.25, 2.5);
+      save();
+      renderRisk(); renderRadar(); renderTable(); renderTraps(); renderRecs();
+    });
+
+    var cIn = document.getElementById("capInput");
+    cIn.addEventListener("input", function(){
+      var v = num(cIn.value, null);
+      if (v !== null) {
+        state.maxCapPct = clamp(v, 1, 100);
+        save();
+        renderRisk(); renderRadar(); renderTable(); renderTraps(); renderRecs();
+      }
+    });
+    cIn.addEventListener("change", function(){
+      state.maxCapPct = clamp(num(cIn.value, 15), 1, 100);
+      cIn.value = String(state.maxCapPct);
+      save();
+      renderAll();
+    });
+
+    document.querySelectorAll('input[name="stopMode"]').forEach(function(r){
+      r.addEventListener("change", function(){
+        if (r.checked) {
+          state.stopMode = r.value;
+          save();
+          renderAll();
+        }
+      });
+    });
+
+    document.getElementById("windowSelect").addEventListener("change", function(e){
+      state.preview = e.target.value;
+      renderTiming(false);
+    });
+
+    var sel = document.getElementById("rejectToggle");
+    sel.checked = state.showRejects;
+    var wrap = document.getElementById("rejectToggleWrap");
+    wrap.classList.toggle("on", state.showRejects);
+    sel.addEventListener("change", function(){
+      state.showRejects = sel.checked;
+      wrap.classList.toggle("on", state.showRejects);
+      save();
+      renderTraps();
+    });
+
+    document.getElementById("mobileSort").addEventListener("change", function(e){
+      var parts = e.target.value.split(":");
+      state.sortKey = parts[0];
+      state.sortDir = parts[1] === "asc" ? 1 : -1;
+      renderTable();
+    });
+
+    document.querySelectorAll("#stockTable thead th").forEach(function(th){
+      th.addEventListener("click", function(){
+        var k = th.getAttribute("data-sort");
+        if (state.sortKey === k) state.sortDir = -state.sortDir;
+        else { state.sortKey = k; state.sortDir = (k === "ticker" || k === "sector" || k === "rsi") ? 1 : -1; }
+        renderTable();
+      });
+    });
+
+    document.getElementById("backdrop").addEventListener("click", closeDrawer);
+    document.addEventListener("keydown", function(e){
+      if (e.key !== "Escape") return;
+      if (sheetEl && !sheetEl.hidden) { apiCloseSheet(); return; }
+      if (popEl && !popEl.hidden) { closeTerm(true); return; }
+      if (state.drawer) closeDrawer();
+    });
+
+    // one accessible pattern for every explainer
+    document.addEventListener("click", function(e){
+      var btn = e.target.closest ? e.target.closest(".q") : null;
+      if (btn) {
+        e.preventDefault();
+        e.stopPropagation();
+        if (popBtn === btn && popEl && !popEl.hidden) { closeTerm(true); return; }
+        openTerm(btn.getAttribute("data-term"), btn);
+        return;
+      }
+      if (popEl && !popEl.hidden && !(e.target.closest && e.target.closest("#pop"))) closeTerm(false);
+    }, true);
+    document.getElementById("popClose").addEventListener("click", function(){ closeTerm(true); });
+
+    var stick = document.getElementById("stickbar");
+    window.addEventListener("scroll", function(){
+      var on = window.scrollY > 420 && window.innerWidth > 1000 && !state.drawer;
+      stick.classList.toggle("show", on);
+    }, { passive:true });
+    window.addEventListener("resize", function(){
+      closeTerm(false);
+      stick.classList.toggle("show", window.scrollY > 420 && window.innerWidth > 1000 && !state.drawer);
+      renderTable();
+    }, { passive:true });
+  }
+
+  /* ============================================================
+     EXAMPLE CARD — kept in sync with the live dataset, never a
+     hard-coded PANW trade that the real numbers contradict.
+     ============================================================ */
+  function renderExample(){
+    var list = document.getElementById("exampleList");
+    var cap = document.getElementById("exampleCaption");
+    if (!list) return;
+    var s = passing()[0];
+    if (!s) {
+      s = STOCKS.filter(function(x){ return !sizing(x).invalid; })[0] || STOCKS[0];
+    }
+    var z = sizing(s);
+    if (z.invalid) {
+      list.innerHTML = '<div class="keyline"><span>החלטה</span><b class="overstop">סטופ מעל המחיר — לא לכניסה</b></div>' +
+        '<div class="keyline"><span>מחיר</span><b>' + N(fmtMoney(s.price)) + '</b></div>' +
+        '<div class="keyline"><span>סטופ</span><b>' + N(fmtMoney(z.stop)) + '</b></div>' +
+        '<div class="keyline"><span>מניות</span><b>0</b></div>';
+    } else {
+      list.innerHTML = '<div class="keyline"><span>כמה לקנות</span><b>' + N(fmtInt(z.shares)) + ' מניות</b></div>' +
+        '<div class="keyline"><span>כמה זה עולה</span><b>' + N(fmtMoney(z.cost, 0)) + '</b></div>' +
+        '<div class="keyline"><span>איפה הסטופ</span><b>' + N(fmtMoney(z.stop)) + '</b></div>' +
+        '<div class="keyline"><span>הפסד מקסימלי</span><b>' + N(fmtMoney(z.cashRisk, 0)) + '</b></div>' +
+        '<div class="keyline"><span>יעד 2R</span><b>' + N(fmtMoney(z.target)) + '</b></div>';
+    }
+    if (cap) {
+      cap.textContent = "דוגמה: " + s.ticker + " בתיק של " + fmtMoney(state.portfolio, 0) +
+        " ובסיכון של " + state.riskPct.toFixed(2) + "%" +
+        (DATA.loaded ? " · סגירת " + DATA.asOf : "");
+    }
+  }
+
+  /* ============================================================
+     BOOT
+     ============================================================ */
+  function bootData(){
+    loadIndicators().then(function(ok){
+      /* the calculated close is the baseline that "הסר מפתח" restores */
+      STOCKS.forEach(function(s){ demoSnap[s.ticker] = { price:s.price, dayChange:s.dayChange }; });
+      DATA.settled = true;
+      document.documentElement.setAttribute("data-source", ok ? "calculated" : "demo");
+      renderBanner();
+      renderAll();
+      renderExample();
+    });
+  }
+
+  load();
+  wire();
+  renderGlossary();
+  tickClocks();
+  setInterval(tickClocks, 1000);
+  bootData();
+
+  // expose a tiny read-only snapshot for automated checks
+  window.SafeTrend = {
+    version: "2.3",
+    stocks: STOCKS.map(function(s){ return s.ticker; }),
+    universe: STOCKS.length,
+    /* rendered page vs full set — the perf and paging checks read these */
+    visible: function(){ return document.querySelectorAll("#stockBody tr[data-ticker]").length; },
+    renderMs: function(){ return RENDER_MS; },
+    query: function(q){
+      var el = document.getElementById("searchInput");
+      if (q === undefined) return state.q;
+      state.q = String(q || "");
+      state.limit = PAGE_SIZE;
+      if (el) el.value = state.q;
+      var cl = document.getElementById("searchClear");
+      if (cl) cl.hidden = !state.q;
+      renderTable();
+      return state.q;
+    },
+    terms: Object.keys(TERMS),
+    term: function(k){ var t = TERMS[k]; return t ? { t:t.t, s:termField(t, "s"), e:termField(t, "e") } : null; },
+    data: function(){
+      return { loaded:DATA.loaded, asOf:DATA.asOf, source:DATA.source,
+               generatedAt:DATA.generatedAt, failed:DATA.failed.slice(0),
+               applied:DATA.count, bars:barsLabel(),
+               universe:DATA.universe, size:STOCKS.length, page:PAGE_SIZE, shown:state.limit,
+               fundApplied:DATA.fundCount, fundSource:DATA.fundSource };
+    },
+    /* live fundamentals as rendered — live flags show what came from Finnhub */
+    fundamentals: function(t){
+      if (t) {
+        var one = STOCKS.filter(function(x){ return x.ticker === t; })[0];
+        if (!one) return null;
+        return { ticker:one.ticker, pe:one.pe, roe:one.roe, epsGrowth:one.epsGrowth,
+                 salesGrowth:one.salesGrowth, beta:one.beta, mcap:one.mcap, instOwn:one.instOwn,
+                 live:Object.keys(one.fundLive || {}), instOwnLive:false };
+      }
+      return STOCKS.map(function(s){
+        return { ticker:s.ticker, pe:s.pe, roe:s.roe, epsGrowth:s.epsGrowth,
+                 salesGrowth:s.salesGrowth, beta:s.beta, mcap:s.mcap, instOwn:s.instOwn,
+                 live:Object.keys(s.fundLive || {}) };
+      });
+    },
+    passing: function(){ return passing().map(function(s){ return s.ticker; }); },
+    /* the verdict a searched row carries: full 4-layer result, not the toggles */
+    status: function(t){
+      var one = STOCKS.filter(function(x){ return x.ticker === t; })[0];
+      if (!one) return null;
+      var st = statusOf(one);
+      return { ticker:t, pass:st.pass, fails:st.fails.slice(0), checks:st.nd, why:st.why };
+    },
+    layers: function(){ return JSON.parse(JSON.stringify(state.layers)); },
+    /* scan profile: read (no arg) or switch by name, then read back */
+    profiles: function(){ return profileNames(); },
+    profile: function(name){
+      if (name === undefined){
+        return { name: state.profile, def: PROFILES[state.profile] || null, isDefault:(state.profile === PROFILE_DEFAULT),
+                 cfg: JSON.parse(JSON.stringify(scanCfg())), diffs: cfgDiffs(),
+                 diffCount: cfgDiffCount(), ms: PROFILE_MS };
+      }
+      setProfile(String(name));
+      return state.profile;
+    },
+    profileMs: function(){ return PROFILE_MS; },
+    /* the zero-results fallback, as rendered: rank, tickers, and every failing check */
+    closest: function(){
+      var pool = searchRows();
+      if (pool.some(function(s){ return evaluator(s).pass; })) return [];
+      return closestRows(5, pool).map(function(r){
+        return {
+          ticker: r.s.ticker,
+          failedLayers: r.layers.map(function(n){ return "L" + n; }),
+          checks: r.active.map(function(d){
+            return { layer:d.layer, text: d.text.replace(/<[^>]+>/g, "") };
+          })
+        };
+      });
+    },
+    all: function(){
+      return STOCKS.map(function(s){
+        var z = sizing(s);
+        return { ticker:s.ticker, price:+s.price.toFixed(2), dayChange:+s.dayChange.toFixed(2),
+                 sma20:+s.sma20.toFixed(2), sma50:+s.sma50.toFixed(2), sma200:+s.sma200.toFixed(2),
+                 rsi:+s.rsi.toFixed(1), rvol:+s.rvol.toFixed(2), closeStrength:+s.closeStrength.toFixed(1),
+                 live:!!s.live, invalid:!!z.invalid, stop:+z.stop.toFixed(2),
+                 shares:z.shares, fails:layerFails(s) };
+      });
+    },
+    rows: function(){ return sortedRows().map(function(s){ var z = sizing(s); return { ticker:s.ticker, shares:z.shares, cost:+z.cost.toFixed(2), risk:+z.cashRisk.toFixed(2), stop:+z.stop.toFixed(2), target:+z.target.toFixed(2), invalid:!!z.invalid }; }); },
+    config: function(){ return { portfolio:state.portfolio, riskPct:state.riskPct, maxCapPct:state.maxCapPct, stopMode:state.stopMode }; },
+    /* the 'המלצות היום' card, as rendered */
+    recs: function(){
+      if (!DATA.loaded) return { ready:false, count:0, rows:[], blocked:[], total:STOCKS.length };
+      var R = recPicks();
+      return {
+        ready:true, count:R.picks.length, found:R.found, total:R.total,
+        blocked:R.blocked.map(function(r){ return r.s.ticker; }),
+        rows:R.picks.map(function(r){
+          return { ticker:r.s.ticker, shares:r.z.shares, stop:+r.z.stop.toFixed(2), target:+r.z.target.toFixed(2),
+                   cost:+r.z.cost.toFixed(2), risk:+r.z.cashRisk.toFixed(2), capped:!!r.z.capped,
+                   riskPct:+((r.z.cashRisk / state.portfolio) * 100).toFixed(2),
+                   capPct:+((r.z.cost / state.portfolio) * 100).toFixed(1) };
+        })
+      };
+    },
+    refresh: function(){ return refreshAll(); },
+    refreshing: function(){ return refreshing; },
+    setLayers: function(obj){ Object.keys(obj).forEach(function(k){ state.layers[k] = !!obj[k]; }); renderAll(); renderExample(); },
+    /* live-data snapshot — never exposes the key itself */
+    price: function(t){ var s = STOCKS.filter(function(x){ return x.ticker === t; })[0]; return s ? +s.price.toFixed(2) : null; },
+    sizing: function(t){ var s = STOCKS.filter(function(x){ return x.ticker === t; })[0]; if (!s) return null; var z = sizing(s); return { shares:z.shares, cost:+z.cost.toFixed(2), stop:+z.stop.toFixed(2), capped:z.capped, invalid:!!z.invalid }; },
+    api: function(){ return { provider:apiState.provider, hasKey:!!apiState.key, live:!!apiState.live, updated:apiState.updated.slice(0), at:apiState.updatedAt ? apiState.updatedAt.getTime() : null }; }
+  };
+})();
+</script>
+</body>
+</html>

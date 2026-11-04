@@ -320,6 +320,25 @@
   .stat .v.ro{color:var(--red)}
   .stat .n{font-size:11px;color:var(--muted);line-height:1.45;margin-top:1px}
 
+  /* ---------- scan profile (three presets) ---------- */
+  .profile-row{display:grid;grid-template-columns:minmax(180px,.55fr) minmax(0,2fr);gap:14px;align-items:start;margin-bottom:16px;padding-bottom:14px;border-bottom:1px solid var(--line-2)}
+  .profile-lead{min-width:0}
+  .profile-lead .flabel{margin-bottom:4px}
+  #profileActive{color:var(--ink);font-weight:700;font-size:12.5px;font-family:var(--sans);direction:rtl}
+  .profile-note{font-size:11.5px;line-height:1.65;color:var(--muted);margin:0}
+  .profile-seg{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+  .profile-btn{text-align:right;background:#fdfcf9;border:1px solid var(--line);border-radius:11px;padding:8px 10px;min-width:0;cursor:pointer;transition:border-color .15s,background .15s,box-shadow .15s}
+  .profile-btn:hover{border-color:#cfc9ba;background:#fff}
+  .profile-btn b{display:block;font-size:13px;line-height:1.4;color:var(--ink)}
+  .profile-btn small{display:block;font-size:10.5px;line-height:1.55;color:var(--muted);margin-top:3px;font-weight:400}
+  .profile-btn[aria-checked="true"]{border-color:#b9ccdd;background:var(--blue-bg);box-shadow:inset 0 0 0 1px #b9ccdd}
+  .profile-btn[aria-checked="true"] b{color:var(--blue)}
+  .profile-btn:focus-visible{outline:2px solid var(--blue);outline-offset:2px}
+  .profile-banner{margin:0 0 12px;font-size:12.5px;line-height:1.65;color:#6b4d15;background:var(--amber-bg);border:1px solid #eee0c4;border-radius:10px;padding:8px 11px}
+  .profile-banner b{font-weight:700}
+  .adj-row{display:flex;flex-wrap:wrap;gap:4px;margin-top:7px}
+  .adj-chip{font-size:10px;line-height:1.8;color:#8a5a12;background:#fdf3e2;border:1px solid #f0e0c2;border-radius:999px;padding:0 7px;white-space:nowrap}
+
   /* ---------- what it means ---------- */
   .what{display:grid;grid-template-columns:1.15fr .85fr;gap:16px;align-items:start}
   .what p{font-size:14px;line-height:1.75;color:#3f3c33;margin-bottom:6px}
@@ -610,6 +629,7 @@
     .layers-grid{grid-template-columns:repeat(2,1fr)}
     .what{grid-template-columns:1fr}
     .stickbar{display:none}
+    .profile-row{grid-template-columns:1fr;gap:10px}
   }
   @media (max-width:900px){ .stickbar{display:none} }
   @media (max-width:860px){
@@ -629,6 +649,9 @@
     .wrap{padding:18px 14px 56px}
     .risk-grid{grid-template-columns:1fr}
     .risk-summary{grid-template-columns:repeat(2,1fr)}
+    .profile-seg{grid-template-columns:1fr;gap:6px}
+    .profile-btn{padding:7px 9px}
+    .profile-btn small{font-size:10px}
     .layers-grid{grid-template-columns:1fr}
     .closest-head,.closest-intro,.cc-foot{padding-inline:12px}
     .cc-row{padding:10px 12px;grid-template-columns:20px 1fr;gap:8px}
@@ -983,6 +1006,7 @@
       <span class="hint" id="recsHint">מחכה לנתוני השוק</span>
     </div>
     <div class="card-body">
+      <p class="profile-banner" id="profileBanner" hidden></p>
       <div id="recsBody">
         <p class="recs-loading">טוען נתונים…</p>
       </div>
@@ -997,6 +1021,13 @@
       <span class="hint">נשמר בדפדפן הזה · כל שינוי מחשב מחדש את כל השורות</span>
     </div>
     <div class="card-body">
+      <div class="profile-row">
+        <div class="profile-lead">
+          <div class="flabel"><span>פרופיל סריקה</span><b id="profileActive">שמרני</b></div>
+          <p class="profile-note">הפרופיל קובע את הספים של ארבע השכבות. כל סף שהוקל מסומן בכתום על כרטיס השכבה שלו, כדי שלא תבלבל סריקה מרוככת עם הקפדנית.</p>
+        </div>
+        <div class="profile-seg" id="profileSeg" role="radiogroup" aria-label="פרופיל סריקה"></div>
+      </div>
       <div class="risk-grid">
         <div class="field">
           <div class="flabel"><label for="portfolioInput">שווי התיק</label><b>USD</b></div>
@@ -1374,15 +1405,17 @@
       metrics:["מחיר $184.60","RSI 78.4","יום +9.2%","38%+ מעל ממוצע 50","RVOL 4.6"] }
   ];
 
+  /* rule text is derived from the active profile config (never a literal), so
+     a relaxed scan cannot keep showing the strict threshold on its card */
   var LAYERS = [
     { n:1, title:"בטיחות", sub:"נזילות ותנודתיות",
-      rules:["שווי שוק מעל $2 מיליארד","מחיר מעל $20","בטא בין 0.5 ל-1.5","נפח מסחר יומי מעל מיליון"] },
+      rules:function(C){ return layerRules(1, C); } },
     { n:2, title:"איכות עסקית", sub:"החברה מרוויחה וגדלה",
-      rules:["מכפיל רווח חיובי","צמיחת רווח למניה מעל 10%","צמיחת מכירות מעל 10%","תשואה על ההון מעל 15%","מוסדיים מחזיקים מעל 50%"] },
+      rules:function(C){ return layerRules(2, C); } },
     { n:3, title:"מגמה", sub:"המבנה לא נשבר",
-      rules:["מחיר מעל ממוצע 20 מעל 50 מעל 200","עד 10% מתחת לשיא 52 שבועות","תשואה חיובית ב-3 וב-6 חודשים"] },
+      rules:function(C){ return layerRules(3, C); } },
     { n:4, title:"נגד רדיפה", sub:"לא קונים בשיא ההתלהבות",
-      rules:["RSI בין 50 ל-65","עליית יום בין 1% ל-5%","נפח יחסי מעל 1.2","חוזק סגירה מעל 65%"] }
+      rules:function(C){ return layerRules(4, C); } }
   ];
 
   var WINDOWS = {
@@ -1530,32 +1563,42 @@
     positionSize:{ t:"גודל פוזיציה", s:"מספר המניות שקונים. מחלקים את סכום הסיכון במרחק לסטופ, ואז בודקים שזה לא עובר את התקרה.", e:"$250 סיכון ÷ $20.53 למניה = 12 מניות; תקרת 15% מרשה 10, אז קונים 10." },
     stopLoss:{ t:"סטופ (Stop Loss)", s:"מחיר יציאה שנקבע לפני הכניסה. אם המחיר מגיע אליו, מוכרים בלי להתווכח — שם ההפסד נעצר.", e:"כניסה ב-$342.18 עם סטופ ב-$321.65: ירידה של 6% סוגרת את העסקה בהפסד של $205." },
     target2r:{ t:"יעד 2R", s:"יעד רווח שנקבע לפי הסיכון: כפול המרחק בין הכניסה לסטופ. ביחס הזה רווח אחד מכסה שני הפסדים.", e:"סיכון של $20.53 למניה → יעד במרחק $41.06: $342.18 + $41.06 = $383.24." },
-    rvol:{ t:"נפח מסחר יחסי (RVOL)", s:"כמה מניות נסחרות היום לעומת הנפח הרגיל של אותה מניה. 1.0x זה יום רגיל, 2.0x זה פי שניים מהרגיל.", e:"RVOL 1.62x ב-PANW: נסחרו 62% יותר מניות מהרגיל. מתחת ל-1.2x אין מי שקונה איתך." },
+    rvol:{ t:"נפח מסחר יחסי (RVOL)", s:"כמה מניות נסחרות היום לעומת הנפח הרגיל של אותה מניה. 1.0x זה יום רגיל, 2.0x זה פי שניים מהרגיל.", e:function(C){ return "RVOL 1.62x ב-PANW: נסחרו 62% יותר מניות מהרגיל. מתחת ל-" + oneDec(C.l4.rvol) + "x אין מי שקונה איתך."; } },
     rsi:{ t:"מדד כוח יחסי (RSI)", s:"מספר בין 0 ל-100 שמראה כמה חזקה הייתה העלייה ב-14 הימים האחרונים. מעל 70 המניה קנויה מדי, מתחת ל-30 נמכרה מדי.", e:"RSI 58 נחשב טווח בריא למניה במגמה. RSI 78 בוולטרה אומר שהמחיר כבר רץ — כניסה שם מסוכנת." },
     sma20:{ t:"ממוצע 20 יום (SMA-20)", s:"המחיר הממוצע של 20 ימי המסחר האחרונים. הוא מראה את הכיוון בטווח הקצר: מחיר מעליו אומר שהקונים שולטים.", e:"ב-CRWD הממוצע $411.20 והמחיר $428.75 — המניה נסחרת 4.3% מעל הממוצע הקצר." },
     sma50:{ t:"ממוצע 50 יום (SMA-50)", s:"הממוצע של 50 הימים האחרונים. הרבה סוחרים שמים את הסטופ מתחתיו, כי ירידה מתחתיו מסמנת שהמגמה נשברה.", e:"ב-PANW הממוצע $318.40, כ-7% מתחת למחיר. סטופ שם מפסיד 7% במקום 6%." },
     sma200:{ t:"ממוצע 200 יום (SMA-200)", s:"הממוצע של 200 הימים האחרונים — קו המגמה הראשית. מחיר מעליו נחשב שוק עולה.", e:"LLY ב-$892.45 מול ממוצע של $742.10: 20% מעל הקו הארוך, מגמה ראשית חזקה." },
     closeStrength:{ t:"חוזק סגירה", s:"איפה נסגר המחיר בתוך טווח היום. 100% = סגירה בשיא היום, 50% = סגירה באמצע הטווח.", e:"חוזק 78% אומר שהמחיר נסגר בשלושת רבעי הטווח — הקונים החזיקו עד הסוף." },
-    beta:{ t:"בטא", s:"כמה המניה זזה ביחס לשוק הכללי. בטא 1.0 = כמו השוק, 1.3 = תנועות גדולות ב-30%.", e:"GEV עם בטא 1.08: אם השוק עולה 1%, המניה נוטה לעלות 1.08%. הסינון דורש 0.5–1.5." },
-    mcap:{ t:"שווי שוק", s:"מחיר המניה כפול מספר המניות — גודל החברה בבורסה.", e:"PANW בשווי $288 מיליארד. הסינון דורש מעל $2 מיליארד, אחרת המניה קטנה וקופצת מכל הזמנה." },
-    avgVol:{ t:"נפח מסחר ממוצע", s:"כמה מניות נסחרות ביום בממוצע. זה מה שקובע אם תוכל לקנות ולמכור בלי להזיז את המחיר.", e:"ANET נסחרת 7.9 מיליון מניות ביום — קל להיכנס ולצאת. מתחת למיליון המניה דקה והפער גדל." },
+    beta:{ t:"בטא", s:"כמה המניה זזה ביחס לשוק הכללי. בטא 1.0 = כמו השוק, 1.3 = תנועות גדולות ב-30%.", e:function(C){ return "GEV עם בטא 1.08: אם השוק עולה 1%, המניה נוטה לעלות 1.08%. הסינון דורש " + trimNum(C.l1.betaMin) + "–" + trimNum(C.l1.betaMax) + "."; } },
+    mcap:{ t:"שווי שוק", s:"מחיר המניה כפול מספר המניות — גודל החברה בבורסה.", e:function(C){ return "PANW בשווי $288 מיליארד. הסינון דורש מעל " + mcapText(C.l1.mcap) + ", אחרת המניה קטנה וקופצת מכל הזמנה."; } },
+    avgVol:{ t:"נפח מסחר ממוצע", s:"כמה מניות נסחרות ביום בממוצע. זה מה שקובע אם תוכל לקנות ולמכור בלי להזיז את המחיר.", e:function(C){ return "ANET נסחרת 7.9 מיליון מניות ביום — קל להיכנס ולצאת. מתחת ל-" + volText(C.l1.avgVol) + " המניה דקה והפער גדל."; } },
     pe:{ t:"מכפיל רווח (P/E)", s:"מחיר המניה חלקי הרווח השנתי למניה. כמה המשקיעים משלמים על כל דולר של רווח.", e:"מכפיל 48.1 ב-LLY: משלמים $48 על כל $1 רווח שנתי. חברה מפסידה מקבלת מכפיל שלילי ונפסלת." },
-    epsGrowth:{ t:"צמיחת רווח למניה (EPS)", s:"בכמה אחוזים גדל הרווח למניה בשנה האחרונה. זה מה שנשאר לבעלי המניות מכל מכירה.", e:"הרווח למניה של LLY גדל 50.7% בשנה. הסינון דורש מעל 10%." },
-    salesGrowth:{ t:"צמיחת מכירות", s:"בכמה אחוזים גדלו ההכנסות של החברה בשנה האחרונה.", e:"המכירות של GEV גדלו 16.9%. מתחת ל-10% החברה בקושי גדלה, והמגמה נשענת על רעש." },
-    roe:{ t:"תשואה על ההון (ROE)", s:"כמה רווח מייצרת החברה על כל דולר של הון עצמי. מדד ליעילות של העסק.", e:"ROE 83.7% ב-LLY: כל $100 הון עצמי מייצרים $83.7 רווח בשנה. הסינון דורש מעל 15%." },
-    instOwn:{ t:"אחזקת מוסדיים", s:"איזה אחוז מהמניות מוחזק בידי קרנות וגופים גדולים. הנתון הזה לא מגיע מהספק החינמי — כשהוא קיים הוא ערך עזר סטטי מהדאטה-סט, וכשאין ערך הוא מוצג כ״לא זמין״ והבדיקה שלו מדולגת. היעדר נתון לא נחשב כישלון.", e:"87% מ-CRWD מוחזק בידי מוסדיים (עזר סטטי) — מעל 50%, עוברת. במניה שאין לה נתון כתוב ״לא זמין״, והשכבה ממשיכה הלאה בלי לפסול אותה." },
-    high52:{ t:"מרחק משיא 52 שבועות", s:"כמה אחוז מתחת לשיא של השנה המניה נסחרת עכשיו. קרוב לשיא = המגמה חיה.", e:"LLY רק 1.2% מתחת לשיא. הסינון מרשה עד 10% מתחת; מעבר לזה המגמה כבר נשברה." },
-    perf36:{ t:"תשואה 3 ו-6 חודשים", s:"כמה המניה עלתה בשלושת החודשים ובחצי השנה האחרונים. שני מספרים, כדי לראות שהמגמה לא רק זינוק חד-פעמי.", e:"GEV: 18.4%+ בשלושה חודשים ו-39.6%+ בחצי שנה — מגמה עקבית. הסינון דורש ששניהם חיוביים." }
+    epsGrowth:{ t:"צמיחת רווח למניה (EPS)", s:"בכמה אחוזים גדל הרווח למניה בשנה האחרונה. זה מה שנשאר לבעלי המניות מכל מכירה.", e:function(C){ return "הרווח למניה של LLY גדל 50.7% בשנה. הסינון דורש מעל " + trimNum(C.l2.epsGrowth) + "%."; } },
+    salesGrowth:{ t:"צמיחת מכירות", s:"בכמה אחוזים גדלו ההכנסות של החברה בשנה האחרונה.", e:function(C){ return "המכירות של GEV גדלו 16.9%. מתחת ל-" + trimNum(C.l2.salesGrowth) + "% החברה בקושי גדלה, והמגמה נשענת על רעש."; } },
+    roe:{ t:"תשואה על ההון (ROE)", s:"כמה רווח מייצרת החברה על כל דולר של הון עצמי. מדד ליעילות של העסק.", e:function(C){ return "ROE 83.7% ב-LLY: כל $100 הון עצמי מייצרים $83.7 רווח בשנה. הסינון דורש מעל " + trimNum(C.l2.roe) + "%."; } },
+    instOwn:{ t:"אחזקת מוסדיים", s:"איזה אחוז מהמניות מוחזק בידי קרנות וגופים גדולים. הנתון הזה לא מגיע מהספק החינמי — כשהוא קיים הוא ערך עזר סטטי מהדאטה-סט, וכשאין ערך הוא מוצג כ״לא זמין״ והבדיקה שלו מדולגת. היעדר נתון לא נחשב כישלון.", e:function(C){ return "87% מ-CRWD מוחזק בידי מוסדיים (עזר סטטי) — מעל " + trimNum(C.l2.instOwn) + "%, עוברת. במניה שאין לה נתון כתוב ״לא זמין״, והשכבה ממשיכה הלאה בלי לפסול אותה."; } },
+    high52:{ t:"מרחק משיא 52 שבועות", s:"כמה אחוז מתחת לשיא של השנה המניה נסחרת עכשיו. קרוב לשיא = המגמה חיה.", e:function(C){ return "LLY רק 1.2% מתחת לשיא. הסינון מרשה עד " + trimNum(Math.abs(C.l3.pctFrom52wHigh)) + "% מתחת; מעבר לזה המגמה כבר נשברה."; } },
+    perf36:{ t:"תשואה 3 ו-6 חודשים", s:"כמה המניה עלתה בשלושת החודשים ובחצי השנה האחרונים. שני מספרים, כדי לראות שהמגמה לא רק זינוק חד-פעמי.", e:function(C){ return "GEV: 18.4%+ בשלושה חודשים ו-39.6%+ בחצי שנה — מגמה עקבית. " + (C.l3.requirePerf ? "הסינון דורש ששניהם חיוביים." : "בפרופיל הפעיל הדרישה הזאת כבויה."); } }
   };
+
+  /* help copy may be a function of the active scan config — resolve it at render
+     time so a popover never quotes a threshold the profile no longer uses */
+  function termField(t, f){
+    var v = t ? t[f] : "";
+    return (typeof v === "function") ? v(scanCfg()) : v;
+  }
 
   /* ============================================================
      STATE + persistence (same keys as v1 — settings survive reload)
      ============================================================ */
   var PAGE_SIZE = 60;                  /* rows/cards rendered per page, never a dataset assumption */
   var STORE_KEY = "safetrend.config.v1";
+  var PROFILE_KEY = "scanner.profile";  /* scan profile lives on its own key */
+  var PROFILE_DEFAULT = "שמרני";
   var state = {
     portfolio:25000, riskPct:1.0, maxCapPct:15, stopMode:"conservative",
     layers:{1:true,2:true,3:true,4:true},
+    profile:PROFILE_DEFAULT,
     showRejects:false, sector:null, sortKey:"rvol", sortDir:-1,
     preview:"auto", drawer:null, checks:{}, liveWindow:null,
     q:"", limit:PAGE_SIZE
@@ -1596,6 +1639,11 @@
       var c = localStorage.getItem("maxCapPct");
       if (c !== null && num(c, 0) > 0) state.maxCapPct = clamp(num(c, state.maxCapPct), 1, 100);
     } catch(e){}
+    /* the scan profile has its own key; an unknown/legacy value falls back to the default */
+    try {
+      var pr = localStorage.getItem(PROFILE_KEY);
+      if (pr && PROFILES[pr]) state.profile = pr;
+    } catch(e){}
   }
   function save(){
     try {
@@ -1603,6 +1651,7 @@
         portfolio:state.portfolio, riskPct:state.riskPct, maxCapPct:state.maxCapPct,
         stopMode:state.stopMode, layers:state.layers, showRejects:state.showRejects
       }));
+      localStorage.setItem(PROFILE_KEY, state.profile);
     } catch(e){ /* storage full / blocked — UI still works */ }
   }
 
@@ -1679,8 +1728,8 @@
     if (popBtn && popBtn !== btn) popBtn.setAttribute("aria-expanded", "false");
     popBtn = btn;
     document.getElementById("popTitle").textContent = t.t;
-    document.getElementById("popShort").textContent = t.s;
-    document.getElementById("popEx").textContent = t.e;
+    document.getElementById("popShort").textContent = termField(t, "s");
+    document.getElementById("popEx").textContent = termField(t, "e");
     popEl.hidden = false;
     btn.setAttribute("aria-expanded", "true");
 
@@ -1702,8 +1751,8 @@
     var item = function(k){
       var t = TERMS[k];
       return '<div class="gloss"><h3>' + esc(t.t) + '</h3>' +
-        '<div class="s">' + esc(t.s) + '</div>' +
-        '<div class="e"><b>דוגמה</b>' + esc(t.e) + '</div></div>';
+        '<div class="s">' + esc(termField(t, "s")) + '</div>' +
+        '<div class="e"><b>דוגמה</b>' + esc(termField(t, "e")) + '</div></div>';
     };
     document.getElementById("glossGrid").innerHTML =
       '<div>' + keys.slice(0, half).map(item).join("") + '</div>' +
@@ -1776,27 +1825,177 @@
     return n;
   }
 
-  function layerFails(s){
-    var f = [];
-    if (!(s.mcap > 2e9)) f.push(1);
-    if (!(s.price > 20)) f.push(1);
-    if (!(s.beta >= 0.5 && s.beta <= 1.5)) f.push(1);
-    if (!(s.avgVol > 1e6)) f.push(1);
+  /* ============================================================
+     SCAN PROFILE — one config object, three presets
+     Every threshold the scanner applies lives in SCAN_DEFAULTS.
+     A preset is a sparse overlay on top of it, so the strict
+     defaults stay readable in one place and a relaxed profile can
+     only move the values it names. layerFails(), failDetails(),
+     the layer cards, the closest box, REC_CHECKS and every count
+     read scanCfg() — no threshold literal is repeated anywhere.
+     ============================================================ */
+  var SCAN_DEFAULTS = {
+    l1:{ mcap:2e9, price:20, betaMin:0.5, betaMax:1.5, avgVol:1e6 },
+    l2:{ peMin:0, epsGrowth:10, salesGrowth:10, roe:15, instOwn:50 },
+    l3:{ pctFrom52wHigh:-10, requirePerf:true },
+    l4:{ rsiMin:50, rsiMax:65, dayMin:1, dayMax:5, rvol:1.2, closeStrength:65 }
+  };
 
-    if (!(s.pe > 0)) f.push(2);
-    if (!(s.epsGrowth > 10)) f.push(2);
-    if (!(s.salesGrowth > 10)) f.push(2);
-    if (!(s.roe > 15)) f.push(2);
-    if (instOwnKnown(s) && !(s.instOwn > 50)) f.push(2);   /* no data → skipped */
+  /* relax = the values that move away from SCAN_DEFAULTS. Only the three
+     presets below exist; 'רגוע' restates 'רגיל' relaxations explicitly so
+     each preset can be read on its own. L1 is never relaxed. */
+  var PROFILES = {
+    "שמרני": {
+      label:"שמרני",
+      hint:"ברירת המחדל — כל הספים המקוריים, הסריקה הקפדנית ביותר.",
+      relax:null
+    },
+    "רגיל": {
+      label:"רגיל",
+      hint:"מרפה רק את שכבת נגד-רדיפה — טווח יומי, RSI ונפח יחסי.",
+      relax:{ l4:{ dayMin:0, rvol:1.0, rsiMin:45, rsiMax:70 } }
+    },
+    "רגוע": {
+      label:"רגוע",
+      hint:"מרפה גם את איכות העסק והמגמה, ומרחיב עוד את שכבת נגד-רדיפה.",
+      relax:{
+        l2:{ epsGrowth:5, salesGrowth:5, roe:10 },
+        l3:{ pctFrom52wHigh:-20, requirePerf:false },
+        l4:{ dayMin:0, rvol:0.8, rsiMin:45, rsiMax:70, closeStrength:55 }
+      }
+    }
+  };
+
+  function trimNum(v){
+    if (!isFinite(Number(v))) return "—";
+    return String(Math.round(Number(v) * 100) / 100);
+  }
+  function oneDec(v){
+    if (!isFinite(Number(v))) return "—";
+    return Number(v).toFixed(1);
+  }
+  function mcapText(v){
+    if (!isFinite(v)) return "—";
+    if (v >= 1e9) return "$" + trimNum(v / 1e9) + " מיליארד";
+    if (v >= 1e6) return "$" + trimNum(v / 1e6) + " מיליון";
+    return fmtCompact(v);
+  }
+  function volText(v){
+    if (!isFinite(v)) return "—";
+    var m = v / 1e6;
+    return (m === 1 ? "מיליון" : trimNum(m) + " מיליון");
+  }
+
+  function buildConfig(name){
+    var relax = (PROFILES[name] || PROFILES[PROFILE_DEFAULT]).relax || {};
+    var c = { l1:{}, l2:{}, l3:{}, l4:{} };
+    ["l1","l2","l3","l4"].forEach(function(l){
+      Object.keys(SCAN_DEFAULTS[l]).forEach(function(k){
+        var ov = relax[l] ? relax[l][k] : undefined;
+        c[l][k] = (ov === undefined) ? SCAN_DEFAULTS[l][k] : ov;
+      });
+    });
+    return c;
+  }
+
+  var CFG_CACHE = null, CFG_CACHE_FOR = null;
+  function scanCfg(){
+    if (!CFG_CACHE || CFG_CACHE_FOR !== state.profile){
+      CFG_CACHE = buildConfig(state.profile);
+      CFG_CACHE_FOR = state.profile;
+    }
+    return CFG_CACHE;
+  }
+
+  /* every configurable field with its reader-facing label — the label IS the
+     "מותאם" chip text, so the card can never claim a value it does not use */
+  var CFG_FIELDS = [
+    { layer:1, keys:[["l1","mcap"]],                      label:function(C){ return "שווי שוק " + mcapText(C.l1.mcap); } },
+    { layer:1, keys:[["l1","price"]],                     label:function(C){ return "מחיר $" + trimNum(C.l1.price); } },
+    { layer:1, keys:[["l1","betaMin"],["l1","betaMax"]],  label:function(C){ return "בטא " + trimNum(C.l1.betaMin) + "–" + trimNum(C.l1.betaMax); } },
+    { layer:1, keys:[["l1","avgVol"]],                    label:function(C){ return "נפח " + volText(C.l1.avgVol); } },
+    { layer:2, keys:[["l2","peMin"]],                     label:function(C){ return "מכפיל רווח מעל " + trimNum(C.l2.peMin); } },
+    { layer:2, keys:[["l2","epsGrowth"]],                 label:function(C){ return "צמיחת רווח " + trimNum(C.l2.epsGrowth) + "%"; } },
+    { layer:2, keys:[["l2","salesGrowth"]],               label:function(C){ return "צמיחת מכירות " + trimNum(C.l2.salesGrowth) + "%"; } },
+    { layer:2, keys:[["l2","roe"]],                       label:function(C){ return "תשואה על ההון " + trimNum(C.l2.roe) + "%"; } },
+    { layer:2, keys:[["l2","instOwn"]],                   label:function(C){ return "מוסדיים " + trimNum(C.l2.instOwn) + "%"; } },
+    { layer:3, keys:[["l3","pctFrom52wHigh"]],            label:function(C){ return "מרחק מהשיא " + trimNum(C.l3.pctFrom52wHigh) + "%"; } },
+    { layer:3, keys:[["l3","requirePerf"]],               label:function(C){ return C.l3.requirePerf ? "תשואה 3/6 נדרשת" : "תשואה 3/6 לא נדרשת"; } },
+    { layer:4, keys:[["l4","rsiMin"],["l4","rsiMax"]],    label:function(C){ return "RSI " + trimNum(C.l4.rsiMin) + "–" + trimNum(C.l4.rsiMax); } },
+    { layer:4, keys:[["l4","dayMin"],["l4","dayMax"]],    label:function(C){ return "יום " + trimNum(C.l4.dayMin) + "–" + trimNum(C.l4.dayMax) + "%"; } },
+    { layer:4, keys:[["l4","rvol"]],                      label:function(C){ return "נפח יחסי " + oneDec(C.l4.rvol) + "x"; } },
+    { layer:4, keys:[["l4","closeStrength"]],             label:function(C){ return "חוזק סגירה " + trimNum(C.l4.closeStrength) + "%"; } }
+  ];
+
+  /* per-layer list of thresholds that differ from the strict default */
+  function cfgDiffs(){
+    var C = scanCfg(), out = { 1:[], 2:[], 3:[], 4:[] };
+    CFG_FIELDS.forEach(function(f){
+      var moved = f.keys.some(function(k){
+        return C[k[0]][k[1]] !== SCAN_DEFAULTS[k[0]][k[1]];
+      });
+      if (moved) out[f.layer].push(f.label(C));
+    });
+    return out;
+  }
+  function cfgDiffCount(){
+    var d = cfgDiffs();
+    return d[1].length + d[2].length + d[3].length + d[4].length;
+  }
+
+  /* the bullet list on each layer card — built from the same config */
+  function layerRules(n, C){
+    if (n === 1) return [
+      "שווי שוק מעל " + mcapText(C.l1.mcap),
+      "מחיר מעל $" + trimNum(C.l1.price),
+      "בטא בין " + trimNum(C.l1.betaMin) + " ל-" + trimNum(C.l1.betaMax),
+      "נפח מסחר יומי מעל " + volText(C.l1.avgVol)
+    ];
+    if (n === 2) return [
+      C.l2.peMin > 0 ? "מכפיל רווח מעל " + trimNum(C.l2.peMin) : "מכפיל רווח חיובי",
+      "צמיחת רווח למניה מעל " + trimNum(C.l2.epsGrowth) + "%",
+      "צמיחת מכירות מעל " + trimNum(C.l2.salesGrowth) + "%",
+      "תשואה על ההון מעל " + trimNum(C.l2.roe) + "%",
+      "מוסדיים מחזיקים מעל " + trimNum(C.l2.instOwn) + "%"
+    ];
+    if (n === 3) {
+      var r = [
+        "מחיר מעל ממוצע 20 מעל 50 מעל 200",
+        "עד " + Math.abs(C.l3.pctFrom52wHigh) + "% מתחת לשיא 52 שבועות"
+      ];
+      if (C.l3.requirePerf) r.push("תשואה חיובית ב-3 וב-6 חודשים");
+      return r;
+    }
+    if (n === 4) return [
+      "RSI בין " + trimNum(C.l4.rsiMin) + " ל-" + trimNum(C.l4.rsiMax),
+      "עליית יום בין " + trimNum(C.l4.dayMin) + "% ל-" + trimNum(C.l4.dayMax) + "%",
+      "נפח יחסי מעל " + oneDec(C.l4.rvol),
+      "חוזק סגירה מעל " + trimNum(C.l4.closeStrength) + "%"
+    ];
+    return [];
+  }
+
+  function layerFails(s){
+    var C = scanCfg(), f = [];
+    if (!(s.mcap > C.l1.mcap)) f.push(1);
+    if (!(s.price > C.l1.price)) f.push(1);
+    if (!(s.beta >= C.l1.betaMin && s.beta <= C.l1.betaMax)) f.push(1);
+    if (!(s.avgVol > C.l1.avgVol)) f.push(1);
+
+    if (!(s.pe > C.l2.peMin)) f.push(2);
+    if (!(s.epsGrowth > C.l2.epsGrowth)) f.push(2);
+    if (!(s.salesGrowth > C.l2.salesGrowth)) f.push(2);
+    if (!(s.roe > C.l2.roe)) f.push(2);
+    if (instOwnKnown(s) && !(s.instOwn > C.l2.instOwn)) f.push(2);   /* no data → skipped */
 
     if (!(s.price > s.sma20 && s.sma20 > s.sma50 && s.sma50 > s.sma200)) f.push(3);
-    if (!(s.pctFrom52wHigh >= -10)) f.push(3);
-    if (!(s.perf3m > 0 && s.perf6m > 0)) f.push(3);
+    if (!(s.pctFrom52wHigh >= C.l3.pctFrom52wHigh)) f.push(3);
+    if (C.l3.requirePerf && !(s.perf3m > 0 && s.perf6m > 0)) f.push(3);
 
-    if (!(s.rsi >= 50 && s.rsi <= 65)) f.push(4);
-    if (!(s.dayChange > 1 && s.dayChange < 5)) f.push(4);
-    if (!(s.rvol > 1.2)) f.push(4);
-    if (!(s.closeStrength > 65)) f.push(4);
+    if (!(s.rsi >= C.l4.rsiMin && s.rsi <= C.l4.rsiMax)) f.push(4);
+    if (!(s.dayChange > C.l4.dayMin && s.dayChange < C.l4.dayMax)) f.push(4);
+    if (!(s.rvol > C.l4.rvol)) f.push(4);
+    if (!(s.closeStrength > C.l4.closeStrength)) f.push(4);
 
     return f.filter(function(v, i, a){ return a.indexOf(v) === i; });
   }
@@ -1910,20 +2109,21 @@
      ============================================================ */
   function failDetails(s){
     var out = [];
+    var C = scanCfg();
     function add(layer, html){ out.push({ layer:layer, text:html }); }
 
     /* L1 — safety */
-    if (!(s.mcap > 2e9))                   add(1, "שווי שוק " + N(fmtCompact(s.mcap)) + " (נדרש מעל $2B)");
-    if (!(s.price > 20))                   add(1, "מחיר " + N(fmtMoney(s.price)) + " (נדרש מעל $20)");
-    if (!(s.beta >= 0.5 && s.beta <= 1.5)) add(1, "בטא " + N(nv(s.beta, 2)) + " (נדרש 0.5–1.5)");
-    if (!(s.avgVol > 1e6))                 add(1, "נפח יומי " + N(fmtVol(s.avgVol)) + " (נדרש מעל מיליון)");
+    if (!(s.mcap > C.l1.mcap))             add(1, "שווי שוק " + N(fmtCompact(s.mcap)) + " (נדרש מעל " + N(mcapText(C.l1.mcap)) + ")");
+    if (!(s.price > C.l1.price))           add(1, "מחיר " + N(fmtMoney(s.price)) + " (נדרש מעל $" + N(trimNum(C.l1.price)) + ")");
+    if (!(s.beta >= C.l1.betaMin && s.beta <= C.l1.betaMax)) add(1, "בטא " + N(nv(s.beta, 2)) + " (נדרש " + N(trimNum(C.l1.betaMin) + "–" + trimNum(C.l1.betaMax)) + ")");
+    if (!(s.avgVol > C.l1.avgVol))         add(1, "נפח יומי " + N(fmtVol(s.avgVol)) + " (נדרש מעל " + N(volText(C.l1.avgVol)) + ")");
 
     /* L2 — business quality */
-    if (!(s.pe > 0))                       add(2, "מכפיל רווח " + N(s.pe > 0 ? nv(s.pe, 1) : "שלילי") + " (נדרש חיובי)");
-    if (!(s.epsGrowth > 10))               add(2, "צמיחת רווח למניה " + N(fmtPct(s.epsGrowth, 1)) + " (נדרש מעל 10%)");
-    if (!(s.salesGrowth > 10))             add(2, "צמיחת מכירות " + N(fmtPct(s.salesGrowth, 1)) + " (נדרש מעל 10%)");
-    if (!(s.roe > 15))                     add(2, "תשואה על ההון " + N(nv(s.roe, 1) + "%") + " (נדרש מעל 15%)");
-    if (instOwnKnown(s) && !(s.instOwn > 50)) add(2, "מוחזקות מוסדיות " + N(nv(s.instOwn, 0) + "%") + " (נדרש מעל 50%)" + '<span class="srcchip ref">עזר</span>');
+    if (!(s.pe > C.l2.peMin))              add(2, "מכפיל רווח " + N(s.pe > 0 ? nv(s.pe, 1) : "שלילי") + " (נדרש " + N(C.l2.peMin > 0 ? "מעל " + trimNum(C.l2.peMin) : "חיובי") + ")");
+    if (!(s.epsGrowth > C.l2.epsGrowth))   add(2, "צמיחת רווח למניה " + N(fmtPct(s.epsGrowth, 1)) + " (נדרש מעל " + N(trimNum(C.l2.epsGrowth) + "%") + ")");
+    if (!(s.salesGrowth > C.l2.salesGrowth)) add(2, "צמיחת מכירות " + N(fmtPct(s.salesGrowth, 1)) + " (נדרש מעל " + N(trimNum(C.l2.salesGrowth) + "%") + ")");
+    if (!(s.roe > C.l2.roe))               add(2, "תשואה על ההון " + N(nv(s.roe, 1) + "%") + " (נדרש מעל " + N(trimNum(C.l2.roe) + "%") + ")");
+    if (instOwnKnown(s) && !(s.instOwn > C.l2.instOwn)) add(2, "מוחזקות מוסדיות " + N(nv(s.instOwn, 0) + "%") + " (נדרש מעל " + N(trimNum(C.l2.instOwn) + "%") + ")" + '<span class="srcchip ref">עזר</span>');
 
     /* L3 — trend: report the link of the chain that actually broke */
     if (!(s.price > s.sma20 && s.sma20 > s.sma50 && s.sma50 > s.sma200)) {
@@ -1939,14 +2139,14 @@
       }
       add(3, t);
     }
-    if (!(s.pctFrom52wHigh >= -10))        add(3, "מרחק משיא 52 שבועות " + N(fmtPct(s.pctFrom52wHigh, 1)) + " (נדרש עד 10%- מתחת)");
-    if (!(s.perf3m > 0 && s.perf6m > 0))   add(3, "תשואה " + N(fmtPct(s.perf3m, 1)) + " ב-3 חודשים ו-" + N(fmtPct(s.perf6m, 1)) + " ב-6 (נדרשות חיוביות)");
+    if (!(s.pctFrom52wHigh >= C.l3.pctFrom52wHigh)) add(3, "מרחק משיא 52 שבועות " + N(fmtPct(s.pctFrom52wHigh, 1)) + " (נדרש עד " + N(trimNum(Math.abs(C.l3.pctFrom52wHigh)) + "%- מתחת") + ")");
+    if (C.l3.requirePerf && !(s.perf3m > 0 && s.perf6m > 0)) add(3, "תשואה " + N(fmtPct(s.perf3m, 1)) + " ב-3 חודשים ו-" + N(fmtPct(s.perf6m, 1)) + " ב-6 (נדרשות חיוביות)");
 
     /* L4 — anti-chase */
-    if (!(s.rsi >= 50 && s.rsi <= 65))     add(4, "RSI " + N(nv(s.rsi, 1)) + " (נדרש 50–65)");
-    if (!(s.dayChange > 1 && s.dayChange < 5)) add(4, "שינוי יומי " + N(fmtPct(s.dayChange, 2)) + " (נדרש +1% עד +5%)");
-    if (!(s.rvol > 1.2))                   add(4, "נפח יחסי " + N(nv(s.rvol, 2) + "x") + " (נדרש מעל 1.2x)");
-    if (!(s.closeStrength > 65))           add(4, "חוזק סגירה " + N(nv(s.closeStrength, 0) + "%") + " (נדרש מעל 65%)");
+    if (!(s.rsi >= C.l4.rsiMin && s.rsi <= C.l4.rsiMax)) add(4, "RSI " + N(nv(s.rsi, 1)) + " (נדרש " + N(trimNum(C.l4.rsiMin) + "–" + trimNum(C.l4.rsiMax)) + ")");
+    if (!(s.dayChange > C.l4.dayMin && s.dayChange < C.l4.dayMax)) add(4, "שינוי יומי " + N(fmtPct(s.dayChange, 2)) + " (נדרש +" + N(trimNum(C.l4.dayMin)) + "% עד +" + N(trimNum(C.l4.dayMax)) + "%)");
+    if (!(s.rvol > C.l4.rvol))             add(4, "נפח יחסי " + N(nv(s.rvol, 2) + "x") + " (נדרש מעל " + N(oneDec(C.l4.rvol) + "x") + ")");
+    if (!(s.closeStrength > C.l4.closeStrength)) add(4, "חוזק סגירה " + N(nv(s.closeStrength, 0) + "%") + " (נדרש מעל " + N(trimNum(C.l4.closeStrength) + "%") + ")");
 
     return out;
   }
@@ -2089,20 +2289,34 @@
 
   /* Which active check turned away the most names today. Only used for
      the plain-Hebrew "why nothing passed" line — never for pass/fail,
-     which stays with layerFails(). Thresholds mirror layerFails(). */
+     which stays with layerFails(). Thresholds and labels come from the
+     active profile config, so a relaxed scan explains itself in its own
+     numbers. */
   var REC_CHECKS = [
-    { on:function(s){ return !!state.layers["1"] && !(s.mcap > 2e9); },           id:"mcap",  label:"שווי השוק מתחת ל-2 מיליארד דולר" },
-    { on:function(s){ return !!state.layers["1"] && !(s.avgVol > 1e6); },         id:"vol",   label:"נפח המסחר היומי מתחת למיליון מניות" },
-    { on:function(s){ return !!state.layers["2"] && !(s.epsGrowth > 10); },       id:"fund",  label:"הצמיחה העסקית לא עוברת את רף L2" },
-    { on:function(s){ return !!state.layers["3"] && !(s.price > s.sma20); },      id:"trend", label:"המחיר מתחת לממוצע 20 יום" },
-    { on:function(s){ return !!state.layers["3"] && !(s.sma20 > s.sma50 && s.sma50 > s.sma200); }, id:"stack", label:"הממוצעים לא מסודרים 20>50>200" },
-    { on:function(s){ return !!state.layers["3"] && !(s.perf3m > 0 && s.perf6m > 0); }, id:"perf", label:"התשואה ב-3 או ב-6 חודשים שלילית" },
-    { on:function(s){ return !!state.layers["4"] && !(s.rsi >= 50 && s.rsi <= 65) && s.rsi < 50; }, id:"rsiLow",  label:"RSI מתחת ל-50 (אין כוח קנייה)" },
-    { on:function(s){ return !!state.layers["4"] && !(s.rsi >= 50 && s.rsi <= 65) && s.rsi > 65; }, id:"rsiHigh", label:"RSI מעל 65 (המניה כבר רצה)" },
-    { on:function(s){ return !!state.layers["4"] && !(s.dayChange > 1 && s.dayChange < 5) && s.dayChange <= 1; }, id:"dayLow",  label:"השינוי היומי מתחת ל-+1%" },
-    { on:function(s){ return !!state.layers["4"] && !(s.dayChange > 1 && s.dayChange < 5) && s.dayChange >= 5; }, id:"dayHigh", label:"השינוי היומי מעל +5% (זינוק חד)" },
-    { on:function(s){ return !!state.layers["4"] && !(s.rvol > 1.2); },           id:"rvol",  label:"נפח יחסי מתחת ל-1.2x" },
-    { on:function(s){ return !!state.layers["4"] && !(s.closeStrength > 65); },   id:"close", label:"חוזק סגירה מתחת ל-65%" }
+    { on:function(s){ var C=scanCfg(); return !!state.layers["1"] && !(s.mcap > C.l1.mcap); },
+      id:"mcap",  label:function(C){ return "שווי השוק מתחת ל-" + mcapText(C.l1.mcap); } },
+    { on:function(s){ var C=scanCfg(); return !!state.layers["1"] && !(s.avgVol > C.l1.avgVol); },
+      id:"vol",   label:function(C){ return "נפח המסחר היומי מתחת ל-" + volText(C.l1.avgVol); } },
+    { on:function(s){ var C=scanCfg(); return !!state.layers["2"] && !(s.epsGrowth > C.l2.epsGrowth); },
+      id:"fund",  label:function(){ return "הצמיחה העסקית לא עוברת את רף L2"; } },
+    { on:function(s){ return !!state.layers["3"] && !(s.price > s.sma20); },
+      id:"trend", label:function(){ return "המחיר מתחת לממוצע 20 יום"; } },
+    { on:function(s){ return !!state.layers["3"] && !(s.sma20 > s.sma50 && s.sma50 > s.sma200); },
+      id:"stack", label:function(){ return "הממוצעים לא מסודרים 20>50>200"; } },
+    { on:function(s){ var C=scanCfg(); return C.l3.requirePerf && !!state.layers["3"] && !(s.perf3m > 0 && s.perf6m > 0); },
+      id:"perf",  label:function(){ return "התשואה ב-3 או ב-6 חודשים שלילית"; } },
+    { on:function(s){ var C=scanCfg(); return !!state.layers["4"] && !(s.rsi >= C.l4.rsiMin && s.rsi <= C.l4.rsiMax) && s.rsi < C.l4.rsiMin; },
+      id:"rsiLow",  label:function(C){ return "RSI מתחת ל-" + trimNum(C.l4.rsiMin) + " (אין כוח קנייה)"; } },
+    { on:function(s){ var C=scanCfg(); return !!state.layers["4"] && !(s.rsi >= C.l4.rsiMin && s.rsi <= C.l4.rsiMax) && s.rsi > C.l4.rsiMax; },
+      id:"rsiHigh", label:function(C){ return "RSI מעל " + trimNum(C.l4.rsiMax) + " (המניה כבר רצה)"; } },
+    { on:function(s){ var C=scanCfg(); return !!state.layers["4"] && !(s.dayChange > C.l4.dayMin && s.dayChange < C.l4.dayMax) && s.dayChange <= C.l4.dayMin; },
+      id:"dayLow",  label:function(C){ return "השינוי היומי מתחת ל-+" + trimNum(C.l4.dayMin) + "%"; } },
+    { on:function(s){ var C=scanCfg(); return !!state.layers["4"] && !(s.dayChange > C.l4.dayMin && s.dayChange < C.l4.dayMax) && s.dayChange >= C.l4.dayMax; },
+      id:"dayHigh", label:function(C){ return "השינוי היומי מעל +" + trimNum(C.l4.dayMax) + "% (זינוק חד)"; } },
+    { on:function(s){ var C=scanCfg(); return !!state.layers["4"] && !(s.rvol > C.l4.rvol); },
+      id:"rvol",  label:function(C){ return "נפח יחסי מתחת ל-" + oneDec(C.l4.rvol) + "x"; } },
+    { on:function(s){ var C=scanCfg(); return !!state.layers["4"] && !(s.closeStrength > C.l4.closeStrength); },
+      id:"close", label:function(C){ return "חוזק סגירה מתחת ל-" + trimNum(C.l4.closeStrength) + "%"; } }
   ];
 
   var REC_CAUSE = {
@@ -2128,7 +2342,7 @@
       if (n > bestN) { bestN = n; best = c; }
     });
     if (!best) return "";
-    var head = "הבדיקה שפסלה הכי הרבה שמות היום: " + best.label +
+    var head = "הבדיקה שפסלה הכי הרבה שמות היום: " + best.label(scanCfg()) +
       " (" + bestN + " מתוך " + STOCKS.length + "). ";
     return head + (REC_CAUSE[best.id] || "המסנן עובד כמו שהוא אמור — עדיף בלי עסקה מאשר עם אחת חלשה.");
   }
@@ -2448,11 +2662,77 @@
   /* ============================================================
      LAYERS RENDER
      ============================================================ */
+  /* ============================================================
+     SCAN PROFILE RENDER — selector, banner, active label
+     ============================================================ */
+  var PROFILE_MS = 0;
+
+  function profileNames(){ return Object.keys(PROFILES); }
+
+  function buildProfileSeg(){
+    var seg = document.getElementById("profileSeg");
+    if (!seg) return;
+    seg.innerHTML = profileNames().map(function(name){
+      return '<button type="button" class="profile-btn" role="radio" aria-checked="false" data-profile="' + esc(name) + '">' +
+        '<b>' + esc(name) + '</b><small>' + esc(PROFILES[name].hint) + '</small></button>';
+    }).join("");
+    Array.prototype.forEach.call(seg.querySelectorAll("[data-profile]"), function(btn){
+      btn.addEventListener("click", function(){ setProfile(btn.getAttribute("data-profile")); });
+      btn.addEventListener("keydown", function(ev){
+        if (ev.key === "ArrowRight" || ev.key === "ArrowLeft" || ev.key === "ArrowDown" || ev.key === "ArrowUp"){
+          ev.preventDefault();
+          var names = profileNames();
+          var i = names.indexOf(state.profile);
+          var step = (ev.key === "ArrowRight" || ev.key === "ArrowDown") ? 1 : -1;
+          setProfile(names[(i + step + names.length) % names.length]);
+          var next = seg.querySelector('[data-profile="' + state.profile + '"]');
+          if (next) next.focus();
+        }
+      });
+    });
+    renderProfile();
+  }
+
+  function setProfile(name){
+    if (!PROFILES[name] || state.profile === name) return false;
+    state.profile = name;
+    save();
+    var t0 = (window.performance && performance.now) ? performance.now() : Date.now();
+    renderAll();
+    PROFILE_MS = ((window.performance && performance.now) ? performance.now() : Date.now()) - t0;
+    return true;
+  }
+
+  function renderProfile(){
+    var name = state.profile;
+    var P = PROFILES[name] || PROFILES[PROFILE_DEFAULT];
+    Array.prototype.forEach.call(document.querySelectorAll("[data-profile]"), function(b){
+      var sel = b.getAttribute("data-profile") === name;
+      b.setAttribute("aria-checked", sel ? "true" : "false");
+      b.setAttribute("tabindex", sel ? "0" : "-1");
+    });
+    var active = document.getElementById("profileActive");
+    if (active) active.textContent = P.label;
+    var banner = document.getElementById("profileBanner");
+    if (banner){
+      var strict = (name === PROFILE_DEFAULT);
+      banner.hidden = strict;
+      banner.textContent = strict ? "" :
+        "פרופיל " + P.label + " פעיל — הספים מרוככים מהברירת-מחדל" +
+        (cfgDiffCount() ? " (" + cfgDiffCount() + " ספים מותאמים)" : "");
+    }
+  }
+
   function renderLayers(){
     var total = STOCKS.length;
+    var C = scanCfg();
+    var diffs = cfgDiffs();
     var html = LAYERS.map(function(L){
       var on = !!state.layers[String(L.n)];
       var passingLayer = STOCKS.filter(function(s){ return layerFails(s).indexOf(L.n) === -1; }).length;
+      var chips = (diffs[L.n] || []).map(function(t){
+        return '<span class="adj-chip" data-adj="' + L.n + '">מותאם: ' + esc(t) + '</span>';
+      }).join("");
       return '<div class="layer-card' + (on ? "" : " off") + '" data-layer="' + L.n + '">' +
         '<div class="lc-head">' +
           '<span class="lc-num">L' + L.n + '</span>' +
@@ -2461,7 +2741,8 @@
             '<input type="checkbox" data-layer-toggle="' + L.n + '"' + (on ? " checked" : "") + ' aria-label="הפעלת שכבת ' + esc(L.title) + '">' +
             '<span></span></label>' +
         '</div>' +
-        '<ul class="lc-list">' + L.rules.map(function(r){
+        (chips ? '<div class="adj-row" aria-label="ספים מותאמים בשכבה ' + L.n + '">' + chips + '</div>' : '') +
+        '<ul class="lc-list">' + L.rules(C).map(function(r){
           /* institutional ownership is the one L2 rule that can be missing:
              it is labelled with its provenance and, when the provider sends
              nothing, says so instead of pretending the value is under 50% */
@@ -3574,6 +3855,8 @@
      ============================================================ */
   function renderAll(){
     resetCaches();                 /* layer toggles may have changed under us */
+    renderProfile();
+    renderGlossary();              /* help text quotes the active thresholds */
     renderRecs();
     renderTiming(false);
     renderRisk();
@@ -3585,6 +3868,7 @@
 
   function wire(){
     popEl = document.getElementById("pop");
+    buildProfileSeg();              /* three presets, built from PROFILES once */
 
     /* --- refresh: re-pull the file, re-run quotes, recompute everything --- */
     var refreshBtn = document.getElementById("refreshBtn");
@@ -3835,7 +4119,7 @@
       return state.q;
     },
     terms: Object.keys(TERMS),
-    term: function(k){ return TERMS[k]; },
+    term: function(k){ var t = TERMS[k]; return t ? { t:t.t, s:termField(t, "s"), e:termField(t, "e") } : null; },
     data: function(){
       return { loaded:DATA.loaded, asOf:DATA.asOf, source:DATA.source,
                generatedAt:DATA.generatedAt, failed:DATA.failed.slice(0),
@@ -3867,6 +4151,18 @@
       return { ticker:t, pass:st.pass, fails:st.fails.slice(0), checks:st.nd, why:st.why };
     },
     layers: function(){ return JSON.parse(JSON.stringify(state.layers)); },
+    /* scan profile: read (no arg) or switch by name, then read back */
+    profiles: function(){ return profileNames(); },
+    profile: function(name){
+      if (name === undefined){
+        return { name: state.profile, def: PROFILES[state.profile] || null, isDefault:(state.profile === PROFILE_DEFAULT),
+                 cfg: JSON.parse(JSON.stringify(scanCfg())), diffs: cfgDiffs(),
+                 diffCount: cfgDiffCount(), ms: PROFILE_MS };
+      }
+      setProfile(String(name));
+      return state.profile;
+    },
+    profileMs: function(){ return PROFILE_MS; },
     /* the zero-results fallback, as rendered: rank, tickers, and every failing check */
     closest: function(){
       var pool = searchRows();

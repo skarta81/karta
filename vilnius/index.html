@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>וילנה · 15–19.12.2026 · משפחת קרתא</title>
+<meta name="description" content="הטיול המשפחתי לווילנה — טיסות, שוק הכריסמס, אטרקציות ולוז יומי.">
+<style>
+  :root{
+    --bg:#0a0f16; --card:#111925; --line:#1e2a38; --fg:#eef3f9; --dim:#8598ae;
+    --gold:#e8b04b; --ice:#7fb8d8; --ok:#3fa87a; --warn:#d9743f;
+    --r:16px; --sp:8px;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{-webkit-text-size-adjust:100%}
+  body{
+    background:var(--bg); color:var(--fg);
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Rubik,Arial,sans-serif;
+    line-height:1.65; -webkit-font-smoothing:antialiased;
+    padding:0 0 60px;
+  }
+  .wrap{max-width:880px;margin:0 auto;padding:0 20px}
+  .num{direction:ltr;unicode-bidi:isolate;display:inline-block;font-variant-numeric:tabular-nums}
+
+  /* hero */
+  header{padding:56px 0 40px;border-bottom:1px solid var(--line);
+    background:radial-gradient(900px 420px at 78% -10%, #17263a 0%, transparent 62%)}
+  .kicker{font-size:12px;letter-spacing:.26em;color:var(--gold);font-weight:600;margin-bottom:14px}
+  h1{font-size:clamp(42px,8vw,76px);line-height:.95;letter-spacing:-.03em;font-weight:700}
+  h1 span{display:block;font-size:.34em;font-weight:400;color:var(--dim);letter-spacing:.02em;margin-top:16px}
+  .metas{display:flex;gap:26px;flex-wrap:wrap;margin-top:28px}
+  .metas div b{display:block;font-size:20px;font-weight:600}
+  .metas div i{font-style:normal;color:var(--dim);font-size:11px;letter-spacing:.12em}
+
+  section{padding:44px 0;border-bottom:1px solid var(--line)}
+  section:last-of-type{border-bottom:0}
+  h2{font-size:26px;letter-spacing:-.015em;font-weight:600;margin-bottom:8px}
+  .lede{color:var(--dim);font-size:15.5px;max-width:62ch;margin-bottom:24px}
+
+  /* flight */
+  .flight{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:20px 22px;margin-bottom:10px}
+  .flight .row{display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap}
+  .flight .code{font-size:12px;letter-spacing:.16em;color:var(--gold);font-weight:600}
+  .flight .times{display:flex;align-items:center;gap:18px;margin-top:10px}
+  .flight .t b{font-size:26px;font-weight:700;letter-spacing:-.02em}
+  .flight .t i{display:block;font-style:normal;color:var(--dim);font-size:11.5px;margin-top:2px}
+  .flight .path{flex:1;height:1px;background:linear-gradient(90deg,transparent,var(--line),transparent);position:relative;min-width:60px}
+  .flight .path::after{content:"✈";position:absolute;top:-11px;left:50%;transform:translateX(-50%);color:var(--dim);font-size:13px}
+
+  /* cards */
+  .grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px 18px 16px;
+    transition:border-color .25s ease, transform .25s ease}
+  .card:hover{border-color:#2c3d52;transform:translateY(-2px)}
+  .card h3{font-size:16.5px;font-weight:600;margin-bottom:6px}
+  .card p{color:var(--dim);font-size:14px}
+  .card .tag{display:inline-block;font-size:11px;letter-spacing:.08em;color:var(--gold);
+    border:1px solid #3a2f1a;background:#1b160d;border-radius:6px;padding:2px 7px;margin-bottom:10px}
+
+  /* market highlight */
+  .market{background:linear-gradient(160deg,#182333,#0f1620);border:1px solid #2a3a4d;
+    border-radius:18px;padding:26px 24px}
+  .market .big{font-size:clamp(30px,5vw,44px);font-weight:700;letter-spacing:-.02em;line-height:1}
+  .market .big small{display:block;font-size:.36em;font-weight:400;color:var(--dim);letter-spacing:.06em;margin-top:10px}
+  .market ul{list-style:none;margin-top:20px;display:grid;gap:9px}
+  .market li{display:flex;gap:10px;font-size:14.5px;color:#c6d3e2}
+  .market li b{color:var(--fg);font-weight:600;min-width:86px}
+
+  /* day plan */
+  .day{display:grid;grid-template-columns:88px 1fr;gap:18px;padding:18px 0;border-bottom:1px dashed var(--line)}
+  .day:last-child{border-bottom:0}
+  .day .d{font-size:12px;letter-spacing:.1em;color:var(--gold);font-weight:600;padding-top:3px}
+  .day .d b{display:block;font-size:20px;color:var(--fg);letter-spacing:-.01em}
+  .day ul{list-style:none;display:grid;gap:7px}
+  .day li{font-size:14.5px;color:#c6d3e2}
+  .day li span{color:var(--dim);font-size:12.5px;margin-inline-start:8px}
+
+  /* notes */
+  .note{display:flex;gap:14px;padding:16px 0;border-bottom:1px solid var(--line)}
+  .note:last-child{border-bottom:0}
+  .note .ico{flex:0 0 26px;font-size:17px;line-height:1.4}
+  .note b{display:block;font-size:15px;margin-bottom:2px}
+  .note p{color:var(--dim);font-size:14px}
+
+  footer{padding-top:28px;color:#5c6c82;font-size:12px;line-height:1.9}
+  footer a{color:var(--ice);text-decoration:none}
+  @media(max-width:640px){
+    .grid{grid-template-columns:1fr}
+    .metas{gap:18px}
+    .day{grid-template-columns:1fr;gap:6px}
+  }
+  @media(prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+
+<header><div class="wrap">
+  <div class="kicker">משפחת קרתא · דצמבר 2026</div>
+  <h1>וילנה<span>ארבעה לילות בעיר העתיקה, בשוק הכריסמס הגדול של הבלטיות</span></h1>
+  <div class="metas">
+    <div><b><span class="num">15–19.12</span></b><i>תאריכים</i></div>
+    <div><b><span class="num">5</span> נוסעים</b><i>שקד · שרית · רז · נוי · ניב</i></div>
+    <div><b><span class="num">−2°</span> בממוצע</b><i>מזג אוויר</i></div>
+    <div><b><span class="num">REDACTED</span></b><i>הזמנה</i></div>
+  </div>
+</div></header>
+
+<section><div class="wrap">
+  <h2>הטיסות</h2>
+  <p class="lede">Wizz Air · בן גוריון ↔ וילנה · 3 שעות 30 דקות טיסה · שעון וילנה זהה לישראל בחורף</p>
+
+  <div class="flight">
+    <div class="row"><span class="code">W6 1966 · הלוך</span><span class="num" style="color:var(--dim);font-size:13px">15.12.2026</span></div>
+    <div class="times">
+      <div class="t"><b class="num">11:05</b><i>תל אביב · TLV</i></div>
+      <div class="path"></div>
+      <div class="t"><b class="num">15:35</b><i>וילנה · VNO</i></div>
+    </div>
+  </div>
+
+  <div class="flight">
+    <div class="row"><span class="code">W6 1965 · חזור</span><span class="num" style="color:var(--dim);font-size:13px">19.12.2026</span></div>
+    <div class="times">
+      <div class="t"><b class="num">06:00</b><i>וילנה · VNO</i></div>
+      <div class="path"></div>
+      <div class="t"><b class="num">10:10</b><i>תל אביב · TLV</i></div>
+    </div>
+  </div>
+</div></section>
+
+<section><div class="wrap">
+  <h2>שוק הכריסמס</h2>
+  <p class="lede">אנחנו נוחתים בדיוק בעונת השיא — השוק פעיל לאורך כל השהות שלנו.</p>
+  <div class="market">
+    <div class="big"><span class="num">28.11 – 27.12</span><small>כיכר הקתדרלה · כניסה חופשית</small></div>
+    <ul>
+      <li><b>מיקום</b><span>כיכר הקתדרלה (Katedros aikštė), ועוד שני רחבים סמוכים — וינצו קודירקוס ואודמיניו</span></li>
+      <li><b>שעות</b><span>בערך <span class="num">12:00–20:00</span> בימי חול, פתיחה מוקדמת יותר בראשון. שעות מדויקות מתפרסמות סמוך לפתיחה</span></li>
+      <li><b>עץ השנה</b><span>העץ המרכזי מוצב בכיכר; הדלקה בטקס Opening ב-28.11 בשעה 19:30</span></li>
+      <li><b>לילדים</b><span>רכבת קטנה סביב הכיכר (כ-€6), קרוסלה (כ-€7), ומתחם החלקה על הקרח</span></li>
+      <li><b>מה אוכלים</b><span>קיבינאי, מרק לחם, שוקולד חם, עוגיות דבש ופונץ'</span></li>
+    </ul>
+  </div>
+</div></section>
+
+<section><div class="wrap">
+  <h2>אטרקציות עיקריות</h2>
+  <p class="lede">העיר העתיקה של וילנה היא אתר מורשת עולמית של אונסק״ו, וכל מה שכאן במרחק הליכה אחת מהשנייה.</p>
+  <div class="grid">
+    <div class="card"><span class="tag">נוף</span><h3>מגדל גדימינאס</h3>
+      <p>הנקודה שממנה מבינים את העיר. עולים ברכבל או ברגל, ורואים את כל הגגות האדומים והמגדלים. ביום חורפי — הנוף הכי טוב שיש.</p></div>
+    <div class="card"><span class="tag">שכונה</span><h3>אוז׳ופיס</h3>
+      <p>רפובליקה עצמאית בהצהרה, שכונה של אמנים. עוברים בגשר מעל נהר הווילניה ומגלים ציורי קיר, גלריות קטנות ובתי קפה. יש שלט חוקה על הקיר — שווה לקרוא.</p></div>
+    <div class="card"><span class="tag">היסטוריה</span><h3>מוזיאון הכיבושים (KGB)</h3>
+      <p>בניין המשטרה החשאית הסובייטית, עם תאי המעצר והמרתף. קשה, חשוב, ולא לילדים צעירים. ניב בן 9 — שווה לשקול אם מתאים.</p></div>
+    <div class="card"><span class="tag">אמנות</span><h3>מוזיאון MO</h3>
+      <p>אמנות ליטאית מודרנית, חלל נעים ומחומם — פתרון מושלם לשעה גשומה. יש בית קפה טוב בקומה העליונה.</p></div>
+    <div class="card"><span class="tag">קתדרלה</span><h3>קתדרלת וילנה</h3>
+      <p>ממש על הכיכר של השוק. מתחתיה — קברי המלכים והנסיכים של ליטא, בכניסה בתשלום קטן. שער הכניסה למרכז העתיק.</p></div>
+    <div class="card"><span class="tag">טיול יום</span><h3>טרקאי</h3>
+      <p>טירה על אי באמצע אגם, כ-30 דקות נסיעה מהעיר. באגדה — טירה אגדית של נסיכים. בחורף האגם קפוא, וזה נראה כמו ציור.</p></div>
+  </div>
+</div></section>
+
+<section><div class="wrap">
+  <h2>לוז מוצע</h2>
+  <p class="lede">ארבעה ימים, קצב נינוח, עם מקום לרדת מהתוכנית בגלל קור או גשם.</p>
+
+  <div class="day"><div class="d"><b>15.12</b>שלישי</div>
+    <ul><li>נחיתה 15:35 · צ׳ק-אין במלון בעיר העתיקה</li>
+        <li>הליכת התמצאות קצרה בעיר העתיקה <span>16:30</span></li>
+        <li>ערב ראשון בשוק הכריסמס — אורות, אוכל, אווירה <span>18:00</span></li></ul></div>
+
+  <div class="day"><div class="d"><b>16.12</b>רביעי</div>
+    <ul><li>מגדל גדימינאס ורכבל <span>10:00</span></li>
+        <li>קתדרלה והכיכר לאור יום <span>12:00</span></li>
+        <li>אוז׳ופיס ושוקולד חם <span>14:00</span></li>
+        <li>מוזיאון MO או מנוחה במלון <span>16:00</span></li></ul></div>
+
+  <div class="day"><div class="d"><b>17.12</b>חמישי</div>
+    <ul><li>טיול יום לטרקאי — טירה ואגם קפוא <span>09:30</span></li>
+        <li>חזרה לעיר, צהריים מאוחרים <span>14:00</span></li>
+        <li>שוק הכריסמס בשעות החושך — הוא נראה אחרת לגמרי <span>17:30</span></li></ul></div>
+
+  <div class="day"><div class="d"><b>18.12</b>שישי</div>
+    <ul><li>מוזיאון הכיבושים (KGB) להורים ולרז <span>10:00</span></li>
+        <li>קניות אחרונות בעיר העתיקה <span>13:00</span></li>
+        <li>ארוחת ערב פרידה — מסעדה ליטאית <span>18:30</span></li>
+        <li>אריזה + שינה מוקדמת</li></ul></div>
+
+  <div class="day"><div class="d"><b>19.12</b>שבת</div>
+    <ul><li>יציאה מהמלון <span>03:30</span></li>
+        <li>טיסה חזור <span>06:00 → 10:10</span></li></ul></div>
+</div></section>
+
+<section><div class="wrap">
+  <h2>שווה לדעת לפני שיוצאים</h2>
+  <div class="note"><span class="ico">🧳</span><div><b>כבודה — הנקודה הרגישה</b>
+    <p>בהזמנה רשום לכל נוסע <span class="num">1/40×30×20</span> — התיק האישי שמתחת למושב בלבד. אין מזוודת קבינה ואין מזוודה נשלחת. לחמישה אנשים לארבעה לילות בדצמבר כדאי להוסיף כבודה בתשלום.</p></div></div>
+  <div class="note"><span class="ico">🧥</span><div><b>קור אמיתי</b>
+    <p>דצמבר בווילנה: סביב <span class="num">0°</span> עד <span class="num">−5°</span>, לעיתים שלג. מעילים, כפפות, כובעים ונעליים אטומות למים — לא אופציה.</p></div></div>
+  <div class="note"><span class="ico">⏰</span><div><b>החזור ב-06:00</b>
+    <p>אחרי חמישה אנשים ושלושה ילדים, יציאה ב-<span class="num">03:30</span> מהמלון היא לא פרט שולי. שווה להזמין הסעה מראש, ולשקול מלון קרוב לשדה ללילה האחרון.</p></div></div>
+  <div class="note"><span class="ico">💶</span><div><b>כסף</b>
+    <p>ליטא באירו. כרטיסי אשראי מתקבלים כמעט בכל מקום, אבל שווה מזומן קטן לדוכנים בשוק.</p></div></div>
+</div></section>
+
+<footer><div class="wrap">
+  הזמנה <span class="num">REDACTED</span> · Wizz Air · <span class="num">1,184.89 EUR</span> ל-5 נוסעים<br>
+  מקורות: Vilnius Cultural Center, govilnius.lt, Lithuanian Travel Guide · תאריכי השוק ושעות נוכחיים ל-2026<br>
+  נבנה עבור משפחת קרתא · עודכן 22.11.2026
+</div></footer>
+
+</body>
+</html>

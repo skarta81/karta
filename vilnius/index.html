@@ -147,6 +147,40 @@
     .rv{opacity:1;transform:none}
     html{scroll-behavior:auto}
   }
+/* ---------- real imagery ---------- */
+#hero::before{content:"";position:absolute;inset:0;z-index:-1;
+  background:url("img/market.jpg") center 40%/cover no-repeat;opacity:.40;
+  -webkit-mask-image:radial-gradient(78% 72% at 50% 44%,#000 28%,transparent 80%);
+  mask-image:radial-gradient(78% 72% at 50% 44%,#000 28%,transparent 80%)}
+#hero::after{content:"";position:absolute;inset:0;z-index:-1;
+  background:linear-gradient(180deg,rgba(5,7,13,.72) 0%,rgba(5,7,13,.35) 42%,var(--bg1) 100%)}
+
+.market::before{content:"";position:absolute;inset:0;border-radius:22px;
+  background:url("img/market.jpg") center/cover;opacity:.17}
+.market>*{position:relative;z-index:1}
+
+.card::before{content:"";display:block;height:152px;border-radius:12px;
+  margin:-24px -22px 18px;background-size:cover;background-position:center}
+.card:nth-child(1)::before{background-image:url("img/gediminas.jpg")}
+.card:nth-child(2)::before{background-image:url("img/uzupis.jpg")}
+.card:nth-child(5)::before{background-image:url("img/cathedral.jpg")}
+.card:nth-child(6)::before{background-image:url("img/trakai.jpg")}
+.card:nth-child(3)::before,.card:nth-child(4)::before{display:none}
+
+/* ---------- horizontal timeline ---------- */
+.tl{padding:0;margin-top:40px;display:flex;gap:16px;overflow-x:auto;
+  scroll-snap-type:x mandatory;padding-bottom:16px;
+  scrollbar-width:thin;scrollbar-color:rgba(233,180,76,.55) transparent}
+.tl::-webkit-scrollbar{height:4px}
+.tl::-webkit-scrollbar-thumb{background:rgba(233,180,76,.55);border-radius:4px}
+.tl .rail,.tl .fill{display:none}
+.day{flex:0 0 min(76vw,330px);scroll-snap-align:start;padding:22px 20px;
+  border:1px solid var(--line);border-radius:16px;background:rgba(255,255,255,.032)}
+.day::before{display:none}
+.hint{display:flex;align-items:center;gap:10px;color:var(--dim);font-size:12.5px;
+  letter-spacing:.14em;margin-top:14px}
+.hint i{flex:1;height:1px;background:linear-gradient(90deg,var(--line),transparent)}
+@media(max-width:700px){.day{flex:0 0 82vw}.card::before{height:132px}}
 </style>
 </head>
 <body>

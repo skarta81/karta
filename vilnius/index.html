@@ -182,6 +182,24 @@
   letter-spacing:.14em;margin-top:14px}
 .hint i{flex:1;height:1px;background:linear-gradient(90deg,var(--line),transparent)}
 @media(max-width:700px){.day{flex:0 0 82vw}.card::before{height:132px}}
+
+/* ---------- map ---------- */
+.mapbar{display:flex;gap:8px;flex-wrap:wrap;margin:22px 0 14px}
+.mapbar button{background:rgba(255,255,255,.05);border:1px solid var(--line);color:var(--dim);
+  border-radius:999px;padding:8px 16px;font:inherit;font-size:13.5px;cursor:pointer;transition:.25s}
+.mapbar button:hover{border-color:rgba(233,180,76,.5);color:var(--fg)}
+.mapbar button.on{background:rgba(233,180,76,.16);border-color:rgba(233,180,76,.55);color:var(--gold-soft)}
+#map{height:460px;border:1px solid var(--line);border-radius:16px;overflow:hidden;z-index:0}
+.leaflet-popup-content-wrapper{background:#0e1520;color:var(--fg);border-radius:12px;border:1px solid rgba(233,180,76,.3)}
+.leaflet-popup-tip{background:#0e1520}
+.leaflet-popup-content{margin:14px 16px;font-family:Assistant,Arial,sans-serif;direction:rtl;text-align:right}
+.leaflet-popup-content b{display:block;font-size:15px;margin-bottom:4px;color:var(--gold-soft)}
+.leaflet-popup-content span{font-size:13px;color:#b9c6d6;line-height:1.55;display:block}
+.leaflet-popup-content a{color:var(--ice);font-size:12.5px;text-decoration:none;display:inline-block;margin-top:8px}
+.leaflet-control-attribution{background:rgba(10,15,22,.75)!important;color:#6b7a8f!important;font-size:10px!important}
+.leaflet-control-attribution a{color:#8fa3bd!important}
+.pin{width:11px;height:11px;border-radius:50%;border:2px solid #fff3}
+@media(max-width:700px){#map{height:380px}}
 </style>
 </head>
 <body>
@@ -307,6 +325,53 @@
   </div>
 </section>
 
+
+
+<!-- CHRISTMAS PROGRAM -->
+<section data-theme="market">
+  <div class="wrap">
+    <div class="eyebrow rv">מה קורה בכריסמס</div>
+    <h2 class="rv">העיר כולה הופכת לפסטיבל</h2>
+    <p class="lede rv">התוכנית הרשמית של וילנה לחג כוללת יותר משוק אחד — אלה הדברים שמתקיימים לאורך דצמבר, כולל הימים שלנו שם.</p>
+    <div class="notes rv">
+      <div class="note"><span class="ico">🎄</span><div><b>עץ הכריסמס בכיכר הקתדרלה</b>
+        <p>העץ המרכזי והטקס הרשמי — ההדלקה ב-28.11. לאורך כל דצמבר הוא עומד בכיכר, ודקות מהמלון.</p></div></div>
+      <div class="note"><span class="ico">🏘️</span><div><b>עיר הכריסמס (Christmas Town)</b>
+        <p>מתחם הדוכנים סביב הכיכר — אוכל, מתנות, סדנאות לילדים. זה מה שאנחנו מכירים בתור "השוק".</p></div></div>
+      <div class="note"><span class="ico">🚂</span><div><b>הרכבת של הכריסמס</b>
+        <p>רכבת קטנה שמקיפה את הכיכר — הקליעה הכי בטוחה לניב בן תשע.</p></div></div>
+      <div class="note"><span class="ico">⛸️</span><div><b>משטח ההחלקה על הקרח</b>
+        <p>פתוח בעונה, ליד הכיכר. שווה לבדוק שעות פתיחה והשכרת נעליים לפני שמגיעים.</p></div></div>
+      <div class="note"><span class="ico">🏛️</span><div><b>בית העירייה וכיכר העיר</b>
+        <p>בזאר צדקה בינלאומי, כיכר עיצוב כריסמס ואירועי קהילה — באזור העיר העתיקה.</p></div></div>
+      <div class="note"><span class="ico">🏃</span><div><b>ריצת הכריסמס</b>
+        <p>"המרתון האיטי בעולם" — אירוע עירוני Openspace. אם נופלים על התאריך, זה spectacle, לא הפרעה.</p></div></div>
+    </div>
+    <p style="margin-top:20px;font-size:13.5px;color:var(--dim)">
+      התאריכים המדויקים לכל אירוע מתפרסמים באתר הרשמי:
+      <a href="https://kaledossostineje.lt/en/program/" target="_blank" rel="noopener"
+         style="color:var(--gold-soft)">kaledossostineje.lt/program ↗</a>
+    </p>
+  </div>
+</section>
+<!-- MAP -->
+<section data-theme="sights" id="mapSec">
+  <div class="wrap">
+    <div class="eyebrow rv">מפה</div>
+    <h2 class="rv">כל הנקודות על מפה אחת</h2>
+    <p class="lede rv">לחיצה על סיכה פותחת מה זה, כמה זמן זה לוקח ומה שווה לדעת. הסינון למעלה מציג רק את מה שמעניין באותו רגע.</p>
+
+    <div class="mapbar rv" id="mapbar">
+      <button data-cat="all" class="on">הכל</button>
+      <button data-cat="sight">אטרקציות</button>
+      <button data-cat="food">אוכל</button>
+      <button data-cat="shop">קניות</button>
+      <button data-cat="hotel">מלון</button>
+    </div>
+    <div id="map" class="rv"></div>
+    <p class="hint"><i></i>המפה נטענת מ-OpenStreetMap · המרחקים בקו אווירי</p>
+  </div>
+</section>
 <section data-theme="plan">
   <div class="wrap">
     <div class="eyebrow rv">לוז מוצע</div>
@@ -445,6 +510,50 @@
   addEventListener('scroll', onScroll, {passive:true});
   onScroll();
   applyTheme('hero');
+})();
+</script>
+
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script>
+(function(){
+  var el=document.getElementById('map'); if(!el||!window.L) return;
+  var map=L.map('map',{scrollWheelZoom:false}).setView([54.6872,25.2780],13);
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
+    {maxZoom:19,attribution:'&copy; OpenStreetMap'}).addTo(map);
+  var C={sight:'#e9b44c',food:'#d4643a',shop:'#9fd3e8',hotel:'#f3f0e8'};
+  var P=[
+    ['sight',54.6859,25.2878,'קתדרלת וילנה וכיכר הקתדרלה','השוק, עץ הכריסמס והכניסה לעיר העתיקה. מתחת לקתדרלה קברי המלכים.','10 דק׳ הליכה מהמלון'],
+    ['sight',54.6868,25.2907,'מגדל גדימינאס','התצפית שמסבירה את העיר. עולים ברכבל או ברגל.','שעה, כולל הרכבל'],
+    ['sight',54.6880,25.2707,'מוזיאון הכיבושים (KGB)','בניין המשטרה החשאית עם תאי המעצר והמרתף. קשה, חשוב, לא לילד בן 9.','כמעט ממול למלון'],
+    ['sight',54.6785,25.2846,'מוזיאון האשליות','חדרים אופטיים, מראות ואשליות — בערך שעה של צחוק עם ילדים.','מתאים במיוחד לנוי וניב'],
+    ['sight',54.6781,25.2869,'בית העירייה וכיכר העיר','לב העיר העתיקה, מוקף בתי קפה.','5 דק׳ מהקתדרלה'],
+    ['sight',54.6527,24.9339,'טירת האי טרקאי','טירה על אי באמצע אגם, קפוא בחורף.','חצי יום, ~30 דק׳ נסיעה'],
+    ['shop',54.7105,25.2631,'Akropolis','הקניון הגדול בבלטיות: קולנוע 8 אולמות, זירת קרח, באולינג 20 נתיבים.','יום גשום — פתרון מושלם'],
+    ['shop',54.7204,25.2805,'Ozas ומתחם האטרקציות','קניון גדול עם מתחם בידור: באולינג, קולנוע ומשחקים.','חלופה טובה ליום גשום'],
+    ['food',54.6745,25.2696,'Senoji Trobelė','מטבח ליטאי מסורתי בבקתה מעץ — קיבינאי ועוף בתנור.','ארוחה משפחתית'],
+    ['food',54.7126,25.2988,'Etno Dvaras','מטבח ליטאי עממי, מנות גדולות, מתאים לילדים.','סניפים בעיר'],
+    ['food',54.6799,25.2864,'Lokys','מסעדה ותיקה במרתף, ציד ומטבח ליטאי קלאסי.','ארוחת ערב של פעם'],
+    ['food',54.6829,25.2804,'Džiaugsmas','מסעדה מודרנית של שף — הטובה בעיר, להזמין מראש.','בלי ילדים, אם יוצא'],
+    ['hotel',54.6869,25.2800,'Novotel Vilnius Centre','גדימינו 16. שני חדרים, ארוחת בוקר כלולה.','הבסיס שלנו']
+  ];
+  var markers=[];
+  P.forEach(function(p){
+    var m=L.circleMarker([p[1],p[2]],{radius:7,color:'#fff',weight:1.5,fillColor:C[p[0]],fillOpacity:.95});
+    m.bindPopup('<b>'+p[3]+'</b><span>'+p[4]+'</span><span style="color:#7f8fa4;margin-top:6px">'+p[5]+'</span>'+
+      '<a target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query='+
+      p[1]+','+p[2]+'">פתיחה במפות ↗</a>');
+    m._cat=p[0]; m.addTo(map); markers.push(m);
+  });
+  var chips=document.querySelectorAll('#mapbar button');
+  chips.forEach(function(b){
+    b.addEventListener('click',function(){
+      chips.forEach(function(x){x.classList.remove('on')}); b.classList.add('on');
+      var c=b.dataset.cat;
+      markers.forEach(function(m){ (c==='all'||m._cat===c) ? m.addTo(map) : map.removeLayer(m); });
+    });
+  });
+  setTimeout(function(){map.invalidateSize()},400);
 })();
 </script>
 </body>
